@@ -1,0 +1,12 @@
+{
+  "id": "short01_sky_not_violet",
+  "handle": "@mrshorts1737",
+  "lines": [
+    {"kind": "hook", "text": "The sky should be violet. So why isn't it?"},
+    {"kind": "scatter", "text": "Sunlight scatters in our atmosphere, and short wavelengths scatter the most."},
+    {"kind": "violet", "text": "Violet scatters even more than blue."},
+    {"kind": "eye", "text": "But the sun gives off less violet, some of it is absorbed high up, and our eyes are weaker at seeing it."},
+    {"kind": "blue", "text": "Blue wins that combination. So the sky looks blue."},
+    {"kind": "loop", "text": "The sky isn't violet... because of what your eyes can't do."}
+  ]
+}

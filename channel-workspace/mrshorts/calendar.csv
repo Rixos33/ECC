@@ -1,0 +1,31 @@
+day,task,short_id,topic,lane,voice,status
+1,Setup channel branding and pick AI voice,,,,,todo
+2,Fact-check scripts 1-5,1-5,,,,todo
+3,Fact-check scripts 6-10,6-10,,,,todo
+4,Record/generate voice 1-4,1-4,,,,todo
+5,Record/generate voice 5-7,5-7,,,,todo
+6,Record/generate voice 8-10,8-10,,,,todo
+7,Rest,,,,,todo
+8,Edit 1-3,1-3,,,,todo
+9,Edit 4-6,4-6,,,,todo
+10,Edit 7-8,7-8,,,,todo
+11,Edit 9-10,9-10,,,,todo
+12,Fact-check and record 11-20,11-20,,,,todo
+13,Edit 11-14,11-14,,,,todo
+14,Titles/descriptions and schedule in Studio,,,,,todo
+15,Publish,1,Sky isnt violet,science,AI,todo
+16,Publish,5,Decoy effect,psychology,You,todo
+17,Publish,3,GPS and relativity,science,AI,todo
+18,Publish,6,Illusory truth,psychology,You,todo
+19,Publish,4,Shipping container,science,AI,todo
+20,Publish,7,Anchoring,psychology,You,todo
+21,Publish,2,Cant tickle yourself,science,AI,todo
+22,Publish,8,Bystander effect,psychology,You,todo
+23,Publish,15,Curved flight routes,science,AI,todo
+24,Publish,16,Free-offer trap,psychology,You,todo
+25,Publish,19,Salty ocean,science,AI,todo
+26,Publish,11,Dunning-Kruger,psychology,You,todo
+27,Publish,14,Moon vanishes,science,AI,todo
+28,Publish,10,Phone slot machine,psychology,You,todo
+29,Publish,9,Time speeds up,science,AI,todo
+30,Publish,17,Con artists and trust,psychology,You,todo
