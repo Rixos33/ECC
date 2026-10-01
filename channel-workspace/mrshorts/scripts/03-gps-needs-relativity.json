@@ -1,0 +1,553 @@
+{
+ "id": "short03_gps_needs_relativity",
+ "handle": "@mrshorts1737",
+ "title": "Your GPS only works because Einstein was right",
+ "palette": "blue",
+ "bg": "space",
+ "ground": "planet",
+ "mood": "wonder",
+ "lines": [
+  {
+   "text": "Your phone's map? It only works because Einstein was right.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "phone",
+       "x": 0.4,
+       "y": 0.44,
+       "s": 1.5,
+       "color": "cyan"
+      },
+      {
+       "prop": "satellite",
+       "x": 0.76,
+       "y": 0.27,
+       "s": 0.7
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.12,
+       "s": 1.0,
+       "label": "MAP NEEDS EINSTEIN",
+       "size": 90,
+       "color": "yellow"
+      }
+     ]
+    },
+    {
+     "on": "Einstein",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.4,
+       "y": 0.46,
+       "s": 1.4,
+       "color": "white",
+       "mood": "happy"
+      },
+      {
+       "prop": "check",
+       "x": 0.72,
+       "y": 0.36,
+       "s": 0.7,
+       "on": "right"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "GPS satellites carry atomic clocks roughly twenty thousand kilometers up, at about fourteen thousand kilometers per hour.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "satellite",
+       "x": 0.46,
+       "y": 0.28,
+       "s": 1.3
+      },
+      {
+       "prop": "clock",
+       "x": 0.46,
+       "y": 0.44,
+       "s": 0.6,
+       "on": "clocks"
+      },
+      {
+       "prop": "planet",
+       "x": 0.5,
+       "y": 0.6,
+       "s": 1.403
+      }
+     ]
+    },
+    {
+     "on": "twenty",
+     "scene": [
+      {
+       "prop": "planet",
+       "x": 0.5,
+       "y": 0.5,
+       "s": 1.4
+      },
+      {
+       "prop": "satellite",
+       "x": 0.4,
+       "y": 0.28,
+       "s": 0.7
+      },
+      {
+       "prop": "label",
+       "x": 0.7,
+       "y": 0.34,
+       "s": 1.0,
+       "label": "HIGH ORBIT",
+       "size": 80,
+       "color": "yellow"
+      }
+     ]
+    },
+    {
+     "on": "fourteen",
+     "scene": [
+      {
+       "prop": "satellite",
+       "x": 0.4,
+       "y": 0.34,
+       "s": 1.963,
+       "to": [
+        0.55,
+        0.34
+       ]
+      },
+      {
+       "prop": "arrow",
+       "x": 0.5,
+       "y": 0.48,
+       "s": 1.0,
+       "length": 300,
+       "color": "yellow"
+      },
+      {
+       "prop": "planet",
+       "x": 0.5,
+       "y": 0.64,
+       "s": 0.8
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "Their speed makes those clocks run slow, by about seven microseconds a day.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "satellite",
+       "x": 0.32,
+       "y": 0.24,
+       "s": 0.6
+      },
+      {
+       "prop": "clock",
+       "x": 0.32,
+       "y": 0.43,
+       "s": 1.703,
+       "speed": 0.3
+      },
+      {
+       "prop": "clock",
+       "x": 0.76,
+       "y": 0.47,
+       "s": 0.8,
+       "speed": 1.0
+      }
+     ]
+    },
+    {
+     "on": "seven",
+     "scene": [
+      {
+       "prop": "clock",
+       "x": 0.36,
+       "y": 0.42,
+       "s": 1.488,
+       "speed": 0.3
+      },
+      {
+       "prop": "arrow",
+       "x": 0.74,
+       "y": 0.46,
+       "s": 1.0,
+       "angle": 90,
+       "length": 200,
+       "color": "cyan"
+      },
+      {
+       "prop": "calendar",
+       "x": 0.74,
+       "y": 0.27,
+       "s": 0.6,
+       "label": "1 day"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "But weaker gravity up there makes them run fast, by about forty-five microseconds a day.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "planet",
+       "x": 0.5,
+       "y": 0.5,
+       "s": 1.4
+      },
+      {
+       "prop": "satellite",
+       "x": 0.5,
+       "y": 0.29,
+       "s": 0.7
+      },
+      {
+       "prop": "arrow",
+       "x": 0.84,
+       "y": 0.38,
+       "s": 1.0,
+       "angle": -90,
+       "length": 200,
+       "color": "cyan"
+      }
+     ]
+    },
+    {
+     "on": "fast",
+     "scene": [
+      {
+       "prop": "satellite",
+       "x": 0.32,
+       "y": 0.24,
+       "s": 0.6
+      },
+      {
+       "prop": "clock",
+       "x": 0.32,
+       "y": 0.43,
+       "s": 1.703,
+       "speed": 3.0
+      },
+      {
+       "prop": "person",
+       "x": 0.76,
+       "y": 0.508,
+       "s": 1.0,
+       "color": "orange",
+       "mood": "surprised",
+       "look": -1.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "Net result: thirty-eight microseconds fast, every day. Left alone, position errors would grow by roughly ten kilometers a day.",
+   "say": "Nett result: thirty-eight microseconds fast, every day. Left alone, position errors would grow by roughly ten kilometers a day.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "clock",
+       "x": 0.5,
+       "y": 0.28,
+       "s": 0.8,
+       "speed": 3.0
+      },
+      {
+       "prop": "bars",
+       "x": 0.5,
+       "y": 0.48,
+       "s": 0.8,
+       "bars": [
+        [
+         "speed: slower",
+         0.16,
+         "#3fa9ff"
+        ],
+        [
+         "gravity: faster",
+         1.0,
+         "#ffd23f"
+        ]
+       ]
+      }
+     ],
+     "cam": {
+      "zoom": [
+       1.0,
+       1.15
+      ]
+     }
+    },
+    {
+     "on": "Left",
+     "scene": [
+      {
+       "prop": "phone",
+       "x": 0.42,
+       "y": 0.42,
+       "s": 1.5,
+       "color": "cyan"
+      },
+      {
+       "prop": "pin",
+       "x": 0.42,
+       "y": 0.4,
+       "s": 0.55,
+       "color": "blue",
+       "layer": true,
+       "to": [
+        0.52,
+        0.32
+       ]
+      },
+      {
+       "prop": "arrow",
+       "x": 0.74,
+       "y": 0.36,
+       "s": 1.0,
+       "angle": -45,
+       "length": 180,
+       "color": "red"
+      }
+     ]
+    },
+    {
+     "on": "ten",
+     "scene": [
+      {
+       "prop": "pin",
+       "x": 0.26,
+       "y": 0.42,
+       "s": 1.2,
+       "color": "blue"
+      },
+      {
+       "prop": "arrow",
+       "x": 0.52,
+       "y": 0.42,
+       "s": 1.0,
+       "length": 200,
+       "color": "red"
+      },
+      {
+       "prop": "pin",
+       "x": 0.78,
+       "y": 0.42,
+       "s": 1.47,
+       "color": "red"
+      }
+     ]
+    }
+   ],
+   "sfx": "chime",
+   "sfx_at": 0.4
+  },
+  {
+   "text": "So engineers tune the satellite clocks to tick slightly slow before launch. On purpose.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.3,
+       "y": 0.45,
+       "s": 1.3,
+       "color": "orange",
+       "mood": "happy"
+      },
+      {
+       "prop": "satellite",
+       "x": 0.7,
+       "y": 0.36,
+       "s": 0.9
+      }
+     ]
+    },
+    {
+     "on": "tick",
+     "scene": [
+      {
+       "prop": "clock",
+       "x": 0.44,
+       "y": 0.44,
+       "s": 1.5,
+       "speed": 0.3
+      },
+      {
+       "prop": "label",
+       "x": 0.44,
+       "y": 0.26,
+       "s": 1.0,
+       "label": "-38 µs",
+       "size": 90,
+       "color": "cyan"
+      },
+      {
+       "prop": "arrow",
+       "x": 0.8,
+       "y": 0.44,
+       "s": 1.0,
+       "angle": 90,
+       "length": 180,
+       "color": "cyan"
+      }
+     ],
+     "cam": {
+      "zoom": [
+       1.0,
+       1.15
+      ]
+     }
+    },
+    {
+     "on": "launch",
+     "scene": [
+      {
+       "prop": "satellite",
+       "x": 0.5,
+       "y": 0.38,
+       "s": 1.2,
+       "to": [
+        0.5,
+        0.27
+       ]
+      },
+      {
+       "prop": "planet",
+       "x": 0.5,
+       "y": 0.6,
+       "s": 1.501
+      },
+      {
+       "prop": "clock",
+       "x": 0.8,
+       "y": 0.24,
+       "s": 0.5,
+       "speed": 0.3
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "Every blue dot on your map is quiet proof... that Einstein was right.",
+   "say": "Every blue dot, on your map, is quiet proof... that Einstein was right.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "planet",
+       "x": 0.46,
+       "y": 0.46,
+       "s": 1.4
+      },
+      {
+       "prop": "pin",
+       "x": 0.42,
+       "y": 0.42,
+       "s": 0.5,
+       "color": "blue",
+       "layer": true
+      },
+      {
+       "prop": "satellite",
+       "x": 0.74,
+       "y": 0.3,
+       "s": 0.7
+      }
+     ]
+    },
+    {
+     "on": "quiet",
+     "scene": [
+      {
+       "prop": "phone",
+       "x": 0.42,
+       "y": 0.44,
+       "s": 1.5,
+       "color": "cyan"
+      },
+      {
+       "prop": "pin",
+       "x": 0.42,
+       "y": 0.4,
+       "s": 0.55,
+       "color": "blue",
+       "layer": true,
+       "to": [
+        0.5,
+        0.33
+       ]
+      },
+      {
+       "prop": "satellite",
+       "x": 0.76,
+       "y": 0.3,
+       "s": 0.7
+      }
+     ]
+    },
+    {
+     "on": "Einstein",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.36,
+       "y": 0.45,
+       "s": 1.3,
+       "color": "white",
+       "mood": "happy"
+      },
+      {
+       "prop": "check",
+       "x": 0.74,
+       "y": 0.36,
+       "s": 0.8,
+       "on": "right"
+      }
+     ],
+     "cam": {
+      "zoom": [
+       1.0,
+       1.15
+      ]
+     }
+    }
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "claim": "Altitude ~20,000 km, speed ~14,000 km/h; -7 μs/day (special), +45 μs/day (general), net +38 μs/day; ~10 km/day error",
+   "url": "https://www.astronomy.ohio-state.edu/pogge.1/Ast162/Unit5/gps.html",
+   "note": "Richard Pogge, Ohio State University astronomy course page 'Real-World Relativity: The GPS Navigation System'."
+  },
+  {
+   "claim": "Satellite clocks pre-set to 10.22999999543 MHz instead of 10.23 MHz",
+   "url": "https://link.springer.com/article/10.12942/lrr-2003-1",
+   "note": "Neil Ashby 2003, 'Relativity in the Global Positioning System', Living Reviews in Relativity 6:1 (net gain ~38.6 μs/day; fractional frequency offset applied before launch)."
+  },
+  {
+   "claim": "NIST on GPS and relativity",
+   "url": "https://www.nist.gov/atomic-clocks/a-powerful-tool-for-science/putting-einstein-test",
+   "note": "Background/pointer from NIST."
+  }
+ ],
+ "caveats": "The '10 km per day' figure is the standard popular estimate (Pogge); physicists note the real failure mode is more complex, since receivers also solve for their own clock offset. Narration says 'roughly' and 'position errors would grow', which is defensible. Satellite altitude is 20,200 km above the surface; rounded to 20,000."
+}

@@ -1,0 +1,547 @@
+{
+ "id": "short05_decoy_effect",
+ "handle": "@mrshorts1737",
+ "title": "The option nobody picks (and why it's there)",
+ "palette": "green",
+ "bg": "plain",
+ "ground": "hill",
+ "mood": "curious",
+ "lines": [
+  {
+   "text": "This option? Nobody picked it. It still changed everyone's choice.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "card",
+       "x": 0.5,
+       "y": 0.46,
+       "s": 1.5,
+       "label": "PRINT",
+       "price": "$125",
+       "color": "white"
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.26,
+       "s": 1.0,
+       "label": "0 BUYERS",
+       "size": 120,
+       "color": "red"
+      }
+     ]
+    },
+    {
+     "on": "changed",
+     "scene": [
+      {
+       "prop": "card",
+       "x": 0.62,
+       "y": 0.36,
+       "s": 1.3,
+       "label": "BOTH",
+       "price": "$125",
+       "best": true,
+       "on": "everyone"
+      },
+      {
+       "prop": "crowd",
+       "x": 0.5,
+       "y": 0.531,
+       "s": 0.7,
+       "n": 3,
+       "layer": true
+      },
+      {
+       "prop": "card",
+       "x": 0.24,
+       "y": 0.33,
+       "s": 0.7,
+       "label": "PRINT",
+       "price": "$125",
+       "color": "grey"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "In a famous classroom demo, MIT students were offered: web, fifty-nine dollars. Print, one twenty-five dollars. Both, also one twenty-five dollars.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "crowd",
+       "x": 0.5,
+       "y": 0.501,
+       "s": 1.0,
+       "n": 4
+      },
+      {
+       "prop": "newspaper",
+       "x": 0.5,
+       "y": 0.26,
+       "s": 0.6,
+       "headline": "SUBSCRIBE"
+      }
+     ]
+    },
+    {
+     "on": "web",
+     "scene": [
+      {
+       "prop": "card",
+       "x": 0.4,
+       "y": 0.44,
+       "s": 1.5,
+       "label": "WEB",
+       "price": "$59"
+      },
+      {
+       "prop": "phone",
+       "x": 0.76,
+       "y": 0.44,
+       "s": 0.9,
+       "color": "cyan"
+      }
+     ]
+    },
+    {
+     "on": "Print",
+     "scene": [
+      {
+       "prop": "card",
+       "x": 0.2,
+       "y": 0.44,
+       "s": 1.542,
+       "label": "WEB",
+       "price": "$59"
+      },
+      {
+       "prop": "card",
+       "x": 0.5,
+       "y": 0.44,
+       "s": 1.1,
+       "label": "PRINT",
+       "price": "$125"
+      },
+      {
+       "prop": "card",
+       "x": 0.8,
+       "y": 0.44,
+       "s": 1.1,
+       "label": "BOTH",
+       "price": "$125",
+       "on": "Both"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "Nobody chose print alone. But eighty-four percent chose the bundle.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "card",
+       "x": 0.5,
+       "y": 0.3,
+       "s": 1.1,
+       "label": "PRINT",
+       "price": "$125",
+       "color": "grey"
+      },
+      {
+       "prop": "crowd",
+       "x": 0.5,
+       "y": 0.491,
+       "s": 1.102,
+       "n": 4,
+       "mood": "neutral"
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.12,
+       "s": 1.0,
+       "label": "IGNORED",
+       "size": 90,
+       "color": "red",
+       "on": "alone"
+      }
+     ]
+    },
+    {
+     "on": "eighty",
+     "scene": [
+      {
+       "prop": "card",
+       "x": 0.5,
+       "y": 0.3,
+       "s": 1.2,
+       "label": "BOTH",
+       "price": "$125",
+       "best": true
+      },
+      {
+       "prop": "crowd",
+       "x": 0.5,
+       "y": 0.511,
+       "s": 0.9,
+       "n": 5,
+       "mood": "happy"
+      }
+     ],
+     "cam": {
+      "zoom": [
+       1.0,
+       1.15
+      ]
+     }
+    }
+   ],
+   "sfx": "chime",
+   "sfx_at": 2.2
+  },
+  {
+   "text": "Remove the useless option, and only thirty-two percent did. That's a decoy.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "card",
+       "x": 0.3,
+       "y": 0.44,
+       "s": 1.5,
+       "label": "WEB",
+       "price": "$59"
+      },
+      {
+       "prop": "card",
+       "x": 0.7,
+       "y": 0.44,
+       "s": 1.5,
+       "label": "BOTH",
+       "price": "$125"
+      }
+     ]
+    },
+    {
+     "on": "thirty",
+     "scene": [
+      {
+       "prop": "card",
+       "x": 0.5,
+       "y": 0.26,
+       "s": 0.7,
+       "label": "BOTH",
+       "price": "$125"
+      },
+      {
+       "prop": "bars",
+       "x": 0.5,
+       "y": 0.46,
+       "s": 0.8,
+       "bars": [
+        [
+         "with decoy",
+         0.84,
+         "#7ad151"
+        ],
+        [
+         "no decoy",
+         0.32,
+         "#9aa0b4"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "on": "That",
+     "scene": [
+      {
+       "prop": "card",
+       "x": 0.42,
+       "y": 0.44,
+       "s": 1.5,
+       "label": "PRINT",
+       "price": "$125",
+       "color": "grey"
+      },
+      {
+       "prop": "label",
+       "x": 0.76,
+       "y": 0.34,
+       "s": 1.0,
+       "label": "BAIT",
+       "size": 110,
+       "color": "red"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "The catch? With photos or real products, the effect often vanished. One team got reliable effects in just eleven of ninety-one tries.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "frame",
+       "x": 0.3,
+       "y": 0.38,
+       "s": 1.2,
+       "label": "PHOTO"
+      },
+      {
+       "prop": "package",
+       "x": 0.74,
+       "y": 0.52,
+       "s": 0.9,
+       "color": "orange",
+       "label": "REAL",
+       "on": "or"
+      }
+     ]
+    },
+    {
+     "on": "effect",
+     "scene": [
+      {
+       "prop": "card",
+       "x": 0.5,
+       "y": 0.3,
+       "s": 1.1,
+       "label": "BOTH",
+       "price": "$125",
+       "color": "grey"
+      },
+      {
+       "prop": "crowd",
+       "x": 0.5,
+       "y": 0.511,
+       "s": 0.9,
+       "n": 4,
+       "mood": "neutral"
+      }
+     ]
+    },
+    {
+     "on": "One",
+     "scene": [
+      {
+       "prop": "crowd",
+       "x": 0.5,
+       "y": 0.471,
+       "s": 1.3,
+       "n": 3,
+       "colors": [
+        "teal",
+        "orange",
+        "pink"
+       ]
+      },
+      {
+       "prop": "newspaper",
+       "x": 0.5,
+       "y": 0.22,
+       "s": 0.55,
+       "headline": "DECOY TESTS"
+      }
+     ]
+    },
+    {
+     "on": "eleven",
+     "scene": [
+      {
+       "prop": "bars",
+       "x": 0.5,
+       "y": 0.3,
+       "s": 0.9,
+       "bars": [
+        [
+         "worked",
+         0.12,
+         "#7ad151"
+        ],
+        [
+         "all tries",
+         1.0,
+         "#9aa0b4"
+        ]
+       ],
+       "sub": "one team's tests"
+      },
+      {
+       "prop": "person",
+       "x": 0.5,
+       "y": 0.536,
+       "s": 0.7,
+       "color": "teal"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "Decoys work best with numbers in neat tables. Like pricing pages.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "list",
+       "x": 0.5,
+       "y": 0.3,
+       "s": 0.75,
+       "items": [
+        "web  $59",
+        "print  $125",
+        "both  $125"
+       ]
+      },
+      {
+       "prop": "person",
+       "x": 0.5,
+       "y": 0.509,
+       "s": 1.0,
+       "color": "yellow",
+       "mood": "happy"
+      }
+     ]
+    },
+    {
+     "on": "Like",
+     "scene": [
+      {
+       "prop": "card",
+       "x": 0.2,
+       "y": 0.44,
+       "s": 1.542,
+       "label": "BASIC",
+       "price": "$5"
+      },
+      {
+       "prop": "card",
+       "x": 0.5,
+       "y": 0.44,
+       "s": 1.1,
+       "label": "PLUS",
+       "price": "$9",
+       "color": "grey"
+      },
+      {
+       "prop": "card",
+       "x": 0.8,
+       "y": 0.44,
+       "s": 1.1,
+       "label": "PRO",
+       "price": "$10",
+       "best": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "So when an option makes no sense, remember: nobody picks it. That's the point.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "card",
+       "x": 0.42,
+       "y": 0.44,
+       "s": 1.5,
+       "label": "PRINT",
+       "price": "$125",
+       "color": "grey"
+      },
+      {
+       "prop": "question",
+       "x": 0.76,
+       "y": 0.34,
+       "s": 0.6,
+       "big": "?"
+      }
+     ]
+    },
+    {
+     "on": "nobody",
+     "scene": [
+      {
+       "prop": "card",
+       "x": 0.62,
+       "y": 0.36,
+       "s": 1.3,
+       "label": "BOTH",
+       "price": "$125",
+       "best": true
+      },
+      {
+       "prop": "crowd",
+       "x": 0.32,
+       "y": 0.531,
+       "s": 0.7,
+       "n": 3,
+       "layer": true
+      }
+     ]
+    },
+    {
+     "on": "That",
+     "scene": [
+      {
+       "prop": "card",
+       "x": 0.5,
+       "y": 0.46,
+       "s": 1.5,
+       "label": "PRINT",
+       "price": "$125",
+       "color": "white"
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.26,
+       "s": 1.0,
+       "label": "0 BUYERS",
+       "size": 120,
+       "color": "red"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "claim": "Economist offer: web $59, print $125, both $125; 16/0/84 of 100 MIT Sloan students; without decoy 68/32",
+   "url": "https://ribbonfarm.com/2008/09/18/predictably-irrational-by-dan-ariely/",
+   "note": "Summary of Ariely, 'Predictably Irrational' (2008), ch. 1. Reported in a popular book and TED talk, not a peer-reviewed paper."
+  },
+  {
+   "claim": "Original attraction/decoy effect",
+   "url": "https://ideas.repec.org/a/oup/jconrs/v9y1982i1p90-98.html",
+   "note": "Huber, Payne & Puto 1982, Journal of Consumer Research 9(1):90-98."
+  },
+  {
+   "claim": "Effect largely confined to numeric, stylized stimuli; typically absent with experienced products or perceptual attributes (e.g., photos)",
+   "url": "https://web2-bschool.nus.edu.sg/wp-content/uploads/media_rp/publications/tF83O1430805722.pdf",
+   "note": "Frederick, Lee & Baskin 2014, 'The Limits of Attraction', J. Marketing Research 51:487-507."
+  },
+  {
+   "claim": "91 attempts, only 11 reliable attraction effects",
+   "url": "https://journals.sagepub.com/doi/10.1509/jmr.14.0020",
+   "note": "Yang & Lynn 2014, J. Marketing Research 51:508-513; effects at chance levels with verbal/pictorial descriptions."
+  },
+  {
+   "claim": "Rebuttal from original authors",
+   "url": "https://journals.sagepub.com/doi/10.1509/jmr.14.0208",
+   "note": "Huber, Payne & Puto 2014 'Let's Be Honest About the Attraction Effect' argue the effect is real but context-dependent."
+  }
+ ],
+ "caveats": "The Economist numbers come only from Ariely's book/talk (ch. 1 'The Truth About Relativity'); I verified them through secondary summaries, not the book text. The second group's size is not clearly reported, so narration says 'thirty-two percent'. Ariely has had two papers retracted over data problems (2021 PNAS; 2026 Psychological Science). Nothing specific is alleged about this example, but a fact-checker may prefer to drop his name and say 'a famous classroom demo'. Line 5 'the effect often vanished' is fair per Frederick et al. and Yang & Lynn; Huber et al. dispute the practical conclusion. Round-3 edit: line 1 no longer names Ariely (per the note above); it now says 'MIT students were offered...'. The numbers are unchanged and still come from his book/talk. Line 4's bars show 11 reliable effects out of 91 attempts to scale. Final edit: line 1 framed as 'a famous classroom demo' (book/talk anecdote, not a peer-reviewed study)."
+}

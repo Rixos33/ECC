@@ -1,0 +1,574 @@
+{
+ "id": "short08_bystander_effect",
+ "handle": "@mrshorts1737",
+ "title": "Would a crowd help you? The footage says...",
+ "palette": "violet",
+ "bg": "sky",
+ "ground": "hill",
+ "mood": "tense",
+ "lines": [
+  {
+   "text": "Would a crowd help? Classic psychology said maybe not. Real footage disagrees.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "crowd",
+       "x": 0.72,
+       "y": 0.475,
+       "s": 1.26,
+       "n": 3
+      },
+      {
+       "prop": "person",
+       "x": 0.34,
+       "y": 0.56,
+       "s": 0.95,
+       "color": "red",
+       "mood": "sad",
+       "rot": 90,
+       "layer": true
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.25,
+       "s": 1.0,
+       "label": "CROWD HELP YOU?",
+       "size": 100,
+       "color": "yellow"
+      }
+     ]
+    },
+    {
+     "on": "Classic",
+     "scene": [
+      {
+       "prop": "newspaper",
+       "x": 0.36,
+       "y": 0.38,
+       "s": 1.1,
+       "headline": "NOBODY HELPED"
+      },
+      {
+       "prop": "crowd",
+       "x": 0.78,
+       "y": 0.521,
+       "s": 0.8,
+       "n": 2,
+       "mood": "sad"
+      }
+     ]
+    },
+    {
+     "on": "Real",
+     "scene": [
+      {
+       "prop": "tv",
+       "x": 0.42,
+       "y": 0.485,
+       "s": 1.1,
+       "label": "CCTV",
+       "people": 3
+      },
+      {
+       "prop": "camera",
+       "x": 0.82,
+       "y": 0.54,
+       "s": 0.7
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "In 1968, students on an intercom heard a fellow student apparently having a seizure.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "crowd",
+       "x": 0.5,
+       "y": 0.491,
+       "s": 1.1,
+       "n": 4
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.25,
+       "s": 1.0,
+       "label": "LAB STUDY",
+       "size": 90,
+       "color": "yellow"
+      }
+     ]
+    },
+    {
+     "on": "intercom",
+     "scene": [
+      {
+       "prop": "speaker",
+       "x": 0.34,
+       "y": 0.485,
+       "s": 1.3
+      },
+      {
+       "prop": "person",
+       "x": 0.72,
+       "y": 0.491,
+       "s": 1.2,
+       "color": "cyan",
+       "on": "heard"
+      }
+     ]
+    },
+    {
+     "on": "apparently",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.36,
+       "y": 0.55,
+       "s": 1.2,
+       "color": "yellow",
+       "mood": "sad",
+       "rot": 90
+      },
+      {
+       "prop": "bubble",
+       "x": 0.62,
+       "y": 0.34,
+       "s": 1.0,
+       "label": "help...",
+       "tail": "left"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "Thinking they were the only listener, eighty-five percent got help before it ended. With four others listening, thirty-one percent.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.36,
+       "y": 0.472,
+       "s": 1.4,
+       "color": "cyan"
+      },
+      {
+       "prop": "speaker",
+       "x": 0.74,
+       "y": 0.52,
+       "s": 0.9
+      },
+      {
+       "prop": "label",
+       "x": 0.36,
+       "y": 0.25,
+       "s": 1.0,
+       "label": "ALONE",
+       "size": 90,
+       "color": "yellow"
+      }
+     ]
+    },
+    {
+     "on": "eighty",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.36,
+       "y": 0.472,
+       "s": 1.4,
+       "color": "cyan",
+       "wave": true,
+       "mood": "surprised"
+      },
+      {
+       "prop": "speaker",
+       "x": 0.74,
+       "y": 0.52,
+       "s": 0.9
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.25,
+       "s": 1.0,
+       "label": "HELPED IN TIME",
+       "size": 80,
+       "color": "yellow"
+      }
+     ]
+    },
+    {
+     "on": "With",
+     "scene": [
+      {
+       "prop": "bars",
+       "x": 0.5,
+       "y": 0.3,
+       "s": 0.8,
+       "bars": [
+        [
+         "alone",
+         0.85,
+         "#7ad151"
+        ],
+        [
+         "with 4 others",
+         0.31,
+         "#ff5a5a"
+        ]
+       ]
+      },
+      {
+       "prop": "crowd",
+       "x": 0.5,
+       "y": 0.521,
+       "s": 0.8,
+       "n": 5
+      }
+     ],
+     "cam": {
+      "zoom": [
+       1.0,
+       1.15
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "text": "Diffusion of responsibility: everyone assumes someone else will act.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "crowd",
+       "x": 0.72,
+       "y": 0.475,
+       "s": 1.26,
+       "n": 3
+      },
+      {
+       "prop": "person",
+       "x": 0.34,
+       "y": 0.56,
+       "s": 0.95,
+       "color": "red",
+       "mood": "sad",
+       "rot": 90,
+       "layer": true
+      }
+     ]
+    },
+    {
+     "on": "someone",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.28,
+       "y": 0.482,
+       "s": 1.3,
+       "color": "cyan",
+       "look": 1.0
+      },
+      {
+       "prop": "person",
+       "x": 0.72,
+       "y": 0.482,
+       "s": 1.3,
+       "color": "orange",
+       "look": -1.0,
+       "flip": true
+      },
+      {
+       "prop": "bubble",
+       "x": 0.5,
+       "y": 0.26,
+       "s": 0.9,
+       "label": "you go",
+       "tail": "left"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "But a 2019 study watched two hundred nineteen real fights and arguments on CCTV. In about nine in ten, someone stepped in.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.24,
+       "y": 0.482,
+       "s": 1.3,
+       "color": "teal",
+       "mood": "neutral",
+       "look": 0.0
+      },
+      {
+       "prop": "tv",
+       "x": 0.72,
+       "y": 0.48,
+       "s": 1.15,
+       "people": 3
+      }
+     ]
+    },
+    {
+     "on": "two",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.28,
+       "y": 0.482,
+       "s": 1.3,
+       "color": "red",
+       "mood": "sad"
+      },
+      {
+       "prop": "person",
+       "x": 0.72,
+       "y": 0.482,
+       "s": 1.3,
+       "color": "orange",
+       "flip": true,
+       "mood": "surprised"
+      },
+      {
+       "prop": "bubble",
+       "x": 0.5,
+       "y": 0.24,
+       "s": 0.9,
+       "label": "hey!",
+       "tail": "left"
+      }
+     ]
+    },
+    {
+     "on": "arguments",
+     "scene": [
+      {
+       "prop": "camera",
+       "x": 0.26,
+       "y": 0.514,
+       "s": 1.0
+      },
+      {
+       "prop": "tv",
+       "x": 0.68,
+       "y": 0.475,
+       "s": 1.2,
+       "people": 3,
+       "label": "219 FIGHTS"
+      }
+     ],
+     "cam": {
+      "zoom": [
+       1.0,
+       1.15
+      ]
+     }
+    },
+    {
+     "on": "about",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.22,
+       "y": 0.466,
+       "s": 1.47,
+       "color": "red"
+      },
+      {
+       "prop": "person",
+       "x": 0.78,
+       "y": 0.491,
+       "s": 1.2,
+       "color": "orange",
+       "flip": true
+      },
+      {
+       "prop": "person",
+       "x": 0.72,
+       "y": 0.5,
+       "s": 1.1,
+       "color": "cyan",
+       "wave": true,
+       "on": "someone",
+       "to": [
+        0.5,
+        0.5
+       ],
+       "layer": true
+      }
+     ],
+     "cam": {
+      "zoom": [
+       1.0,
+       1.15
+      ]
+     }
+    }
+   ],
+   "sfx": "chime",
+   "sfx_at": 5.4
+  },
+  {
+   "text": "And more bystanders meant a better chance of help, not worse.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "crowd",
+       "x": 0.5,
+       "y": 0.491,
+       "s": 1.1,
+       "n": 5,
+       "mood": "happy"
+      },
+      {
+       "prop": "arrow",
+       "x": 0.5,
+       "y": 0.2,
+       "s": 1.0,
+       "angle": -90,
+       "length": 200,
+       "color": "green"
+      }
+     ]
+    },
+    {
+     "on": "better",
+     "scene": [
+      {
+       "prop": "crowd",
+       "x": 0.72,
+       "y": 0.475,
+       "s": 1.26,
+       "n": 3,
+       "mood": "happy"
+      },
+      {
+       "prop": "person",
+       "x": 0.34,
+       "y": 0.56,
+       "s": 0.95,
+       "color": "red",
+       "mood": "happy",
+       "rot": 90,
+       "layer": true
+      },
+      {
+       "prop": "heart",
+       "x": 0.5,
+       "y": 0.32,
+       "s": 0.6,
+       "on": "help"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "So would a crowd help you? Real-world evidence says: probably yes.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "crowd",
+       "x": 0.72,
+       "y": 0.475,
+       "s": 1.26,
+       "n": 3
+      },
+      {
+       "prop": "person",
+       "x": 0.34,
+       "y": 0.56,
+       "s": 0.95,
+       "color": "red",
+       "mood": "sad",
+       "rot": 90,
+       "layer": true
+      }
+     ]
+    },
+    {
+     "on": "Real",
+     "scene": [
+      {
+       "prop": "tv",
+       "x": 0.42,
+       "y": 0.485,
+       "s": 1.1,
+       "label": "REAL LIFE",
+       "people": 3
+      },
+      {
+       "prop": "check",
+       "x": 0.82,
+       "y": 0.28,
+       "s": 0.6,
+       "on": "evidence"
+      }
+     ]
+    },
+    {
+     "on": "says",
+     "scene": [
+      {
+       "prop": "crowd",
+       "x": 0.72,
+       "y": 0.475,
+       "s": 1.26,
+       "n": 3,
+       "mood": "happy"
+      },
+      {
+       "prop": "person",
+       "x": 0.34,
+       "y": 0.56,
+       "s": 0.95,
+       "color": "red",
+       "mood": "happy",
+       "rot": 90,
+       "layer": true
+      },
+      {
+       "prop": "heart",
+       "x": 0.5,
+       "y": 0.32,
+       "s": 0.5
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "claim": "Seizure-over-intercom study: 85% (alone) vs 31% (four other bystanders) reported the emergency before the victim's fit ended",
+   "url": "https://psycnet.apa.org/doi/10.1037/h0025589",
+   "note": "Darley & Latané 1968, 'Bystander intervention in emergencies: Diffusion of responsibility', JPSP 8:377-383. Figures also given in many textbook summaries (e.g., simplypsychology.org/bystander-effect.html)."
+  },
+  {
+   "claim": "219 CCTV-captured public conflicts in Amsterdam, Lancaster, Cape Town; intervention in ~91%; more bystanders linked to greater likelihood someone helps",
+   "url": "https://research.lancaster-university.uk/en/publications/would-i-be-helped-cross-national-cctv-footage-shows-that-interven/",
+   "note": "Philpot, Liebst, Levine, Bernasco & Lindegaard, American Psychologist 75(1):66-75 (online 2019, print 2020). See also ScienceDaily summary: https://www.sciencedaily.com/releases/2019/06/190626125049.htm"
+  },
+  {
+   "claim": "Bystander effect is weaker in dangerous emergencies",
+   "url": "https://www.semanticscholar.org/paper/The-bystander-effect:-a-meta-analytic-review-on-in-Fischer-Krueger/43e957f87e561c4d2d65715e6fe94e872b34299e",
+   "note": "Fischer et al. 2011 meta-analysis, Psychological Bulletin 137(4):517-537 (overall effect g = -0.35, attenuated in dangerous situations)."
+  }
+ ],
+ "caveats": "Both findings can be true: the lab effect is about each individual's likelihood of acting, while the CCTV study measures whether anyone in the group acts. The CCTV data cover public conflicts (arguments, fights), not every kind of emergency (e.g., medical collapse). The paper was published online in 2019, print issue dated 2020. Darley & Latané's '85% vs 31%' is 'before the end of the fit'; by the end of the session most participants in all conditions eventually responded (62% in six-person groups)."
+}

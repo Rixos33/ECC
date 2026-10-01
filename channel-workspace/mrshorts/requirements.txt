@@ -1,0 +1,4 @@
+edge-tts>=7
+skia-python>=87
+numpy>=1.26
+faster-whisper>=1.0  # qa.py only

@@ -1,0 +1,563 @@
+{
+ "id": "short09_time_speeds_up_with_age",
+ "handle": "@mrshorts1737",
+ "title": "Does time really speed up as you age?",
+ "palette": "blue",
+ "bg": "sky",
+ "ground": "hill",
+ "mood": "wonder",
+ "lines": [
+  {
+   "text": "As you age, why do the years fly faster? Maybe... they don't.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "hourglass",
+       "x": 0.36,
+       "y": 0.36,
+       "s": 1.5
+      },
+      {
+       "prop": "person",
+       "x": 0.76,
+       "y": 0.491,
+       "s": 1.2,
+       "color": "grey",
+       "mood": "surprised",
+       "look": 3.1
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.11,
+       "s": 1.0,
+       "label": "YEARS FLY FASTER?",
+       "size": 100,
+       "color": "yellow"
+      }
+     ]
+    },
+    {
+     "on": "years",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.3,
+       "y": 0.482,
+       "s": 1.3,
+       "color": "grey",
+       "mood": "surprised"
+      },
+      {
+       "prop": "calendar",
+       "x": 0.7,
+       "y": 0.36,
+       "s": 1.1,
+       "day": 1,
+       "flip": true
+      }
+     ]
+    },
+    {
+     "on": "Maybe",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.34,
+       "y": 0.482,
+       "s": 1.3,
+       "color": "grey",
+       "mood": "happy"
+      },
+      {
+       "prop": "clock",
+       "x": 0.72,
+       "y": 0.34,
+       "s": 0.9,
+       "speed": 0.5
+      }
+     ],
+     "cam": {
+      "zoom": [
+       1.0,
+       1.15
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "text": "The popular answer: novelty. Kids have endless firsts. Adults fall into routine, with fewer memories marking time.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "bulb",
+       "x": 0.34,
+       "y": 0.34,
+       "s": 1.1
+      },
+      {
+       "prop": "person",
+       "x": 0.7,
+       "y": 0.491,
+       "s": 1.2,
+       "color": "cyan",
+       "mood": "happy"
+      }
+     ]
+    },
+    {
+     "on": "Kids",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.24,
+       "y": 0.518,
+       "s": 0.9,
+       "color": "yellow",
+       "mood": "happy"
+      },
+      {
+       "prop": "frame",
+       "x": 0.62,
+       "y": 0.36,
+       "s": 1.177,
+       "label": "FIRST BIKE"
+      },
+      {
+       "prop": "heart",
+       "x": 0.86,
+       "y": 0.22,
+       "s": 0.5
+      }
+     ]
+    },
+    {
+     "on": "Adults",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.32,
+       "y": 0.472,
+       "s": 1.4,
+       "color": "orange",
+       "mood": "neutral"
+      },
+      {
+       "prop": "calendar",
+       "x": 0.72,
+       "y": 0.36,
+       "s": 0.9,
+       "label": "MON",
+       "on": "routine"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "That idea goes back to William James, in 1890. It's never been settled.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "bulb",
+       "x": 0.34,
+       "y": 0.34,
+       "s": 1.1
+      },
+      {
+       "prop": "person",
+       "x": 0.7,
+       "y": 0.491,
+       "s": 1.2,
+       "color": "cyan",
+       "mood": "neutral"
+      }
+     ]
+    },
+    {
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.3,
+       "y": 0.472,
+       "s": 1.4,
+       "color": "brown",
+       "mood": "neutral",
+       "look": 0.3
+      },
+      {
+       "prop": "frame",
+       "x": 0.7,
+       "y": 0.36,
+       "s": 1.0,
+       "label": "W. JAMES 1890",
+       "on": "James"
+      }
+     ],
+     "on": "William"
+    },
+    {
+     "on": "never",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.24,
+       "y": 0.475,
+       "s": 1.374,
+       "color": "teal",
+       "look": 1.0
+      },
+      {
+       "prop": "person",
+       "x": 0.76,
+       "y": 0.491,
+       "s": 1.2,
+       "color": "orange",
+       "flip": true,
+       "look": -1.0
+      },
+      {
+       "prop": "question",
+       "x": 0.5,
+       "y": 0.24,
+       "s": 0.5,
+       "big": "?"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "In 2010, researchers asked over eighteen hundred people: how fast does time feel?",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.3,
+       "y": 0.482,
+       "s": 1.3,
+       "color": "teal",
+       "mood": "happy"
+      },
+      {
+       "prop": "newspaper",
+       "x": 0.7,
+       "y": 0.38,
+       "s": 0.8,
+       "headline": "SURVEY"
+      }
+     ]
+    },
+    {
+     "on": "eighteen",
+     "scene": [
+      {
+       "prop": "crowd",
+       "x": 0.5,
+       "y": 0.491,
+       "s": 1.1,
+       "n": 5
+      },
+      {
+       "prop": "clock",
+       "x": 0.5,
+       "y": 0.2,
+       "s": 0.6,
+       "speed": 4.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "Almost everyone said time flies. Age barely mattered, except when judging the last ten years.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "clock",
+       "x": 0.5,
+       "y": 0.26,
+       "s": 1.0,
+       "speed": 4.0
+      },
+      {
+       "prop": "crowd",
+       "x": 0.5,
+       "y": 0.511,
+       "s": 0.9,
+       "n": 4,
+       "mood": "surprised"
+      }
+     ]
+    },
+    {
+     "on": "Age",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.28,
+       "y": 0.518,
+       "s": 0.9,
+       "color": "yellow",
+       "mood": "happy"
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.44,
+       "s": 1.0,
+       "label": "=",
+       "size": 150,
+       "color": "white"
+      },
+      {
+       "prop": "person",
+       "x": 0.72,
+       "y": 0.482,
+       "s": 1.3,
+       "color": "grey",
+       "mood": "happy",
+       "flip": true
+      }
+     ]
+    },
+    {
+     "on": "except",
+     "scene": [
+      {
+       "prop": "hourglass",
+       "x": 0.5,
+       "y": 0.2,
+       "s": 0.5
+      },
+      {
+       "prop": "bars",
+       "x": 0.5,
+       "y": 0.44,
+       "s": 0.85,
+       "bars": [
+        [
+         "younger",
+         0.6,
+         "#3fa9ff"
+        ],
+        [
+         "older",
+         0.85,
+         "#9b5cff"
+        ]
+       ],
+       "sub": "last decade (illustrative)"
+      }
+     ],
+     "cam": {
+      "zoom": [
+       1.0,
+       1.15
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "text": "Routine didn't predict it. Time pressure did. Busy people, at any age, feel time rushing.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "calendar",
+       "x": 0.38,
+       "y": 0.4,
+       "s": 1.3,
+       "label": "MON",
+       "flip": true
+      },
+      {
+       "prop": "check",
+       "x": 0.74,
+       "y": 0.36,
+       "s": 0.8,
+       "ok": false,
+       "on": "didn"
+      }
+     ]
+    },
+    {
+     "on": "Time",
+     "scene": [
+      {
+       "prop": "clock",
+       "x": 0.3,
+       "y": 0.3,
+       "s": 1.1,
+       "speed": 3.0
+      },
+      {
+       "prop": "person",
+       "x": 0.7,
+       "y": 0.483,
+       "s": 1.284,
+       "color": "orange",
+       "mood": "surprised"
+      }
+     ],
+     "cam": {
+      "zoom": [
+       1.0,
+       1.15
+      ]
+     }
+    },
+    {
+     "on": "Busy",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.44,
+       "y": 0.472,
+       "s": 1.4,
+       "color": "orange",
+       "mood": "surprised"
+      },
+      {
+       "prop": "phone",
+       "x": 0.78,
+       "y": 0.32,
+       "s": 0.5,
+       "color": "cyan"
+      },
+      {
+       "prop": "clock",
+       "x": 0.16,
+       "y": 0.3,
+       "s": 0.5,
+       "speed": 3.0
+      }
+     ]
+    }
+   ],
+   "sfx": "chime",
+   "sfx_at": 1.6
+  },
+  {
+   "text": "So maybe the years don't fly faster as you get older. Your to-do list is what flies.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.3,
+       "y": 0.482,
+       "s": 1.3,
+       "color": "grey",
+       "mood": "happy"
+      },
+      {
+       "prop": "calendar",
+       "x": 0.7,
+       "y": 0.36,
+       "s": 1.0,
+       "day": 1,
+       "flip": true
+      }
+     ]
+    },
+    {
+     "on": "fly",
+     "scene": [
+      {
+       "prop": "hourglass",
+       "x": 0.36,
+       "y": 0.36,
+       "s": 1.5
+      },
+      {
+       "prop": "person",
+       "x": 0.76,
+       "y": 0.491,
+       "s": 1.2,
+       "color": "grey",
+       "mood": "surprised",
+       "look": 3.1
+      }
+     ]
+    },
+    {
+     "on": "Your",
+     "scene": [
+      {
+       "prop": "list",
+       "x": 0.5,
+       "y": 0.4,
+       "s": 0.9,
+       "items": [
+        "reply to email",
+        "pay bills",
+        "call mum"
+       ]
+      },
+      {
+       "prop": "clock",
+       "x": 0.84,
+       "y": 0.16,
+       "s": 0.45,
+       "speed": 6.0
+      }
+     ]
+    },
+    {
+     "on": "what",
+     "scene": [
+      {
+       "prop": "list",
+       "x": 0.5,
+       "y": 0.44,
+       "s": 0.9,
+       "items": [
+        "book dentist",
+        "fix the sink",
+        "gym at six"
+       ],
+       "to": [
+        0.5,
+        0.3
+       ]
+      },
+      {
+       "prop": "clock",
+       "x": 0.16,
+       "y": 0.16,
+       "s": 0.45,
+       "speed": 9.0
+      }
+     ],
+     "cam": {
+      "zoom": [
+       1.0,
+       1.15
+      ]
+     }
+    }
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "claim": "1,865 adults aged 16-80; all ages report time passing quickly; age differences very small except for last-10-years question; findings support time-pressure theory; James (1890) attributed acceleration to fewer memorable events",
+   "url": "https://researchmap.jp/read0153473/published_papers/1402627/attachment_file.pdf",
+   "note": "Friedman & Janssen 2010, 'Aging and the speed of time', Acta Psychologica 134:130-141 (full text checked). Abstract: 'A total of 1865 adults from two countries, ranging in age from 16 to 80'. Exp. 1: 99 New Zealanders (young vs. older); Exp. 2: Dutch internet sample. Items asked how fast the last week, month, year and 10 years passed; age differences only on the 10-year item (about 4% of variance in Exp. 2), about 1% or less for the rest."
+  },
+  {
+   "claim": "Age effect found only on the 10-year item in a sample of 499 aged 14-94",
+   "url": "https://journals.sagepub.com/doi/10.2466/pr0.97.3.921-935",
+   "note": "Wittmann & Lehnhoff 2005, 'Age effects in perception of time', Psychological Reports 97:921-935. Small-to-moderate effects."
+  }
+ ],
+ "caveats": "Round-2 edits: narration now says 'people' rather than 'adults', because the sample included 16- and 17-year-olds (the paper itself calls them adults). The earlier on-screen list 'Week: similar / Year: similar' was checked against the paper and is accurate (no meaningful age difference for last week, month or year; older people rated the last 10 years as faster). It is now shown as two bar pairs: 'last year' young ~= old, '10 years' old > young. Bar lengths are illustrative, not the paper's means. The novelty/memory hypothesis isn't disproven, just unproven. 'Routine didn't predict it' rests on Friedman & Janssen: their life-change/routine measures did not explain speed-of-time ratings, while time pressure did; it's one paper (two samples, New Zealand and the Netherlands). Narration rounds 1,865 to 'over eighteen hundred'. Wittmann & Lehnhoff (2005) likewise found a modest age effect only for the decade question. Round-5 edit: last line is now 'Your to-do list is what flies.' (same meaning; 'does' was misheard). The 'younger/older' bars are illustrative, not the paper's means."
+}

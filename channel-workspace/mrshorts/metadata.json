@@ -1,0 +1,272 @@
+[
+  {
+    "id": "short01_sky_not_violet",
+    "title": "Why isn't the sky violet? Your eyes explain it",
+    "alt_titles": [
+      "Violet scatters more than blue. So why is the sky blue?",
+      "The sky should look violet. Here's why it doesn't"
+    ],
+    "description": "Violet light scatters even more than blue, but less violet sunlight, some absorption high up and our eyes' weak violet sensitivity make the sky look blue.\nSource: Rayleigh 1871 (scattering); Baez, UC Riverside Physics FAQ\n#shorts #science #physics",
+    "tags": [
+      "why is the sky blue",
+      "why isn't the sky violet",
+      "rayleigh scattering",
+      "light scattering",
+      "color vision",
+      "cone cells",
+      "atmosphere",
+      "physics explained",
+      "science shorts",
+      "curious science"
+    ],
+    "pinned_comment": "Before this, what did you think the answer was: 'blue scatters most' or something else?",
+    "synthetic_disclosure": {
+      "value": false,
+      "reason": "Not required: stock neural TTS voice (not a real person's clone) over clearly animated flat-vector visuals; YouTube exempts non-realistic animation and AI narration that doesn't impersonate anyone."
+    },
+    "playlist": "Science"
+  },
+  {
+    "id": "short02_cant_tickle_yourself",
+    "title": "Why you can't tickle yourself (the robot test)",
+    "alt_titles": [
+      "A tickle robot showed why self-tickling fails",
+      "Your brain cancels your own touch. Here's the test"
+    ],
+    "description": "Your brain predicts your own touch and turns it down. Add a 0.2-second delay with a tickle robot and self-touch feels like someone else's.\nSource: Blakemore, Wolpert & Frith 1998; Blakemore, Frith & Wolpert 1999\n#shorts #neuroscience #brain",
+    "tags": [
+      "why can't you tickle yourself",
+      "tickling",
+      "tickle robot",
+      "sensory prediction",
+      "cerebellum",
+      "brain science",
+      "neuroscience",
+      "Blakemore Wolpert",
+      "self touch",
+      "science shorts"
+    ],
+    "pinned_comment": "Where are you most ticklish, and have you ever managed to tickle yourself there?",
+    "synthetic_disclosure": {
+      "value": false,
+      "reason": "Not required: stock neural TTS voice (not a real person's clone) over clearly animated flat-vector visuals; YouTube exempts non-realistic animation and AI narration that doesn't impersonate anyone."
+    },
+    "playlist": "Science"
+  },
+  {
+    "id": "short03_gps_needs_relativity",
+    "title": "Your GPS only works because Einstein was right",
+    "alt_titles": [
+      "GPS clocks gain 38 microseconds a day. Here's why",
+      "Why GPS satellites run their clocks slow on purpose"
+    ],
+    "description": "Speed slows GPS satellite clocks by ~7 microseconds a day; weaker gravity speeds them up by ~45. Engineers pre-tune them to cancel the net 38.\nSource: Ashby 2003 (Living Reviews in Relativity); Pogge, Ohio State\n#shorts #physics #relativity",
+    "tags": [
+      "gps relativity",
+      "einstein",
+      "general relativity",
+      "special relativity",
+      "time dilation",
+      "atomic clocks",
+      "gps satellites",
+      "physics explained",
+      "science shorts",
+      "how gps works"
+    ],
+    "pinned_comment": "What's another everyday thing you think secretly depends on 'weird' physics?",
+    "synthetic_disclosure": {
+      "value": false,
+      "reason": "Not required: stock neural TTS voice (not a real person's clone) over clearly animated flat-vector visuals; YouTube exempts non-realistic animation and AI narration that doesn't impersonate anyone."
+    },
+    "playlist": "Science"
+  },
+  {
+    "id": "short04_shipping_container",
+    "title": "The metal box that shrank the world",
+    "alt_titles": [
+      "How one metal box slashed port loading costs",
+      "The 1956 trip that changed world trade"
+    ],
+    "description": "In 1956 Malcom McLean's Ideal-X carried 58 containers. The real breakthrough was one shared standard, which cut loading costs (by McLean's figures) from $5.83 to ~16 cents a ton.\nSource: Levinson, The Box (2006); Bernhofen, El-Sahli & Kneller 2016\n#shorts #history #economics",
+    "tags": [
+      "shipping container",
+      "containerization",
+      "malcom mclean",
+      "ideal x",
+      "global trade",
+      "history of trade",
+      "economics explained",
+      "the box levinson",
+      "supply chain",
+      "inventions that changed the world"
+    ],
+    "pinned_comment": "Look at the label on something near you: which country did it cross an ocean from?",
+    "synthetic_disclosure": {
+      "value": false,
+      "reason": "Not required: stock neural TTS voice (not a real person's clone) over clearly animated flat-vector visuals; YouTube exempts non-realistic animation and AI narration that doesn't impersonate anyone."
+    },
+    "playlist": "Science"
+  },
+  {
+    "id": "short05_decoy_effect",
+    "title": "The option nobody picks (and why it's there)",
+    "alt_titles": [
+      "Why pricing pages include a useless option",
+      "The decoy effect: a choice built to be ignored"
+    ],
+    "description": "A 'decoy' option nobody picks can push people toward the one next to it. But replications show it works mainly on neat tables of numbers, like pricing pages.\nSource: Huber, Payne & Puto 1982; Frederick, Lee & Baskin 2014\n#shorts #psychology #marketing",
+    "tags": [
+      "decoy effect",
+      "attraction effect",
+      "pricing psychology",
+      "behavioral economics",
+      "consumer psychology",
+      "choice architecture",
+      "cognitive bias",
+      "marketing psychology",
+      "psychology shorts",
+      "replication"
+    ],
+    "pinned_comment": "Have you ever spotted a decoy option on a pricing page or menu? Where?",
+    "synthetic_disclosure": {
+      "value": false,
+      "reason": "Not required: stock neural TTS voice (not a real person's clone) over clearly animated flat-vector visuals; YouTube exempts non-realistic animation and AI narration that doesn't impersonate anyone."
+    },
+    "playlist": "Psychology"
+  },
+  {
+    "id": "short06_illusory_truth",
+    "title": "Why repeated lies start to feel true",
+    "alt_titles": [
+      "Hear it enough and it feels true. Even if you know",
+      "The illusory truth effect, in under a minute"
+    ],
+    "description": "Repetition makes claims feel truer, even ones you know are false, because familiar feels easy and easy feels true. Only completely absurd claims resist.\nSource: Hasher, Goldstein & Toppino 1977; Fazio et al. 2015\n#shorts #psychology #misinformation",
+    "tags": [
+      "illusory truth effect",
+      "repetition",
+      "misinformation",
+      "fake news",
+      "cognitive bias",
+      "processing fluency",
+      "critical thinking",
+      "memory",
+      "psychology facts",
+      "psychology shorts"
+    ],
+    "pinned_comment": "What's a 'fact' you believed for years just because you heard it everywhere?",
+    "synthetic_disclosure": {
+      "value": false,
+      "reason": "Not required: stock neural TTS voice (not a real person's clone) over clearly animated flat-vector visuals; YouTube exempts non-realistic animation and AI narration that doesn't impersonate anyone."
+    },
+    "playlist": "Psychology"
+  },
+  {
+    "id": "short07_anchoring",
+    "title": "A random number just changed your answer",
+    "alt_titles": [
+      "A spinning wheel skewed people's guesses",
+      "Anchoring: the bias that passed the replication test"
+    ],
+    "description": "In 1974 a wheel-of-fortune number shifted people's estimates by 20 points. Anchoring is one of the classic biases that replicated strongly in 2014.\nSource: Tversky & Kahneman 1974; Klein et al. 2014 (Many Labs)\n#shorts #psychology #cognitivebias",
+    "tags": [
+      "anchoring bias",
+      "anchoring effect",
+      "tversky kahneman",
+      "cognitive bias",
+      "many labs replication",
+      "behavioral economics",
+      "decision making",
+      "pricing psychology",
+      "psychology shorts",
+      "kahneman"
+    ],
+    "pinned_comment": "Quick test: is the tallest living tree taller or shorter than 150 m? Now reply with your exact guess, no googling.",
+    "synthetic_disclosure": {
+      "value": false,
+      "reason": "Not required: stock neural TTS voice (not a real person's clone) over clearly animated flat-vector visuals; YouTube exempts non-realistic animation and AI narration that doesn't impersonate anyone."
+    },
+    "playlist": "Psychology"
+  },
+  {
+    "id": "short08_bystander_effect",
+    "title": "Would a crowd help you? Real CCTV says probably",
+    "alt_titles": [
+      "The bystander effect vs 219 real CCTV clips",
+      "Crowds don't just watch. 2019 footage shows it"
+    ],
+    "description": "A 1968 lab study found people help less when others are listening. But a study of 219 real CCTV-recorded conflicts found someone stepped in about 9 times in 10.\nSource: Darley & Latané 1968; Philpot et al. 2019 (American Psychologist)\n#shorts #psychology #bystandereffect",
+    "tags": [
+      "bystander effect",
+      "diffusion of responsibility",
+      "darley latane",
+      "cctv study",
+      "helping behavior",
+      "social psychology",
+      "emergency help",
+      "psychology myths",
+      "psychology shorts",
+      "would people help you"
+    ],
+    "pinned_comment": "Have you ever stepped in, or been helped by a stranger, when others were around?",
+    "synthetic_disclosure": {
+      "value": false,
+      "reason": "Not required: stock neural TTS voice (not a real person's clone) over clearly animated flat-vector visuals; YouTube exempts non-realistic animation and AI narration that doesn't impersonate anyone."
+    },
+    "playlist": "Psychology"
+  },
+  {
+    "id": "short09_time_speeds_up_with_age",
+    "title": "Does time really speed up as you age?",
+    "alt_titles": [
+      "Time flies at every age. The real cause may be busyness",
+      "Why the years feel faster (it may not be age)"
+    ],
+    "description": "In a survey of 1,865 adults, nearly everyone said time flies and age barely mattered, except for the last 10 years. Feeling busy predicted it better than routine did.\nSource: Friedman & Janssen 2010 (Acta Psychologica); Wittmann & Lehnhoff 2005\n#shorts #psychology #time",
+    "tags": [
+      "time perception",
+      "why time speeds up",
+      "time flies",
+      "aging",
+      "time pressure",
+      "william james",
+      "memory and time",
+      "psychology of time",
+      "psychology shorts",
+      "curious science"
+    ],
+    "pinned_comment": "Did this year feel faster or slower than last year, and were you busier?",
+    "synthetic_disclosure": {
+      "value": false,
+      "reason": "Not required: stock neural TTS voice (not a real person's clone) over clearly animated flat-vector visuals; YouTube exempts non-realistic animation and AI narration that doesn't impersonate anyone."
+    },
+    "playlist": "Psychology"
+  },
+  {
+    "id": "short10_phone_slot_machine",
+    "title": "Why your phone feels like a slot machine",
+    "alt_titles": [
+      "Pigeons explain why you keep checking your phone",
+      "Unpredictable rewards: from pigeons to your feed"
+    ],
+    "description": "Unpredictable rewards kept Skinner's pigeons pecking; feeds and likes work in a similar way. Whether it's true 'addiction' is still debated.\nSource: Ferster & Skinner 1957; Lindström et al. 2021 (Nature Communications)\n#shorts #psychology #smartphone",
+    "tags": [
+      "variable reward",
+      "variable ratio schedule",
+      "skinner",
+      "slot machine",
+      "phone addiction",
+      "problematic smartphone use",
+      "social media psychology",
+      "pull to refresh",
+      "reward learning",
+      "psychology shorts"
+    ],
+    "pinned_comment": "Be honest: how many times do you think you checked your phone today with no notification?",
+    "synthetic_disclosure": {
+      "value": false,
+      "reason": "Not required: stock neural TTS voice (not a real person's clone) over clearly animated flat-vector visuals; YouTube exempts non-realistic animation and AI narration that doesn't impersonate anyone."
+    },
+    "playlist": "Psychology"
+  }
+]

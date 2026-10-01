@@ -1,0 +1,458 @@
+{
+ "id": "short06_illusory_truth",
+ "handle": "@mrshorts1737",
+ "title": "Why repeated lies start to feel true",
+ "palette": "teal",
+ "bg": "plain",
+ "ground": "hill",
+ "mood": "curious",
+ "lines": [
+  {
+   "text": "A false claim, heard enough, starts to feel true. Even if you know better.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "speaker",
+       "x": 0.2,
+       "y": 0.485,
+       "s": 1.3
+      },
+      {
+       "prop": "person",
+       "x": 0.8,
+       "y": 0.463,
+       "s": 1.5,
+       "color": "orange",
+       "mood": "surprised",
+       "look": 3.1
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.14,
+       "s": 1.0,
+       "label": "FALSE = TRUE?",
+       "size": 110,
+       "color": "yellow"
+      }
+     ]
+    },
+    {
+     "on": "starts",
+     "scene": [
+      {
+       "prop": "check",
+       "x": 0.42,
+       "y": 0.4,
+       "s": 2.082
+      },
+      {
+       "prop": "person",
+       "x": 0.8,
+       "y": 0.509,
+       "s": 1.0,
+       "color": "orange",
+       "mood": "happy"
+      }
+     ],
+     "cam": {
+      "zoom": [
+       1.0,
+       1.15
+      ]
+     }
+    },
+    {
+     "on": "Even",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.4,
+       "y": 0.472,
+       "s": 1.4,
+       "color": "yellow"
+      },
+      {
+       "prop": "bulb",
+       "x": 0.7,
+       "y": 0.32,
+       "s": 0.8,
+       "on": "know"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "In 1977, repeated statements felt truer every time students rated them.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "crowd",
+       "x": 0.72,
+       "y": 0.466,
+       "s": 1.35,
+       "n": 3
+      },
+      {
+       "prop": "speaker",
+       "x": 0.16,
+       "y": 0.511,
+       "s": 1.0,
+       "on": "repeated"
+      }
+     ]
+    },
+    {
+     "on": "felt",
+     "scene": [
+      {
+       "prop": "speaker",
+       "x": 0.5,
+       "y": 0.22,
+       "s": 0.6,
+       "float": true
+      },
+      {
+       "prop": "bars",
+       "x": 0.5,
+       "y": 0.45,
+       "s": 0.85,
+       "bars": [
+        [
+         "1st time",
+         0.55,
+         "#ffd23f"
+        ],
+        [
+         "2nd time",
+         0.62,
+         "#ffd23f"
+        ],
+        [
+         "3rd time",
+         0.68,
+         "#ffd23f"
+        ]
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "Scientists call this illusory truth. Familiar feels easy, and easy feels true.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "brain",
+       "x": 0.42,
+       "y": 0.42,
+       "s": 1.5
+      },
+      {
+       "prop": "bulb",
+       "x": 0.76,
+       "y": 0.3,
+       "s": 0.7
+      }
+     ]
+    },
+    {
+     "on": "Familiar",
+     "scene": [
+      {
+       "prop": "feather",
+       "x": 0.2,
+       "y": 0.42,
+       "s": 1.47,
+       "rot": -20
+      },
+      {
+       "prop": "arrow",
+       "x": 0.48,
+       "y": 0.42,
+       "s": 1.0,
+       "length": 160,
+       "color": "white"
+      },
+      {
+       "prop": "thumb",
+       "x": 0.78,
+       "y": 0.42,
+       "s": 1.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "In 2015, repeating a false fact about Scottish kilts made it feel truer, even to people who knew better.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "speaker",
+       "x": 0.16,
+       "y": 0.511,
+       "s": 1.0
+      },
+      {
+       "prop": "crowd",
+       "x": 0.72,
+       "y": 0.466,
+       "s": 1.35,
+       "n": 3,
+       "on": "repeating"
+      }
+     ]
+    },
+    {
+     "on": "Scottish",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.34,
+       "y": 0.472,
+       "s": 1.4,
+       "color": "pink"
+      },
+      {
+       "prop": "bubble",
+       "x": 0.66,
+       "y": 0.28,
+       "s": 1.0,
+       "label": "a kilt is a sari?",
+       "tail": "left"
+      }
+     ]
+    },
+    {
+     "on": "truer",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.34,
+       "y": 0.472,
+       "s": 1.4,
+       "color": "yellow",
+       "mood": "surprised"
+      },
+      {
+       "prop": "bulb",
+       "x": 0.74,
+       "y": 0.46,
+       "s": 0.6
+      },
+      {
+       "prop": "bubble",
+       "x": 0.68,
+       "y": 0.24,
+       "s": 1.0,
+       "label": "hmm, true?",
+       "tail": "left"
+      }
+     ]
+    }
+   ],
+   "sfx": "chime",
+   "sfx_at": 3.2
+  },
+  {
+   "text": "The limit? Ridiculous claims, like Earth is a perfect square, don't budge.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.68,
+       "y": 0.472,
+       "s": 1.4,
+       "color": "teal",
+       "mood": "happy",
+       "flip": true
+      },
+      {
+       "prop": "bubble",
+       "x": 0.32,
+       "y": 0.28,
+       "s": 1.0,
+       "label": "no way!",
+       "tail": "right",
+       "on": "Ridiculous"
+      }
+     ]
+    },
+    {
+     "on": "Earth",
+     "scene": [
+      {
+       "prop": "planet",
+       "x": 0.38,
+       "y": 0.36,
+       "s": 1.284,
+       "shape": "square"
+      },
+      {
+       "prop": "person",
+       "x": 0.76,
+       "y": 0.5,
+       "s": 1.1,
+       "color": "orange",
+       "mood": "happy",
+       "flip": true
+      },
+      {
+       "prop": "bubble",
+       "x": 0.72,
+       "y": 0.2,
+       "s": 0.9,
+       "label": "nope!",
+       "tail": "left"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "But one look at a fake headline raised belief a week later.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "newspaper",
+       "x": 0.6,
+       "y": 0.42,
+       "s": 1.2,
+       "headline": "SHOCK!"
+      },
+      {
+       "prop": "eye",
+       "x": 0.24,
+       "y": 0.34,
+       "s": 0.7,
+       "on": "look"
+      }
+     ]
+    },
+    {
+     "on": "raised",
+     "scene": [
+      {
+       "prop": "calendar",
+       "x": 0.3,
+       "y": 0.42,
+       "s": 1.47,
+       "label": "+7 days"
+      },
+      {
+       "prop": "arrow",
+       "x": 0.58,
+       "y": 0.44,
+       "s": 1.0,
+       "angle": -90,
+       "length": 200,
+       "color": "green"
+      },
+      {
+       "prop": "newspaper",
+       "x": 0.8,
+       "y": 0.44,
+       "s": 0.6,
+       "headline": "SHOCK!"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "So if something feels true, ask yourself: is it true... or just familiar?",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.38,
+       "y": 0.472,
+       "s": 1.4,
+       "color": "yellow",
+       "mood": "neutral",
+       "look": 0.8
+      },
+      {
+       "prop": "question",
+       "x": 0.74,
+       "y": 0.34,
+       "s": 0.6,
+       "big": "?",
+       "on": "ask"
+      }
+     ]
+    },
+    {
+     "on": "is",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.34,
+       "y": 0.472,
+       "s": 1.4,
+       "color": "yellow",
+       "mood": "surprised",
+       "look": 0.8
+      },
+      {
+       "prop": "bubble",
+       "x": 0.68,
+       "y": 0.28,
+       "s": 1.0,
+       "label": "true?",
+       "tail": "left"
+      }
+     ]
+    },
+    {
+     "on": "or",
+     "scene": [
+      {
+       "prop": "speaker",
+       "x": 0.2,
+       "y": 0.485,
+       "s": 1.3
+      },
+      {
+       "prop": "person",
+       "x": 0.8,
+       "y": 0.463,
+       "s": 1.5,
+       "color": "orange",
+       "mood": "surprised",
+       "look": 3.1
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "claim": "1977: repeated statements rated more valid across three sessions two weeks apart, for true and false statements",
+   "url": "https://www.sciencedirect.com/science/article/pii/S0022537177800121",
+   "note": "Hasher, Goldstein & Toppino 1977, J. Verbal Learning and Verbal Behavior 16:107-112."
+  },
+  {
+   "claim": "Repetition increases perceived truth even when people know the answer (sari/kilt example)",
+   "url": "https://psycnet.apa.org/manuscript/2015-38275-001.pdf",
+   "note": "Fazio, Brashier, Payne & Marsh 2015, J. Experimental Psychology: General 144(5):993-1002. 'Reading a statement like A sari is the name of the short pleated skirt worn by Scots increased participants' later belief that it was true, even if they could correctly answer...'"
+  },
+  {
+   "claim": "Single prior exposure increases perceived accuracy of fake news, persisting after a week; no effect for entirely implausible claims ('The Earth is a perfect square')",
+   "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2958246",
+   "note": "Pennycook, Cannon & Rand 2018, J. Experimental Psychology: General 147(12):1865-1880."
+  }
+ ],
+ "caveats": "Narration compresses Pennycook's boundary condition: only entirely implausible claims were immune, and a small degree of plausibility sufficed. The effect is reliable but typically modest in size (a shift in ratings, not wholesale conversion). Fazio 2015 found knowledge doesn't fully protect; it doesn't mean knowledge never helps. Pennycook 2018: 'raised belief a week later' refers to perceived accuracy ratings persisting after a one-week delay. Round-3 visuals: the 1977 bars rising across sessions are schematic (ratings rose modestly on a 7-point scale), not the paper's means. Round-4 edit: quote marks removed from narration text. Round-5 edit: phonetic 'say' respellings removed (they hurt recognition). Line 3 now describes Fazio et al. 2015's example item without naming it in narration: the false statement was that a sari is the short pleated skirt worn by Scots (it is a kilt); the on-screen bubble shows it. 'Absurd' is now 'Ridiculous' (Pennycook 2018: only entirely implausible claims were immune). Round-6 edit: line 2 names the effect as 'illusory truth' (short for the illusory truth effect) so the term reads as one caption."
+}

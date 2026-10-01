@@ -1,0 +1,557 @@
+{
+ "id": "short04_shipping_container",
+ "handle": "@mrshorts1737",
+ "title": "The metal box that shrank the world",
+ "palette": "orange",
+ "bg": "sky",
+ "ground": "sea",
+ "mood": "curious",
+ "lines": [
+  {
+   "text": "World trade's giant? A metal box.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "ship",
+       "x": 0.34,
+       "y": 0.558,
+       "s": 1.15
+      },
+      {
+       "prop": "crane",
+       "x": 0.86,
+       "y": 0.52,
+       "s": 0.85,
+       "layer": true
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.14,
+       "s": 1.0,
+       "label": "TRADE GIANT?",
+       "size": 110,
+       "color": "yellow"
+      }
+     ]
+    },
+    {
+     "on": "metal",
+     "scene": [
+      {
+       "prop": "crane",
+       "x": 0.36,
+       "y": 0.478,
+       "s": 1.3
+      },
+      {
+       "prop": "container",
+       "x": 0.541,
+       "y": 0.481,
+       "s": 0.65,
+       "color": "orange",
+       "layer": true
+      }
+     ],
+     "cam": {
+      "zoom": [
+       1.0,
+       1.15
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "text": "Ships were loaded by hand: sacks, barrels, crates. Freight could eat up to thirty percent of an import's cost.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "ship",
+       "x": 0.67,
+       "y": 0.557,
+       "s": 1.16,
+       "containers": false
+      },
+      {
+       "prop": "crowd",
+       "x": 0.15,
+       "y": 0.531,
+       "s": 0.7,
+       "n": 3,
+       "layer": true
+      }
+     ]
+    },
+    {
+     "on": "sacks",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.24,
+       "y": 0.475,
+       "s": 1.374,
+       "color": "cyan",
+       "to": [
+        0.32,
+        0.475
+       ]
+      },
+      {
+       "prop": "package",
+       "x": 0.56,
+       "y": 0.529,
+       "s": 0.8,
+       "color": "brown"
+      },
+      {
+       "prop": "package",
+       "x": 0.8,
+       "y": 0.529,
+       "s": 0.8,
+       "color": "brown",
+       "on": "crates"
+      }
+     ]
+    },
+    {
+     "on": "Freight",
+     "scene": [
+      {
+       "prop": "ship",
+       "x": 0.5,
+       "y": 0.52,
+       "s": 1.1,
+       "containers": false
+      },
+      {
+       "prop": "coin",
+       "x": 0.78,
+       "y": 0.24,
+       "s": 0.7,
+       "label": "$"
+      }
+     ]
+    },
+    {
+     "on": "thirty",
+     "scene": [
+      {
+       "prop": "coin",
+       "x": 0.5,
+       "y": 0.2,
+       "s": 0.7,
+       "label": "$"
+      },
+      {
+       "prop": "bars",
+       "x": 0.5,
+       "y": 0.44,
+       "s": 0.85,
+       "bars": [
+        [
+         "freight",
+         0.3,
+         "#ff5a5a"
+        ],
+        [
+         "the goods",
+         0.7,
+         "#9aa0b4"
+        ]
+       ],
+       "sub": "share of import cost"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "In 1956, Malcom McLean shipped fifty-eight boxes to Houston on the Ideal-X.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.14,
+       "y": 0.499,
+       "s": 1.1,
+       "color": "cyan",
+       "mood": "happy"
+      },
+      {
+       "prop": "ship",
+       "x": 0.66,
+       "y": 0.554,
+       "s": 1.25
+      }
+     ]
+    },
+    {
+     "on": "fifty",
+     "scene": [
+      {
+       "prop": "ship",
+       "x": 0.4,
+       "y": 0.557,
+       "s": 1.177,
+       "to": [
+        0.55,
+        0.557
+       ]
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.26,
+       "s": 1.0,
+       "label": "NEWARK TO HOUSTON",
+       "size": 80,
+       "color": "yellow"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "McLean's own figures: loading fell from five dollars eighty-three a ton to about sixteen cents.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "crane",
+       "x": 0.22,
+       "y": 0.506,
+       "s": 1.0
+      },
+      {
+       "prop": "ship",
+       "x": 0.7,
+       "y": 0.567,
+       "s": 0.9
+      }
+     ]
+    },
+    {
+     "on": "fell",
+     "scene": [
+      {
+       "prop": "crowd",
+       "x": 0.36,
+       "y": 0.471,
+       "s": 1.3,
+       "n": 3
+      },
+      {
+       "prop": "package",
+       "x": 0.8,
+       "y": 0.529,
+       "s": 0.8,
+       "color": "brown"
+      },
+      {
+       "prop": "coin",
+       "x": 0.78,
+       "y": 0.22,
+       "s": 0.6,
+       "label": "$"
+      }
+     ]
+    },
+    {
+     "on": "about",
+     "scene": [
+      {
+       "prop": "bars",
+       "x": 0.5,
+       "y": 0.46,
+       "s": 0.85,
+       "bars": [
+        [
+         "by hand: $5.83",
+         1.0,
+         "#ff5a5a"
+        ],
+        [
+         "by box: 16¢",
+         0.027,
+         "#7ad151"
+        ]
+       ],
+       "sub": "loading cost per ton"
+      },
+      {
+       "prop": "container",
+       "x": 0.5,
+       "y": 0.22,
+       "s": 0.6,
+       "color": "orange"
+      }
+     ],
+     "cam": {
+      "zoom": [
+       1.0,
+       1.15
+      ]
+     }
+    }
+   ],
+   "sfx": "chime",
+   "sfx_at": 3.4
+  },
+  {
+   "text": "The twist? Boxes weren't new. The trick was one standard, for any crane, ship or truck. He even shared his patents free.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "crane",
+       "x": 0.3,
+       "y": 0.487,
+       "s": 1.2
+      },
+      {
+       "prop": "container",
+       "x": 0.467,
+       "y": 0.49,
+       "s": 0.6,
+       "color": "grey",
+       "layer": true
+      },
+      {
+       "prop": "newspaper",
+       "x": 0.76,
+       "y": 0.26,
+       "s": 0.6,
+       "headline": "OLD NEWS",
+       "on": "Boxes"
+      }
+     ]
+    },
+    {
+     "on": "trick",
+     "scene": [
+      {
+       "prop": "ship",
+       "x": 0.5,
+       "y": 0.552,
+       "s": 1.3
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.3,
+       "s": 1.0,
+       "label": "ONE STANDARD",
+       "size": 100,
+       "color": "yellow",
+       "on": "standard"
+      }
+     ]
+    },
+    {
+     "on": "crane",
+     "scene": [
+      {
+       "prop": "crane",
+       "x": 0.24,
+       "y": 0.506,
+       "s": 1.0
+      },
+      {
+       "prop": "container",
+       "x": 0.379,
+       "y": 0.509,
+       "s": 0.5,
+       "color": "orange",
+       "layer": true
+      },
+      {
+       "prop": "ship",
+       "x": 0.72,
+       "y": 0.567,
+       "s": 0.9
+      }
+     ]
+    },
+    {
+     "on": "shared",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.14,
+       "y": 0.499,
+       "s": 1.1,
+       "color": "cyan",
+       "mood": "happy",
+       "wave": true
+      },
+      {
+       "prop": "ship",
+       "x": 0.66,
+       "y": 0.554,
+       "s": 1.25
+      },
+      {
+       "prop": "bubble",
+       "x": 0.44,
+       "y": 0.24,
+       "s": 1.0,
+       "label": "use it!",
+       "tail": "left"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "One study: containers grew rich countries' trade more than free-trade deals did.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "ship",
+       "x": 0.4,
+       "y": 0.557,
+       "s": 1.177
+      },
+      {
+       "prop": "arrow",
+       "x": 0.86,
+       "y": 0.4,
+       "s": 1.0,
+       "angle": -90,
+       "length": 240,
+       "color": "green",
+       "on": "grew"
+      }
+     ]
+    },
+    {
+     "on": "more",
+     "scene": [
+      {
+       "prop": "container",
+       "x": 0.5,
+       "y": 0.24,
+       "s": 0.8,
+       "color": "orange"
+      },
+      {
+       "prop": "bars",
+       "x": 0.5,
+       "y": 0.46,
+       "s": 0.85,
+       "bars": [
+        [
+         "containers",
+         1.0,
+         "#ff9f1c"
+        ],
+        [
+         "trade deals",
+         0.4,
+         "#9aa0b4"
+        ]
+       ]
+      }
+     ],
+     "cam": {
+      "zoom": [
+       1.0,
+       1.15
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "text": "Your shoes and phone probably crossed an ocean in... a metal box.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "phone",
+       "x": 0.3,
+       "y": 0.4,
+       "s": 1.2,
+       "color": "cyan"
+      },
+      {
+       "prop": "package",
+       "x": 0.68,
+       "y": 0.511,
+       "s": 1.0,
+       "color": "orange",
+       "label": "SHOES"
+      }
+     ]
+    },
+    {
+     "on": "ocean",
+     "scene": [
+      {
+       "prop": "ship",
+       "x": 0.42,
+       "y": 0.556,
+       "s": 1.2,
+       "to": [
+        0.54,
+        0.556
+       ]
+      },
+      {
+       "prop": "sun",
+       "x": 0.8,
+       "y": 0.26,
+       "s": 0.6
+      }
+     ]
+    },
+    {
+     "on": "metal",
+     "scene": [
+      {
+       "prop": "ship",
+       "x": 0.34,
+       "y": 0.558,
+       "s": 1.15
+      },
+      {
+       "prop": "crane",
+       "x": 0.86,
+       "y": 0.52,
+       "s": 0.85,
+       "layer": true
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "claim": "Ideal-X, 26 April 1956, 58 containers, Newark to Houston; loading cost 15.8 cents/ton vs $5.83/ton break-bulk; freight 10-30% of import cost",
+   "url": "https://worksthatwork.com/2/intermodal-container",
+   "note": "Essay by Marc Levinson (author of 'The Box', Princeton UP): McLean's accountants pegged Ideal-X loading at 15.8 cents per ton vs US$5.83 for average break-bulk."
+  },
+  {
+   "claim": "Ideal-X route/date; McLean allowed Sea-Land patents to be used royalty-free for standard corner fittings",
+   "url": "https://www.smithsonianmag.com/innovation/shipping-container-idea-before-time-180963730/",
+   "note": "Levinson in Smithsonian Magazine: 'He agreed to allow the industry to use Sea-Land's patents royalty-free so that every container in every country could use the same corner fittings.'"
+  },
+  {
+   "claim": "The value was in the system, not the box; earlier containers existed",
+   "url": "https://www.library.hbs.edu/working-knowledge/the-truck-driver-who-reinvented-shipping",
+   "note": "HBS Working Knowledge: no business before McLean was dedicated to a systematic process of hauling boxed cargo."
+  },
+  {
+   "claim": "Containerization raised trade more than FTAs/GATT among industrialized countries (1962-1990)",
+   "url": "https://cris.brighton.ac.uk/ws/portalfiles/portal/376845/JIE%20accepted%20manuscript%20online%20version%20(1).pdf",
+   "note": "Bernhofen, El-Sahli & Kneller 2016, J. International Economics 98:36-50. Cumulative effect for North-North trade described as much larger than FTAs or GATT."
+  }
+ ],
+ "caveats": "The 15.8 cents vs $5.83 figures are McLean's company estimate as reported by Levinson, not an independent audit; narration attributes them to 'McLean's own figures'. Line 6 is one econometric study and applies to industrialized (North-North) trade 1962-1990; wording limited to 'rich countries'. Round 3 shows the cost drop as a large '$5.83' coin and a small '16¢' coin; coin sizes are illustrative, not to scale (the real ratio is 15.8/583, ~2.7%). 'Trucking boss' = McLean owned a large trucking company. Round-4 edit: the cost drop is now shown as two bars drawn to scale (by box = 2.7% of by hand); the 'containers vs trade deals' bars are illustrative of 'more than', not the paper's coefficients."
+}

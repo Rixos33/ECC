@@ -1,12 +1,450 @@
 {
-  "id": "short01_sky_not_violet",
-  "handle": "@mrshorts1737",
-  "lines": [
-    {"kind": "hook", "text": "The sky should be violet. So why isn't it?"},
-    {"kind": "scatter", "text": "Sunlight scatters in our atmosphere, and short wavelengths scatter the most."},
-    {"kind": "violet", "text": "Violet scatters even more than blue."},
-    {"kind": "eye", "text": "But the sun gives off less violet, some of it is absorbed high up, and our eyes are weaker at seeing it."},
-    {"kind": "blue", "text": "Blue wins that combination. So the sky looks blue."},
-    {"kind": "loop", "text": "The sky isn't violet... because of what your eyes can't do."}
-  ]
+ "id": "short01_sky_not_violet",
+ "handle": "@mrshorts1737",
+ "title": "Why Isn't the Sky Violet?",
+ "palette": "blue",
+ "bg": "sky",
+ "ground": "hill",
+ "mood": "wonder",
+ "lines": [
+  {
+   "text": "The sky? It should be violet. So why isn't it?",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "photons",
+       "x": 0.5,
+       "y": 0.25,
+       "s": 1.1,
+       "colors": [
+        "violet",
+        "purple",
+        "violet",
+        "purple"
+       ]
+      },
+      {
+       "prop": "person",
+       "x": 0.5,
+       "y": 0.482,
+       "s": 1.3,
+       "color": "orange",
+       "mood": "surprised",
+       "look": -1.6
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.1,
+       "s": 1.0,
+       "label": "VIOLET SKY?",
+       "size": 110,
+       "color": "yellow"
+      }
+     ],
+     "tint": "violet"
+    },
+    {
+     "on": "why",
+     "scene": [
+      {
+       "prop": "sun",
+       "x": 0.22,
+       "y": 0.24,
+       "s": 1.262
+      },
+      {
+       "prop": "photons",
+       "x": 0.66,
+       "y": 0.32,
+       "s": 0.7,
+       "colors": [
+        "blue",
+        "cyan",
+        "blue"
+       ]
+      },
+      {
+       "prop": "person",
+       "x": 0.66,
+       "y": 0.491,
+       "s": 1.2,
+       "color": "orange",
+       "mood": "surprised",
+       "look": -1.6
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "Sunlight scatters in our atmosphere, and short wavelengths scatter the most.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "sun",
+       "x": 0.25,
+       "y": 0.27,
+       "s": 1.0
+      },
+      {
+       "prop": "photons",
+       "x": 0.66,
+       "y": 0.3,
+       "s": 0.6,
+       "colors": [
+        "violet",
+        "blue",
+        "green",
+        "red"
+       ],
+       "on": "scatters"
+      },
+      {
+       "prop": "mountain",
+       "x": 0.55,
+       "y": 0.506,
+       "s": 0.9,
+       "color": "teal"
+      }
+     ]
+    },
+    {
+     "on": "short",
+     "scene": [
+      {
+       "prop": "spectrum",
+       "x": 0.5,
+       "y": 0.44,
+       "s": 1.0
+      },
+      {
+       "prop": "arrow",
+       "x": 0.2,
+       "y": 0.34,
+       "s": 1.0,
+       "angle": 90,
+       "length": 180,
+       "color": "violet"
+      },
+      {
+       "prop": "label",
+       "x": 0.24,
+       "y": 0.25,
+       "s": 1.0,
+       "label": "400 nm",
+       "size": 90,
+       "color": "violet"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "Violet scatters even more than blue.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "sun",
+       "x": 0.24,
+       "y": 0.26,
+       "s": 1.4
+      },
+      {
+       "prop": "photons",
+       "x": 0.66,
+       "y": 0.36,
+       "s": 1.0,
+       "colors": [
+        "violet",
+        "purple",
+        "violet"
+       ]
+      }
+     ]
+    },
+    {
+     "on": "more",
+     "scene": [
+      {
+       "prop": "photons",
+       "x": 0.5,
+       "y": 0.22,
+       "s": 0.8,
+       "colors": [
+        "violet",
+        "blue"
+       ]
+      },
+      {
+       "prop": "bars",
+       "x": 0.5,
+       "y": 0.45,
+       "s": 0.85,
+       "bars": [
+        [
+         "violet",
+         1.0,
+         "#9b5cff"
+        ],
+        [
+         "blue",
+         0.63,
+         "#3fa9ff"
+        ]
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "But sunlight has less violet to begin with, and our eyes are much less sensitive to it.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "sun",
+       "x": 0.5,
+       "y": 0.27,
+       "s": 1.259
+      },
+      {
+       "prop": "spectrum",
+       "x": 0.5,
+       "y": 0.46,
+       "s": 0.9
+      },
+      {
+       "prop": "arrow",
+       "x": 0.14,
+       "y": 0.37,
+       "s": 1.0,
+       "angle": 90,
+       "length": 140,
+       "color": "red",
+       "on": "violet"
+      }
+     ]
+    },
+    {
+     "on": "begin",
+     "scene": [
+      {
+       "prop": "sun",
+       "x": 0.82,
+       "y": 0.18,
+       "s": 0.6
+      },
+      {
+       "prop": "bars",
+       "x": 0.5,
+       "y": 0.42,
+       "s": 0.85,
+       "bars": [
+        [
+         "violet in sunlight",
+         0.55,
+         "#9b5cff"
+        ],
+        [
+         "blue in sunlight",
+         0.85,
+         "#3fa9ff"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "on": "eyes",
+     "scene": [
+      {
+       "prop": "eye",
+       "x": 0.5,
+       "y": 0.33,
+       "s": 1.5,
+       "color": "violet"
+      },
+      {
+       "prop": "photons",
+       "x": 0.5,
+       "y": 0.47,
+       "s": 0.55,
+       "colors": [
+        "violet",
+        "violet"
+       ]
+      }
+     ],
+     "cam": {
+      "zoom": [
+       1.0,
+       1.12
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "text": "Blue wins that combination. So the sky looks blue.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "eye",
+       "x": 0.36,
+       "y": 0.4,
+       "s": 1.1,
+       "color": "blue"
+      },
+      {
+       "prop": "check",
+       "x": 0.8,
+       "y": 0.4,
+       "s": 0.8,
+       "on": "wins"
+      },
+      {
+       "prop": "photons",
+       "x": 0.5,
+       "y": 0.26,
+       "s": 0.8,
+       "colors": [
+        "blue",
+        "cyan",
+        "blue"
+       ]
+      }
+     ]
+    },
+    {
+     "on": "sky",
+     "scene": [
+      {
+       "prop": "photons",
+       "x": 0.5,
+       "y": 0.24,
+       "s": 1.0,
+       "colors": [
+        "blue",
+        "cyan",
+        "blue",
+        "cyan"
+       ]
+      },
+      {
+       "prop": "person",
+       "x": 0.38,
+       "y": 0.482,
+       "s": 1.3,
+       "color": "orange",
+       "mood": "happy",
+       "look": -1.6
+      },
+      {
+       "prop": "sun",
+       "x": 0.78,
+       "y": 0.4,
+       "s": 0.6
+      }
+     ]
+    }
+   ],
+   "sfx": "chime",
+   "sfx_at": 0.2
+  },
+  {
+   "text": "The sky isn't violet... because of sunlight, and what your eyes can't do.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "photons",
+       "x": 0.5,
+       "y": 0.25,
+       "s": 1.1,
+       "colors": [
+        "violet",
+        "purple",
+        "violet",
+        "purple"
+       ]
+      },
+      {
+       "prop": "person",
+       "x": 0.5,
+       "y": 0.482,
+       "s": 1.3,
+       "color": "orange",
+       "mood": "neutral",
+       "look": -1.6
+      }
+     ],
+     "tint": "violet"
+    },
+    {
+     "on": "sunlight",
+     "scene": [
+      {
+       "prop": "sun",
+       "x": 0.5,
+       "y": 0.3,
+       "s": 1.1
+      },
+      {
+       "prop": "spectrum",
+       "x": 0.5,
+       "y": 0.47,
+       "s": 0.8
+      }
+     ]
+    },
+    {
+     "on": "eyes",
+     "scene": [
+      {
+       "prop": "eye",
+       "x": 0.5,
+       "y": 0.36,
+       "s": 1.5,
+       "color": "violet"
+      },
+      {
+       "prop": "photons",
+       "x": 0.5,
+       "y": 0.5,
+       "s": 0.55,
+       "colors": [
+        "violet",
+        "violet"
+       ]
+      }
+     ],
+     "cam": {
+      "zoom": [
+       1.0,
+       1.15
+      ]
+     }
+    }
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "claim": "Rayleigh scattering scales with 1/wavelength^4 (400 nm vs 450 nm = 1.6x, vs 700 nm = 9x)",
+   "url": "https://en.wikipedia.org/wiki/Rayleigh_scattering",
+   "note": "pointer; primary: Rayleigh 1871 / standard optics texts"
+  },
+  {
+   "claim": "Sky looks blue not violet: less violet in the solar spectrum and lower eye sensitivity to violet",
+   "url": "https://math.ucr.edu/home/baez/physics/General/BlueSky/blue_sky.html",
+   "note": "UC Riverside physics FAQ"
+  }
+ ],
+ "caveats": "Round-2 edit: removed the ozone-absorption claim (ozone mainly absorbs UV and orange/red in the Chappuis band, not violet). The sky's spectrum does contain violet; cone response makes the mix look pale blue. Round-3 edit: the payoff line now credits both causes ('because of sunlight, and what your eyes can't do'), matching line 3 and the UCR FAQ. Round-5 edit: the 'violet vs blue in sunlight' bars (line 3) are illustrative of the solar spectrum's lower violet irradiance, not measured values."
 }

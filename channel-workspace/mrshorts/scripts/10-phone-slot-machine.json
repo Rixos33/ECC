@@ -1,0 +1,553 @@
+{
+ "id": "short10_phone_slot_machine",
+ "handle": "@mrshorts1737",
+ "title": "Why your phone feels like a slot machine",
+ "palette": "orange",
+ "bg": "plain",
+ "ground": "hill",
+ "mood": "playful",
+ "lines": [
+  {
+   "text": "Checking your phone, when nothing's there? Blame pigeons.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "phone",
+       "x": 0.4,
+       "y": 0.48,
+       "s": 1.1,
+       "color": "cyan",
+       "notify": false
+      },
+      {
+       "prop": "bird",
+       "x": 0.64,
+       "y": 0.528,
+       "s": 1.1,
+       "peck": true,
+       "flip": true
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.11,
+       "s": 1.0,
+       "label": "CHECK AGAIN?",
+       "size": 110,
+       "color": "yellow"
+      }
+     ]
+    },
+    {
+     "on": "Blame",
+     "scene": [
+      {
+       "prop": "bird",
+       "x": 0.34,
+       "y": 0.464,
+       "s": 2.087,
+       "peck": true
+      },
+      {
+       "prop": "bird",
+       "x": 0.74,
+       "y": 0.535,
+       "s": 1.0,
+       "peck": true,
+       "flip": true,
+       "color": "white"
+      }
+     ],
+     "cam": {
+      "zoom": [
+       1.0,
+       1.15
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "text": "In the 1950s, Skinner's lab rewarded pigeons for pecking on different schedules.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.24,
+       "y": 0.475,
+       "s": 1.374,
+       "color": "cyan"
+      },
+      {
+       "prop": "person",
+       "x": 0.76,
+       "y": 0.491,
+       "s": 1.2,
+       "color": "yellow",
+       "flip": true
+      },
+      {
+       "prop": "bird",
+       "x": 0.5,
+       "y": 0.554,
+       "s": 0.7,
+       "peck": true
+      }
+     ]
+    },
+    {
+     "on": "rewarded",
+     "scene": [
+      {
+       "prop": "bird",
+       "x": 0.38,
+       "y": 0.496,
+       "s": 1.592,
+       "peck": true
+      },
+      {
+       "prop": "coin",
+       "x": 0.76,
+       "y": 0.34,
+       "s": 0.7,
+       "label": "",
+       "on": "pecking"
+      }
+     ]
+    },
+    {
+     "on": "different",
+     "scene": [
+      {
+       "prop": "clock",
+       "x": 0.38,
+       "y": 0.38,
+       "s": 1.3,
+       "speed": 1.5
+      },
+      {
+       "prop": "coin",
+       "x": 0.76,
+       "y": 0.3,
+       "s": 0.5,
+       "label": ""
+      },
+      {
+       "prop": "coin",
+       "x": 0.76,
+       "y": 0.48,
+       "s": 0.5,
+       "label": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "Unpredictable rewards kept them pecking fast and steady. Slot machines work that way: you never know which pull pays.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "bird",
+       "x": 0.36,
+       "y": 0.483,
+       "s": 1.801,
+       "peck": true
+      },
+      {
+       "prop": "coin",
+       "x": 0.76,
+       "y": 0.26,
+       "s": 0.7,
+       "label": ""
+      },
+      {
+       "prop": "question",
+       "x": 0.76,
+       "y": 0.46,
+       "s": 0.5,
+       "big": "?"
+      }
+     ]
+    },
+    {
+     "on": "pecking",
+     "scene": [
+      {
+       "prop": "bird",
+       "x": 0.4,
+       "y": 0.481,
+       "s": 1.835,
+       "peck": true
+      },
+      {
+       "prop": "arrow",
+       "x": 0.8,
+       "y": 0.42,
+       "s": 1.0,
+       "angle": -90,
+       "length": 180,
+       "color": "green"
+      }
+     ]
+    },
+    {
+     "on": "Slot",
+     "scene": [
+      {
+       "prop": "slot",
+       "x": 0.4,
+       "y": 0.492,
+       "s": 1.3
+      },
+      {
+       "prop": "bird",
+       "x": 0.82,
+       "y": 0.548,
+       "s": 0.8,
+       "peck": true,
+       "flip": true
+      }
+     ]
+    },
+    {
+     "on": "never",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.34,
+       "y": 0.472,
+       "s": 1.4,
+       "color": "cyan",
+       "mood": "surprised"
+      },
+      {
+       "prop": "coin",
+       "x": 0.74,
+       "y": 0.3,
+       "s": 0.7,
+       "on": "pays"
+      }
+     ],
+     "cam": {
+      "zoom": [
+       1.0,
+       1.15
+      ]
+     }
+    }
+   ],
+   "sfx": "chime",
+   "sfx_at": 2.6
+  },
+  {
+   "text": "Your feed is similar. Even the inventor of pull-to-refresh called it addictive.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "phone",
+       "x": 0.38,
+       "y": 0.42,
+       "s": 1.4,
+       "color": "cyan",
+       "notify": true
+      },
+      {
+       "prop": "heart",
+       "x": 0.74,
+       "y": 0.32,
+       "s": 0.6
+      }
+     ]
+    },
+    {
+     "on": "Even",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.36,
+       "y": 0.472,
+       "s": 1.4,
+       "color": "cyan"
+      },
+      {
+       "prop": "bulb",
+       "x": 0.7,
+       "y": 0.3,
+       "s": 0.8
+      }
+     ]
+    },
+    {
+     "on": "pull",
+     "scene": [
+      {
+       "prop": "phone",
+       "x": 0.38,
+       "y": 0.42,
+       "s": 1.4,
+       "color": "cyan"
+      },
+      {
+       "prop": "thumb",
+       "x": 0.74,
+       "y": 0.28,
+       "s": 0.6,
+       "to": [
+        0.74,
+        0.42
+       ]
+      },
+      {
+       "prop": "arrow",
+       "x": 0.74,
+       "y": 0.54,
+       "s": 1.0,
+       "angle": 90,
+       "length": 140,
+       "color": "white"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "A 2021 study of a million-plus posts found people post more when likes come faster, like animals chasing food.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "phone",
+       "x": 0.3,
+       "y": 0.4,
+       "s": 1.2,
+       "color": "cyan"
+      },
+      {
+       "prop": "crowd",
+       "x": 0.7,
+       "y": 0.521,
+       "s": 0.8,
+       "n": 3
+      }
+     ]
+    },
+    {
+     "on": "people",
+     "scene": [
+      {
+       "prop": "thumb",
+       "x": 0.36,
+       "y": 0.4,
+       "s": 1.6
+      },
+      {
+       "prop": "heart",
+       "x": 0.74,
+       "y": 0.46,
+       "s": 0.6,
+       "on": "likes"
+      },
+      {
+       "prop": "heart",
+       "x": 0.76,
+       "y": 0.3,
+       "s": 0.45,
+       "on": "come"
+      }
+     ]
+    },
+    {
+     "on": "animals",
+     "scene": [
+      {
+       "prop": "bird",
+       "x": 0.4,
+       "y": 0.496,
+       "s": 1.592,
+       "peck": true
+      },
+      {
+       "prop": "coin",
+       "x": 0.78,
+       "y": 0.36,
+       "s": 0.6,
+       "label": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "But is it real addiction? Researchers still argue. Many say problematic use instead.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "phone",
+       "x": 0.38,
+       "y": 0.42,
+       "s": 1.4,
+       "color": "cyan"
+      },
+      {
+       "prop": "question",
+       "x": 0.74,
+       "y": 0.34,
+       "s": 0.6,
+       "big": "?"
+      }
+     ]
+    },
+    {
+     "on": "Researchers",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.26,
+       "y": 0.474,
+       "s": 1.391,
+       "color": "cyan",
+       "mood": "surprised"
+      },
+      {
+       "prop": "person",
+       "x": 0.74,
+       "y": 0.482,
+       "s": 1.3,
+       "color": "yellow",
+       "mood": "sad",
+       "flip": true
+      },
+      {
+       "prop": "bubble",
+       "x": 0.5,
+       "y": 0.24,
+       "s": 0.9,
+       "label": "it's not!",
+       "tail": "left"
+      }
+     ]
+    },
+    {
+     "on": "Many",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.3,
+       "y": 0.482,
+       "s": 1.3,
+       "color": "yellow"
+      },
+      {
+       "prop": "phone",
+       "x": 0.56,
+       "y": 0.44,
+       "s": 0.5,
+       "color": "cyan",
+       "layer": true
+      },
+      {
+       "prop": "bubble",
+       "x": 0.72,
+       "y": 0.26,
+       "s": 1.0,
+       "label": "too much?",
+       "tail": "left"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "So next time you check your phone and nothing's there... you just pulled the lever.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.3,
+       "y": 0.473,
+       "s": 1.391,
+       "color": "cyan"
+      },
+      {
+       "prop": "clock",
+       "x": 0.72,
+       "y": 0.34,
+       "s": 0.9,
+       "speed": 2.0
+      }
+     ]
+    },
+    {
+     "on": "check",
+     "scene": [
+      {
+       "prop": "phone",
+       "x": 0.4,
+       "y": 0.48,
+       "s": 1.1,
+       "color": "cyan",
+       "notify": false
+      },
+      {
+       "prop": "bird",
+       "x": 0.64,
+       "y": 0.528,
+       "s": 1.1,
+       "peck": true,
+       "flip": true
+      }
+     ]
+    },
+    {
+     "on": "pulled",
+     "scene": [
+      {
+       "prop": "slot",
+       "x": 0.4,
+       "y": 0.492,
+       "s": 1.3
+      },
+      {
+       "prop": "bird",
+       "x": 0.8,
+       "y": 0.548,
+       "s": 0.8,
+       "peck": true,
+       "flip": true
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "claim": "Ferster & Skinner, Schedules of Reinforcement (1957): variable-ratio schedules produce high, steady response rates in pigeons",
+   "url": "https://books.google.com/books/about/Schedules_of_Reinforcement.html?id=ssAtzwEACAAJ",
+   "note": "Book record; VR vs other schedules summarised in Springer encyclopedia entry https://link.springer.com/rwe/10.1007/978-3-319-55065-7_1555"
+  },
+  {
+   "claim": "Loren Brichter, inventor of pull-to-refresh: 'Pull-to-refresh is addictive'",
+   "url": "https://en.wikipedia.org/wiki/Pull-to-refresh",
+   "note": "Pointer to Paul Lewis, 'Our minds can be hijacked', The Guardian, 6 Oct 2017, where Brichter is quoted."
+  },
+  {
+   "claim": ">1 million posts from >4,000 users; people post more frequently when rate of likes is high, consistent with reward learning seen in animals",
+   "url": "https://www.nature.com/articles/s41467-020-19607-x",
+   "note": "Lindström et al. 2021, Nature Communications 12:1311. Summary: https://www.sciencedaily.com/releases/2021/02/210226103811.htm"
+  },
+  {
+   "claim": "'Smartphone addiction' may not meet addiction criteria; 'problematic smartphone use' suggested",
+   "url": "https://www.semanticscholar.org/paper/Is-smartphone-addiction-really-an-addiction-Panova-Carbonell/b4a39849753d5080a80a8c50d07171a2c0f8b349",
+   "note": "Panova & Carbonell 2018, Journal of Behavioral Addictions 7(2):252-259."
+  }
+ ],
+ "caveats": "Line 3 'kept them pecking fast and steadily' reflects standard VR-schedule findings; avoid stronger claims like 'most addictive schedule'. The slot-machine analogy for phones is a design critique (Brichter, Tristan Harris) and a plausible mechanism, not a proven equivalence; Lindström 2021 shows reward-learning patterns in posting, not addiction. Verify the Brichter quote against the Guardian article itself (Wikipedia used as pointer). The 1957 visual is the book's publication year; the research ran through the 1950s. Round-4 edit: quote marks removed from 'problematic use' in the narration text (caption artefact); 'say' respells Ferster as FUR-stir. Round-5 edit: narration credits 'Skinner's lab' (Ferster & Skinner 1957, Schedules of Reinforcement) instead of naming Ferster, which TTS garbled."
+}

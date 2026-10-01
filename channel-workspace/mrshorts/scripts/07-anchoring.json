@@ -1,0 +1,558 @@
+{
+ "id": "short07_anchoring",
+ "handle": "@mrshorts1737",
+ "title": "A random number just changed your answer",
+ "palette": "red",
+ "bg": "plain",
+ "ground": "hill",
+ "mood": "tense",
+ "lines": [
+  {
+   "text": "A random number? It can change your answer. Even when you watch it being picked.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "wheel",
+       "x": 0.4,
+       "y": 0.4,
+       "s": 1.5,
+       "values": [
+        10,
+        65,
+        25,
+        90,
+        40,
+        5,
+        75,
+        50
+       ],
+       "stop": 0
+      },
+      {
+       "prop": "person",
+       "x": 0.8,
+       "y": 0.509,
+       "s": 1.0,
+       "color": "yellow",
+       "mood": "surprised",
+       "look": -1.0
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.12,
+       "s": 1.0,
+       "label": "RANDOM NUMBER?",
+       "size": 110,
+       "color": "yellow"
+      }
+     ]
+    },
+    {
+     "on": "answer",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.36,
+       "y": 0.472,
+       "s": 1.4,
+       "color": "cyan"
+      },
+      {
+       "prop": "bubble",
+       "x": 0.68,
+       "y": 0.28,
+       "s": 1.0,
+       "label": "um... 25?",
+       "tail": "left"
+      }
+     ]
+    },
+    {
+     "on": "watch",
+     "scene": [
+      {
+       "prop": "eye",
+       "x": 0.5,
+       "y": 0.26,
+       "s": 0.9,
+       "color": "blue"
+      },
+      {
+       "prop": "wheel",
+       "x": 0.5,
+       "y": 0.46,
+       "s": 1.3,
+       "values": [
+        10,
+        65,
+        25,
+        90,
+        40,
+        5,
+        75,
+        50
+       ],
+       "stop": 1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "In 1974, Tversky and Kahneman spun a wheel of fortune, then asked: what percent of African countries are in the UN?",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.28,
+       "y": 0.482,
+       "s": 1.3,
+       "color": "cyan"
+      },
+      {
+       "prop": "person",
+       "x": 0.72,
+       "y": 0.482,
+       "s": 1.3,
+       "color": "yellow",
+       "flip": true
+      },
+      {
+       "prop": "newspaper",
+       "x": 0.5,
+       "y": 0.26,
+       "s": 0.5,
+       "headline": "SCIENCE"
+      }
+     ]
+    },
+    {
+     "on": "wheel",
+     "scene": [
+      {
+       "prop": "wheel",
+       "x": 0.46,
+       "y": 0.42,
+       "s": 1.6,
+       "values": [
+        10,
+        65,
+        25,
+        90,
+        40,
+        5,
+        75,
+        50
+       ],
+       "stop": 0
+      },
+      {
+       "prop": "arrow",
+       "x": 0.86,
+       "y": 0.42,
+       "s": 1.0,
+       "angle": 90,
+       "length": 160,
+       "color": "white"
+      }
+     ],
+     "cam": {
+      "zoom": [
+       1.0,
+       1.15
+      ]
+     }
+    },
+    {
+     "on": "percent",
+     "scene": [
+      {
+       "prop": "planet",
+       "x": 0.4,
+       "y": 0.4,
+       "s": 1.4
+      },
+      {
+       "prop": "pin",
+       "x": 0.36,
+       "y": 0.38,
+       "s": 0.45,
+       "color": "red",
+       "layer": true
+      },
+      {
+       "prop": "person",
+       "x": 0.8,
+       "y": 0.509,
+       "s": 1.0,
+       "color": "cyan",
+       "mood": "surprised",
+       "look": 3.1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "People who got ten guessed twenty-five percent. People who got sixty-five guessed forty-five.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "wheel",
+       "x": 0.36,
+       "y": 0.4,
+       "s": 1.4,
+       "values": [
+        10,
+        65,
+        25,
+        90,
+        40,
+        5,
+        75,
+        50
+       ],
+       "stop": 0
+      },
+      {
+       "prop": "person",
+       "x": 0.78,
+       "y": 0.509,
+       "s": 1.0,
+       "color": "cyan"
+      }
+     ]
+    },
+    {
+     "on": "twenty",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.34,
+       "y": 0.472,
+       "s": 1.4,
+       "color": "cyan",
+       "mood": "neutral"
+      },
+      {
+       "prop": "bubble",
+       "x": 0.7,
+       "y": 0.28,
+       "s": 1.0,
+       "label": "low!",
+       "tail": "left"
+      }
+     ],
+     "cam": {
+      "zoom": [
+       1.0,
+       1.15
+      ]
+     }
+    },
+    {
+     "on": "sixty",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.26,
+       "y": 0.5,
+       "s": 1.1,
+       "color": "yellow"
+      },
+      {
+       "prop": "wheel",
+       "x": 0.66,
+       "y": 0.4,
+       "s": 1.3,
+       "values": [
+        10,
+        65,
+        25,
+        90,
+        40,
+        5,
+        75,
+        50
+       ],
+       "stop": 1
+      },
+      {
+       "prop": "bubble",
+       "x": 0.26,
+       "y": 0.22,
+       "s": 0.9,
+       "label": "higher!",
+       "tail": "right",
+       "on": "guessed"
+      }
+     ],
+     "cam": {
+      "zoom": [
+       1.0,
+       1.15
+      ]
+     }
+    }
+   ],
+   "sfx": "chime",
+   "sfx_at": 3.8
+  },
+  {
+   "text": "Paying people for accuracy didn't fix it.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.32,
+       "y": 0.472,
+       "s": 1.4,
+       "color": "cyan"
+      },
+      {
+       "prop": "coin",
+       "x": 0.7,
+       "y": 0.28,
+       "s": 0.8
+      },
+      {
+       "prop": "check",
+       "x": 0.7,
+       "y": 0.48,
+       "s": 0.7,
+       "ok": false,
+       "on": "didn"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "The twist: lots of famous psychology failed to replicate. Anchoring didn't. In 2014, thirty-six samples worldwide showed it strongly.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "newspaper",
+       "x": 0.38,
+       "y": 0.4,
+       "s": 1.2,
+       "headline": "FAMOUS STUDY"
+      },
+      {
+       "prop": "bulb",
+       "x": 0.78,
+       "y": 0.3,
+       "s": 0.8
+      }
+     ]
+    },
+    {
+     "on": "failed",
+     "scene": [
+      {
+       "prop": "newspaper",
+       "x": 0.62,
+       "y": 0.4,
+       "s": 1.2,
+       "headline": "FAILED"
+      },
+      {
+       "prop": "person",
+       "x": 0.22,
+       "y": 0.509,
+       "s": 1.0,
+       "color": "yellow",
+       "mood": "sad"
+      }
+     ]
+    },
+    {
+     "on": "Anchoring",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.32,
+       "y": 0.482,
+       "s": 1.3,
+       "color": "yellow",
+       "mood": "happy"
+      },
+      {
+       "prop": "bubble",
+       "x": 0.66,
+       "y": 0.26,
+       "s": 1.0,
+       "label": "still works!",
+       "tail": "left"
+      },
+      {
+       "prop": "check",
+       "x": 0.74,
+       "y": 0.46,
+       "s": 0.7,
+       "on": "didn"
+      }
+     ]
+    },
+    {
+     "on": "2014",
+     "scene": [
+      {
+       "prop": "crowd",
+       "x": 0.5,
+       "y": 0.501,
+       "s": 1.0,
+       "n": 5
+      },
+      {
+       "prop": "newspaper",
+       "x": 0.5,
+       "y": 0.22,
+       "s": 0.55,
+       "headline": "MANY LABS"
+      }
+     ]
+    },
+    {
+     "on": "worldwide",
+     "scene": [
+      {
+       "prop": "planet",
+       "x": 0.5,
+       "y": 0.44,
+       "s": 1.5,
+       "pins": 36
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.2,
+       "s": 1.0,
+       "label": "36 SAMPLES",
+       "size": 100,
+       "color": "yellow",
+       "on": "strongly"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "It's the idea behind a crossed-out was price.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "card",
+       "x": 0.24,
+       "y": 0.44,
+       "s": 1.45,
+       "label": "WAS",
+       "price": "$99",
+       "color": "white",
+       "accent": "#3a3a4a",
+       "strike": true
+      },
+      {
+       "prop": "arrow",
+       "x": 0.465,
+       "y": 0.44,
+       "s": 1.0,
+       "length": 80,
+       "color": "white"
+      },
+      {
+       "prop": "card",
+       "x": 0.71,
+       "y": 0.44,
+       "s": 1.65,
+       "label": "NOW",
+       "price": "$49",
+       "best": true,
+       "on": "crossed"
+      }
+     ],
+     "cam": {
+      "zoom": [
+       1.0,
+       1.15
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "text": "So watch the first number you hear. Even a random one can change your answer.",
+   "shots": [
+    {
+     "scene": [
+      {
+       "prop": "eye",
+       "x": 0.4,
+       "y": 0.42,
+       "s": 1.966,
+       "color": "blue"
+      },
+      {
+       "prop": "speaker",
+       "x": 0.8,
+       "y": 0.538,
+       "s": 0.7,
+       "on": "hear"
+      }
+     ]
+    },
+    {
+     "on": "random",
+     "scene": [
+      {
+       "prop": "wheel",
+       "x": 0.4,
+       "y": 0.4,
+       "s": 1.5,
+       "values": [
+        10,
+        65,
+        25,
+        90,
+        40,
+        5,
+        75,
+        50
+       ],
+       "stop": 0
+      },
+      {
+       "prop": "person",
+       "x": 0.8,
+       "y": 0.509,
+       "s": 1.0,
+       "color": "yellow",
+       "mood": "surprised",
+       "look": -1.0
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "claim": "Wheel of fortune 0-100; medians 25 and 45 for anchors 10 and 65; payoffs for accuracy did not reduce anchoring",
+   "url": "https://www.science.org/doi/10.1126/science.185.4157.1124",
+   "note": "Tversky & Kahneman 1974, 'Judgment under Uncertainty: Heuristics and Biases', Science 185:1124-1131 (verified against full text)."
+  },
+  {
+   "claim": "Anchoring replicated strongly across 36 samples (N > 5,000)",
+   "url": "https://econtent.hogrefe.com/doi/10.1027/1864-9335/a000178",
+   "note": "Klein et al. 2014, Many Labs 1, Social Psychology 45(3):142-152. All four anchoring items replicated with large effects, larger than the original estimate."
+  }
+ ],
+ "caveats": "Many Labs tested the Jacowitz & Kahneman (1995) version, where participants are given an explicit high/low number, not a spun wheel; narration says 'found strong anchoring' generally. Kahneman's later book says the wheel was rigged to stop at 10 or 65, while the 1974 paper only says it was spun in front of subjects; narration avoids the 'rigged' detail. Anchors from truly incidental numbers (not posed as a comparison) replicate less reliably. Line 6 is an illustration of the logic, not a claim that it's been proven in stores. Today all African states are UN members, so avoid implying the question has a tricky answer. Round-4 edit: quote marks around 'was' removed from the narration text (caption artefact). Round-5 visual: the 2014 replication is the Many Labs project (Klein et al. 2014, 36 samples); the 'MANY LABS' headline names it."
+}

@@ -1,0 +1,136 @@
+[
+ {
+  "id": "short01_sky_not_violet",
+  "duration": 22.6,
+  "size_mb": 2.3,
+  "lufs": -14.0,
+  "wps": 2.92,
+  "narration_match": 1.0,
+  "first_frame_std": 32.3,
+  "diffs": [],
+  "flags": []
+ },
+ {
+  "id": "short02_cant_tickle_yourself",
+  "duration": 33.4,
+  "size_mb": 3.24,
+  "lufs": -14.1,
+  "wps": 3.02,
+  "narration_match": 0.984,
+  "first_frame_std": 33.8,
+  "diffs": [
+   "'built' -> 'build'",
+   "'of' -> ''"
+  ],
+  "flags": []
+ },
+ {
+  "id": "short03_gps_needs_relativity",
+  "duration": 39.6,
+  "size_mb": 3.88,
+  "lufs": -14.1,
+  "wps": 2.55,
+  "narration_match": 0.978,
+  "first_frame_std": 33.8,
+  "diffs": [
+   "'every blue dot' -> 'everyblue'"
+  ],
+  "flags": []
+ },
+ {
+  "id": "short04_shipping_container",
+  "duration": 37.0,
+  "size_mb": 4.09,
+  "lufs": -14.1,
+  "wps": 2.65,
+  "narration_match": 0.957,
+  "first_frame_std": 43.0,
+  "diffs": [
+   "\"trade's\" -> 'trade'",
+   "'ships' -> 'shifts'",
+   "'sacks' -> 'sax'",
+   "'malcom' -> 'malcolm'"
+  ],
+  "flags": []
+ },
+ {
+  "id": "short05_decoy_effect",
+  "duration": 40.2,
+  "size_mb": 4.13,
+  "lufs": -14.1,
+  "wps": 2.49,
+  "narration_match": 0.994,
+  "first_frame_std": 63.9,
+  "diffs": [
+   "'the' -> ''"
+  ],
+  "flags": []
+ },
+ {
+  "id": "short06_illusory_truth",
+  "duration": 35.1,
+  "size_mb": 3.43,
+  "lufs": -14.2,
+  "wps": 2.65,
+  "narration_match": 0.983,
+  "first_frame_std": 31.6,
+  "diffs": [
+   "'to' -> ''",
+   "'raised' -> 'raise'"
+  ],
+  "flags": []
+ },
+ {
+  "id": "short07_anchoring",
+  "duration": 35.1,
+  "size_mb": 4.57,
+  "lufs": -14.1,
+  "wps": 2.79,
+  "narration_match": 0.989,
+  "first_frame_std": 39.4,
+  "diffs": [
+   "\"it's\" -> 'if'"
+  ],
+  "flags": []
+ },
+ {
+  "id": "short08_bystander_effect",
+  "duration": 37.3,
+  "size_mb": 4.13,
+  "lufs": -14.0,
+  "wps": 2.62,
+  "narration_match": 0.994,
+  "first_frame_std": 34.3,
+  "diffs": [
+   "'in' -> ''"
+  ],
+  "flags": []
+ },
+ {
+  "id": "short09_time_speeds_up_with_age",
+  "duration": 38.8,
+  "size_mb": 3.99,
+  "lufs": -14.1,
+  "wps": 2.63,
+  "narration_match": 1.0,
+  "first_frame_std": 39.3,
+  "diffs": [],
+  "flags": []
+ },
+ {
+  "id": "short10_phone_slot_machine",
+  "duration": 36.0,
+  "size_mb": 3.36,
+  "lufs": -14.1,
+  "wps": 2.72,
+  "narration_match": 0.959,
+  "first_frame_std": 27.4,
+  "diffs": [
+   "'pull' -> 'pulled'",
+   "'likes' -> 'lights'",
+   "'but' -> 'what'",
+   "'pulled' -> 'pull'"
+  ],
+  "flags": []
+ }
+]
