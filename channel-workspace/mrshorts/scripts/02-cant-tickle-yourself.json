@@ -562,5 +562,8 @@
   "next": "08",
   "question": "If you needed help, would a crowd step in, or just watch?",
   "label": "WOULD THEY HELP?"
+ },
+ "mascot": {
+  "activity": "magnifier"
  }
 }

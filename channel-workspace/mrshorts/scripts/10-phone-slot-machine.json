@@ -554,5 +554,8 @@
   "next": "09",
   "question": "Do the years really go faster as you get older?",
   "label": "FASTER YEARS?"
+ },
+ "mascot": {
+  "activity": "flask"
  }
 }

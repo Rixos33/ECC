@@ -575,5 +575,8 @@
   "next": "10",
   "question": "What do you and a pigeon in a lab have in common?",
   "label": "YOU + A PIGEON?"
+ },
+ "mascot": {
+  "activity": "notebook"
  }
 }

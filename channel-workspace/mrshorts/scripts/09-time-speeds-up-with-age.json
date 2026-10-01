@@ -564,5 +564,8 @@
   "next": "15",
   "question": "Why do planes fly a curve when a straight line looks shorter?",
   "label": "CURVED FLIGHTS?"
+ },
+ "mascot": {
+  "activity": "cube"
  }
 }

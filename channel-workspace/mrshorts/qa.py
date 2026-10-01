@@ -7,7 +7,7 @@ loudness, length, file size, and first-frame check.
 import argparse, difflib, glob, json, os, re, subprocess
 import numpy as np
 
-TARGETS = {"duration": (20, 55), "wps": (2.3, 3.4), "lufs": (-15.5, -12.5), "size_mb": (0, 8), "max_beat": 7.5}
+TARGETS = {"duration": (20, 75), "wps": (1.6, 3.0), "lufs": (-15.5, -12.5), "size_mb": (0, 8), "max_beat": 7.5}
 
 
 UNITS = {w: i for i, w in enumerate("zero one two three four five six seven eight nine ten eleven twelve thirteen "
@@ -115,10 +115,22 @@ def main():
             stale = os.path.getmtime(video) < newest
             pcm = subprocess.run(["ffmpeg", "-nostdin", "-loglevel", "error", "-i", video, "-ac", "1", "-ar", "16000",
                                   "-f", "f32le", "-"], capture_output=True, check=True).stdout
-            segs, _ = model.transcribe(np.frombuffer(pcm, np.float32), language="en", beam_size=5)
+            segs, _ = model.transcribe(np.frombuffer(pcm, np.float32), language="en", beam_size=5, word_timestamps=True)
+            segs = list(segs)
             heard = norm(" ".join(s.text for s in segs))
+            # caption sync: caption word start minus the time Whisper hears that word (negative = caption early)
+            sync_med = sync_early = None
+            timing = os.path.join(args.out, "timing", spec["id"] + ".json")
+            if os.path.exists(timing):
+                key = lambda w: re.sub(r"[^a-z0-9]", "", w.lower())
+                cap = [(key(w), a) for w, a, _ in json.load(open(timing))]
+                hw = [(key(w.word), w.start) for sg in segs for w in (sg.words or [])]
+                m2 = difflib.SequenceMatcher(a=[x[0] for x in cap], b=[x[0] for x in hw], autojunk=False)
+                offs = [cap[b.a + k][1] - hw[b.b + k][1] for b in m2.get_matching_blocks() for k in range(b.size)]
+                if len(offs) > 10:
+                    sync_med, sync_early = float(np.median(offs)), float(np.percentile(offs, 5))
             teaser = spec.get("teaser") or {}
-            outro = f"{teaser['question']} {teaser.get('cta', 'The answer is in the next Short!')}" if teaser else ""
+            outro = f"{teaser['question']} {teaser.get('cta', 'Think it over. The answer is in the next Short.')}" if teaser else ""
             said = norm(" ".join([ln["text"] for ln in spec["lines"]] + [outro]))
             sm = difflib.SequenceMatcher(a=said, b=heard, autojunk=False)
             diffs = [f"{' '.join(said[i1:i2])!r} -> {' '.join(heard[j1:j2])!r}"
@@ -142,13 +154,17 @@ def main():
                 flags.append("first frame looks empty")
             if stale:
                 flags.append("STALE: video is older than its script or the renderer; re-render")
+            if sync_med is not None and (abs(sync_med) > 0.12 or sync_early < -0.3):
+                flags.append(f"caption sync: median {sync_med * 1000:+.0f} ms, earliest 5% {sync_early * 1000:+.0f} ms")
             if sm.ratio() < 0.95:
                 flags.append(f"narration match {sm.ratio():.2f}")
             row = {"id": spec["id"], "duration": round(dur, 1), "size_mb": round(size, 2), "lufs": loud,
-                   "wps": round(wps, 2), "narration_match": round(sm.ratio(), 3), "first_frame_std": round(ff, 1),
+                   "wps": round(wps, 2), "narration_match": round(sm.ratio(), 3),
+                   "caption_sync_ms": None if sync_med is None else round(sync_med * 1000), "first_frame_std": round(ff, 1),
                    "diffs": diffs, "flags": flags}
             report.append(row)
-            print(f"{spec['id']:<34} {dur:5.1f}s {size:4.1f}MB {loud}LUFS {wps:.2f}w/s match={sm.ratio():.3f} "
+            sync_txt = "" if sync_med is None else f"sync={sync_med * 1000:+.0f}ms "
+            print(f"{spec['id']:<34} {dur:5.1f}s {size:4.1f}MB {loud}LUFS {wps:.2f}w/s match={sm.ratio():.3f} {sync_txt}"
                   f"{'OK' if not flags else 'FLAGS: ' + '; '.join(flags)}")
             for d in diffs:
                 print("    heard:", d)

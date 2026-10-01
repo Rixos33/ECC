@@ -13,7 +13,7 @@ Turns a script JSON into a finished vertical Short (1080x1920, 30 fps, H.264/AAC
     python3 -m venv .venv && .venv/bin/pip install -r requirements.txt   # needs ffmpeg on PATH
     .venv/bin/python render_short.py "scripts/*.json" out/
 
-Options: `--voice en-US-BrianMultilingualNeural`, `--rate +8%`, `--pitch -2Hz`, `--crf 24`, `--music-db -19`,
+Options: `--voice en-US-BrianMultilingualNeural`, `--rate -4%`, `--pitch -2Hz`, `--crf 24`, `--music-db -19`,
 `--tts elevenlabs --voice <voice_id>` (needs `ELEVENLABS_API_KEY`), `--tts say`. TTS results are cached in `.tts-cache/`.
 
 ## Script schema
@@ -116,9 +116,11 @@ Colours are palette names (`white yellow orange red pink purple violet blue cyan
 
 ## The mascot (Mr. Shorts)
 
-A small owl in glasses and red shorts (`mascot` prop). When a script has a `teaser`, he watches from the bottom-left
-corner for the whole Short (hopping on the reveal chime), then steps forward at the end, asks the teaser question in
-his own voice (`--mascot-voice`, default `en-US-AnaNeural`) with a moving beak, and says the answer is in the next
+A small owl in glasses and red shorts (`mascot` prop). When a script has a `teaser`, he sits in the bottom-right
+corner for the whole Short doing one "thinking" activity, set per script with `"mascot": {"activity": "telescope"}`
+(telescope, book, globe, puzzle, abacus, magnifier, chess, notebook, flask, cube: use a different one in each
+video). He hops on the reveal chime, then steps forward at the end, asks the teaser question in
+his own voice (`--mascot-voice`, default `en-GB-RyanNeural`, a dry adult voice) with a moving beak, and says the answer is in the next
 Short. The teaser must be the hook of the Short published next, so keep `teaser.next` in step with the publishing
 order. `--no-mascot` renders without him (and keeps the seamless loop).
 

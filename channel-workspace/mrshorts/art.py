@@ -804,7 +804,123 @@ def p_package(c, t, p, color="orange", label="", **_):
         text(c, label, 115, 22, fit_size(label, 40, 130), INK)
 
 
-def p_mascot(c, t, p, talk=0.0, look=0.0, mood="smirk", wave=False, hop=0.0, **_):
+ACTIVITIES = ("telescope", "book", "globe", "puzzle", "abacus", "magnifier", "chess", "notebook", "flask", "cube")
+
+
+def _activity(c, t, kind):
+    """One 'thinking' prop for Mr. Shorts, drawn to his left (he sits in the right-hand corner)."""
+    brass, wood, navy = (230, 180, 70), (150, 96, 60), (40, 50, 110)
+    if kind == "telescope":
+        for dx in (-50, 0, 50):  # tripod
+            c.drawLine(-175, 20, -175 + dx, 172, paint(wood, stroke=10))
+        c.save()
+        c.translate(-175, 20)
+        c.rotate(-28 + 3 * math.sin(t * 0.8))
+        rrect(c, -170, -24, 250, 48, 10, navy)
+        rrect(c, -190, -32, 40, 64, 8, brass)
+        rrect(c, 60, -18, 60, 36, 8, brass)
+        c.restore()
+        tw = 0.5 + 0.5 * math.sin(t * 5)
+        for a in range(4):
+            c.save()
+            c.translate(-360, -150)
+            c.rotate(a * 45)
+            c.drawLine(-22 * tw - 8, 0, 22 * tw + 8, 0, paint("yellow", stroke=6))
+            c.restore()
+    elif kind == "book":
+        flip = (t % 3.6) / 0.5  # a page turns every few seconds
+        c.drawPath(path([(-150, 40), (-20, 60), (-20, 150), (-150, 128)]), paint("white"))
+        c.drawPath(path([(110, 40), (-20, 60), (-20, 150), (110, 128)]), paint("white"))
+        for i in range(4):
+            c.drawLine(-135, 62 + i * 18, -40, 76 + i * 18, paint("grey", 170, stroke=5))
+            c.drawLine(95, 62 + i * 18, 0, 76 + i * 18, paint("grey", 170, stroke=5))
+        if flip < 1:
+            x = 110 - 260 * flip
+            c.drawPath(path([(x, 40 - 30 * math.sin(math.pi * flip)), (-20, 60), (-20, 150), (x, 128 - 30 * math.sin(math.pi * flip))]),
+                       paint((235, 232, 222)))
+        c.drawPath(path([(-158, 46), (-20, 68), (118, 46), (118, 136), (-20, 158), (-158, 136)]), paint(wood, stroke=12))
+    elif kind == "globe":
+        rrect(c, -230, 150, 110, 22, 8, wood)
+        c.drawLine(-175, 150, -175, 110, paint(wood, stroke=12))
+        c.drawArc(skia.Rect.MakeXYWH(-262, -62, 174, 174), 60, 200, False, paint(brass, stroke=10))
+        c.save()
+        c.translate(-175, 25)
+        c.scale(0.5, 0.5)
+        p_planet(c, t * 2.2, 1.0, atmosphere=None)
+        c.restore()
+    elif kind == "puzzle":
+        cols = ("teal", "orange", "pink", "yellow")
+        drop = abs(math.sin(t * 1.4))
+        for i, (x, y) in enumerate(((-250, 110), (-180, 110), (-250, 40), (-180, 40))):
+            yy = y - (70 * drop if i == 3 else 0)
+            rrect(c, x, yy, 66, 66, 10, cols[i])
+            c.drawCircle(x + 33, yy - 4, 13, paint(cols[i]))
+            c.drawCircle(x + 70, yy + 33, 13, paint(shade(cols[i], -0.2)))
+    elif kind == "abacus":
+        rrect(c, -270, -10, 170, 180, 12, wood)
+        rrect(c, -256, 4, 142, 152, 6, (60, 40, 30))
+        for r in range(3):
+            y = 30 + r * 50
+            c.drawLine(-256, y, -114, y, paint(brass, stroke=5))
+            shift = 34 * (0.5 + 0.5 * math.sin(t * 1.6 + r * 2.1))
+            for b in range(3):
+                c.drawCircle(-240 + b * 26 + (shift if b == 2 else 0), y, 13, paint(("red", "yellow", "cyan")[r]))
+    elif kind == "magnifier":
+        c.save()
+        c.translate(-70 + 10 * math.sin(t * 1.2), -52)
+        c.drawLine(-50, 50, -130, 150, paint(wood, stroke=20))
+        c.drawCircle(0, 0, 78, paint("cyan", 70))
+        c.drawCircle(4, 4, 30, paint(INK))            # the eye, magnified
+        c.drawCircle(-8, -8, 11, paint("white"))
+        c.drawCircle(0, 0, 78, paint(brass, stroke=14))
+        c.restore()
+    elif kind == "chess":
+        rrect(c, -290, 120, 200, 50, 8, wood)
+        for i in range(4):
+            c.drawRect(skia.Rect.MakeXYWH(-282 + i * 46, 126, 46, 20), paint("white" if i % 2 else INK))
+        slide = 46 * (0.5 + 0.5 * math.sin(t * 1.1))
+        for x, col, king in ((-260, "white", False), (-168 - slide, INK, True)):
+            c.drawPath(path([(x - 16, 126), (x + 16, 126), (x + 9, 86), (x - 9, 86)]), paint(col))
+            c.drawCircle(x, 76, 14, paint(col))
+            if king:
+                c.drawLine(x, 52, x, 66, paint(col, stroke=6))
+                c.drawLine(x - 7, 58, x + 7, 58, paint(col, stroke=6))
+    elif kind == "notebook":
+        c.save()
+        c.translate(-170, 70)
+        c.rotate(-10)
+        rrect(c, -75, -95, 150, 190, 10, wood)
+        rrect(c, -62, -80, 124, 162, 4, "white")
+        n_lines = 1 + int(t * 1.2) % 5
+        for i in range(n_lines):
+            w = 96 if i < n_lines - 1 else 96 * ((t * 1.2) % 1)
+            c.drawLine(-50, -58 + i * 28, -50 + w, -58 + i * 28, paint(navy, stroke=5))
+        c.restore()
+        px, py = -215 + 96 * ((t * 1.2) % 1), 20 + 28 * (int(t * 1.2) % 5)
+        c.drawLine(px, py, px + 50, py - 70, paint("yellow", stroke=12))
+        c.drawLine(px, py, px + 7, py - 10, paint(INK, stroke=12))
+    elif kind == "flask":
+        fl = path([(-205, -20), (-165, -20), (-165, 50), (-110, 165), (-260, 165), (-205, 50)])
+        c.drawPath(fl, paint("white", 70))
+        c.drawPath(path([(-190, 80), (-180, 80), (-118, 160), (-252, 160)]), paint("green"))
+        for i in range(4):
+            yy = 150 - ((t * 60 + i * 37) % 150)
+            c.drawCircle(-185 + 14 * math.sin(i * 2 + t * 2), yy, 6 + i % 3 * 2, paint("green", 200))
+        c.drawPath(fl, paint("white", 230, stroke=8))
+    elif kind == "cube":
+        cols = ("red", "yellow", "blue", "green", "orange", "white")
+        step = int(t * 1.3)
+        c.save()
+        c.translate(-175, 60)
+        c.rotate(8 * math.sin(t * 1.3))
+        rrect(c, -78, -78, 156, 156, 14, INK)
+        for r in range(3):
+            for q in range(3):
+                rrect(c, -70 + q * 48, -70 + r * 48, 44, 44, 8, cols[(r * 3 + q + (step if r == step % 3 else 0)) % 6])
+        c.restore()
+
+
+def p_mascot(c, t, p, talk=0.0, look=0.0, mood="smirk", wave=False, hop=0.0, activity=None, **_):
     """Mr. Shorts: a small round owl with big glasses, a raised eyebrow and red shorts.
     talk 0..1 opens the beak, look -1..1 moves the pupils, hop 0..1 lifts him off the ground."""
     body_c, wing_c, beak_c = (246, 240, 228), (124, 92, 214), (255, 150, 60)
@@ -867,6 +983,8 @@ def p_mascot(c, t, p, talk=0.0, look=0.0, mood="smirk", wave=False, hop=0.0, **_
         sm.quadTo(26, 44, 40, 28)
         c.drawPath(sm, paint(INK, stroke=6))
     c.restore()
+    if activity:
+        _activity(c, t, activity)
 
 # ---------------- infographic props (text-led beats) ----------------
 

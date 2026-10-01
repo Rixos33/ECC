@@ -451,5 +451,8 @@
   "next": "05",
   "question": "Why would a shop sell something it hopes nobody buys?",
   "label": "USELESS OPTION?"
+ },
+ "mascot": {
+  "activity": "telescope"
  }
 }

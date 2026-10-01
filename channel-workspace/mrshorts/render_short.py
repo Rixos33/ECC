@@ -18,7 +18,8 @@ W, H, FPS = 1080, 1920, 30
 VIS_CY = 760        # visual focus (above captions, clear of the Shorts UI)
 CAP_Y = 1330        # caption baseline block
 SAFE_W = 800        # caption width: clear of the Shorts action buttons on the right
-PUNCH = 0.22        # hard cut + punch-in duration (s)
+XFADE = 0.5         # cross-dissolve between shots (s)
+MIN_SHOT = 2.4      # shots shorter than this are merged into the previous one (s)
 PALETTES = {  # bg top, bg bottom, accent: vivid duotone gradients
     "violet": ((30, 14, 70), (110, 50, 170), "yellow"),
     "blue": ((10, 30, 90), (40, 110, 200), "cyan"),
@@ -299,7 +300,7 @@ def fit_scene(props, cam=None):
         return 1.0, 0.0, 0.0
     bx0, bx1, by0, by1 = min(xs), max(xs), min(ys), max(ys)
     x0, y0, x1, y1 = FIT_BOX
-    cam_max = max((cam or {}).get("zoom", (1.0, 1.1))) * 1.07  # end of push-in + punch
+    cam_max = max((cam or {}).get("zoom", (1.0, 1.1)))  # end of the push-in
     z = min((x1 - x0) / max(1, bx1 - bx0), (y1 - y0) / max(1, by1 - by0)) / cam_max
     z = max(1.0 / cam_max, min(z, 1.6))
     # move the content centre to the box centre (in pre-zoom coordinates)
@@ -314,8 +315,6 @@ def camera(tl, dur, cam, fit, punch):
     z0, z1 = cam.get("zoom", (1.0, 1.1))
     k = ease_io(tl / max(dur, 0.1))
     z = z0 + (z1 - z0) * k
-    if punch:  # hard cut lands slightly zoomed in and settles
-        z *= 1 + 0.07 * (1 - ease_io(tl / PUNCH))
     pan = cam.get("pan", (0, 0))
     return z * fit[0], pan[0] * k, pan[1] * k
 
@@ -550,7 +549,7 @@ def chunk_words(words, gap=0.2):
 def draw_captions(c, chunks, t, accent):
     active = chunks[0] if chunks else None  # frame 0 already shows the first caption
     for ch in chunks:
-        if ch[0][1] - 0.05 <= t:
+        if ch[0][1] - 0.02 <= t:
             active = ch
     if not active or t > active[-1][1] + active[-1][2] + 0.5:
         return
@@ -558,14 +557,18 @@ def draw_captions(c, chunks, t, accent):
     size = CAP_SIZE
     while size > CAP_MIN and art.measure(" ".join(labels), size) + size * 0.22 * (len(labels) - 1) > SAFE_W:
         size -= 2
-    pop = ease_out_back((t - active[0][1] + 0.05) / 0.16)
+    pop = ease_out_back((t - active[0][1] + 0.02) / 0.16)
     size *= 0.88 + 0.12 * pop
     space = art.measure(" ", size) + size * 0.22  # room for the stroke and the enlarged current word
     widths = [art.measure(lb, size) for lb in labels]
     x = W / 2 - (sum(widths) + space * (len(labels) - 1)) / 2
-    for (w, s, d), lb, wd in zip(active, labels, widths):
-        cur = s - 0.03 <= t < s + max(d, 0.12) + 0.04
-        color = accent if cur else ("white" if s <= t else (215, 215, 225))
+    first = active is chunks[0]
+    for n, ((w, s, d), lb, wd) in enumerate(zip(active, labels, widths)):
+        if s - 0.02 > t and not (first and n == 0):
+            x += wd + space  # not spoken yet: keep its slot so the line doesn't jump, but don't show it
+            continue
+        cur = s - 0.02 <= t < s + max(d, 0.12) + 0.04
+        color = accent if cur else "white"
         fs = size * (1.05 if cur else 1)
         f = skia.Font(art.typeface(lb), fs)
         lx = x + wd / 2 - f.measureText(lb) / 2
@@ -615,6 +618,26 @@ def display_words(text, ws):
     shown = text.split()
     if not ws:
         return []
+    # the spoken text differs slightly (a `say` respelling): match the words that agree and
+    # interpolate the rest between their neighbours
+    import difflib
+    a, b = [_norm(w) for w in shown], [_norm(w[0]) for w in ws]
+    times = [None] * len(shown)
+    for blk in difflib.SequenceMatcher(a=a, b=b, autojunk=False).get_matching_blocks():
+        for k in range(blk.size):
+            times[blk.a + k] = (ws[blk.b + k][1], ws[blk.b + k][2])
+    if sum(x is not None for x in times) >= 0.6 * len(shown):
+        t_end = ws[-1][1] + ws[-1][2]
+        known = [(-1, ws[0][1], 0.0)] + [(i, x[0], x[1]) for i, x in enumerate(times) if x] + [(len(shown), t_end, 0.0)]
+        out = []
+        for (i0, s0, d0), (i1, s1, _) in zip(known, known[1:]):
+            if i0 >= 0:
+                out.append((shown[i0], s0, d0))
+            gap = i1 - i0 - 1
+            for g in range(gap):  # spread unmatched words across the gap
+                lo = s0 + d0
+                out.append((shown[i0 + 1 + g], lo + (s1 - lo) * g / gap, (s1 - lo) / gap))
+        return out
     t0, t1 = ws[0][1], ws[-1][1] + ws[-1][2]
     total = sum(len(w) + 1 for w in shown)
     out, t = [], t0
@@ -650,6 +673,9 @@ def validate(spec, path):
     lines = spec.get("lines") or []
     if not lines:
         raise RenderError(f"{path}: no lines")
+    act = (spec.get("mascot") or {}).get("activity")
+    if act is not None and act not in art.ACTIVITIES:
+        raise RenderError(f"{path}: mascot.activity must be one of {', '.join(art.ACTIVITIES)}")
     teaser = spec.get("teaser")
     if teaser is not None and not (isinstance(teaser, dict) and str(teaser.get("question", "")).strip()):
         raise RenderError(f"{path}: teaser must be an object with a non-empty 'question'")
@@ -686,7 +712,7 @@ def render(spec_path, out_dir, args):
             ws = display_words(ln["text"], ws)
             last = i == len(lines) - 1
             reveal = bool(ln.get("sfx"))
-            pause = ln.get("pause", 0.1 if last else (0.45 if reveal else (0.4 if i == 0 or ln["text"].rstrip().endswith("?") else 0.2)))
+            pause = ln.get("pause", 0.25 if last else (0.7 if reveal else (0.6 if i == 0 or ln["text"].rstrip().endswith("?") else 0.4)))
             dur = len(samples) / audio.SR + pause
             # split the line into shots that cut on spoken words
             shots, widx = line_shots(ln), 0
@@ -697,6 +723,12 @@ def render(spec_path, out_dir, args):
                     widx = j
                 starts.append((t + max(0.0, ws[j][1] - 0.06) if j is not None and k else
                                (t if k == 0 else starts[-1][0] + 1.5), widx))
+            keep = [0]  # drop cuts that would leave a shot shorter than MIN_SHOT
+            for k in range(1, len(shots)):
+                nxt_start = starts[k + 1][0] if k + 1 < len(shots) else t + dur
+                if starts[k][0] - starts[keep[-1]][0] >= MIN_SHOT and nxt_start - starts[k][0] >= MIN_SHOT * 0.6:
+                    keep.append(k)
+            shots, starts = [shots[k] for k in keep], [starts[k] for k in keep]
             for k, sh in enumerate(shots):
                 st, wi = starts[k]
                 end = starts[k + 1][0] if k + 1 < len(shots) else t + dur
@@ -726,18 +758,19 @@ def render(spec_path, out_dir, args):
                     cues.append((max(0.0, t - 1.1), "riser"))  # build-up into the reveal
             t += dur
         outro_at, talk_env, chime_times = None, None, [at for at, kind in cues if kind == "chime"]
+        activity = (spec.get("mascot") or {}).get("activity") or art.ACTIVITIES[sum(map(ord, spec["id"])) % len(art.ACTIVITIES)]
         teaser = spec.get("teaser")
         if teaser and not args.no_mascot:
             gap = 0.3  # breath between the narrator's last line and the mascot
             scenes[-1]["dur"] += gap
             voice.append(np.zeros(int(gap * audio.SR)))
             t += gap
-            cta = teaser.get("cta", "The answer is in the next Short!")
+            cta = teaser.get("cta", "Think it over. The answer is in the next Short.")
             samples, ws = synth(f"{teaser['question']} {cta}", args, os.path.join(tmp, "mascot"), args.cache,
                                 voice=args.mascot_voice, rate=args.mascot_rate, pitch=args.mascot_pitch)
             ws = display_words(f"{teaser['question']} {cta}", ws)
             dur = len(samples) / audio.SR + 0.35
-            n_q = len(teaser["question"].split())
+            n_q = len(teaser["question"].split()) + 3  # cut to the wave on "The answer..."
             cta_at = t + (ws[n_q][1] - 0.08 if n_q < len(ws) else dur * 0.7)
             frame = int(audio.SR / FPS)
             env_ = np.array([np.sqrt(np.mean(samples[i:i + frame] ** 2)) for i in range(0, len(samples), frame)])
@@ -756,6 +789,9 @@ def render(spec_path, out_dir, args):
             outro_at = t
             t += dur
         total = t
+        os.makedirs(os.path.join(out_dir, "timing"), exist_ok=True)  # caption timeline, used by qa.py's sync check
+        with open(os.path.join(out_dir, "timing", spec["id"] + ".json"), "w") as fh:
+            json.dump([[w, round(a, 3), round(d, 3)] for w, a, d in words], fh)
         chunks = chunk_words(words)
 
         mix = audio.mixdown(np.concatenate(voice), total, cues, spec.get("mood", "wonder"),
@@ -791,28 +827,43 @@ def render(spec_path, out_dir, args):
                 sc = scenes[idx]
                 tl = ft - sc["start"]
                 bg.draw(c, ft)
-                if sc.get("tint"):
-                    c.drawRect(skia.Rect.MakeWH(W, H), art.paint(sc["tint"], 120))
-                # hard cuts with a punch-in; the very first scene is fully built on frame 0 (loop seam)
+                # soft cross-dissolve from the previous shot (the very first scene is fully built on frame 0)
                 tl_draw = tl + (0.6 if idx == 0 else 0)
+                k = ease_io(tl / XFADE) if idx and tl < XFADE else 1.0
+                pv = scenes[idx - 1] if k < 1 else None
                 if sc.get("outro"):
                     k_env = int((ft - outro_at) * FPS)
                     talk = float(talk_env[k_env]) if 0 <= k_env < len(talk_env) else 0.0
                     for pr in sc["props"]:
                         if pr["prop"] == "mascot":
                             pr["talk"] = talk
-                dock = dock_span(sc, tl_draw, idx > 0)
-                bg.draw_ground(c, ft, ground_y(sc["props"], tl_draw, sc["dur"], sc["cam"], sc["fit"], idx > 0), dock)
-                draw_scene(c, sc["props"], tl_draw, sc["dur"], sc["cam"], sc["fit"], punch=idx > 0)
+                for scn, alpha in ((pv, 1 - k), (sc, k)):
+                    if scn is not None and scn.get("tint"):
+                        c.drawRect(skia.Rect.MakeWH(W, H), art.paint(scn["tint"], int(120 * alpha)))
+                gy = ground_y(sc["props"], tl_draw, sc["dur"], sc["cam"], sc["fit"], idx > 0)
+                if pv is not None:  # the horizon glides between the two shots
+                    gy_prev = ground_y(pv["props"], ft - pv["start"], pv["dur"], pv["cam"], pv["fit"], True)
+                    gy = gy_prev + (gy - gy_prev) * k
+                bg.draw_ground(c, ft, gy, dock_span(sc if k >= 0.5 else pv, tl_draw, idx > 0))
+                if pv is not None:
+                    c.saveLayerAlpha(None, int(255 * (1 - k)))
+                    draw_scene(c, pv["props"], ft - pv["start"], pv["dur"], pv["cam"], pv["fit"], punch=True)
+                    c.restore()
+                    c.saveLayerAlpha(None, int(255 * k))
+                    draw_scene(c, sc["props"], tl_draw, sc["dur"], sc["cam"], sc["fit"], punch=True)
+                    c.restore()
+                else:
+                    draw_scene(c, sc["props"], tl_draw, sc["dur"], sc["cam"], sc["fit"], punch=idx > 0)
                 if teaser and not args.no_mascot and not sc.get("outro"):
-                    # Mr. Shorts watches from the corner (below the captions, clear of the Shorts UI)
+                    # Mr. Shorts sits in the right-hand corner (below the captions, left of the Shorts buttons),
+                    # busy with this video's one activity; he hops on the reveal
                     hop = max((1 - abs((ft - tc) / 0.45 - 0.5) * 2 for tc in chime_times if 0 <= ft - tc <= 0.45),
                               default=0.0)
                     c.save()
-                    c.translate(155, 1492)
+                    c.translate(850, 1492)
                     c.scale(0.62, 0.62)
-                    art.PROPS["mascot"](c, ft, 1.0, look=math.sin(ft * 0.7) + 0.4, hop=hop / 2,
-                                        mood="curious" if hop else "smirk")
+                    art.PROPS["mascot"](c, ft, 1.0, look=-0.7 + 0.3 * math.sin(ft * 0.7), hop=hop / 2,
+                                        mood="curious" if hop else "smirk", activity=activity)
                     c.restore()
                 bg.foreground(c, ft)
                 draw_captions(c, chunks, ft, art.rgb(accent))
@@ -835,12 +886,12 @@ def main():
     ap.add_argument("out", help="output directory")
     ap.add_argument("--tts", choices=["edge", "elevenlabs", "say"], default="edge")
     ap.add_argument("--voice", default=None)
-    ap.add_argument("--rate", default="+8%", help="edge speaking rate")
+    ap.add_argument("--rate", default="-4%", help="edge speaking rate")
     ap.add_argument("--pitch", default="-2Hz", help="edge pitch shift")
     ap.add_argument("--crf", type=int, default=24, help="x264 quality (lower = bigger, sharper)")
     ap.add_argument("--music-db", type=float, default=-19.0, help="music bed peak level before ducking")
-    ap.add_argument("--mascot-voice", default="en-US-AnaNeural", help="voice for the mascot's end question")
-    ap.add_argument("--mascot-rate", default="+12%")
+    ap.add_argument("--mascot-voice", default="en-GB-RyanNeural", help="voice for the mascot's end question")
+    ap.add_argument("--mascot-rate", default="+0%")
     ap.add_argument("--mascot-pitch", default="+0Hz")
     ap.add_argument("--no-mascot", action="store_true", help="skip the mascot and its end question")
     ap.add_argument("--music-file", default=None, help="use this audio file as the music bed instead of the generated one")

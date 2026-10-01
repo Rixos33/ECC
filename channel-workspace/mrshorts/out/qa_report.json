@@ -1,52 +1,53 @@
 [
  {
   "id": "short01_sky_not_violet",
-  "duration": 31.5,
-  "size_mb": 3.52,
-  "lufs": -14.0,
-  "wps": 2.64,
-  "narration_match": 0.975,
-  "first_frame_std": 33.1,
-  "diffs": [
-   "'it hopes' -> 'that helps'"
-  ],
+  "duration": 37.0,
+  "size_mb": 4.51,
+  "lufs": -14.1,
+  "wps": 2.32,
+  "narration_match": 1.0,
+  "caption_sync_ms": 46,
+  "first_frame_std": 33.4,
+  "diffs": [],
   "flags": []
  },
  {
   "id": "short02_cant_tickle_yourself",
-  "duration": 43.9,
-  "size_mb": 4.65,
-  "lufs": -14.0,
-  "wps": 2.73,
+  "duration": 51.5,
+  "size_mb": 5.83,
+  "lufs": -14.1,
+  "wps": 2.39,
   "narration_match": 0.991,
-  "first_frame_std": 35.4,
+  "caption_sync_ms": 37,
+  "first_frame_std": 35.8,
   "diffs": [
-   "'would' -> 'with'"
+   "'add' -> 'at'"
   ],
   "flags": []
  },
  {
   "id": "short03_gps_needs_relativity",
-  "duration": 50.9,
-  "size_mb": 5.44,
+  "duration": 57.8,
+  "size_mb": 6.79,
   "lufs": -14.1,
-  "wps": 2.38,
+  "wps": 2.14,
   "narration_match": 1.0,
-  "first_frame_std": 35.9,
+  "caption_sync_ms": 64,
+  "first_frame_std": 36.8,
   "diffs": [],
   "flags": []
  },
  {
   "id": "short04_shipping_container",
-  "duration": 48.0,
-  "size_mb": 5.74,
+  "duration": 55.5,
+  "size_mb": 7.1,
   "lufs": -14.1,
-  "wps": 2.41,
-  "narration_match": 0.954,
-  "first_frame_std": 43.5,
+  "wps": 2.15,
+  "narration_match": 0.964,
+  "caption_sync_ms": 56,
+  "first_frame_std": 43.7,
   "diffs": [
-   "\"trade's\" -> 'trades'",
-   "'ships' -> 'shifts'",
+   "\"trade's\" -> 'trade'",
    "'sacks' -> 'sax'",
    "\"import's\" -> 'import'",
    "'malcom' -> 'malcolm'"
@@ -55,85 +56,89 @@
  },
  {
   "id": "short05_decoy_effect",
-  "duration": 50.9,
-  "size_mb": 5.66,
+  "duration": 59.3,
+  "size_mb": 6.82,
   "lufs": -14.1,
-  "wps": 2.34,
-  "narration_match": 0.991,
-  "first_frame_std": 64.5,
+  "wps": 2.06,
+  "narration_match": 0.996,
+  "caption_sync_ms": 60,
+  "first_frame_std": 67.7,
   "diffs": [
-   "'did' -> 'it'"
+   "'did' -> ''"
   ],
   "flags": []
  },
  {
   "id": "short06_illusory_truth",
-  "duration": 45.6,
-  "size_mb": 4.89,
-  "lufs": -14.1,
-  "wps": 2.39,
+  "duration": 53.2,
+  "size_mb": 5.98,
+  "lufs": -14.2,
+  "wps": 2.1,
   "narration_match": 0.981,
-  "first_frame_std": 33.7,
+  "caption_sync_ms": 51,
+  "first_frame_std": 35.1,
   "diffs": [
    "'raised' -> 'raise'",
-   "'plain' -> 'play'"
+   "'plain' -> 'plane'"
   ],
   "flags": []
  },
  {
   "id": "short07_anchoring",
-  "duration": 47.1,
-  "size_mb": 6.2,
+  "duration": 55.1,
+  "size_mb": 7.43,
   "lufs": -14.1,
-  "wps": 2.44,
-  "narration_match": 0.986,
-  "first_frame_std": 41.1,
+  "wps": 2.14,
+  "narration_match": 0.987,
+  "caption_sync_ms": 21,
+  "first_frame_std": 41.7,
   "diffs": [
-   "'un' -> 'u n'"
+   "'crossed out' -> 'crossout'"
   ],
   "flags": []
  },
  {
   "id": "short08_bystander_effect",
-  "duration": 48.4,
-  "size_mb": 5.7,
+  "duration": 55.7,
+  "size_mb": 6.99,
   "lufs": -14.0,
-  "wps": 2.42,
-  "narration_match": 0.985,
-  "first_frame_std": 35.2,
+  "wps": 2.16,
+  "narration_match": 0.976,
+  "caption_sync_ms": 44,
+  "first_frame_std": 35.9,
   "diffs": [
-   "'would' -> 'what'",
+   "'before' -> 'afforded in'",
+   "'ended' -> ''",
    "'in' -> ''"
   ],
   "flags": []
  },
  {
   "id": "short09_time_speeds_up_with_age",
-  "duration": 49.5,
-  "size_mb": 5.53,
-  "lufs": -14.0,
-  "wps": 2.44,
-  "narration_match": 0.983,
-  "first_frame_std": 39.9,
-  "diffs": [
-   "'they' -> 'eat it the'"
-  ],
+  "duration": 58.1,
+  "size_mb": 6.8,
+  "lufs": -14.1,
+  "wps": 2.13,
+  "narration_match": 1.0,
+  "caption_sync_ms": 59,
+  "first_frame_std": 40.0,
+  "diffs": [],
   "flags": []
  },
  {
   "id": "short10_phone_slot_machine",
-  "duration": 46.2,
-  "size_mb": 4.74,
+  "duration": 53.6,
+  "size_mb": 5.84,
   "lufs": -14.1,
-  "wps": 2.49,
-  "narration_match": 0.965,
-  "first_frame_std": 29.5,
+  "wps": 2.2,
+  "narration_match": 0.966,
+  "caption_sync_ms": 44,
+  "first_frame_std": 30.5,
   "diffs": [
-   "'the' -> ''",
-   "'likes' -> 'lights'",
-   "'but' -> 'what'",
-   "'pulled' -> 'pull'",
-   "'short' -> ''"
+   "'slot' -> 'slop'",
+   "'pull' -> 'pole'",
+   "'pull' -> 'pole'",
+   "'likes' -> 'lights'"
   ],
   "flags": []
  }

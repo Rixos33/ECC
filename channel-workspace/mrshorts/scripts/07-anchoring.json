@@ -559,5 +559,8 @@
   "next": "02",
   "question": "Go on, try to tickle yourself. Why doesn't it work?",
   "label": "TICKLE YOURSELF?"
+ },
+ "mascot": {
+  "activity": "chess"
  }
 }

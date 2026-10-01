@@ -548,5 +548,8 @@
   "next": "03",
   "question": "What does the map on your phone have to do with Einstein?",
   "label": "MAPS + EINSTEIN?"
+ },
+ "mascot": {
+  "activity": "abacus"
  }
 }

@@ -558,5 +558,8 @@
   "next": "07",
   "question": "Can a random number change your answer to a serious question?",
   "label": "RANDOM NUMBER?"
+ },
+ "mascot": {
+  "activity": "puzzle"
  }
 }

@@ -554,5 +554,8 @@
   "next": "06",
   "question": "If you hear a lie often enough, does it start to feel true?",
   "label": "LIE = TRUE?"
+ },
+ "mascot": {
+  "activity": "globe"
  }
 }
