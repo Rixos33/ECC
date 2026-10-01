@@ -570,5 +570,10 @@
    "note": "Fischer et al. 2011 meta-analysis, Psychological Bulletin 137(4):517-537 (overall effect g = -0.35, attenuated in dangerous situations)."
   }
  ],
- "caveats": "Both findings can be true: the lab effect is about each individual's likelihood of acting, while the CCTV study measures whether anyone in the group acts. The CCTV data cover public conflicts (arguments, fights), not every kind of emergency (e.g., medical collapse). The paper was published online in 2019, print issue dated 2020. Darley & Latané's '85% vs 31%' is 'before the end of the fit'; by the end of the session most participants in all conditions eventually responded (62% in six-person groups)."
+ "caveats": "Both findings can be true: the lab effect is about each individual's likelihood of acting, while the CCTV study measures whether anyone in the group acts. The CCTV data cover public conflicts (arguments, fights), not every kind of emergency (e.g., medical collapse). The paper was published online in 2019, print issue dated 2020. Darley & Latané's '85% vs 31%' is 'before the end of the fit'; by the end of the session most participants in all conditions eventually responded (62% in six-person groups).",
+ "teaser": {
+  "next": "10",
+  "question": "What do you and a pigeon in a lab have in common?",
+  "label": "YOU + A PIGEON?"
+ }
 }

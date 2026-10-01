@@ -803,6 +803,71 @@ def p_package(c, t, p, color="orange", label="", **_):
         rrect(c, 40, -10, 150, 64, 14, "white")
         text(c, label, 115, 22, fit_size(label, 40, 130), INK)
 
+
+def p_mascot(c, t, p, talk=0.0, look=0.0, mood="smirk", wave=False, hop=0.0, **_):
+    """Mr. Shorts: a small round owl with big glasses, a raised eyebrow and red shorts.
+    talk 0..1 opens the beak, look -1..1 moves the pupils, hop 0..1 lifts him off the ground."""
+    body_c, wing_c, beak_c = (246, 240, 228), (124, 92, 214), (255, 150, 60)
+    lift = -70 * math.sin(math.pi * max(0.0, min(1.0, hop)))
+    c.drawOval(skia.Rect.MakeXYWH(-95 + abs(lift) * 0.2, 168, 190 - abs(lift) * 0.4, 28), paint(INK, 70))
+    c.save()
+    c.translate(0, lift)
+    sq = 1 + 0.02 * math.sin(t * 2.6)  # breathing
+    c.scale(1 / sq, sq)
+    for sx in (-1, 1):  # feet
+        c.drawOval(skia.Rect.MakeXYWH(sx * 48 - 30, 150, 60, 26), paint(beak_c))
+    for sx in (-1, 1):  # ear tufts
+        c.drawPath(path([(sx * 40, -150), (sx * 112, -205), (sx * 104, -110)]), paint(wing_c))
+    body = skia.Path()
+    body.addOval(skia.Rect.MakeXYWH(-125, -160, 250, 320))
+    c.drawPath(body, paint(shade(body_c, -0.2)))
+    c.save()
+    c.clipPath(body, doAntiAlias=True)
+    c.drawOval(skia.Rect.MakeXYWH(-135, -172, 250, 320), paint(body_c))
+    c.drawRect(skia.Rect.MakeXYWH(-140, 62, 280, 120), paint("red"))          # the shorts
+    c.drawRect(skia.Rect.MakeXYWH(-140, 62, 280, 18), paint(shade(PAL["red"], -0.3)))  # waistband
+    c.drawLine(0, 78, 0, 170, paint(shade(PAL["red"], -0.3), stroke=6))
+    c.drawOval(skia.Rect.MakeXYWH(40, -150, 160, 330), paint(INK, 22))       # soft side shading
+    c.restore()
+    for sx in (-1, 1):  # wings; the right one waves when asked
+        c.save()
+        c.translate(sx * 118, -10)
+        ang = sx * 14 + (sx * 4 * math.sin(t * 2.2))
+        if wave and sx > 0:
+            ang = -152 + 18 * math.sin(t * 9)
+        c.rotate(ang)
+        c.drawOval(skia.Rect.MakeXYWH(-26, -8, 52, 118), paint(wing_c))
+        c.drawOval(skia.Rect.MakeXYWH(-18, -2, 34, 96), paint(shade(wing_c, 0.18)))
+        c.restore()
+    # eyes behind big round glasses
+    blink = abs(((t + 0.4) % 3.4) - 0.1) < 0.07
+    for sx in (-1, 1):
+        ex = sx * 56
+        c.drawCircle(ex, -52, 50, paint("white"))
+        if blink:
+            c.drawLine(ex - 26, -50, ex + 26, -50, paint(INK, stroke=8))
+        else:
+            px = ex + 14 * max(-1.0, min(1.0, look))
+            c.drawCircle(px, -48, 22, paint(INK))
+            c.drawCircle(px - 8, -57, 8, paint("white"))
+        c.drawCircle(ex, -52, 52, paint(INK, stroke=10))
+    c.drawLine(-8, -56, 8, -56, paint(INK, stroke=10))                       # bridge
+    # eyebrows: the right one is cocked, which is where the wit lives
+    lift_b = {"smirk": 16, "curious": 22, "happy": 6}.get(mood, 12)
+    c.drawLine(-88, -120, -30, -116, paint(wing_c, stroke=11))
+    c.drawLine(30, -118 - lift_b * 0.4, 90, -124 - lift_b, paint(wing_c, stroke=11))
+    # beak opens with speech
+    op = 16 * max(0.0, min(1.0, talk))
+    c.drawPath(path([(-22, 6 - op * 0.3), (22, 6 - op * 0.3), (0, 26 - op * 0.3)]), paint(beak_c))
+    if op > 1:
+        c.drawPath(path([(-16, 12 + op * 0.4), (16, 12 + op * 0.4), (0, 22 + op)]), paint(shade(beak_c, -0.25)))
+    elif mood in ("smirk", "happy"):
+        sm = skia.Path()
+        sm.moveTo(6, 34)
+        sm.quadTo(26, 44, 40, 28)
+        c.drawPath(sm, paint(INK, stroke=6))
+    c.restore()
+
 # ---------------- infographic props (text-led beats) ----------------
 
 def p_big(c, t, p, big="?", sub="", color=None, accent="yellow", _zs=1.0, **_):

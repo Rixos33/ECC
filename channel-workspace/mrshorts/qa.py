@@ -7,7 +7,7 @@ loudness, length, file size, and first-frame check.
 import argparse, difflib, glob, json, os, re, subprocess
 import numpy as np
 
-TARGETS = {"duration": (20, 45), "wps": (2.3, 3.4), "lufs": (-15.5, -12.5), "size_mb": (0, 8), "max_beat": 7.5}
+TARGETS = {"duration": (20, 55), "wps": (2.3, 3.4), "lufs": (-15.5, -12.5), "size_mb": (0, 8), "max_beat": 7.5}
 
 
 UNITS = {w: i for i, w in enumerate("zero one two three four five six seven eight nine ten eleven twelve thirteen "
@@ -117,11 +117,13 @@ def main():
                                   "-f", "f32le", "-"], capture_output=True, check=True).stdout
             segs, _ = model.transcribe(np.frombuffer(pcm, np.float32), language="en", beam_size=5)
             heard = norm(" ".join(s.text for s in segs))
-            said = norm(" ".join(ln["text"] for ln in spec["lines"]))
+            teaser = spec.get("teaser") or {}
+            outro = f"{teaser['question']} {teaser.get('cta', 'The answer is in the next Short!')}" if teaser else ""
+            said = norm(" ".join([ln["text"] for ln in spec["lines"]] + [outro]))
             sm = difflib.SequenceMatcher(a=said, b=heard, autojunk=False)
             diffs = [f"{' '.join(said[i1:i2])!r} -> {' '.join(heard[j1:j2])!r}"
                      for op, i1, i2, j1, j2 in sm.get_opcodes() if op != "equal"]
-            wps = sum(len(ln["text"].split()) for ln in spec["lines"]) / dur
+            wps = (sum(len(ln["text"].split()) for ln in spec["lines"]) + len(outro.split())) / dur
             loud = lufs(video)
             ff = first_frame_std(video)
             flags = []

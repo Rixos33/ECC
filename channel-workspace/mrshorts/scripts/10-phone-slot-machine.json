@@ -549,5 +549,10 @@
    "note": "Panova & Carbonell 2018, Journal of Behavioral Addictions 7(2):252-259."
   }
  ],
- "caveats": "Line 3 'kept them pecking fast and steadily' reflects standard VR-schedule findings; avoid stronger claims like 'most addictive schedule'. The slot-machine analogy for phones is a design critique (Brichter, Tristan Harris) and a plausible mechanism, not a proven equivalence; Lindström 2021 shows reward-learning patterns in posting, not addiction. Verify the Brichter quote against the Guardian article itself (Wikipedia used as pointer). The 1957 visual is the book's publication year; the research ran through the 1950s. Round-4 edit: quote marks removed from 'problematic use' in the narration text (caption artefact); 'say' respells Ferster as FUR-stir. Round-5 edit: narration credits 'Skinner's lab' (Ferster & Skinner 1957, Schedules of Reinforcement) instead of naming Ferster, which TTS garbled."
+ "caveats": "Line 3 'kept them pecking fast and steadily' reflects standard VR-schedule findings; avoid stronger claims like 'most addictive schedule'. The slot-machine analogy for phones is a design critique (Brichter, Tristan Harris) and a plausible mechanism, not a proven equivalence; Lindström 2021 shows reward-learning patterns in posting, not addiction. Verify the Brichter quote against the Guardian article itself (Wikipedia used as pointer). The 1957 visual is the book's publication year; the research ran through the 1950s. Round-4 edit: quote marks removed from 'problematic use' in the narration text (caption artefact); 'say' respells Ferster as FUR-stir. Round-5 edit: narration credits 'Skinner's lab' (Ferster & Skinner 1957, Schedules of Reinforcement) instead of naming Ferster, which TTS garbled.",
+ "teaser": {
+  "next": "09",
+  "question": "Do the years really go faster as you get older?",
+  "label": "FASTER YEARS?"
+ }
 }

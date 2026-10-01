@@ -543,5 +543,10 @@
    "note": "Huber, Payne & Puto 2014 'Let's Be Honest About the Attraction Effect' argue the effect is real but context-dependent."
   }
  ],
- "caveats": "The Economist numbers come only from Ariely's book/talk (ch. 1 'The Truth About Relativity'); I verified them through secondary summaries, not the book text. The second group's size is not clearly reported, so narration says 'thirty-two percent'. Ariely has had two papers retracted over data problems (2021 PNAS; 2026 Psychological Science). Nothing specific is alleged about this example, but a fact-checker may prefer to drop his name and say 'a famous classroom demo'. Line 5 'the effect often vanished' is fair per Frederick et al. and Yang & Lynn; Huber et al. dispute the practical conclusion. Round-3 edit: line 1 no longer names Ariely (per the note above); it now says 'MIT students were offered...'. The numbers are unchanged and still come from his book/talk. Line 4's bars show 11 reliable effects out of 91 attempts to scale. Final edit: line 1 framed as 'a famous classroom demo' (book/talk anecdote, not a peer-reviewed study)."
+ "caveats": "The Economist numbers come only from Ariely's book/talk (ch. 1 'The Truth About Relativity'); I verified them through secondary summaries, not the book text. The second group's size is not clearly reported, so narration says 'thirty-two percent'. Ariely has had two papers retracted over data problems (2021 PNAS; 2026 Psychological Science). Nothing specific is alleged about this example, but a fact-checker may prefer to drop his name and say 'a famous classroom demo'. Line 5 'the effect often vanished' is fair per Frederick et al. and Yang & Lynn; Huber et al. dispute the practical conclusion. Round-3 edit: line 1 no longer names Ariely (per the note above); it now says 'MIT students were offered...'. The numbers are unchanged and still come from his book/talk. Line 4's bars show 11 reliable effects out of 91 attempts to scale. Final edit: line 1 framed as 'a famous classroom demo' (book/talk anecdote, not a peer-reviewed study).",
+ "teaser": {
+  "next": "03",
+  "question": "What does the map on your phone have to do with Einstein?",
+  "label": "MAPS + EINSTEIN?"
+ }
 }

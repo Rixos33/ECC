@@ -549,5 +549,10 @@
    "note": "Background/pointer from NIST."
   }
  ],
- "caveats": "The '10 km per day' figure is the standard popular estimate (Pogge); physicists note the real failure mode is more complex, since receivers also solve for their own clock offset. Narration says 'roughly' and 'position errors would grow', which is defensible. Satellite altitude is 20,200 km above the surface; rounded to 20,000."
+ "caveats": "The '10 km per day' figure is the standard popular estimate (Pogge); physicists note the real failure mode is more complex, since receivers also solve for their own clock offset. Narration says 'roughly' and 'position errors would grow', which is defensible. Satellite altitude is 20,200 km above the surface; rounded to 20,000.",
+ "teaser": {
+  "next": "06",
+  "question": "If you hear a lie often enough, does it start to feel true?",
+  "label": "LIE = TRUE?"
+ }
 }

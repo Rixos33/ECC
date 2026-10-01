@@ -13,7 +13,7 @@ Turns a script JSON into a finished vertical Short (1080x1920, 30 fps, H.264/AAC
     python3 -m venv .venv && .venv/bin/pip install -r requirements.txt   # needs ffmpeg on PATH
     .venv/bin/python render_short.py "scripts/*.json" out/
 
-Options: `--voice en-US-BrianMultilingualNeural`, `--rate +18%`, `--pitch -2Hz`, `--crf 24`, `--music-db -19`,
+Options: `--voice en-US-BrianMultilingualNeural`, `--rate +8%`, `--pitch -2Hz`, `--crf 24`, `--music-db -19`,
 `--tts elevenlabs --voice <voice_id>` (needs `ELEVENLABS_API_KEY`), `--tts say`. TTS results are cached in `.tts-cache/`.
 
 ## Script schema
@@ -42,6 +42,8 @@ Options: `--voice en-US-BrianMultilingualNeural`, `--rate +18%`, `--pitch -2Hz`,
       "sfx": "chime", "sfx_at": 0.5                                 // optional extra cue: whoosh|pop|chime
     }
   ],
+  "teaser": {"next": "05", "question": "Why would a shop sell something it hopes nobody buys?",
+             "label": "USELESS OPTION?"},     // Mr. Shorts asks this at the end; it is the NEXT Short's hook
   "sources": [{"claim": "", "url": "", "note": ""}],
   "caveats": ""
 }
@@ -111,6 +113,14 @@ without rendering using `.venv/bin/python lint_scenes.py "scripts/*.json"`.
 | `wave` | color (sea surface) |
 
 Colours are palette names (`white yellow orange red pink purple violet blue cyan teal green grey navy brown skin`) or `#rrggbb`.
+
+## The mascot (Mr. Shorts)
+
+A small owl in glasses and red shorts (`mascot` prop). When a script has a `teaser`, he watches from the bottom-left
+corner for the whole Short (hopping on the reveal chime), then steps forward at the end, asks the teaser question in
+his own voice (`--mascot-voice`, default `en-US-AnaNeural`) with a moving beak, and says the answer is in the next
+Short. The teaser must be the hook of the Short published next, so keep `teaser.next` in step with the publishing
+order. `--no-mascot` renders without him (and keeps the seamless loop).
 
 ## Retention rules baked into the renderer
 

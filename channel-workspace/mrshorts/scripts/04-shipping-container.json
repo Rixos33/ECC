@@ -553,5 +553,10 @@
    "note": "Bernhofen, El-Sahli & Kneller 2016, J. International Economics 98:36-50. Cumulative effect for North-North trade described as much larger than FTAs or GATT."
   }
  ],
- "caveats": "The 15.8 cents vs $5.83 figures are McLean's company estimate as reported by Levinson, not an independent audit; narration attributes them to 'McLean's own figures'. Line 6 is one econometric study and applies to industrialized (North-North) trade 1962-1990; wording limited to 'rich countries'. Round 3 shows the cost drop as a large '$5.83' coin and a small '16¢' coin; coin sizes are illustrative, not to scale (the real ratio is 15.8/583, ~2.7%). 'Trucking boss' = McLean owned a large trucking company. Round-4 edit: the cost drop is now shown as two bars drawn to scale (by box = 2.7% of by hand); the 'containers vs trade deals' bars are illustrative of 'more than', not the paper's coefficients."
+ "caveats": "The 15.8 cents vs $5.83 figures are McLean's company estimate as reported by Levinson, not an independent audit; narration attributes them to 'McLean's own figures'. Line 6 is one econometric study and applies to industrialized (North-North) trade 1962-1990; wording limited to 'rich countries'. Round 3 shows the cost drop as a large '$5.83' coin and a small '16¢' coin; coin sizes are illustrative, not to scale (the real ratio is 15.8/583, ~2.7%). 'Trucking boss' = McLean owned a large trucking company. Round-4 edit: the cost drop is now shown as two bars drawn to scale (by box = 2.7% of by hand); the 'containers vs trade deals' bars are illustrative of 'more than', not the paper's coefficients.",
+ "teaser": {
+  "next": "07",
+  "question": "Can a random number change your answer to a serious question?",
+  "label": "RANDOM NUMBER?"
+ }
 }

@@ -73,3 +73,13 @@ Rules below were checked against current guidance (see Sources). Re-check the di
 - Shorts hashtag display, first 3 above the title: hashtagtools.io/blog/youtube-shorts-hashtags-title-vs-description-2026
 - Feed title truncation, ~40-50 characters: vidiq.com/blog/post/youtube-shorts-titles ; hashtagtools.io Shorts character limits 2026.
 - Viewed vs swiped away metric: YouTube Community video, support.google.com/youtube/community-video/273390203 ; buffer.com Shorts analytics guide.
+
+## Mascot teaser chain (publish in this order)
+
+Each Short ends with Mr. Shorts asking the question that the NEXT Short answers, so the order matters:
+
+01 sky -> 05 decoy -> 03 GPS -> 06 illusory truth -> 04 shipping container -> 07 anchoring -> 02 tickle -> 08 bystander -> 10 phone -> 09 time
+
+09 teases "Why do planes fly a curve when a straight line looks shorter?" (topic 15, curved flight routes), which
+is not made yet: render it before publishing 09, or change 09's `teaser`. If you reorder the schedule, update each
+script's `teaser` and re-render. Put the next Short's link in the pinned comment once it is live.

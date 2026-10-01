@@ -554,5 +554,10 @@
    "note": "Klein et al. 2014, Many Labs 1, Social Psychology 45(3):142-152. All four anchoring items replicated with large effects, larger than the original estimate."
   }
  ],
- "caveats": "Many Labs tested the Jacowitz & Kahneman (1995) version, where participants are given an explicit high/low number, not a spun wheel; narration says 'found strong anchoring' generally. Kahneman's later book says the wheel was rigged to stop at 10 or 65, while the 1974 paper only says it was spun in front of subjects; narration avoids the 'rigged' detail. Anchors from truly incidental numbers (not posed as a comparison) replicate less reliably. Line 6 is an illustration of the logic, not a claim that it's been proven in stores. Today all African states are UN members, so avoid implying the question has a tricky answer. Round-4 edit: quote marks around 'was' removed from the narration text (caption artefact). Round-5 visual: the 2014 replication is the Many Labs project (Klein et al. 2014, 36 samples); the 'MANY LABS' headline names it."
+ "caveats": "Many Labs tested the Jacowitz & Kahneman (1995) version, where participants are given an explicit high/low number, not a spun wheel; narration says 'found strong anchoring' generally. Kahneman's later book says the wheel was rigged to stop at 10 or 65, while the 1974 paper only says it was spun in front of subjects; narration avoids the 'rigged' detail. Anchors from truly incidental numbers (not posed as a comparison) replicate less reliably. Line 6 is an illustration of the logic, not a claim that it's been proven in stores. Today all African states are UN members, so avoid implying the question has a tricky answer. Round-4 edit: quote marks around 'was' removed from the narration text (caption artefact). Round-5 visual: the 2014 replication is the Many Labs project (Klein et al. 2014, 36 samples); the 'MANY LABS' headline names it.",
+ "teaser": {
+  "next": "02",
+  "question": "Go on, try to tickle yourself. Why doesn't it work?",
+  "label": "TICKLE YOURSELF?"
+ }
 }

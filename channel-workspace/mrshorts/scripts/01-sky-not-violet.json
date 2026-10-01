@@ -446,5 +446,10 @@
    "note": "UC Riverside physics FAQ"
   }
  ],
- "caveats": "Round-2 edit: removed the ozone-absorption claim (ozone mainly absorbs UV and orange/red in the Chappuis band, not violet). The sky's spectrum does contain violet; cone response makes the mix look pale blue. Round-3 edit: the payoff line now credits both causes ('because of sunlight, and what your eyes can't do'), matching line 3 and the UCR FAQ. Round-5 edit: the 'violet vs blue in sunlight' bars (line 3) are illustrative of the solar spectrum's lower violet irradiance, not measured values."
+ "caveats": "Round-2 edit: removed the ozone-absorption claim (ozone mainly absorbs UV and orange/red in the Chappuis band, not violet). The sky's spectrum does contain violet; cone response makes the mix look pale blue. Round-3 edit: the payoff line now credits both causes ('because of sunlight, and what your eyes can't do'), matching line 3 and the UCR FAQ. Round-5 edit: the 'violet vs blue in sunlight' bars (line 3) are illustrative of the solar spectrum's lower violet irradiance, not measured values.",
+ "teaser": {
+  "next": "05",
+  "question": "Why would a shop sell something it hopes nobody buys?",
+  "label": "USELESS OPTION?"
+ }
 }

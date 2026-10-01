@@ -94,8 +94,11 @@ def read_wav(path):
         return np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).astype(np.float64) / 32768
 
 
-def synth(text, args, stem, cache_dir):
+def synth(text, args, stem, cache_dir, voice=None, rate=None, pitch=None):
     """Return (mono samples @48k, [(word, start, dur)]). Cached by backend/voice/text."""
+    if voice or rate or pitch:
+        args = argparse.Namespace(**{**vars(args), "voice": voice or args.voice, "rate": rate or args.rate,
+                                     "pitch": pitch or args.pitch})
     key = hashlib.sha1(json.dumps([args.tts, args.voice, args.rate, args.pitch, text]).encode()).hexdigest()[:24]
     cache = os.path.join(cache_dir, f"{args.tts}_{key}.json") if cache_dir else None
     wav = stem + ".wav"
@@ -260,7 +263,7 @@ EXTENTS = {
     "rain": (350, 250), "wave": (460, 200), "salt": (250, 110), "big": (430, 190), "question": (200, 260),
     "versus": (430, 220), "timeline": (400, 190), "bird": (150, 130), "robot": (150, 250), "heart": (170, 140),
     "speaker": (130, 170), "newspaper": (200, 240), "thumb": (130, 130), "frame": (180, 210), "crane": (200, 270),
-    "tv": (230, 230), "package": (150, 170),
+    "tv": (230, 230), "package": (150, 170), "mascot": (135, 205),
 }
 FIT_BOX = (110, 230, 970, 1230)  # x0, y0, x1, y1: visual safe area above the captions
 
@@ -304,7 +307,7 @@ def fit_scene(props, cam=None):
 
 
 FOOT = {"person": 175, "crowd": 190, "robot": 140, "bird": 125, "ship": 70, "crane": 180, "package": 170,
-        "mountain": 200, "camera": 165, "speaker": 170, "slot": 160, "tv": 200, "wave": -60}
+        "mountain": 200, "camera": 165, "speaker": 170, "slot": 160, "tv": 200, "wave": -60, "mascot": 172}
 
 
 def camera(tl, dur, cam, fit, punch):
@@ -647,6 +650,9 @@ def validate(spec, path):
     lines = spec.get("lines") or []
     if not lines:
         raise RenderError(f"{path}: no lines")
+    teaser = spec.get("teaser")
+    if teaser is not None and not (isinstance(teaser, dict) and str(teaser.get("question", "")).strip()):
+        raise RenderError(f"{path}: teaser must be an object with a non-empty 'question'")
     for i, ln in enumerate(lines):
         if not str(ln.get("text", "")).strip():
             raise RenderError(f"{path}: line {i} has empty text")
@@ -680,7 +686,7 @@ def render(spec_path, out_dir, args):
             ws = display_words(ln["text"], ws)
             last = i == len(lines) - 1
             reveal = bool(ln.get("sfx"))
-            pause = ln.get("pause", 0.08 if last else (0.35 if reveal else (0.3 if i == 0 or ln["text"].rstrip().endswith("?") else 0.1)))
+            pause = ln.get("pause", 0.1 if last else (0.45 if reveal else (0.4 if i == 0 or ln["text"].rstrip().endswith("?") else 0.2)))
             dur = len(samples) / audio.SR + pause
             # split the line into shots that cut on spoken words
             shots, widx = line_shots(ln), 0
@@ -719,11 +725,41 @@ def render(spec_path, out_dir, args):
                 if ln["sfx"] == "chime" and i:
                     cues.append((max(0.0, t - 1.1), "riser"))  # build-up into the reveal
             t += dur
+        outro_at, talk_env, chime_times = None, None, [at for at, kind in cues if kind == "chime"]
+        teaser = spec.get("teaser")
+        if teaser and not args.no_mascot:
+            gap = 0.3  # breath between the narrator's last line and the mascot
+            scenes[-1]["dur"] += gap
+            voice.append(np.zeros(int(gap * audio.SR)))
+            t += gap
+            cta = teaser.get("cta", "The answer is in the next Short!")
+            samples, ws = synth(f"{teaser['question']} {cta}", args, os.path.join(tmp, "mascot"), args.cache,
+                                voice=args.mascot_voice, rate=args.mascot_rate, pitch=args.mascot_pitch)
+            ws = display_words(f"{teaser['question']} {cta}", ws)
+            dur = len(samples) / audio.SR + 0.35
+            n_q = len(teaser["question"].split())
+            cta_at = t + (ws[n_q][1] - 0.08 if n_q < len(ws) else dur * 0.7)
+            frame = int(audio.SR / FPS)
+            env_ = np.array([np.sqrt(np.mean(samples[i:i + frame] ** 2)) for i in range(0, len(samples), frame)])
+            talk_env = np.clip(env_ / (np.percentile(env_, 90) + 1e-9), 0, 1)
+            owl = {"prop": "mascot", "x": 0.5, "y": 0.47, "s": 2.0, "accent": accent}
+            for st, end, label, extra in (
+                    (t, cta_at, teaser.get("label", "NEXT TIME?"), {"mood": "curious"}),
+                    (cta_at, t + dur, "ANSWER: NEXT SHORT", {"mood": "happy", "wave": True})):
+                props = [{**owl, **extra}, {"prop": "label", "label": label, "x": 0.5, "y": 0.2, "size": 110,
+                                            "color": "yellow", "accent": accent}]
+                scenes.append({"start": st, "dur": end - st, "props": props, "cam": {"zoom": (1.0, 1.06)},
+                               "tint": None, "fit": fit_scene(props, {"zoom": (1.0, 1.06)}), "outro": True})
+            cues += [(max(0, t - 0.12), "whoosh"), (t + 0.02, "pop"), (cta_at, "pop")]
+            words += [(w, t + s0, d) for w, s0, d in ws]
+            voice += [samples, np.zeros(int(0.35 * audio.SR))]
+            outro_at = t
+            t += dur
         total = t
         chunks = chunk_words(words)
 
         mix = audio.mixdown(np.concatenate(voice), total, cues, spec.get("mood", "wonder"),
-                            seed=sum(map(ord, spec["id"])), music_db=args.music_db)
+                            seed=sum(map(ord, spec["id"])), music_db=args.music_db, bed=args.bed)
         raw = os.path.join(tmp, "mix.wav")
         with wave.open(raw, "w") as w:
             w.setnchannels(2)
@@ -759,9 +795,25 @@ def render(spec_path, out_dir, args):
                     c.drawRect(skia.Rect.MakeWH(W, H), art.paint(sc["tint"], 120))
                 # hard cuts with a punch-in; the very first scene is fully built on frame 0 (loop seam)
                 tl_draw = tl + (0.6 if idx == 0 else 0)
+                if sc.get("outro"):
+                    k_env = int((ft - outro_at) * FPS)
+                    talk = float(talk_env[k_env]) if 0 <= k_env < len(talk_env) else 0.0
+                    for pr in sc["props"]:
+                        if pr["prop"] == "mascot":
+                            pr["talk"] = talk
                 dock = dock_span(sc, tl_draw, idx > 0)
                 bg.draw_ground(c, ft, ground_y(sc["props"], tl_draw, sc["dur"], sc["cam"], sc["fit"], idx > 0), dock)
                 draw_scene(c, sc["props"], tl_draw, sc["dur"], sc["cam"], sc["fit"], punch=idx > 0)
+                if teaser and not args.no_mascot and not sc.get("outro"):
+                    # Mr. Shorts watches from the corner (below the captions, clear of the Shorts UI)
+                    hop = max((1 - abs((ft - tc) / 0.45 - 0.5) * 2 for tc in chime_times if 0 <= ft - tc <= 0.45),
+                              default=0.0)
+                    c.save()
+                    c.translate(155, 1492)
+                    c.scale(0.62, 0.62)
+                    art.PROPS["mascot"](c, ft, 1.0, look=math.sin(ft * 0.7) + 0.4, hop=hop / 2,
+                                        mood="curious" if hop else "smirk")
+                    c.restore()
                 bg.foreground(c, ft)
                 draw_captions(c, chunks, ft, art.rgb(accent))
                 enc.stdin.write(surface.makeImageSnapshot().tobytes())
@@ -783,14 +835,24 @@ def main():
     ap.add_argument("out", help="output directory")
     ap.add_argument("--tts", choices=["edge", "elevenlabs", "say"], default="edge")
     ap.add_argument("--voice", default=None)
-    ap.add_argument("--rate", default="+18%", help="edge speaking rate")
+    ap.add_argument("--rate", default="+8%", help="edge speaking rate")
     ap.add_argument("--pitch", default="-2Hz", help="edge pitch shift")
     ap.add_argument("--crf", type=int, default=24, help="x264 quality (lower = bigger, sharper)")
     ap.add_argument("--music-db", type=float, default=-19.0, help="music bed peak level before ducking")
+    ap.add_argument("--mascot-voice", default="en-US-AnaNeural", help="voice for the mascot's end question")
+    ap.add_argument("--mascot-rate", default="+12%")
+    ap.add_argument("--mascot-pitch", default="+0Hz")
+    ap.add_argument("--no-mascot", action="store_true", help="skip the mascot and its end question")
+    ap.add_argument("--music-file", default=None, help="use this audio file as the music bed instead of the generated one")
     ap.add_argument("--cache", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), ".tts-cache"))
     args = ap.parse_args()
     if args.voice is None:
         args.voice = {"edge": "en-US-AndrewMultilingualNeural", "elevenlabs": "pNInz6obpgDQGcFMJqyk"}.get(args.tts)
+    args.bed = None
+    if args.music_file:  # decode once: stereo float at the mix sample rate
+        pcm = run(["ffmpeg", "-nostdin", "-loglevel", "error", "-i", args.music_file, "-ac", "2", "-ar", str(audio.SR),
+                   "-f", "f32le", "-"], capture_output=True).stdout
+        args.bed = np.frombuffer(pcm, np.float32).astype(np.float64).reshape(-1, 2).T
     failed = []
     for pattern in args.scripts:
         for path in sorted(glob.glob(pattern)) or [pattern]:

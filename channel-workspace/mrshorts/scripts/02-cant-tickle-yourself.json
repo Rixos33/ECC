@@ -557,5 +557,10 @@
    "note": "Blakemore et al. 2000, Psychological Medicine 30:1131-1139. Controls and patients without these symptoms rated self-touch less tickly; patients with hallucinations/passivity did not."
   }
  ],
- "caveats": "Line 3 says 'point to' and 'part of' deliberately: the cerebellum is implicated, not proven to be the sole mechanism. Line 6 is one smallish 2000 study of psychiatric patients (with auditory hallucinations and/or passivity experiences); don't generalise it to 'all people with schizophrenia'. The '1998' visual refers to the Nature Neuroscience fMRI paper. Round-2 edit: line 4 now says 'much more ticklish, almost like someone else's touch' rather than 'as ticklish as': the paper reports ratings rising with delay and no significant difference from external touch at 200 ms, which is not the same as proven equivalence (small sample, rank ratings)."
+ "caveats": "Line 3 says 'point to' and 'part of' deliberately: the cerebellum is implicated, not proven to be the sole mechanism. Line 6 is one smallish 2000 study of psychiatric patients (with auditory hallucinations and/or passivity experiences); don't generalise it to 'all people with schizophrenia'. The '1998' visual refers to the Nature Neuroscience fMRI paper. Round-2 edit: line 4 now says 'much more ticklish, almost like someone else's touch' rather than 'as ticklish as': the paper reports ratings rising with delay and no significant difference from external touch at 200 ms, which is not the same as proven equivalence (small sample, rank ratings).",
+ "teaser": {
+  "next": "08",
+  "question": "If you needed help, would a crowd step in, or just watch?",
+  "label": "WOULD THEY HELP?"
+ }
 }
