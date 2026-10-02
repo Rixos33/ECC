@@ -1285,6 +1285,246 @@ def p_stream(c, t, p, color="red", riders=4, rider_color="yellow", **_):
         glow(c, x, y, 34, rider_color, int(120 * a))
         ball(c, x, y, 24, rider_color, int(255 * a))
 
+
+# ---------------- props for Short 12 (stimulants) ----------------
+
+def p_pill(c, t, p, color="yellow", mood="happy", bolt=True, **_):
+    """A two-tone capsule character with a face and (optionally) a lightning bolt."""
+    glow(c, 0, 0, 170, color, 80)
+    c.save()
+    c.rotate(-18 + 4 * math.sin(t * 3))
+    body = skia.RRect.MakeRectXY(skia.Rect.MakeXYWH(-170, -80, 340, 160), 80, 80)
+    c.drawRRect(body, paint(shade(color, -0.3)))
+    c.save()
+    c.clipRRect(body, doAntiAlias=True)
+    c.drawRect(skia.Rect.MakeXYWH(-180, -92, 180, 172), paint("white"))
+    c.drawRect(skia.Rect.MakeXYWH(0, -92, 180, 172), paint(color))
+    c.drawOval(skia.Rect.MakeXYWH(-150, -70, 240, 40), paint("white", 110))
+    c.restore()
+    c.save()
+    c.translate(-78, 6)
+    face(c, t, mood, 0.95)
+    c.restore()
+    if bolt:
+        c.drawPath(path([(96, -56), (56, 6), (86, 6), (64, 58), (124, -10), (92, -10)]), paint(INK))
+    c.restore()
+
+
+def p_ache(c, t, p, color="red", **_):
+    """Throbbing pain: pulsing rings and little bolts (put it over a head)."""
+    for i in range(3):
+        r = 60 + ((t * 90 + i * 45) % 135)
+        c.drawCircle(0, 0, r, paint(color, int(max(0, 200 - r * 1.3)), stroke=12))
+    for a in (-60, 0, 60):
+        c.save()
+        c.rotate(a + 8 * math.sin(t * 9))
+        c.drawPath(path([(-10, -120), (10, -150), (0, -150), (14, -185), (-12, -146), (-2, -146)]), paint("yellow"))
+        c.restore()
+
+
+def p_notes(c, t, p, **_):
+    """A workbook being filled in fast: lines appear, a pencil scribbles."""
+    c.save()
+    c.rotate(-6)
+    shaded_rrect(c, -150, -190, 300, 380, 16, "brown")
+    rrect(c, -128, -166, 256, 330, 6, "white")
+    n = 2 + int(t * 3) % 8
+    for i in range(n):
+        w = 200 if i < n - 1 else 200 * ((t * 3) % 1)
+        c.drawLine(-104, -130 + i * 36, -104 + w, -130 + i * 36, paint("navy", stroke=8))
+    c.restore()
+    px, py = -110 + 200 * ((t * 3) % 1), -150 + 36 * (int(t * 3) % 8)
+    c.drawLine(px, py, px + 90, py - 130, paint("yellow", stroke=20))
+    c.drawLine(px, py, px + 12, py - 18, paint(INK, stroke=20))
+
+
+def p_synapse(c, t, p, color="purple", dots=0.4, plug=0.0, push=0.0, **_):
+    """Two nerve endings and the gap between them. Messenger `dots` (0..1) fill the gap; `plug` (0..1)
+    blocks the clean-up pumps on the upper ending; `push` (0..1) shoves extra messenger out."""
+    top = skia.Path()
+    top.moveTo(-150, -330)
+    top.cubicTo(-150, -200, -280, -150, -260, -60)
+    top.cubicTo(-240, 0, 240, 0, 260, -60)
+    top.cubicTo(280, -150, 150, -200, 150, -330)
+    top.close()
+    c.drawPath(top, paint(shade(color, -0.3)))
+    c.save()
+    c.translate(-8, -8)
+    c.drawPath(top, paint(color))
+    c.restore()
+    k = max(0.0, min(1.0, float(plug)))
+    for i, x in enumerate((-170, -60, 60, 170)):  # pumps along the lower edge
+        rrect(c, x - 30, -52, 60, 44, 12, shade(color, -0.45))
+        c.drawCircle(x, -30, 14, paint("cyan"))
+        if k > 0:  # a cap slides over each pump
+            rrect(c, x - 36, -14 - 46 * (1 - k) - 20, 72, 30, 10, "yellow", int(255 * min(1, k * 1.5)))
+            c.drawLine(x - 16, -40 + 0, x + 16, -20, paint("red", int(255 * k), stroke=8)) if k > 0.9 else None
+    bot = skia.Path()
+    bot.moveTo(-270, 330)
+    bot.cubicTo(-270, 230, -200, 190, 0, 190)
+    bot.cubicTo(200, 190, 270, 230, 270, 330)
+    bot.close()
+    c.drawPath(bot, paint(shade(color, -0.15)))
+    for x in (-150, -50, 50, 150):  # receivers
+        c.drawArc(skia.Rect.MakeXYWH(x - 26, 168, 52, 52), 180, 180, False, paint("pink", stroke=12))
+    n = int(4 + 34 * max(0.0, min(1.0, float(dots))) + 14 * max(0.0, min(1.0, float(push))))
+    for i in range(n):
+        x = ((i * 97) % 440) - 220 + 14 * math.sin(t * 2 + i)
+        y = 20 + ((i * 53 + t * (24 + i % 5 * 6)) % 140)
+        glow(c, x, y, 20, "green", 90)
+        ball(c, x, y, 13, "green")
+    if push > 0:
+        for i in range(3):
+            c.drawLine(-40 + i * 40, -4, -40 + i * 40, 30 * push, paint("yellow", int(220 * push), stroke=8))
+
+
+def p_pedal(c, t, p, press=0.0, label="BRAKE", _zs=1.0, **_):
+    """A brake pedal; `press` 0..1 pushes it down and lights it up."""
+    k = max(0.0, min(1.0, float(press)))
+    rrect(c, -150, 120, 300, 46, 16, "grey")
+    c.save()
+    c.translate(0, 120)
+    c.rotate(-34 + 30 * k)
+    c.drawLine(0, 0, 0, -170, paint(shade(PAL["grey"], -0.3), stroke=30))
+    if k > 0.5:
+        glow(c, 0, -190, 150, "red", int(170 * k))
+    shaded_rrect(c, -120, -250, 240, 110, 24, "red")
+    for i in range(4):
+        c.drawLine(-90 + i * 60, -236, -90 + i * 60, -154, paint(shade(PAL["red"], -0.3), stroke=10))
+    text(c, label, 0, -196, min_size(fit_size(label, 54, 210), _zs), "white", stroke=8)
+    c.restore()
+
+
+def p_car(c, t, p, color="orange", label="", stop=0.0, _zs=1.0, **_):
+    """A little runaway car; `stop` 0..1 squashes it to a halt with skid marks."""
+    k = max(0.0, min(1.0, float(stop)))
+    roll = 0 if k >= 1 else t * 14 * (1 - k)
+    for i in range(3):
+        if k < 1:
+            c.drawLine(-240 - i * 50, 20 + i * 26, -300 - i * 50 - 60 * (1 - k), 20 + i * 26, paint("white", 170, stroke=10))
+    if k > 0:
+        for y in (92, 104):
+            c.drawLine(-260, y, -120, y, paint(INK, int(160 * k), stroke=8))
+    c.save()
+    c.scale(1 - 0.08 * math.sin(math.pi * k), 1 + 0.05 * math.sin(math.pi * k))
+    shaded_rrect(c, -190, -30, 380, 110, 40, color)
+    shaded_rrect(c, -110, -110, 220, 100, 40, color)
+    rrect(c, -86, -92, 80, 60, 16, "cyan")
+    rrect(c, 8, -92, 80, 60, 16, "cyan")
+    for wx in (-110, 110):
+        c.drawCircle(wx, 84, 46, paint(INK))
+        c.drawCircle(wx, 84, 20, paint("grey"))
+        c.drawLine(wx, 84, wx + 20 * math.cos(roll), 84 + 20 * math.sin(roll), paint("white", stroke=6))
+    c.save()
+    c.translate(120, 20)
+    face(c, t, "shocked" if 0 < k < 1 else ("worried" if k >= 1 else "happy"), 0.8)
+    c.restore()
+    if label:
+        text(c, label, -40, 28, min_size(fit_size(label, 40, 170), _zs), "white", stroke=7)
+    c.restore()
+
+
+def p_toggle(c, t, p, left="WITH", right="WITHOUT", state=0.0, _zs=1.0, **_):
+    """A two-state switch; `state` 0 = left, 1 = right."""
+    k = max(0.0, min(1.0, float(state)))
+    rrect(c, -230, -80, 460, 160, 80, INK, 200)
+    c.drawRRect(skia.RRect.MakeRectXY(skia.Rect.MakeXYWH(-230, -80, 460, 160), 80, 80), paint("white", 230, stroke=8))
+    x = -150 + 300 * k
+    glow(c, x, 0, 90, "cyan", 150)
+    ball(c, x, 0, 62, "cyan")
+    label = left if k < 0.5 else right   # only the active state is named, so the two never collide
+    text(c, label, 0, -150, min_size(fit_size(label, 70, 560), _zs), "white", stroke=9)
+
+
+def p_curve(c, t, p, pos=0.5, color="cyan", **_):
+    """The 'too little / just right / too much' hill. A ball with a face rides it; `pos` 0..1 along the hill."""
+    pts = [(x, 170 - 330 * math.exp(-((x / 150.0) ** 2))) for x in range(-400, 401, 10)]
+    area = skia.Path()
+    area.moveTo(-400, 190)
+    for x, y in pts:
+        area.lineTo(x, y)
+    area.lineTo(400, 190)
+    area.close()
+    c.drawPath(area, paint(color, 60))
+    line = skia.Path()
+    line.moveTo(*pts[0])
+    for x, y in pts[1:]:
+        line.lineTo(x, y)
+    c.drawPath(line, paint(color, stroke=14))
+    c.drawLine(-410, 190, 410, 190, paint("white", 200, stroke=8))
+    k = max(0.0, min(1.0, float(pos)))
+    x = -360 + 720 * k
+    y = 170 - 330 * math.exp(-((x / 150.0) ** 2))
+    mood = "sleepy" if k < 0.3 else ("happy" if k < 0.7 else "dizzy")
+    colr = "grey" if k < 0.3 else ("yellow" if k < 0.7 else "red")
+    glow(c, x, y - 60, 80, colr, 130)
+    ball(c, x, y - 60, 58, colr)
+    c.save()
+    c.translate(x, y - 58)
+    face(c, t, mood, 0.7)
+    c.restore()
+
+
+def p_papers(c, t, p, label="", n=7, _zs=1.0, **_):
+    """A tall stack of study papers."""
+    for i in range(int(n)):
+        c.save()
+        c.translate(4 * math.sin(i * 2.1), 150 - i * 42)
+        c.rotate(3 * math.sin(i * 1.7))
+        shaded_rrect(c, -170, -34, 340, 60, 8, "white")
+        for j in range(3):
+            c.drawLine(-140, -18 + j * 14, 60 + (j % 2) * 60, -18 + j * 14, paint("grey", 180, stroke=5))
+        c.restore()
+    if label:
+        text(c, label, 0, 150 - int(n) * 42 - 60, min_size(fit_size(label, 80, 420), _zs), "yellow", stroke=10)
+
+
+def p_plate(c, t, p, push=0.0, **_):
+    """A plate of food; `push` 0..1 slides it away untouched."""
+    k = max(0.0, min(1.0, float(push)))
+    c.save()
+    c.translate(220 * k, 0)
+    c.drawOval(skia.Rect.MakeXYWH(-210, -40, 420, 150), paint(shade(PAL["white"], -0.2)))
+    c.drawOval(skia.Rect.MakeXYWH(-210, -60, 420, 150), paint("white"))
+    c.drawOval(skia.Rect.MakeXYWH(-140, -34, 280, 96), paint(shade(PAL["white"], -0.1)))
+    ball(c, -50, -30, 52, "orange")
+    ball(c, 40, -44, 44, "green")
+    ball(c, 20, 6, 36, "red")
+    c.restore()
+
+
+def p_dial(c, t, p, value=0.5, label="", color="green", _zs=1.0, **_):
+    """A gauge; `value` 0..1 sets the needle."""
+    shaded_rrect(c, -210, -180, 420, 330, 40, INK)
+    for i, colr in enumerate(("red", "orange", "yellow", "green")):
+        c.drawArc(skia.Rect.MakeXYWH(-150, -110, 300, 300), 180 + i * 45, 45, False, paint(colr, stroke=34, cap=False))
+    a = math.radians(180 + 180 * max(0.0, min(1.0, float(value))))
+    c.drawLine(0, 40, 130 * math.cos(a), 40 + 130 * math.sin(a), paint("white", stroke=12))
+    c.drawCircle(0, 40, 20, paint("white"))
+    if label:
+        text(c, label, 0, 110, min_size(fit_size(label, 50, 360), _zs), "white")
+
+
+def p_doctor(c, t, p, color="white", mood="happy", look=0.0, **_):
+    """A doctor: blob person in a white coat with a stethoscope and a clipboard."""
+    p_person(c, t, 1.0, color=color, mood=mood, look=look)
+    bob = 5 * math.sin(t * 3 + look)
+    c.save()
+    c.translate(0, bob)
+    c.drawArc(skia.Rect.MakeXYWH(-40, -30, 80, 100), 0, 180, False, paint(INK, stroke=8))
+    c.drawCircle(0, 70, 14, paint("grey"))
+    for a, b in (((-10, 20), (10, 20)), ((0, 10), (0, 30))):
+        c.drawLine(a[0] + 44, a[1] + 60, b[0] + 44, b[1] + 60, paint("red", stroke=9))
+    c.save()
+    c.translate(-96, 80)
+    c.rotate(-10)
+    shaded_rrect(c, -44, -56, 88, 112, 10, "brown")
+    rrect(c, -34, -42, 68, 88, 4, "white")
+    for i in range(4):
+        c.drawLine(-24, -26 + i * 18, 24, -26 + i * 18, paint("grey", stroke=5))
+    c.restore()
+    c.restore()
+
 # ---------------- infographic props (text-led beats) ----------------
 
 def p_big(c, t, p, big="?", sub="", color=None, accent="yellow", _zs=1.0, **_):

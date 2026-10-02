@@ -81,9 +81,9 @@ def draw_title(c, spec, ft, accent):  # noqa: C901
         words = big.split()
         h = (len(words) + 1) // 2
         lines = [" ".join(words[:h]), " ".join(words[h:])] if len(words) > 2 else [big]
-        size = min(art.fit_size(ln, 150, 940) for ln in lines)
+        size = min(art.fit_size(ln, 150, 880) for ln in lines)
         c.save()
-        c.translate(W / 2, 330 - 150 * k)
+        c.translate(W / 2, 430 - 122 * k)
         c.rotate(-3 * (1 - k))
         c.scale(1 - 0.6 * k, 1 - 0.6 * k)
         for i, ln in enumerate(lines):
@@ -96,9 +96,9 @@ def draw_title(c, spec, ft, accent):  # noqa: C901
         size = art.fit_size(bar, 60, 760)
         w = art.measure(bar, size) + 84
         a = int(255 * k)
-        c.drawRRect(skia.RRect.MakeRectXY(skia.Rect.MakeXYWH(W / 2 - w / 2, 146, w, 92), 46, 46), art.paint(art.INK, int(200 * k)))
-        c.drawRRect(skia.RRect.MakeRectXY(skia.Rect.MakeXYWH(W / 2 - w / 2, 146, w, 92), 46, 46), art.paint(accent, a, stroke=6))
-        art.text(c, bar, W / 2, 192, size, "white", a)
+        c.drawRRect(skia.RRect.MakeRectXY(skia.Rect.MakeXYWH(W / 2 - w / 2, 262, w, 92), 46, 46), art.paint(art.INK, int(200 * k)))
+        c.drawRRect(skia.RRect.MakeRectXY(skia.Rect.MakeXYWH(W / 2 - w / 2, 262, w, 92), 46, 46), art.paint(accent, a, stroke=6))
+        art.text(c, bar, W / 2, 308, size, "white", a)
 
 
 LEGACY = {"big", "question", "bars", "list", "versus", "timeline", "spectrum"}
@@ -174,7 +174,7 @@ def load_recording(path, lines, model_name="small.en", min_match=0.8):
     segs, _ = WhisperModel(model_name, device="cpu", compute_type="int8").transcribe(
         np.frombuffer(lo, np.float32), language="en", word_timestamps=True)
     heard = [(w.word.strip(), w.start, w.end - w.start) for sg in segs for w in (sg.words or [])]
-    shown = [(i, w) for i, ln in enumerate(lines) for w in ln.get("say", ln["text"]).split()]
+    shown = [(i, w) for i, ln in enumerate(lines) for w in ln["text"].split()]
     a, b = [_norm(w) for _, w in shown], [_norm(w[0]) for w in heard]
     times = [None] * len(shown)
     for blk in difflib.SequenceMatcher(a=a, b=b, autojunk=False).get_matching_blocks():
@@ -379,6 +379,9 @@ EXTENTS = {
     "tv": (230, 230), "package": (150, 170), "mascot": (140, 215), "molecule": (130, 120), "receptor": (330, 175),
     "neuron": (250, 250), "network": (250, 240), "rays": (300, 300), "rings": (330, 330), "bike": (220, 290),
     "hat": (150, 180), "scanner": (230, 215), "xray": (330, 90), "stream": (480, 170),
+    "pill": (190, 130), "ache": (130, 170), "notes": (170, 200), "synapse": (280, 330), "pedal": (160, 190),
+    "car": (300, 140), "toggle": (240, 170), "curve": (410, 260), "papers": (180, 230), "plate": (220, 90),
+    "dial": (210, 180), "doctor": (115, 180),
 }
 FIT_BOX = (110, 230, 970, 1230)
 FIT_CAP = 1.6  # x0, y0, x1, y1: visual safe area above the captions
@@ -423,7 +426,8 @@ def fit_scene(props, cam=None):
 
 
 FOOT = {"person": 175, "crowd": 190, "robot": 140, "bird": 125, "ship": 70, "crane": 180, "package": 170,
-        "mountain": 200, "camera": 165, "speaker": 170, "slot": 160, "tv": 200, "wave": -60, "mascot": 190}
+        "mountain": 200, "camera": 165, "speaker": 170, "slot": 160, "tv": 200, "wave": -60, "mascot": 190,
+        "doctor": 175}
 
 
 def camera(tl, dur, cam, fit, punch):
@@ -531,7 +535,11 @@ def draw_scene(c, props, tl, dur, cam, fit=(1.0, 0.0, 0.0), punch=True):
         kw = {k2: v for k2, v in pr.items() if k2 not in ("prop", "x", "y", "s", "delay", "to", "move_time", "rot",
                                                            "spin", "flip", "on", "layer", "float", "face", "face_at",
                                                            "face_s", "acts", "anim")}
+        seen = set()
         for an in pr.get("anim", []):  # a prop parameter that changes on a spoken word (e.g. a lid closing)
+            if tl < an.get("at", 0.0) and an["param"] in seen:
+                continue  # a later step of the same parameter has not started yet
+            seen.add(an["param"])
             ka = ease_io((tl - an.get("at", 0.0)) / max(0.05, an.get("dur", 0.6)))
             kw[an["param"]] = an.get("from", 0.0) + (an.get("to", 1.0) - an.get("from", 0.0)) * ka
         fn(c, te, min(1.0, te / 0.5), _zs=max(0.05, pr.get("s", 1.0) * fz * z), **kw)
@@ -705,7 +713,8 @@ def draw_captions(c, chunks, t, accent, lower=False):
     if lower:
         labels = [lb.lower() for lb in labels]
     size = CAP_SIZE if not lower else 70
-    while size > CAP_MIN and art.measure(" ".join(labels), size) + size * 0.22 * (len(labels) - 1) > SAFE_W:
+    safe_w = 720 if lower else SAFE_W
+    while size > CAP_MIN and art.measure(" ".join(labels), size) + size * 0.22 * (len(labels) - 1) > safe_w:
         size -= 2
     pop = ease_out_back((t - active[0][1] + 0.02) / 0.16)
     size *= 0.88 + 0.12 * pop
@@ -860,7 +869,9 @@ def set_style(spec):
     """v3 frames the subject larger, below the title bar."""
     global FIT_BOX, FIT_CAP
     v3 = spec.get("style") == "v3"
-    FIT_BOX = (40, 270, 1040, 1290) if v3 else (110, 230, 970, 1230)
+    # v3 box measured against the YouTube app: top icons end at y~245, the channel row starts at y~1450,
+    # the like/comment/share column covers x>900 below y~1190, and ~5% is cropped from each side
+    FIT_BOX = (70, 380, 1010, 1200) if v3 else (110, 230, 970, 1230)
     FIT_CAP = 2.8 if v3 else 1.6
     return v3
 
@@ -1110,14 +1121,14 @@ def render(spec_path, out_dir, args):
                     gag = next(((kind, (ft - g0) / gd) for g0, gd, kind in gags if g0 <= ft < g0 + gd), None)
                     li = int(ft * FPS)
                     c.save()
-                    c.translate(850, 1492)
-                    c.scale(0.62, 0.62)
+                    c.translate(*((872, 1118) if v3 else (850, 1492)))
+                    c.scale(*((0.54, 0.54) if v3 else (0.62, 0.62)))
                     art.PROPS["mascot"](c, ft, 1.0, look=-0.7 + 0.3 * math.sin(ft * 0.7), hop=hop / 2,
                                         mood="curious" if hop else "smirk", activity=activity,
                                         talk=float(lip[li]) if li < len(lip) else 0.0, point=ease_io(pt),
                                         gag=gag[0] if gag else None, gag_t=gag[1] if gag else 0.0)
                     c.restore()
-                if v3:
+                if v3 and not sc.get("outro"):  # the owl's closing label takes the title's place
                     draw_title(c, spec, ft, accent)
                 else:
                     bg.foreground(c, ft)

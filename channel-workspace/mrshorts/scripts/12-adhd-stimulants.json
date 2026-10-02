@@ -1,0 +1,983 @@
+{
+ "id": "short12_adhd_stimulants",
+ "style": "v3",
+ "handle": "@mrshorts1737",
+ "title": "Why Do Stimulants Calm ADHD Brains?",
+ "title_bar": "ADHD MEDS: THE PARADOX",
+ "accent": "yellow",
+ "world": "neon",
+ "mood": "mystic",
+ "pause": 0.1,
+ "rate": "+18%",
+ "mascot": {
+  "activity": "chess"
+ },
+ "lines": [
+  {
+   "text": "Why would a stimulant help anyone sit still, when stimulants are supposed to rev you up?",
+   "tone": "curious",
+   "shots": [
+    {
+     "world": "lemon",
+     "scene": [
+      {
+       "prop": "brain",
+       "x": 0.5,
+       "y": 0.42,
+       "s": 1.8,
+       "face": "worried",
+       "face_at": [
+        -20,
+        -20
+       ],
+       "face_s": 1.3,
+       "layer": true,
+       "acts": [
+        {
+         "type": "shake",
+         "at": 0.0,
+         "dur": 2.4
+        }
+       ]
+      },
+      {
+       "prop": "pill",
+       "x": 0.76,
+       "y": 0.25,
+       "s": 0.6,
+       "mood": "smug",
+       "layer": true,
+       "float": true
+      }
+     ]
+    },
+    {
+     "on": "when",
+     "world": "lava",
+     "scene": [
+      {
+       "prop": "rays",
+       "x": 0.5,
+       "y": 0.42,
+       "s": 1.0,
+       "color": "yellow",
+       "layer": true
+      },
+      {
+       "prop": "pill",
+       "x": 0.5,
+       "y": 0.42,
+       "s": 1.6,
+       "mood": "stars",
+       "layer": true,
+       "acts": [
+        {
+         "type": "shake",
+         "on": "rev",
+         "dur": 0.8
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "In 1937, doctor Charles Bradley gave children Benzedrine, an amphetamine, hoping to cure their headaches.",
+   "tone": "dry",
+   "shots": [
+    {
+     "world": "mint",
+     "scene": [
+      {
+       "prop": "doctor",
+       "x": 0.5,
+       "y": 0.47,
+       "s": 1.9,
+       "mood": "happy"
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.235,
+       "s": 1.0,
+       "label": "1937",
+       "size": 130,
+       "color": "white"
+      }
+     ]
+    },
+    {
+     "on": "gave",
+     "world": "mint",
+     "scene": [
+      {
+       "prop": "doctor",
+       "x": 0.28,
+       "y": 0.45,
+       "s": 1.5,
+       "mood": "happy",
+       "look": 0.0
+      },
+      {
+       "prop": "person",
+       "x": 0.74,
+       "y": 0.49,
+       "s": 1.15,
+       "color": "orange",
+       "mood": "sad",
+       "look": 3.1
+      },
+      {
+       "prop": "pill",
+       "x": 0.36,
+       "y": 0.33,
+       "s": 0.4,
+       "mood": "happy",
+       "layer": true,
+       "float": true,
+       "acts": [
+        {
+         "type": "move",
+         "to": [
+          0.66,
+          0.37
+         ],
+         "on": "Benzedrine",
+         "dur": 0.9
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "on": "hoping",
+     "world": "grape",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.5,
+       "y": 0.47,
+       "s": 1.9,
+       "color": "orange",
+       "mood": "sad",
+       "layer": true
+      },
+      {
+       "prop": "ache",
+       "x": 0.5,
+       "y": 0.31,
+       "s": 1.2,
+       "layer": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "The headaches stayed, but among thirty children he then tested, many attacked their schoolwork and half grew calmer.",
+   "tone": "dry",
+   "shots": [
+    {
+     "world": "grape",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.5,
+       "y": 0.47,
+       "s": 1.9,
+       "color": "orange",
+       "mood": "sad",
+       "layer": true
+      },
+      {
+       "prop": "ache",
+       "x": 0.5,
+       "y": 0.31,
+       "s": 1.2,
+       "layer": true
+      }
+     ]
+    },
+    {
+     "on": "among",
+     "world": "sky",
+     "scene": [
+      {
+       "prop": "crowd",
+       "x": 0.5,
+       "y": 0.44,
+       "s": 1.0,
+       "n": 6,
+       "mood": "sad"
+      }
+     ]
+    },
+    {
+     "on": "attacked",
+     "world": "candy",
+     "scene": [
+      {
+       "prop": "notes",
+       "x": 0.6,
+       "y": 0.42,
+       "s": 1.5
+      },
+      {
+       "prop": "person",
+       "x": 0.24,
+       "y": 0.48,
+       "s": 1.3,
+       "color": "orange",
+       "mood": "happy",
+       "look": 0.0
+      }
+     ]
+    },
+    {
+     "on": "half",
+     "world": "sky",
+     "scene": [
+      {
+       "prop": "crowd",
+       "x": 0.5,
+       "y": 0.44,
+       "s": 1.0,
+       "n": 6,
+       "mood": "happy"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "These medicines jam the pumps that mop up dopamine and noradrenaline, and amphetamine also pushes extra out.",
+   "tone": "curious",
+   "shots": [
+    {
+     "world": "neon",
+     "scene": [
+      {
+       "prop": "synapse",
+       "x": 0.5,
+       "y": 0.42,
+       "s": 1.25,
+       "dots": 0.25,
+       "anim": [
+        {
+         "param": "plug",
+         "from": 0,
+         "to": 1,
+         "on": "jam",
+         "dur": 0.5
+        }
+       ],
+       "acts": [
+        {
+         "type": "shake",
+         "on": "jam",
+         "dur": 0.4
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "on": "mop",
+     "world": "neon",
+     "scene": [
+      {
+       "prop": "synapse",
+       "x": 0.5,
+       "y": 0.44,
+       "s": 1.5,
+       "dots": 0.25,
+       "plug": 1.0,
+       "anim": [
+        {
+         "param": "dots",
+         "from": 0.25,
+         "to": 0.9,
+         "on": "dopamine",
+         "dur": 1.4
+        }
+       ]
+      }
+     ],
+     "cam": {
+      "zoom": [
+       1.0,
+       1.15
+      ]
+     }
+    },
+    {
+     "on": "amphetamine",
+     "world": "ink",
+     "scene": [
+      {
+       "prop": "synapse",
+       "x": 0.5,
+       "y": 0.44,
+       "s": 1.2,
+       "dots": 0.9,
+       "plug": 1.0,
+       "layer": true,
+       "anim": [
+        {
+         "param": "push",
+         "from": 0,
+         "to": 1,
+         "on": "pushes",
+         "dur": 0.6
+        }
+       ]
+      },
+      {
+       "prop": "pill",
+       "x": 0.2,
+       "y": 0.25,
+       "s": 0.45,
+       "mood": "smug",
+       "layer": true,
+       "float": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "That extra signal wakes the prefrontal cortex, the brakes behind your forehead that tell you to wait.",
+   "tone": "amazed",
+   "shots": [
+    {
+     "world": "sunset",
+     "scene": [
+      {
+       "prop": "brain",
+       "x": 0.5,
+       "y": 0.42,
+       "s": 1.8,
+       "face": "sleepy",
+       "face_at": [
+        -20,
+        -20
+       ],
+       "face_s": 1.3,
+       "layer": true,
+       "acts": [
+        {
+         "type": "jump",
+         "on": "wakes"
+        }
+       ]
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.235,
+       "s": 1.0,
+       "label": "prefrontal cortex",
+       "size": 70,
+       "color": "yellow",
+       "on": "prefrontal"
+      }
+     ]
+    },
+    {
+     "on": "brakes",
+     "world": "grape",
+     "scene": [
+      {
+       "prop": "pedal",
+       "x": 0.26,
+       "y": 0.42,
+       "s": 1.3,
+       "anim": [
+        {
+         "param": "press",
+         "from": 0,
+         "to": 1,
+         "on": "brakes",
+         "dur": 0.4
+        }
+       ]
+      },
+      {
+       "prop": "car",
+       "x": 0.7,
+       "y": 0.46,
+       "s": 0.95,
+       "label": "impulse",
+       "float": true,
+       "anim": [
+        {
+         "param": "stop",
+         "from": 0,
+         "to": 1,
+         "on": "wait",
+         "dur": 0.5
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "The twist: in 1978, Judith Rapoport's team gave amphetamine to fourteen boys without the condition. They fidgeted less and focused better too, so calming down never proved a diagnosis.",
+   "tone": "amazed",
+   "shots": [
+    {
+     "world": "ink",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.5,
+       "y": 0.47,
+       "s": 1.9,
+       "color": "pink",
+       "mood": "happy"
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.235,
+       "s": 1.0,
+       "label": "1978",
+       "size": 130,
+       "color": "white"
+      }
+     ]
+    },
+    {
+     "on": "gave",
+     "world": "ink",
+     "scene": [
+      {
+       "prop": "toggle",
+       "x": 0.5,
+       "y": 0.36,
+       "s": 1.5,
+       "left": "WITH ADHD",
+       "right": "WITHOUT",
+       "anim": [
+        {
+         "param": "state",
+         "from": 0,
+         "to": 1,
+         "on": "without",
+         "dur": 0.4
+        }
+       ]
+      },
+      {
+       "prop": "crowd",
+       "x": 0.5,
+       "y": 0.56,
+       "s": 0.9,
+       "n": 4,
+       "mood": "neutral"
+      }
+     ]
+    },
+    {
+     "on": "They",
+     "world": "candy",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.26,
+       "y": 0.48,
+       "s": 1.4,
+       "color": "teal",
+       "mood": "happy",
+       "look": 0.0
+      },
+      {
+       "prop": "notes",
+       "x": 0.64,
+       "y": 0.42,
+       "s": 1.4
+      }
+     ]
+    },
+    {
+     "on": "so",
+     "world": "lava",
+     "scene": [
+      {
+       "prop": "pill",
+       "x": 0.42,
+       "y": 0.42,
+       "s": 1.4,
+       "mood": "smug",
+       "layer": true
+      },
+      {
+       "prop": "check",
+       "x": 0.78,
+       "y": 0.28,
+       "s": 0.9,
+       "ok": false,
+       "layer": true,
+       "on": "never"
+      }
+     ]
+    }
+   ],
+   "sfx": "chime",
+   "sfx_at": 0.3
+  },
+  {
+   "text": "Amy Arnsten's Yale lab, working mostly with animals, found that too little or too much signal both hurt.",
+   "tone": "serious",
+   "shots": [
+    {
+     "world": "grape",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.34,
+       "y": 0.47,
+       "s": 1.6,
+       "color": "teal",
+       "mood": "happy",
+       "look": 0.0
+      },
+      {
+       "prop": "bird",
+       "x": 0.72,
+       "y": 0.5,
+       "s": 1.0,
+       "on": "animals"
+      }
+     ]
+    },
+    {
+     "on": "found",
+     "world": "neon",
+     "scene": [
+      {
+       "prop": "curve",
+       "x": 0.5,
+       "y": 0.44,
+       "s": 1.1,
+       "pos": 0.5,
+       "anim": [
+        {
+         "param": "pos",
+         "from": 0.5,
+         "to": 0.1,
+         "on": "little",
+         "dur": 0.5
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "on": "much",
+     "world": "lava",
+     "scene": [
+      {
+       "prop": "curve",
+       "x": 0.5,
+       "y": 0.44,
+       "s": 1.1,
+       "pos": 0.1,
+       "anim": [
+        {
+         "param": "pos",
+         "from": 0.1,
+         "to": 0.92,
+         "on": "much",
+         "dur": 0.6
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "In 2018, Samuele Cortese's team pooled over a hundred trials: clear symptom relief for twelve weeks, thin evidence beyond.",
+   "tone": "serious",
+   "shots": [
+    {
+     "world": "mint",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.5,
+       "y": 0.47,
+       "s": 1.9,
+       "color": "white",
+       "mood": "happy"
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.235,
+       "s": 1.0,
+       "label": "2018",
+       "size": 130,
+       "color": "white"
+      }
+     ]
+    },
+    {
+     "on": "pooled",
+     "world": "mint",
+     "scene": [
+      {
+       "prop": "papers",
+       "x": 0.5,
+       "y": 0.47,
+       "s": 1.5,
+       "label": "100+ trials"
+      }
+     ]
+    },
+    {
+     "on": "clear",
+     "world": "sky",
+     "scene": [
+      {
+       "prop": "bars",
+       "x": 0.5,
+       "y": 0.42,
+       "s": 0.9,
+       "bars": [
+        [
+         "before",
+         0.9,
+         "#f0544f"
+        ],
+        [
+         "at 12 weeks",
+         0.45,
+         "#7ad151"
+        ]
+       ],
+       "sub": "symptoms"
+      },
+      {
+       "prop": "check",
+       "x": 0.82,
+       "y": 0.24,
+       "s": 0.6,
+       "on": "relief"
+      }
+     ]
+    },
+    {
+     "on": "thin",
+     "world": "ink",
+     "scene": [
+      {
+       "prop": "calendar",
+       "x": 0.36,
+       "y": 0.44,
+       "s": 1.4,
+       "label": "1 yr?"
+      },
+      {
+       "prop": "question",
+       "x": 0.76,
+       "y": 0.4,
+       "s": 0.6,
+       "big": "?"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "They can blunt appetite, disturb sleep, raise heart rate and blood pressure, and be misused. And in a 2023 Melbourne study, healthy adults tried harder on puzzles but scored slightly worse.",
+   "tone": "serious",
+   "shots": [
+    {
+     "world": "lava",
+     "scene": [
+      {
+       "prop": "plate",
+       "x": 0.56,
+       "y": 0.5,
+       "s": 1.1,
+       "anim": [
+        {
+         "param": "push",
+         "from": 0,
+         "to": 1,
+         "on": "appetite",
+         "dur": 0.6
+        }
+       ]
+      },
+      {
+       "prop": "person",
+       "x": 0.24,
+       "y": 0.46,
+       "s": 1.3,
+       "color": "orange",
+       "mood": "sad",
+       "look": 0.0
+      }
+     ]
+    },
+    {
+     "on": "disturb",
+     "world": "ink",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.4,
+       "y": 0.48,
+       "s": 1.7,
+       "color": "orange",
+       "mood": "surprised"
+      },
+      {
+       "prop": "moon",
+       "x": 0.78,
+       "y": 0.27,
+       "s": 0.9
+      }
+     ]
+    },
+    {
+     "on": "raise",
+     "world": "lava",
+     "scene": [
+      {
+       "prop": "heart",
+       "x": 0.42,
+       "y": 0.43,
+       "s": 1.7,
+       "face": "worried",
+       "face_s": 1.2,
+       "layer": true,
+       "acts": [
+        {
+         "type": "pulse",
+         "at": 0.0,
+         "dur": 9
+        }
+       ]
+      },
+      {
+       "prop": "arrow",
+       "x": 0.82,
+       "y": 0.4,
+       "s": 1.0,
+       "angle": -90,
+       "color": "yellow",
+       "layer": true
+      }
+     ]
+    },
+    {
+     "on": "misused",
+     "world": "ink",
+     "scene": [
+      {
+       "prop": "pill",
+       "x": 0.42,
+       "y": 0.42,
+       "s": 1.4,
+       "mood": "worried",
+       "layer": true
+      },
+      {
+       "prop": "check",
+       "x": 0.78,
+       "y": 0.28,
+       "s": 0.9,
+       "ok": false,
+       "layer": true
+      }
+     ]
+    },
+    {
+     "on": "healthy",
+     "world": "candy",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.26,
+       "y": 0.48,
+       "s": 1.4,
+       "color": "cyan",
+       "mood": "surprised",
+       "look": 0.0
+      },
+      {
+       "prop": "notes",
+       "x": 0.64,
+       "y": 0.42,
+       "s": 1.4
+      }
+     ]
+    },
+    {
+     "on": "scored",
+     "world": "ink",
+     "scene": [
+      {
+       "prop": "dial",
+       "x": 0.5,
+       "y": 0.42,
+       "s": 1.5,
+       "label": "score",
+       "anim": [
+        {
+         "param": "value",
+         "from": 0.62,
+         "to": 0.45,
+         "on": "worse",
+         "dur": 0.6
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "So a stimulant helps you sit still by powering your brakes, and whether it suits anyone is a doctor's call.",
+   "tone": "warm",
+   "shots": [
+    {
+     "world": "lemon",
+     "scene": [
+      {
+       "prop": "brain",
+       "x": 0.5,
+       "y": 0.42,
+       "s": 1.8,
+       "face": "happy",
+       "face_at": [
+        -20,
+        -20
+       ],
+       "face_s": 1.3,
+       "layer": true
+      },
+      {
+       "prop": "pill",
+       "x": 0.76,
+       "y": 0.25,
+       "s": 0.6,
+       "mood": "happy",
+       "layer": true,
+       "float": true
+      }
+     ]
+    },
+    {
+     "on": "powering",
+     "world": "grape",
+     "scene": [
+      {
+       "prop": "pedal",
+       "x": 0.5,
+       "y": 0.42,
+       "s": 1.6,
+       "anim": [
+        {
+         "param": "press",
+         "from": 0,
+         "to": 1,
+         "on": "brakes",
+         "dur": 0.4
+        }
+       ]
+      },
+      {
+       "prop": "pill",
+       "x": 0.8,
+       "y": 0.26,
+       "s": 0.5,
+       "mood": "happy",
+       "float": true
+      }
+     ]
+    },
+    {
+     "on": "whether",
+     "world": "mint",
+     "scene": [
+      {
+       "prop": "doctor",
+       "x": 0.42,
+       "y": 0.47,
+       "s": 1.9,
+       "mood": "happy"
+      },
+      {
+       "prop": "pill",
+       "x": 0.8,
+       "y": 0.3,
+       "s": 0.5,
+       "mood": "happy",
+       "float": true
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "teaser": {
+  "question": "Why can't you remember being a baby, when you were definitely there?",
+  "label": "Baby memories next"
+ },
+ "sources": [
+  {
+   "claim": "Bradley, 1937: Benzedrine first given for headaches after a diagnostic procedure; no effect on headaches; then a 30-child study in which many children's schoolwork improved and half became calmer.",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3064242/",
+   "note": "Strohl 2011, Yale J Biol Med 84:27-33, a historical review of Bradley C., 'The Behavior of Children Receiving Benzedrine', Am J Psychiatry 1937;94:577-581. Emma Pendleton Bradley Home, Providence, Rhode Island. Review states: 'The drug had no effect on the headaches but caused a striking change in behavior'; 'Fifteen of the 30 children responded to Benzedrine by becoming distinctly subdued in their emotional responses'; Bradley: 'The most striking change in behavior occurred in the school activities of many of these patients'. Children aged 5 to 14, one week on the drug, no placebo and no blinding. A search snippet also gave '14 of 30' for improved school performance; I could not confirm that figure in the review, so the script says 'many'."
+  },
+  {
+   "claim": "Methylphenidate blocks the dopamine and noradrenaline transporters; amphetamine blocks them and also increases release.",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8063758/",
+   "note": "Faraone 2018, Neurosci Biobehav Rev 87:255-270. Both drugs inhibit the dopamine and noradrenaline transporters; amphetamine additionally causes release through VMAT-2 inhibition and reverse transport, and inhibits monoamine oxidase. 'Pumps that mop up' is the script's image for transporters. Human PET evidence for transporter blocking and raised dopamine: Volkow et al. 2001, J Neurosci 21:RC121, https://pubmed.ncbi.nlm.nih.gov/11160455/ (10 healthy adults, measured in striatum, not prefrontal cortex)."
+  },
+  {
+   "claim": "The extra signalling supports the prefrontal cortex (attention, inhibition); the calming effect is not sedation and not paradoxical.",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2894421/",
+   "note": "Arnsten 2009, J Pediatr 154(5). 'Therapeutic doses of stimulants substantially increase both DA and NE release in the PFC but have little effect on catecholamine levels in subcortical areas'; 'stimulant actions in ADHD are not paradoxical, but simply more apparent'. The low-dose prefrontal finding is from rats (Berridge et al. 2006, Biol Psychiatry; follow-up https://pubmed.ncbi.nlm.nih.gov/23303075/). 'Wakes the prefrontal cortex' and 'brakes' are the script's metaphor for this, not a quote."
+  },
+  {
+   "claim": "Rapoport et al. 1978: boys without ADHD given dextroamphetamine showed less motor activity and better attention and test performance.",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/341313/",
+   "note": "Rapoport, Buchsbaum, Zahn, Weingartner, Ludlow, Mikkelsen, Science 1978;199:560-563. Double-blind, single dose versus placebo, 14 normal prepubertal boys (mean age 10 years 11 months). Abstract: 'the group showed a marked decrease in motor activity and reaction time and improved performance on cognitive tests'; the similarity to hyperactive children 'casts doubt on' models assuming 'a clinically specific or \"paradoxical\" response to stimulants'. Details of attention and recall results cross-checked in Bagot and Kaminer 2014, https://pmc.ncbi.nlm.nih.gov/articles/PMC4471173/. PubMed and Science pages refused automated fetching; the abstract text was read via search results."
+  },
+  {
+   "claim": "Inverted U: too little or too much dopamine and noradrenaline signalling both impair prefrontal function; evidence is mostly from monkeys and rats.",
+   "url": "https://medicine.yale.edu/lab/arnsten/research/invertedu/",
+   "note": "Arnsten lab, Yale: 'Stimulation of DAD1R produces an inverted-U dose response on both PFC neuronal firing and on cognitive performance'. Arnsten 2009 (link above): 'Either too little or too much catecholamine release is detrimental to PFC function'. Independent review reaching the same view: Clark and Noudoost 2014, https://pmc.ncbi.nlm.nih.gov/articles/PMC3986539/."
+  },
+  {
+   "claim": "Cortese et al. 2018: pooled trials show stimulants beat placebo on core symptoms at about 12 weeks; little evidence beyond that.",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6109107/",
+   "note": "Lancet Psychiatry 2018;5(9):727-738. 133 double-blind randomised trials, over 14,000 children and adolescents and over 10,000 adults. Clinician-rated standardised mean differences versus placebo: children, amphetamines -1.02 and methylphenidate -0.78; adults, amphetamines -0.79 and methylphenidate -0.49. Authors call results beyond 12 weeks 'not informative' and ask for long-term studies. Also found weight decrease and raised blood pressure. The script says 'over a hundred trials' to keep the number easy to say."
+  },
+  {
+   "claim": "Common unwanted effects: reduced appetite, sleep trouble, small rises in heart rate and blood pressure.",
+   "url": "https://www.nhs.uk/medicines/methylphenidate-children/side-effects-of-methylphenidate-for-children/",
+   "note": "NHS lists loss of appetite and trouble sleeping as common, and says the drug 'can cause a small increase in blood pressure and pulse rate'. Size of the cardiovascular effect: Farhat et al. 2025, Lancet Psychiatry, https://www.thelancet.com/journals/lanpsy/article/PIIS2215-0366(25)00062-8/abstract, average rises of a few mm Hg, with certainty of evidence often low; I read this one through summaries only, not the full text."
+  },
+  {
+   "claim": "Misuse and addiction risk; no evidence they raise grades in people without ADHD.",
+   "url": "https://nida.nih.gov/research-topics/parents-educators/mind-matter-series/prescription-stimulants",
+   "note": "NIDA: 'If you do not have ADHD, there are no studies to show these medicines improve your grades'; 'misusing stimulants can change the way your brain works, and you can become addicted'."
+  },
+  {
+   "claim": "2023 Melbourne study: healthy adults on stimulants put in more effort on a puzzle task but got slightly worse results.",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10266726/",
+   "note": "Bowman et al. 2023, Science Advances, University of Melbourne (senior author Peter Bossaerts). 40 healthy adults aged 18 to 35, double-blind, placebo-controlled, single doses, knapsack optimisation task. Time and number of moves rose significantly; value attained was lower (p = 0.02); the chance of finding the best solution was not significantly changed (p = 0.11). One small study on one kind of task."
+  }
+ ],
+ "caveats": "Double-check before recording: (1) Bradley: 'gave children Benzedrine hoping to cure their headaches' refers to headaches caused by a diagnostic procedure at his hospital (Emma Pendleton Bradley Home, Rhode Island); the headache observation came first and the 30-child study followed; it ran one week on the drug with no placebo and no blinding, so it is an early observation, not proof. 'Half grew calmer' is 15 of 30 described as 'distinctly subdued' emotionally; 'many attacked their schoolwork' is Bradley's 'many', no number. I read a 2011 historical review, not Bradley's 1937 paper itself. (2) Rapoport 1978 was 14 boys, one dose, in a lab, with the drug dextroamphetamine; the script says 'amphetamine'. It shows the direction of the effect is similar without ADHD, not that the size or the real-life benefit is the same; Arnsten describes the effect as 'more apparent' in ADHD. Keep the wording about that one study and do not turn it into 'works on everyone'. 'The condition' refers back to ADHD in the title; the original paper says 'normal' boys, as ADHD was not yet the name used. (3) The prefrontal and too-little-or-too-much lines rest mostly on rat and monkey work; the script says 'mostly with animals', keep that clause. 'Too much' in those experiments means signalling above the useful range (as with high amounts or stress); the script gives no amounts on purpose. The best human imaging (Volkow 2001) measured dopamine in the striatum, not the prefrontal cortex. (4) 'Wakes the prefrontal cortex' and 'the brakes behind your forehead' are plain-language metaphors for improved prefrontal control (attention and inhibition), not anatomy terms; 'powering your brakes' in the last line is the same metaphor. (5) Cortese 2018: 'for twelve weeks' means outcomes measured at about 12 weeks, the longest point with good data, not that relief stops then; 'over a hundred trials' is 133; effect sizes were moderate to large in children and smaller in adults, for clinician-rated symptoms at about 12 weeks; this is symptom ratings, not grades or life outcomes. An updated 2026 dose-effect meta-analysis by the same group exists (Lancet Psychiatry, PIIS2215-0366(26)00091-X); I did not read it, so check that it does not change the picture. (6) The 2023 study is small and tested one puzzle type; 'scored slightly worse' means lower value attained, while the chance of a perfect answer did not change significantly. It tested three drugs including modafinil, which is not an ADHD stimulant. (7) Risks line is a short list, not complete; no amounts are given anywhere on purpose, so do not add any on screen. (8) The last line is the only nod to medical advice; nothing in the script says anyone should or should not take medication. (9) Pronunciations to confirm: Benzedrine (BEN-zuh-dreen), Rapoport (RAP-uh-port), Arnsten (ARN-stun), Samuele Cortese (Italian, roughly sam-WELL-ay cor-TAY-zay); I did not find a recording of any of these names. 'Noradrenaline' is the British term for norepinephrine. (10) PubMed and Science refused automated access for the Rapoport abstract; open the PubMed link once by hand. (11) Expect possible age restriction or limited ads on this topic."
+}

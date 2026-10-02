@@ -106,7 +106,7 @@ def main():
     os.makedirs(args.out_dir, exist_ok=True)
     pieces, report, cursor = [], [], 0
     for i, ln in enumerate(spec["lines"]):
-        words = ln.get("say", ln["text"]).split()
+        words = ln["text"].split()
         takes = [t for t in find_takes(words, heard) if t[0] >= cursor] or find_takes(words, heard)
         if not takes:
             raise SystemExit(f"line {i + 1} not found in the recording: {ln['text'][:60]}...")

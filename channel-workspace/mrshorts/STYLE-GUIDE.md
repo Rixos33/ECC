@@ -59,3 +59,10 @@ recurring host character, which supports our mascot.
 Workable as science education (what it does in the brain and body, and why it is risky). Rules for scripts:
 no dosing, sourcing, preparation or "how to take it"; no glamorising; state the risks plainly; sources in
 the script file. Expect YouTube to age-restrict or limit ads on some of these even when done well.
+
+## What the YouTube app covers (measured on our own published Short, 2026-10-02)
+
+In our 1080x1920 frame, on an iPhone: status bar and top icons down to y ~245; the channel row, title and
+buttons from y ~1450 down; the like/comment/share column at x > 900 below y ~1190; and about 5% cropped from
+each side (visible x ~52-1028). So everything that matters lives in x 70-1010, y 265-1420: title bar at
+y 262-354, scene content y 380-1200, captions at y ~1330 and at most 720 px wide, the owl at (872, 1118).
