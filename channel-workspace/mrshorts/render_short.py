@@ -12,7 +12,7 @@ Script schema: see README.md in this folder.
 import argparse, asyncio, base64, glob, hashlib, json, math, os, random, re, subprocess, sys, tempfile, urllib.request, wave
 import numpy as np
 import skia
-import art, audio
+import art, audio, mascot_show
 
 W, H, FPS = 1080, 1920, 30
 VIS_CY = 760        # visual focus (above captions, clear of the Shorts UI)
@@ -420,7 +420,7 @@ def fit_scene(props, cam=None):
     x0, y0, x1, y1 = FIT_BOX
     cam_max = max((cam or {}).get("zoom", (1.0, 1.1)))  # end of the push-in
     z = min((x1 - x0) / max(1, bx1 - bx0), (y1 - y0) / max(1, by1 - by0)) / cam_max
-    z = max(1.0 / cam_max, min(z, FIT_CAP))
+    z = max(0.6, min(z, FIT_CAP))  # zoom in to fill the box, or out so a tall composition still fits
     # move the content centre to the box centre (in pre-zoom coordinates)
     return z, (x0 + x1) / 2 - (bx0 + bx1) / 2, (y0 + y1) / 2 - (by0 + by1) / 2
 
@@ -871,7 +871,8 @@ def set_style(spec):
     v3 = spec.get("style") == "v3"
     # v3 box measured against the YouTube app: top icons end at y~245, the channel row starts at y~1450,
     # the like/comment/share column covers x>900 below y~1190, and ~5% is cropped from each side
-    FIT_BOX = (70, 380, 1010, 1200) if v3 else (110, 230, 970, 1230)
+    # the strip from y~1050 down to the captions is the owl's stage
+    FIT_BOX = (70, 380, 1010, 1050) if v3 else (110, 230, 970, 1230)
     FIT_CAP = 2.8 if v3 else 1.6
     return v3
 
@@ -989,6 +990,7 @@ def render(spec_path, out_dir, args):
             gags.append((end - 0.15, 1.1, "jawdrop" if reveal else kinds[n_gag % len(kinds)]))
             n_gag += 1
         points = [at for at in points if not any(g0 - 0.9 < at < g0 + gd for g0, gd, _ in gags)]
+        show = mascot_show.plan(t, (spec.get("mascot") or {}).get("acts")) if v3 else []
         activity = (spec.get("mascot") or {}).get("activity") or art.ACTIVITIES[sum(map(ord, spec["id"])) % len(art.ACTIVITIES)]
         teaser = spec.get("teaser")
         if teaser and not args.no_mascot:
@@ -1002,7 +1004,8 @@ def render(spec_path, out_dir, args):
                 samples, ws = load_recording(own, [{"text": f"{teaser['question']} {cta}"}], min_match=0.6)[0]
             else:
                 samples, ws = synth(f"{teaser['question']} {cta}", args, os.path.join(tmp, "mascot"), args.cache,
-                                    voice=args.mascot_voice, rate=args.mascot_rate, pitch=args.mascot_pitch)
+                                    voice=args.mascot_voice, rate=args.mascot_rate or spec.get("rate"),
+                                    pitch=args.mascot_pitch)
             ws = display_words(f"{teaser['question']} {cta}", ws)
             dur = len(samples) / audio.SR + 0.35
             n_q = len(teaser["question"].split()) + 3  # cut to the wave on "The answer..."
@@ -1120,13 +1123,22 @@ def render(spec_path, out_dir, args):
                             pt = max(pt, min(1.0, d / 0.18) if d < 1.05 else max(0.0, 1 - (d - 1.05) / 0.3))
                     gag = next(((kind, (ft - g0) / gd) for g0, gd, kind in gags if g0 <= ft < g0 + gd), None)
                     li = int(ft * FPS)
+                    talk_now = float(lip[li]) if li < len(lip) else 0.0
+                    act = mascot_show.active(show, ft)
                     c.save()
-                    c.translate(*((872, 1118) if v3 else (850, 1492)))
-                    c.scale(*((0.54, 0.54) if v3 else (0.62, 0.62)))
-                    art.PROPS["mascot"](c, ft, 1.0, look=-0.7 + 0.3 * math.sin(ft * 0.7), hop=hop / 2,
-                                        mood="curious" if hop else "smirk", activity=activity,
-                                        talk=float(lip[li]) if li < len(lip) else 0.0, point=ease_io(pt),
-                                        gag=gag[0] if gag else None, gag_t=gag[1] if gag else 0.0)
+                    if v3:  # the whole show is drawn 15% larger, anchored on the ground at his spot
+                        c.translate(880, 1270)
+                        c.scale(1.15, 1.15)
+                        c.translate(-880, -1270)
+                    if act:
+                        mascot_show.RUN[act[2]](c, act[0], act[1], {"t": ft, "talk": talk_now, "point": ease_io(pt)})
+                    else:
+                        c.translate(*(mascot_show.HOME if v3 else (850, 1492)))
+                        c.scale(*((mascot_show.S,) * 2 if v3 else (0.62, 0.62)))
+                        art.PROPS["mascot"](c, ft, 1.0, look=-0.7 + 0.3 * math.sin(ft * 0.7), hop=hop / 2,
+                                            mood="curious" if hop else "smirk", activity=None if v3 else activity,
+                                            talk=talk_now, point=ease_io(pt),
+                                            gag=gag[0] if gag else None, gag_t=gag[1] if gag else 0.0)
                     c.restore()
                 if v3 and not sc.get("outro"):  # the owl's closing label takes the title's place
                     draw_title(c, spec, ft, accent)
@@ -1153,12 +1165,13 @@ def main():
     ap.add_argument("--tts", choices=["edge", "elevenlabs", "say"], default="edge")
     ap.add_argument("--voice", default=None)
     ap.add_argument("--rate", default="-4%", help="edge speaking rate")
-    ap.add_argument("--pitch", default="-2Hz", help="edge pitch shift")
+    ap.add_argument("--pitch", default="+8Hz", help="edge pitch shift")
     ap.add_argument("--crf", type=int, default=24, help="x264 quality (lower = bigger, sharper)")
     ap.add_argument("--music-db", type=float, default=-19.0, help="music bed peak level before ducking")
-    ap.add_argument("--mascot-voice", default="en-GB-RyanNeural", help="voice for the mascot's end question")
-    ap.add_argument("--mascot-rate", default="+0%")
-    ap.add_argument("--mascot-pitch", default="+0Hz")
+    ap.add_argument("--mascot-voice", default=None,
+                    help="voice for the mascot's end question (default: the narrator's, since his beak speaks the narration)")
+    ap.add_argument("--mascot-rate", default=None)
+    ap.add_argument("--mascot-pitch", default=None)
     ap.add_argument("--no-mascot", action="store_true", help="skip the mascot and its end question")
     ap.add_argument("--voice-file", default=None,
                     help="your own narration (one continuous recording of the script); replaces the AI voice")

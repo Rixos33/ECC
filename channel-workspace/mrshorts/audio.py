@@ -400,4 +400,9 @@ def mixdown(voice, duration, cues, mood="wonder", seed=0, music_db=-19.0, sfx_db
             clip = pop(hz(tones[i % len(tones)] + 12))
         place(fx, clip, at, SFX_GAIN.get(kind, 0.4))
     fx *= 10 ** (sfx_db / 20)
-    return np.stack([v, v]) + fx + bed
+    # voice polish: lift the presence range for clarity, then a short stereo room around a solid centre
+    vb = v + 0.4 * (v - lowpass(v, 2400))
+    room_l = reverb(vb, 0.45, 1.0, seed + 31, tone=6000) - vb * 0.0
+    room_r = reverb(vb, 0.45, 1.0, seed + 32, tone=6000)
+    voice_st = np.stack([vb + 0.16 * (room_l - 0 * vb), vb + 0.16 * room_r])
+    return voice_st + fx + bed

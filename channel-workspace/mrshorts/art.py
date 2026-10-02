@@ -924,7 +924,7 @@ GAGS = ("glasses", "eyebrows", "jawdrop", "double_take", "nod", "peek", "shrug",
 
 
 def p_mascot(c, t, p, talk=0.0, look=0.0, mood="smirk", wave=False, hop=0.0, activity=None, point=0.0,
-             gag=None, gag_t=0.0, **_):
+             gag=None, gag_t=0.0, point_angle=128.0, pointer=False, wings=None, legs="stand", shadow=True, **_):
     """Mr. Shorts: a small round owl with big glasses, a raised eyebrow and red shorts.
     talk 0..1 opens the beak, look -1..1 moves the pupils, hop 0..1 lifts him off the ground,
     point 0..1 raises the left wing toward the scene, gag + gag_t (0..1) plays a short bit of business."""
@@ -954,7 +954,8 @@ def p_mascot(c, t, p, talk=0.0, look=0.0, mood="smirk", wave=False, hop=0.0, act
     if point:
         look, look_y = -1.0, min(look_y, -8 * point)
     lift = -70 * math.sin(math.pi * max(0.0, min(1.0, hop)))
-    c.drawOval(skia.Rect.MakeXYWH(-100 + abs(lift) * 0.2, 186, 200 - abs(lift) * 0.4, 28), paint(INK, 70))
+    if shadow:
+        c.drawOval(skia.Rect.MakeXYWH(-100 + abs(lift) * 0.2, 186, 200 - abs(lift) * 0.4, 28), paint(INK, 70))
     c.save()
     c.translate(0, lift)
     c.translate(0, 190)
@@ -963,8 +964,16 @@ def p_mascot(c, t, p, talk=0.0, look=0.0, mood="smirk", wave=False, hop=0.0, act
     sq = 1 + 0.02 * math.sin(t * 2.6)  # breathing
     c.scale(flip / sq if abs(flip) > 0.08 else 0.08, sq)
     for sx in (-1, 1):  # legs and feet, showing below the shorts
-        c.drawLine(sx * 62, 140, sx * 62, 182, paint(beak_c, stroke=14))
-        c.drawOval(skia.Rect.MakeXYWH(sx * 66 - 34, 172, 68, 26), paint(beak_c))
+        if legs == "sit":      # legs stick out forward (to his left) when seated
+            c.drawLine(sx * 62, 140, sx * 62 - 70, 150 + sx * 6, paint(beak_c, stroke=14))
+            c.drawOval(skia.Rect.MakeXYWH(sx * 62 - 110, 128 + sx * 6, 40, 44), paint(beak_c))
+        elif legs == "dangle":  # flying or hanging: legs swing loosely
+            sw = 14 * math.sin(t * 6 + sx)
+            c.drawLine(sx * 62, 140, sx * 62 + sw, 186, paint(beak_c, stroke=14))
+            c.drawOval(skia.Rect.MakeXYWH(sx * 66 - 34 + sw, 178, 68, 26), paint(beak_c))
+        else:
+            c.drawLine(sx * 62, 140, sx * 62, 182, paint(beak_c, stroke=14))
+            c.drawOval(skia.Rect.MakeXYWH(sx * 66 - 34, 172, 68, 26), paint(beak_c))
     for sx in (-1, 1):  # ear tufts
         c.drawPath(path([(sx * 40, -150), (sx * 112, -205), (sx * 104, -110)]), paint(wing_c))
     body = skia.Path()
@@ -1008,11 +1017,16 @@ def p_mascot(c, t, p, talk=0.0, look=0.0, mood="smirk", wave=False, hop=0.0, act
         if wave and sx > 0:
             ang = -152 + 18 * math.sin(t * 9)
         if sx < 0 and point:
-            ang = ang + (128 - ang) * point + 5 * math.sin(t * 10) * point  # up and to the left, with a jab
+            ang = ang + (point_angle - ang) * point + 5 * math.sin(t * 10) * point  # toward the target, with a jab
             length = 118 + 34 * point
+        if wings is not None:  # explicit pose for both wings (typing, juggling, holding on)
+            ang = wings[0 if sx < 0 else 1]
         if gag == "glasses" and sx > 0:
             ang = ang + (-150 - ang) * arc                                   # wing comes up to the frames
         c.rotate(ang)
+        if pointer and sx < 0 and (point > 0.3 or wings is not None):  # a pointer stick held in the wing
+            c.drawLine(0, length - 20, 0, length + 190, paint((120, 80, 50), stroke=10))
+            c.drawCircle(0, length + 196, 12, paint("red"))
         c.drawOval(skia.Rect.MakeXYWH(-26, -8, 52, length), paint(wing_c))
         c.drawOval(skia.Rect.MakeXYWH(-18, -2, 34, length - 22), paint(shade(wing_c, 0.18)))
         c.restore()
@@ -1033,16 +1047,29 @@ def p_mascot(c, t, p, talk=0.0, look=0.0, mood="smirk", wave=False, hop=0.0, act
     lift_b = {"smirk": 16, "curious": 22, "happy": 6}.get(mood, 12)
     c.drawLine(-88, -120 - brow_extra, -30, -116 - brow_extra, paint(wing_c, stroke=11))
     c.drawLine(30, -118 - lift_b * 0.4 - brow_extra, 90, -124 - lift_b - brow_extra, paint(wing_c, stroke=11))
-    # beak opens with speech
-    op = 16 * max(0.0, min(1.5, talk))
-    c.drawPath(path([(-22, 6 - op * 0.3), (22, 6 - op * 0.3), (0, 26 - op * 0.3)]), paint(beak_c))
-    if op > 1:
-        c.drawPath(path([(-16, 12 + op * 0.4), (16, 12 + op * 0.4), (0, 22 + op)]), paint(shade(beak_c, -0.25)))
-    elif mood in ("smirk", "happy"):
-        sm = skia.Path()
-        sm.moveTo(6, 34)
-        sm.quadTo(26, 44, 40, 28)
-        c.drawPath(sm, paint(INK, stroke=6))
+    # mouth: a clear open mouth with teeth and a tongue when he talks
+    tk = max(0.0, min(1.5, talk))
+    if tk > 0.12:
+        mw, mh = 44 + 10 * tk, 16 + 44 * tk
+        mouth = skia.RRect.MakeRectXY(skia.Rect.MakeXYWH(-mw / 2, 12, mw, mh), 16, 16)
+        c.drawRRect(mouth, paint((120, 30, 50)))
+        c.save()
+        c.clipRRect(mouth, doAntiAlias=True)
+        c.drawOval(skia.Rect.MakeXYWH(-mw * 0.32, 12 + mh * 0.55, mw * 0.64, mh * 0.6), paint("pink"))   # tongue
+        c.drawRect(skia.Rect.MakeXYWH(-mw / 2, 12, mw, min(13, mh * 0.34)), paint("white"))               # top teeth
+        for i in range(1, 4):
+            x = -mw / 2 + i * mw / 4
+            c.drawLine(x, 12, x, 12 + min(13, mh * 0.34), paint((200, 200, 205), stroke=2))
+        c.restore()
+        c.drawRRect(mouth, paint(INK, stroke=5))
+        c.drawPath(path([(-24, 4), (24, 4), (0, 22)]), paint(beak_c))                                    # upper beak
+    else:
+        c.drawPath(path([(-22, 6), (22, 6), (0, 26)]), paint(beak_c))
+        if mood in ("smirk", "happy"):
+            sm = skia.Path()
+            sm.moveTo(6, 34)
+            sm.quadTo(26, 44, 40, 28)
+            c.drawPath(sm, paint(INK, stroke=6))
     c.restore()
     if activity:
         _activity(c, t, activity)

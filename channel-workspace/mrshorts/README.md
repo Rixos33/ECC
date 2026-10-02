@@ -128,6 +128,15 @@ order. With `--voice-file`, a take of the closing question saved as `<voice-file
 `prepare_narration.py` when you read that line too) is used, so he keeps one voice throughout.
 `--no-mascot` renders without him (and keeps the seamless loop).
 
+### The mascot show (v3 scripts)
+
+In v3 Shorts he does not stay in one corner. `mascot_show.py` holds ten scenarios, each about six seconds, in
+which props glide in, he performs and they glide away: `computer`, `sofa`, `jetpack` (flies up beside the title
+and points a stick at it, then at the animation), `skateboard`, `detective`, `chalkboard`, `juggle`,
+`trampoline`, `parachute`, `popcorn`. As many as fit the narration are played in order; set your own order with
+`"mascot": {"acts": ["jetpack", "sofa", ...]}`. Between scenarios he is at his spot, pointing and doing gags.
+His mouth opens with teeth and a tongue in time with the narration.
+
 ## Retention rules baked into the renderer
 
 - Frame 0 already shows the hook visual (no fade-in), and the loop line flows straight back into the hook.

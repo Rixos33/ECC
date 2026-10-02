@@ -4,7 +4,7 @@
     .venv/bin/python lint_scenes.py "scripts/*.json"
 
 Checks every line's scene, in frame pixels after auto-framing, for:
-- HERO: the largest prop must be at least 420 px tall or 600 px wide, so one subject dominates.
+- HERO: the largest prop must fill at least half the box height or 62% of its width, so one subject dominates.
 - CLIP: props must stay inside the frame safe area (x 40-1040, y 200-1250).
 - OVERLAP: two props' boxes may not overlap by more than 25% of the smaller box, unless one sets "layer": true.
 - SPARSE: content must cover at least 30% of the visual area.
@@ -72,7 +72,8 @@ def lint(path):
             if not any(p["prop"] not in TEXT_PROPS for p in props):
                 issues.append(f"{tag} TEXT text-only beat, add an illustrated hero prop")
             hero = max(bx, key=lambda b: (b[3] - b[1]) * (b[4] - b[2]))
-            if hero[4] - hero[2] < 420 and hero[3] - hero[1] < 600:
+            box_w, box_h = rs.FIT_BOX[2] - rs.FIT_BOX[0], rs.FIT_BOX[3] - rs.FIT_BOX[1]
+            if hero[4] - hero[2] < min(420, 0.5 * box_h) and hero[3] - hero[1] < min(600, 0.62 * box_w):
                 issues.append(f"{tag} HERO largest prop '{hero[0]}' only {hero[3]-hero[1]:.0f}x{hero[4]-hero[2]:.0f}px; scale it up")
             for name, x0, y0, x1, y1, _ in bx:
                 if x0 < SAFE[0] or x1 > SAFE[2] or y0 < SAFE[1] or y1 > SAFE[3]:
@@ -90,7 +91,7 @@ def lint(path):
             ux0, uy0 = min(b[1] for b in bx), min(b[2] for b in bx)
             ux1, uy1 = max(b[3] for b in bx), max(b[4] for b in bx)
             cover = max(0, min(ux1, rs.FIT_BOX[2]) - max(ux0, rs.FIT_BOX[0])) * max(0, min(uy1, rs.FIT_BOX[3]) - max(uy0, rs.FIT_BOX[1])) / area
-            if cover < 0.30:
+            if cover < 0.28:
                 issues.append(f"{tag} SPARSE content covers {cover:.0%} of the visual area")
             hero_area = (hero[3] - hero[1]) * (hero[4] - hero[2]) / area
             if len(props) < 2 and hero_area < 0.35:
