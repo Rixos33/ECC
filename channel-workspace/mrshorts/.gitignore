@@ -2,3 +2,5 @@
 __pycache__/
 .tts-cache/
 out/timing/
+out_ai/
+out/narration/*.wav

@@ -1,0 +1,127 @@
+[
+ {
+  "line": 1,
+  "takes_found": 1,
+  "used_seconds": [
+   1.5,
+   7.8
+  ],
+  "match": 1.0,
+  "heard": "Why does an LSD trip last so long, often swallowing most of a waking day?",
+  "differences": []
+ },
+ {
+  "line": 2,
+  "takes_found": 1,
+  "used_seconds": [
+   8.7,
+   16.2
+  ],
+  "match": 0.97,
+  "heard": "In 1943, chemist Albert Hofmann cycled home from his Swiss lab, then mistook his for a witch.",
+  "differences": [
+   "'neighbour' -> ''"
+  ]
+ },
+ {
+  "line": 3,
+  "takes_found": 1,
+  "used_seconds": [
+   24.2,
+   32.7
+  ],
+  "match": 0.86,
+  "heard": "LSD looks enough like serotonin, your brain's own messenger, to slot into a receptor called 5 -HT2A.",
+  "differences": [
+   "'five H T two A.' -> '5 -HT2A.'"
+  ]
+ },
+ {
+  "line": 4,
+  "takes_found": 1,
+  "used_seconds": [
+   38.9,
+   54.1
+  ],
+  "match": 0.95,
+  "heard": "In 2016, Robin Carhart -Harris's London team scanned volunteers and watched normally separate brain networks start blending. The visual cortex was talking to far more of the brain, even with eyes shut.",
+  "differences": [
+   "\"Carhart-Harris's\" -> \"Carhart -Harris's\""
+  ]
+ },
+ {
+  "line": 5,
+  "takes_found": 1,
+  "used_seconds": [
+   59.1,
+   67.6
+  ],
+  "match": 0.67,
+  "heard": "In 2017, Daniel Walker working with Brian Roth's lab, x -rayed LSD sitting inside the serotonin receptor.",
+  "differences": [
+   "'Wacker,' -> 'Walker'",
+   "'in Bryan' -> 'with Brian'",
+   "'X-rayed' -> 'x -rayed'",
+   "'a' -> 'the'"
+  ]
+ },
+ {
+  "line": 6,
+  "takes_found": 1,
+  "used_seconds": [
+   70.8,
+   79.7
+  ],
+  "match": 1.0,
+  "heard": "Part of the receptor had folded over the molecule, like a lid. When they loosened that lid, LSD slipped out several times faster.",
+  "differences": []
+ },
+ {
+  "line": 7,
+  "takes_found": 2,
+  "used_seconds": [
+   89.6,
+   94.9
+  ],
+  "match": 1.0,
+  "heard": "That's probably only part of the answer, because the drug also lingers in the blood for hours.",
+  "differences": []
+ },
+ {
+  "line": 8,
+  "takes_found": 1,
+  "used_seconds": [
+   96.2,
+   102.3
+  ],
+  "match": 1.0,
+  "heard": "It rarely poisons the body, but a trip can become hours of panic, and people get hurt in accidents.",
+  "differences": []
+ },
+ {
+  "line": 9,
+  "takes_found": 1,
+  "used_seconds": [
+   109.8,
+   118.7
+  ],
+  "match": 0.95,
+  "heard": "A few keep lasting visual disturbances, it might trigger psychosis in vulnerable people and it's illegal in most countries.",
+  "differences": [
+   "'may' -> 'might'"
+  ]
+ },
+ {
+  "line": 10,
+  "takes_found": 1,
+  "used_seconds": [
+   119.7,
+   125.9
+  ],
+  "match": 0.86,
+  "heard": "It lasts so long partly because your own receptor shots delete and you don't choose when it ends.",
+  "differences": [
+   "'shuts the lid,' -> 'shots delete'"
+  ]
+ }
+]

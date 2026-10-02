@@ -26,7 +26,7 @@ Options: `--voice en-US-BrianMultilingualNeural`, `--rate -4%`, `--pitch -2Hz`, 
   "palette": "violet|blue|teal|green|orange|red|pink|navy",
   "bg": "space|sky|plain",
   "ground": "planet|hill|sea|none",           // optional; default planet for space, hill otherwise
-  "mood": "wonder|curious|tense|playful",     // music bed chord progression
+  "mood": "wonder|curious|tense|playful|mystic|eerie",  // music bed; mystic and eerie are slow, airy and bell-led
   "lines": [
     {
       "text": "Your brain predicts your own touch, so it barely registers.",

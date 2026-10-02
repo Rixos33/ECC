@@ -17,6 +17,19 @@ MOODS = {
     "playful": {"bpm": 104, "prog": [(48, [64, 67, 71, 74]), (45, [64, 67, 72, 76]),    # Cmaj9  Am7
                                      (41, [64, 69, 72, 76]), (43, [62, 67, 71, 74])]},   # Fmaj7  G6
 }
+# "mystic" kit: slow, modal, airy. Minor with a raised-fourth colour and a harmonic-minor pull at the end.
+MOODS["mystic"] = {"bpm": 63, "kit": "mystic", "prog": [
+    (45, [60, 64, 69, 71]),   # Am(add9)
+    (41, [60, 64, 69, 71]),   # Fmaj7(#11): same upper notes, the floor drops away
+    (38, [60, 65, 69, 76]),   # Dm9
+    (40, [59, 64, 68, 74])]}  # E7sus -> G# leading tone
+MOODS["eerie"] = {"bpm": 58, "kit": "mystic", "prog": [
+    (40, [59, 64, 67, 71]),   # Em
+    (41, [60, 65, 69, 72]),   # F (flat-second colour)
+    (45, [60, 64, 69, 72]),   # Am
+    (47, [59, 63, 66, 71])]}  # B major: unresolved
+BELL_MOTIF = [0, None, 2, None, 3, None, 1, None, None, 2, None, None, 3, None, None, None]  # sixteenth-note grid
+
 ARP = [0, 2, 1, 3, 2, 1, 3, 2]          # repeating motif over the chord tones (eighth notes)
 ARP_VEL = [1.0, 0.55, 0.75, 0.6, 0.9, 0.5, 0.7, 0.0]  # 0 = rest; accents give the motif a shape
 
@@ -50,19 +63,19 @@ def lowpass(x, cutoff):
     return x
 
 
-def _ir(seconds, seed):
-    """Hall-like impulse response: short bright early part plus a long dark tail, after a pre-delay."""
+def _ir(seconds, seed, tone=2600):
+    """Hall-like impulse response: short bright early part plus a long tail (dark by default), after a pre-delay."""
     rng = np.random.default_rng(seed)
     n = int(seconds * SR)
     t = np.arange(n) / SR
     early = rng.standard_normal(n) * np.exp(-t * 9)
-    tail = lowpass(rng.standard_normal(n), 2600) * np.exp(-t * 2.2) * 2.2
+    tail = lowpass(rng.standard_normal(n), tone) * np.exp(-t * 2.2) * 2.2
     ir = np.concatenate([np.zeros(int(0.018 * SR)), early * 0.5 + tail])
     return ir / np.sqrt(np.sum(ir ** 2))
 
 
-def reverb(x, seconds=3.2, mix=0.35, seed=1):
-    ir = _ir(seconds, seed)
+def reverb(x, seconds=3.2, mix=0.35, seed=1, tone=2600):
+    ir = _ir(seconds, seed, tone)
     size = 1 << int(np.ceil(np.log2(len(x) + len(ir))))
     wet = np.fft.irfft(np.fft.rfft(x, size) * np.fft.rfft(ir, size), size)[:len(x)]
     return (1 - mix) * x + mix * wet * 0.7
@@ -111,6 +124,101 @@ def shaker(seed, length=0.07):
     return x * np.exp(-np.arange(n) / SR * 60)
 
 
+def choir_note(freq, n, seed):
+    """Soft wordless 'ooh': harmonics shaped by two vowel formants, with slow vibrato."""
+    rng = np.random.default_rng(seed)
+    t = np.arange(n) / SR
+    vib = 1 + 0.004 * np.sin(2 * np.pi * rng.uniform(4.6, 5.4) * t + rng.uniform(0, 6.28))
+    phase = 2 * np.pi * np.cumsum(freq * vib) / SR
+    out = np.zeros(n)
+    for h in range(1, 14):
+        fh = freq * h
+        if fh > 5200:
+            break
+        amp = (np.exp(-((fh - 420) / 260) ** 2) + 0.55 * np.exp(-((fh - 900) / 320) ** 2)
+               + 0.12 * np.exp(-((fh - 2900) / 600) ** 2)) / h ** 0.35
+        out += amp * np.sin(h * phase + rng.uniform(0, 6.28))
+    return out
+
+
+def swell(length=1.6, seed=0):
+    """Airy reversed swell that rises into a chord change."""
+    rng = np.random.default_rng(seed)
+    n = int(length * SR)
+    x = rng.standard_normal(n)
+    x = lowpass(x, 6000) - lowpass(x, 900)
+    return x * (np.arange(n) / n) ** 3
+
+
+def music_mystic(duration, cfg, seed=0):
+    """Mysterious bed: deep drone, glassy pad + choir, sparse bells with long echoes, chime sparkles, swells."""
+    rng = np.random.default_rng(seed)
+    beat = 60 / cfg["bpm"]
+    bar = 4 * beat
+    n = int((duration + 6.0) * SR)
+    pad, bells, drone, air = np.zeros((2, n)), np.zeros((2, n)), np.zeros(n), np.zeros((2, n))
+    k = 0
+    while k * bar < duration + 1.0:
+        bass, tones = cfg["prog"][k % len(cfg["prog"])]
+        t0 = k * bar
+        pn = int((bar + 3.0) * SR)
+        tp = np.arange(pn) / SR
+        # drone: root and fifth, slow beating between two slightly detuned voices
+        for m, g in ((bass, 1.0), (bass + 7, 0.45), (bass + 12, 0.3)):
+            f = hz(m)
+            dr = (np.sin(2 * np.pi * f * tp) + np.sin(2 * np.pi * f * 1.004 * tp)) * 0.5
+            dr += 0.2 * np.sin(4 * np.pi * f * tp)
+            place(drone, dr * env(pn, 1.6, 2.4), t0 - 0.8, 0.16 * g)
+        # glass pad + choir, each voice swelling in slowly
+        for i, m in enumerate(tones):
+            pan = 0.2 + 0.6 * i / (len(tones) - 1)
+            place(pad, pad_note(hz(m), pn, seed * 31 + k * 7 + i) * env(pn, 2.0, 2.6), t0 - 1.0, 0.045, pan)
+            place(pad, choir_note(hz(m - 12 if i < 2 else m), pn, seed * 17 + k * 5 + i) * env(pn, 2.2, 2.6),
+                  t0 - 1.0, 0.05, 1 - pan)
+            place(pad, pad_note(hz(m + 12), pn, seed * 13 + k * 3 + i) * env(pn, 2.6, 2.8), t0 - 1.0, 0.03, pan)
+            sh = np.sin(2 * np.pi * hz(m + 24) * tp) * (1 + 0.5 * np.sin(2 * np.pi * 0.3 * tp + i))  # glassy shimmer
+            place(pad, sh * env(pn, 3.0, 3.0), t0 - 1.0, 0.012, 1 - pan)
+        # bell motif: sparse, same shape each bar, last bar of the cycle answers an octave up
+        step = bar / len(BELL_MOTIF)
+        for i, idx in enumerate(BELL_MOTIF):
+            if idx is None:
+                continue
+            m = tones[idx] + 12 + (12 if (k % 4 == 3 and i >= 9) else 0)
+            place(bells, bell(hz(m), 2.6), t0 + i * step + rng.normal(0, 0.008), 0.2 * rng.uniform(0.75, 1.0),
+                  pan=0.3 + 0.4 * (i % 3) / 2)
+        # chime sparkles: one or two very high bells at loose times
+        for _ in range(int(rng.integers(1, 3))):
+            m = tones[int(rng.integers(len(tones)))] + 24 + (7 if rng.random() < 0.3 else 0)
+            place(bells, bell(hz(m), 1.8), t0 + rng.uniform(0, bar), 0.1 * rng.uniform(0.6, 1.0), pan=rng.uniform(0.15, 0.85))
+        # airy swell rising into the next chord
+        sw = swell(1.6, seed + k)
+        place(air, np.stack([sw, np.roll(sw, 211)]), t0 + bar - 1.6, 0.11)
+        # distant heartbeat on the downbeat
+        place(air, thump(0.3), t0, 0.07)
+        k += 1
+    # long dotted echo on the bells, then a big hall
+    d = int(0.75 * beat * SR)
+    echo = np.zeros_like(bells)
+    echo[0, d:] += bells[1, :-d] * 0.42
+    echo[1, 2 * d:] += bells[0, :-2 * d] * 0.3
+    echo[0, 3 * d:] += bells[1, :-3 * d] * 0.18
+    bells = bells + echo
+    # a breath of high "air" that slowly comes and goes
+    tn = np.arange(n) / SR
+    for ch in (0, 1):
+        hiss = rng.standard_normal(n)
+        hiss = lowpass(hiss, 9000) - lowpass(hiss, 3500)
+        air[ch] += hiss * 0.02 * (0.55 + 0.45 * np.sin(2 * np.pi * tn / (bar * 2) + ch * 1.3))
+    wet = pad + bells + air
+    wet = np.stack([reverb(wet[0], 4.6, 0.5, seed + 11, tone=8000), reverb(wet[1], 4.6, 0.5, seed + 12, tone=8000)])
+    out = wet + drone[None, :] * 0.8
+    out = np.tanh(out * 1.5) / 1.5
+    out = out[:, :int(duration * SR)]
+    fade = int(0.8 * SR)
+    out[:, -fade:] *= np.linspace(1, 0.35, fade)
+    return out
+
+
 def chord_at(time, mood):
     cfg = MOODS.get(mood, MOODS["wonder"])
     bar = 4 * 60 / cfg["bpm"]
@@ -140,6 +248,8 @@ def music(duration, mood="wonder", seed=0):
     """Ambient bed: pad + bass + a repeating keys motif with a ping-pong echo + a soft pulse."""
     rng = np.random.default_rng(seed)
     cfg = MOODS.get(mood, MOODS["wonder"])
+    if cfg.get("kit") == "mystic":
+        return music_mystic(duration, cfg, seed)
     beat = 60 / cfg["bpm"]
     bar = 4 * beat
     n = int((duration + 4.0) * SR)
@@ -217,7 +327,7 @@ def bell(freq, length=1.6):
     """Glockenspiel-like tone: slightly inharmonic partials with fast-decaying upper ones."""
     t = np.arange(int(length * SR)) / SR
     y = sum(a * np.sin(2 * np.pi * freq * r * t) * np.exp(-t * d)
-            for r, a, d in ((1.0, 1.0, 3.2), (2.76, 0.35, 6.0), (5.4, 0.14, 11.0), (8.93, 0.05, 18.0)))
+            for r, a, d in ((1.0, 1.0, 3.2), (2.76, 0.42, 5.0), (5.4, 0.2, 9.0), (8.93, 0.08, 15.0)))
     return y * np.minimum(1.0, t / 0.003)
 
 
