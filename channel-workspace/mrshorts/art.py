@@ -986,6 +986,244 @@ def p_mascot(c, t, p, talk=0.0, look=0.0, mood="smirk", wave=False, hop=0.0, act
     if activity:
         _activity(c, t, activity)
 
+
+# ---------------- v3: faces for any object, and brain-science props ----------------
+
+def face(c, t, mood="happy", s=1.0, ink=INK):
+    """A simple face that can sit on any prop, so every object can be a character."""
+    c.save()
+    c.scale(s, s)
+    blink = abs(((t + 0.3) % 3.1) - 0.1) < 0.07 and mood not in ("dizzy", "stars", "shocked")
+    for sx in (-1, 1):
+        ex = sx * 34
+        if mood == "dizzy":
+            for a in (45, -45):
+                c.save()
+                c.translate(ex, -8)
+                c.rotate(a)
+                c.drawLine(-13, 0, 13, 0, paint(ink, stroke=7))
+                c.restore()
+        elif mood == "sleepy" or blink:
+            c.drawArc(skia.Rect.MakeXYWH(ex - 15, -18, 30, 22), 20, 140, False, paint(ink, stroke=7))
+        else:
+            r = 21 if mood == "shocked" else 17
+            c.drawCircle(ex, -8, r, paint("white"))
+            if mood == "stars":
+                for a in range(4):
+                    c.save()
+                    c.translate(ex, -8)
+                    c.rotate(a * 45 + t * 60)
+                    c.drawLine(-12, 0, 12, 0, paint("yellow", stroke=6))
+                    c.restore()
+            else:
+                c.drawCircle(ex + 4 * math.sin(t * 1.3), -7, 9 if mood != "shocked" else 7, paint(ink))
+        if mood == "angry":
+            c.drawLine(ex - sx * 20, -40, ex + sx * 14, -28, paint(ink, stroke=7))
+        elif mood == "worried":
+            c.drawLine(ex - sx * 18, -32, ex + sx * 14, -40, paint(ink, stroke=6))
+    m = skia.Path()
+    if mood in ("happy", "stars"):
+        m.moveTo(-20, 22)
+        m.quadTo(0, 44, 20, 22)
+        c.drawPath(m, paint(ink, stroke=7))
+    elif mood == "shocked":
+        c.drawOval(skia.Rect.MakeXYWH(-10, 20, 20, 26), paint(ink))
+    elif mood in ("worried", "dizzy", "angry"):
+        m.moveTo(-18, 36)
+        m.quadTo(0, 20, 18, 36)
+        c.drawPath(m, paint(ink, stroke=7))
+    elif mood == "smug":
+        m.moveTo(-14, 28)
+        m.quadTo(8, 38, 22, 22)
+        c.drawPath(m, paint(ink, stroke=7))
+    else:
+        c.drawLine(-14, 30, 14, 30, paint(ink, stroke=7))
+    c.restore()
+
+
+def p_molecule(c, t, p, color="yellow", mood="smug", atoms=5, **_):
+    """A small molecule character: a cluster of glowing atoms with a face on the biggest one."""
+    glow(c, 0, 0, 150, color, 110)
+    for i in range(int(atoms)):
+        a = i * 2.4 + 0.5
+        r = 78 + 10 * math.sin(t * 2 + i)
+        x, y = r * math.cos(a), r * math.sin(a) * 0.85
+        c.drawLine(0, 0, x, y, paint(shade(color, -0.35), stroke=14))
+        ball(c, x, y, 34 + (i % 2) * 8, shade(color, 0.25 if i % 2 else -0.1))
+    ball(c, 0, 0, 78, color)
+    face(c, t, mood, 0.95)
+
+
+def p_receptor(c, t, p, color="purple", lid=0.0, mood=None, **_):
+    """A cell-surface receptor: a cup embedded in a membrane. `lid` 0..1 folds a flap over the pocket."""
+    for i in range(-5, 6):  # membrane: two rows of lipid beads
+        for y in (70, 118):
+            ball(c, i * 62 + 8 * math.sin(t * 1.5 + i), y, 26, shade(color, -0.45), light=False)
+    cup = skia.Path()
+    cup.moveTo(-150, -150)
+    cup.cubicTo(-150, 20, -110, 150, 0, 150)
+    cup.cubicTo(110, 150, 150, 20, 150, -150)
+    cup.lineTo(84, -150)
+    cup.cubicTo(84, -20, 60, 40, 0, 40)
+    cup.cubicTo(-60, 40, -84, -20, -84, -150)
+    cup.close()
+    c.save()
+    c.translate(8, 10)
+    c.drawPath(cup, paint(shade(color, -0.3)))
+    c.restore()
+    c.drawPath(cup, paint(color))
+    c.drawPath(cup, paint(shade(color, 0.3), stroke=6))
+    k = max(0.0, min(1.0, float(lid)))  # the lid swings down from the right rim
+    c.save()
+    c.translate(150, -150)
+    c.rotate(-150 + 150 * k)
+    c.drawRRect(skia.RRect.MakeRectXY(skia.Rect.MakeXYWH(-300, -26, 300, 52), 26, 26), paint(shade(color, 0.25)))
+    c.drawRRect(skia.RRect.MakeRectXY(skia.Rect.MakeXYWH(-300, -26, 300, 52), 26, 26), paint(shade(color, -0.3), stroke=6))
+    c.restore()
+    if mood:
+        c.save()
+        c.translate(0, 100)
+        face(c, t, mood, 0.8)
+        c.restore()
+
+
+def p_neuron(c, t, p, color="cyan", mood="happy", fire=0.0, **_):
+    """A nerve cell with branching arms; `fire` 0..1 lights it up."""
+    f = max(0.0, min(1.0, float(fire)))
+    if f > 0:
+        glow(c, 0, 0, 230, "yellow", int(170 * f))
+    for i in range(7):
+        a = i * 0.9 + 0.3
+        pa = skia.Path()
+        pa.moveTo(0, 0)
+        x1, y1 = 150 * math.cos(a), 150 * math.sin(a)
+        x2 = 250 * math.cos(a + 0.3 * math.sin(t * 1.4 + i))
+        y2 = 250 * math.sin(a + 0.3 * math.sin(t * 1.4 + i))
+        pa.quadTo(x1 * 1.2, y1 * 0.8, x2, y2)
+        c.drawPath(pa, paint(shade(color, -0.2), stroke=24 - i % 3 * 5))
+        ball(c, x2, y2, 16, shade(color, 0.3))
+    ball(c, 0, 0, 110, color)
+    c.drawCircle(0, 0, 60, paint(shade(color, -0.25)))
+    face(c, t, mood, 1.0)
+
+
+def p_network(c, t, p, color="pink", links=0.0, **_):
+    """Brain regions as nodes. `links` 0..1 draws more and more connections between them."""
+    pts = [(-170, -150), (0, -210), (170, -150), (-220, 20), (-60, -20), (90, 10), (220, 40), (-130, 180), (30, 170), (170, 190)]
+    cols = ("pink", "cyan", "yellow", "green", "orange", "violet")
+    pairs = [(i, j) for i in range(len(pts)) for j in range(i + 1, len(pts))]
+    near = [pr for pr in pairs if math.hypot(pts[pr[0]][0] - pts[pr[1]][0], pts[pr[0]][1] - pts[pr[1]][1]) < 200]
+    far = [pr for pr in pairs if pr not in near]
+    k = max(0.0, min(1.0, float(links)))
+    for n, (i, j) in enumerate(near + far[:int(len(far) * k)]):
+        hot = n >= len(near)
+        a = 150 + 100 * math.sin(t * 4 + n) if hot else 130
+        c.drawLine(*pts[i], *pts[j], paint(cols[n % 6] if hot else "white", int(a), stroke=9 if hot else 6))
+    for i, (x, y) in enumerate(pts):
+        r = 30 + 5 * math.sin(t * 3 + i) * (1 + k)
+        glow(c, x, y, r * 1.6, cols[i % 6], int(60 + 120 * k))
+        ball(c, x, y, r, cols[i % 6])
+
+
+def p_rays(c, t, p, color="yellow", n=14, **_):
+    """Rotating burst of rays, for a reveal behind a subject."""
+    c.save()
+    c.rotate(t * 14)
+    for i in range(int(n)):
+        c.save()
+        c.rotate(i * 360 / n)
+        c.drawPath(path([(0, 0), (-40, -520), (40, -520)]), paint(color, 70 if i % 2 else 120))
+        c.restore()
+    c.restore()
+
+
+def p_rings(c, t, p, colors=("pink", "yellow", "cyan", "violet", "orange", "green"), **_):
+    """Concentric rings drifting outward with cycling colours: a stylised 'altered perception' pattern."""
+    for i in range(9, 0, -1):
+        r = (i * 60 + t * 55) % 540 + 20
+        wob = 1 + 0.06 * math.sin(t * 3 + i)
+        c.drawOval(skia.Rect.MakeXYWH(-r * wob, -r / wob, 2 * r * wob, 2 * r / wob),
+                   paint(colors[(i + int(t * 2)) % len(colors)], 215, stroke=26))
+
+
+def p_bike(c, t, p, color="orange", rider="white", mood="dizzy", **_):
+    """A wobbling cyclist: two spinning wheels, a simple frame and a blob rider."""
+    c.save()
+    c.rotate(5 * math.sin(t * 4))
+    for wx in (-130, 130):
+        c.drawCircle(wx, 110, 78, paint(INK, stroke=16))
+        c.drawCircle(wx, 110, 62, paint("white", 60))
+        for k in range(4):
+            a = t * 6 + k * math.pi / 2
+            c.drawLine(wx, 110, wx + 62 * math.cos(a), 110 + 62 * math.sin(a), paint("white", 200, stroke=5))
+    for a, b in (((-130, 110), (-30, -10)), ((-30, -10), (90, -10)), ((90, -10), (130, 110)), ((-30, -10), (10, 110)), ((10, 110), (-130, 110))):
+        c.drawLine(*a, *b, paint(color, stroke=16))
+    c.drawLine(90, -10, 96, -60, paint(INK, stroke=12))
+    c.drawLine(70, -62, 122, -58, paint(INK, stroke=12))
+    c.save()
+    c.translate(-30, -150)
+    c.scale(0.85, 0.85)
+    p_person(c, t, 1.0, color=rider, mood=mood)
+    c.restore()
+    c.restore()
+
+
+def p_hat(c, t, p, color="violet", **_):
+    """A pointy witch hat (put it above a character)."""
+    c.save()
+    c.rotate(4 * math.sin(t * 3))
+    c.drawPath(path([(-70, 40), (10, -170), (40, -150), (70, 40)]), paint(color))
+    c.drawPath(path([(10, -170), (40, -150), (60, -175)]), paint(shade(color, -0.25)))
+    c.drawOval(skia.Rect.MakeXYWH(-150, 20, 300, 60), paint(shade(color, -0.25)))
+    c.drawRect(skia.Rect.MakeXYWH(-66, 4, 132, 26), paint("yellow"))
+    c.restore()
+
+
+def p_scanner(c, t, p, color="white", **_):
+    """A brain scanner: a big ring with a glowing bore and a bed."""
+    shaded_rrect(c, -230, -210, 460, 420, 90, color)
+    glow(c, 0, 0, 150, "cyan", int(120 + 60 * math.sin(t * 4)))
+    c.drawCircle(0, 0, 135, paint(INK))
+    c.drawCircle(0, 0, 135, paint("cyan", 200, stroke=10))
+    for i in range(3):
+        c.drawCircle(-170 + i * 36, -170, 9, paint(("green", "yellow", "red")[i], int(150 + 100 * math.sin(t * 5 + i))))
+    rrect(c, -150, 160, 300, 46, 18, shade(rgb(color), -0.2))
+
+
+def p_xray(c, t, p, **_):
+    """An X-ray source firing a beam at a small crystal that sparkles."""
+    shaded_rrect(c, -330, -70, 170, 140, 22, "grey")
+    c.drawCircle(-170, 0, 26, paint("cyan"))
+    beam = path([(-160, -14), (150, -46), (150, 46), (-160, 14)])
+    c.drawPath(beam, paint("cyan", int(110 + 70 * math.sin(t * 14))))
+    c.save()
+    c.translate(200, 0)
+    c.rotate(t * 30)
+    gem = path([(0, -80), (70, -20), (44, 70), (-44, 70), (-70, -20)])
+    glow(c, 0, 0, 110, "white", 110)
+    c.drawPath(gem, paint("cyan"))
+    c.drawPath(path([(0, -80), (70, -20), (0, 0)]), paint("white", 150))
+    c.drawPath(gem, paint("white", 230, stroke=6))
+    c.restore()
+
+
+def p_stream(c, t, p, color="red", riders=4, rider_color="yellow", **_):
+    """A blood vessel seen from the side: cells drift along, with a few small molecules riding the flow."""
+    rrect(c, -520, -170, 1040, 340, 150, shade(color, -0.35))
+    rrect(c, -520, -140, 1040, 280, 130, color)
+    for i in range(9):
+        x = ((i * 137 + t * 90) % 1100) - 550
+        y = -90 + (i * 53) % 180
+        c.drawOval(skia.Rect.MakeXYWH(x - 44, y - 30, 88, 60), paint(shade(color, -0.2)))
+        c.drawOval(skia.Rect.MakeXYWH(x - 26, y - 16, 52, 32), paint(shade(color, -0.35)))
+    n = max(0.0, float(riders))
+    for i in range(int(math.ceil(n))):
+        a = min(1.0, n - i)
+        x = ((i * 251 + t * 120) % 1100) - 550
+        y = -70 + (i * 71) % 150
+        glow(c, x, y, 34, rider_color, int(120 * a))
+        ball(c, x, y, 24, rider_color, int(255 * a))
+
 # ---------------- infographic props (text-led beats) ----------------
 
 def p_big(c, t, p, big="?", sub="", color=None, accent="yellow", _zs=1.0, **_):

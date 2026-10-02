@@ -1,145 +1,27 @@
 [
  {
-  "id": "short01_sky_not_violet",
-  "duration": 37.0,
-  "size_mb": 4.51,
+  "id": "short11_lsd_long_trip",
+  "duration": 76.1,
+  "size_mb": 9.38,
   "lufs": -14.1,
-  "wps": 2.32,
-  "narration_match": 1.0,
-  "caption_sync_ms": 46,
-  "first_frame_std": 33.4,
-  "diffs": [],
-  "flags": []
- },
- {
-  "id": "short02_cant_tickle_yourself",
-  "duration": 51.5,
-  "size_mb": 5.83,
-  "lufs": -14.1,
-  "wps": 2.39,
-  "narration_match": 0.991,
-  "caption_sync_ms": 37,
+  "wps": 2.77,
+  "narration_match": 0.955,
+  "caption_sync_ms": 47,
   "first_frame_std": 35.8,
   "diffs": [
-   "'add' -> 'at'"
+   "'why' -> 'what'",
+   "'hofmann' -> 'hoffman'",
+   "'his' -> ''",
+   "'neighbour' -> 'neighbor'",
+   "'witch' -> 'wish'",
+   "'5 ht2a' -> '5ht2a'",
+   "\"harris's\" -> 'harris'",
+   "'bryan' -> 'brian'",
+   "'ends' -> 'hands'"
   ],
-  "flags": []
- },
- {
-  "id": "short03_gps_needs_relativity",
-  "duration": 57.8,
-  "size_mb": 6.79,
-  "lufs": -14.1,
-  "wps": 2.14,
-  "narration_match": 1.0,
-  "caption_sync_ms": 64,
-  "first_frame_std": 36.8,
-  "diffs": [],
-  "flags": []
- },
- {
-  "id": "short04_shipping_container",
-  "duration": 55.5,
-  "size_mb": 7.1,
-  "lufs": -14.1,
-  "wps": 2.15,
-  "narration_match": 0.964,
-  "caption_sync_ms": 56,
-  "first_frame_std": 43.7,
-  "diffs": [
-   "\"trade's\" -> 'trade'",
-   "'sacks' -> 'sax'",
-   "\"import's\" -> 'import'",
-   "'malcom' -> 'malcolm'"
-  ],
-  "flags": []
- },
- {
-  "id": "short05_decoy_effect",
-  "duration": 59.3,
-  "size_mb": 6.82,
-  "lufs": -14.1,
-  "wps": 2.06,
-  "narration_match": 0.996,
-  "caption_sync_ms": 60,
-  "first_frame_std": 67.7,
-  "diffs": [
-   "'did' -> ''"
-  ],
-  "flags": []
- },
- {
-  "id": "short06_illusory_truth",
-  "duration": 53.2,
-  "size_mb": 5.98,
-  "lufs": -14.2,
-  "wps": 2.1,
-  "narration_match": 0.981,
-  "caption_sync_ms": 51,
-  "first_frame_std": 35.1,
-  "diffs": [
-   "'raised' -> 'raise'",
-   "'plain' -> 'plane'"
-  ],
-  "flags": []
- },
- {
-  "id": "short07_anchoring",
-  "duration": 55.1,
-  "size_mb": 7.43,
-  "lufs": -14.1,
-  "wps": 2.14,
-  "narration_match": 0.987,
-  "caption_sync_ms": 21,
-  "first_frame_std": 41.7,
-  "diffs": [
-   "'crossed out' -> 'crossout'"
-  ],
-  "flags": []
- },
- {
-  "id": "short08_bystander_effect",
-  "duration": 55.7,
-  "size_mb": 6.99,
-  "lufs": -14.0,
-  "wps": 2.16,
-  "narration_match": 0.976,
-  "caption_sync_ms": 44,
-  "first_frame_std": 35.9,
-  "diffs": [
-   "'before' -> 'afforded in'",
-   "'ended' -> ''",
-   "'in' -> ''"
-  ],
-  "flags": []
- },
- {
-  "id": "short09_time_speeds_up_with_age",
-  "duration": 58.1,
-  "size_mb": 6.8,
-  "lufs": -14.1,
-  "wps": 2.13,
-  "narration_match": 1.0,
-  "caption_sync_ms": 59,
-  "first_frame_std": 40.0,
-  "diffs": [],
-  "flags": []
- },
- {
-  "id": "short10_phone_slot_machine",
-  "duration": 53.6,
-  "size_mb": 5.84,
-  "lufs": -14.1,
-  "wps": 2.2,
-  "narration_match": 0.966,
-  "caption_sync_ms": 44,
-  "first_frame_std": 30.5,
-  "diffs": [
-   "'slot' -> 'slop'",
-   "'pull' -> 'pole'",
-   "'pull' -> 'pole'",
-   "'likes' -> 'lights'"
-  ],
-  "flags": []
+  "flags": [
+   "duration 76.1s outside 20-75",
+   "size 9.4 MB"
+  ]
  }
 ]

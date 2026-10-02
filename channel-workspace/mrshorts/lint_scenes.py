@@ -38,6 +38,7 @@ def boxes(props, fit):
 
 def lint(path):
     spec = json.load(open(path))
+    rs.set_style(spec)
     issues = []
     area = (rs.FIT_BOX[2] - rs.FIT_BOX[0]) * (rs.FIT_BOX[3] - rs.FIT_BOX[1])
     for i, ln in enumerate(spec["lines"]):

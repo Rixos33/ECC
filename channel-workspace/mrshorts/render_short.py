@@ -30,6 +30,77 @@ PALETTES = {  # bg top, bg bottom, accent: vivid duotone gradients
     "pink": ((60, 20, 90), (220, 90, 160), "yellow"),
     "navy": ((12, 16, 48), (40, 50, 120), "yellow"),
 }
+WORLDS = {  # v3: full-bleed colour world per shot -> (top, bottom, glow/accent)
+    "neon": ((14, 10, 50), (64, 22, 124), "cyan"),
+    "ink": ((8, 8, 30), (26, 22, 74), "pink"),
+    "grape": ((70, 20, 150), (190, 70, 210), "yellow"),
+    "candy": ((255, 110, 165), (255, 190, 125), "yellow"),
+    "sunset": ((92, 30, 140), (255, 122, 82), "yellow"),
+    "lava": ((120, 10, 62), (255, 92, 62), "yellow"),
+    "mint": ((16, 150, 146), (150, 235, 190), "white"),
+    "sky": ((40, 110, 230), (140, 210, 255), "white"),
+    "lemon": ((255, 196, 40), (255, 238, 150), "pink"),
+}
+_world_shaders = {}
+
+
+def draw_world(c, name, t, alpha=1.0):
+    """Full-frame gradient with drifting glows and sparkles; alpha lets two worlds blend in a transition."""
+    top, bot, glow_c = WORLDS.get(name, WORLDS["neon"])
+    if name not in _world_shaders:
+        _world_shaders[name] = skia.GradientShader.MakeLinear(
+            [skia.Point(0, 0), skia.Point(0, H)], [art.col(top), art.col(bot)])
+    a = int(255 * alpha)
+    c.drawRect(skia.Rect.MakeWH(W, H), skia.Paint(Shader=_world_shaders[name], Alphaf=alpha))
+    for i in range(3):
+        x = W * (0.2 + 0.3 * i) + 120 * math.sin(t * 0.25 + i * 2.1)
+        y = H * (0.25 + 0.2 * i) + 90 * math.cos(t * 0.2 + i)
+        c.drawCircle(x, y, 380, art.paint(glow_c, int(34 * alpha), blur=170))
+    for i, (yb, dk) in enumerate(((1420, -0.18), (1560, -0.32), (1720, -0.46))):  # soft layered floor
+        pa = skia.Path()
+        pa.moveTo(0, H)
+        for x in range(0, W + 30, 30):
+            pa.lineTo(x, yb + 38 * math.sin(x / 210 + t * 0.5 + i * 1.7) + 16 * math.sin(x / 90 - t * 0.7 + i))
+        pa.lineTo(W, H)
+        pa.close()
+        c.drawPath(pa, art.paint(art.shade(bot, dk), a))
+    rnd = random.Random(name)
+    for i in range(34):  # sparkles drifting upward
+        x, y0, sp, ph = rnd.uniform(0, W), rnd.uniform(0, H), rnd.uniform(12, 40), rnd.uniform(0, 6.3)
+        y = (y0 - t * sp) % H
+        r = 3 + 3 * (0.5 + 0.5 * math.sin(t * 3 + ph))
+        c.drawCircle(x, y, r, art.paint("white", int(a * 0.5 * (0.4 + 0.6 * math.sin(t * 2 + ph) ** 2))))
+
+
+def draw_title(c, spec, ft, accent):  # noqa: C901
+    """v3: the title opens as a big lettered card, then settles into a bar that stays at the top."""
+    bar = spec.get("title_bar") or spec.get("title", "")
+    big = spec.get("title", bar)
+    k = ease_io((ft - 1.5) / 0.5)  # 0 = title card, 1 = bar
+    if k < 1:
+        words = big.split()
+        h = (len(words) + 1) // 2
+        lines = [" ".join(words[:h]), " ".join(words[h:])] if len(words) > 2 else [big]
+        size = min(art.fit_size(ln, 150, 940) for ln in lines)
+        c.save()
+        c.translate(W / 2, 330 - 150 * k)
+        c.rotate(-3 * (1 - k))
+        c.scale(1 - 0.6 * k, 1 - 0.6 * k)
+        for i, ln in enumerate(lines):
+            y = (i - (len(lines) - 1) / 2) * size * 1.08
+            art.text(c, ln, 7, y + 9, size, art.shade(art.rgb(accent), -0.55), int(255 * (1 - k)))  # lettering shadow
+            art.text(c, ln, 0, y, size, "white", int(255 * (1 - k)), stroke=18, stroke_color=art.INK)
+            art.text(c, ln, 0, y, size, accent if i == len(lines) - 1 else "white", int(255 * (1 - k)))
+        c.restore()
+    if k > 0:
+        size = art.fit_size(bar, 60, 760)
+        w = art.measure(bar, size) + 84
+        a = int(255 * k)
+        c.drawRRect(skia.RRect.MakeRectXY(skia.Rect.MakeXYWH(W / 2 - w / 2, 146, w, 92), 46, 46), art.paint(art.INK, int(200 * k)))
+        c.drawRRect(skia.RRect.MakeRectXY(skia.Rect.MakeXYWH(W / 2 - w / 2, 146, w, 92), 46, 46), art.paint(accent, a, stroke=6))
+        art.text(c, bar, W / 2, 192, size, "white", a)
+
+
 LEGACY = {"big", "question", "bars", "list", "versus", "timeline", "spectrum"}
 
 
@@ -88,6 +159,47 @@ def tts_elevenlabs(text, voice, path):
     if cur:
         words.append((cur, start, end - start))
     return words
+
+
+def load_recording(path, lines, model_name="small.en"):
+    """Owner's own narration (one continuous take). Returns per-line (samples, words) by aligning the
+    script to Whisper word timestamps, so captions, cuts and cues follow the real voice."""
+    import difflib
+    from faster_whisper import WhisperModel
+    pcm = run(["ffmpeg", "-nostdin", "-loglevel", "error", "-i", path, "-ac", "1", "-ar", str(audio.SR),
+               "-af", "highpass=f=70,loudnorm=I=-18:TP=-2", "-f", "f32le", "-"], capture_output=True).stdout
+    rec = np.frombuffer(pcm, np.float32).astype(np.float64)
+    lo = run(["ffmpeg", "-nostdin", "-loglevel", "error", "-i", path, "-ac", "1", "-ar", "16000", "-f", "f32le", "-"],
+             capture_output=True).stdout
+    segs, _ = WhisperModel(model_name, device="cpu", compute_type="int8").transcribe(
+        np.frombuffer(lo, np.float32), language="en", word_timestamps=True)
+    heard = [(w.word.strip(), w.start, w.end - w.start) for sg in segs for w in (sg.words or [])]
+    shown = [(i, w) for i, ln in enumerate(lines) for w in ln.get("say", ln["text"]).split()]
+    a, b = [_norm(w) for _, w in shown], [_norm(w[0]) for w in heard]
+    times = [None] * len(shown)
+    for blk in difflib.SequenceMatcher(a=a, b=b, autojunk=False).get_matching_blocks():
+        for k in range(blk.size):
+            times[blk.a + k] = (heard[blk.b + k][1], heard[blk.b + k][2])
+    matched = sum(x is not None for x in times) / max(1, len(times))
+    if matched < 0.8:
+        raise RenderError(f"recording matches only {matched:.0%} of the script; re-record or check the wording")
+    last_end = 0.0
+    for k in range(len(times)):  # fill words Whisper missed by interpolating between neighbours
+        if times[k] is None:
+            nxt = next((times[j] for j in range(k + 1, len(times)) if times[j]), None)
+            start = last_end + 0.02
+            end = nxt[0] - 0.02 if nxt else start + 0.25
+            times[k] = (start, max(0.08, (end - start) / 2))
+        last_end = times[k][0] + times[k][1]
+    first = [next(k for k, (i, _) in enumerate(shown) if i == n) for n in range(len(lines))]
+    starts = [max(0.0, times[k][0] - 0.12) for k in first] + [min(len(rec) / audio.SR, last_end + 0.4)]
+    out = []
+    for n in range(len(lines)):
+        seg = rec[int(starts[n] * audio.SR):int(starts[n + 1] * audio.SR)]
+        ws = [(w, times[k][0] - starts[n], times[k][1]) for k, (i, w) in enumerate(shown) if i == n]
+        out.append((seg, ws))
+    print(f"recording aligned: {matched:.0%} of words matched, {len(rec) / audio.SR:.1f}s")
+    return out
 
 
 def read_wav(path):
@@ -264,9 +376,12 @@ EXTENTS = {
     "rain": (350, 250), "wave": (460, 200), "salt": (250, 110), "big": (430, 190), "question": (200, 260),
     "versus": (430, 220), "timeline": (400, 190), "bird": (150, 130), "robot": (150, 250), "heart": (170, 140),
     "speaker": (130, 170), "newspaper": (200, 240), "thumb": (130, 130), "frame": (180, 210), "crane": (200, 270),
-    "tv": (230, 230), "package": (150, 170), "mascot": (135, 205),
+    "tv": (230, 230), "package": (150, 170), "mascot": (135, 205), "molecule": (130, 120), "receptor": (330, 175),
+    "neuron": (250, 250), "network": (250, 240), "rays": (300, 300), "rings": (330, 330), "bike": (220, 290),
+    "hat": (150, 180), "scanner": (230, 215), "xray": (330, 90), "stream": (480, 170),
 }
-FIT_BOX = (110, 230, 970, 1230)  # x0, y0, x1, y1: visual safe area above the captions
+FIT_BOX = (110, 230, 970, 1230)
+FIT_CAP = 1.6  # x0, y0, x1, y1: visual safe area above the captions
 
 
 def extent(pr):
@@ -302,7 +417,7 @@ def fit_scene(props, cam=None):
     x0, y0, x1, y1 = FIT_BOX
     cam_max = max((cam or {}).get("zoom", (1.0, 1.1)))  # end of the push-in
     z = min((x1 - x0) / max(1, bx1 - bx0), (y1 - y0) / max(1, by1 - by0)) / cam_max
-    z = max(1.0 / cam_max, min(z, 1.6))
+    z = max(1.0 / cam_max, min(z, FIT_CAP))
     # move the content centre to the box centre (in pre-zoom coordinates)
     return z, (x0 + x1) / 2 - (bx0 + bx1) / 2, (y0 + y1) / 2 - (by0 + by1) / 2
 
@@ -381,9 +496,32 @@ def draw_scene(c, props, tl, dur, cam, fit=(1.0, 0.0, 0.0), punch=True):
         grounded = pr["prop"] in FOOT and not pr.get("float")
         breathe = 1 + 0.018 * math.sin(tl * 2.1 + x * 0.01)
         s = pr.get("s", 1.0) * pe * (1 if grounded else breathe)
+        rot_extra = 0.0
+        for act in pr.get("acts", []):  # things that happen to the prop, cued on spoken words
+            ka = (tl - act.get("at", 0.0)) / max(0.05, act.get("dur", 0.5))
+            if ka <= 0:
+                continue
+            kc, typ = min(1.0, ka), act.get("type")
+            if typ == "shake" and ka < 1:
+                x += 16 * math.sin(tl * 70) * (1 - kc)
+            elif typ in ("grow", "shrink"):
+                s *= 1 + (act.get("factor", 1.5 if typ == "grow" else 0.45) - 1) * ease_io(kc)
+            elif typ == "fall":
+                y += 1500 * kc ** 2
+                rot_extra += 220 * kc
+            elif typ == "spin":
+                rot_extra += 360 * ease_io(kc)
+            elif typ == "move":  # glide to a new spot on a cue word
+                m_ = ease_io(kc)
+                x += (act["to"][0] * W - pr.get("x", 0.5) * W) * m_
+                y += (act["to"][1] * H - pr.get("y", 0.4) * H) * m_
+            elif typ == "jump" and ka < 1:
+                y -= act.get("height", 130) * math.sin(math.pi * kc)
+            elif typ == "pulse":
+                s *= 1 + 0.08 * math.sin(tl * 9)
         c.save()
         c.translate(x, y + (0 if grounded else 10 * math.sin(tl * 1.6 + x)))
-        c.rotate(pr.get("rot", 0) + pr.get("spin", 0) * tl + (0 if grounded else 1.6 * math.sin(tl * 1.3 + x)))
+        c.rotate(pr.get("rot", 0) + rot_extra + pr.get("spin", 0) * tl + (0 if grounded else 1.6 * math.sin(tl * 1.3 + x)))
         c.scale(s * (-1 if pr.get("flip") else 1), s)
         if grounded:  # squash-and-stretch breathing from the feet keeps standing props alive
             f = FOOT[pr["prop"]]
@@ -391,8 +529,18 @@ def draw_scene(c, props, tl, dur, cam, fit=(1.0, 0.0, 0.0), punch=True):
             c.scale(1 - 0.012 * math.sin(tl * 2.3 + x), 1 + 0.025 * math.sin(tl * 2.3 + x))
             c.translate(0, -f)
         kw = {k2: v for k2, v in pr.items() if k2 not in ("prop", "x", "y", "s", "delay", "to", "move_time", "rot",
-                                                           "spin", "flip", "on", "layer", "float")}
+                                                           "spin", "flip", "on", "layer", "float", "face", "face_at",
+                                                           "face_s", "acts", "anim")}
+        for an in pr.get("anim", []):  # a prop parameter that changes on a spoken word (e.g. a lid closing)
+            ka = ease_io((tl - an.get("at", 0.0)) / max(0.05, an.get("dur", 0.6)))
+            kw[an["param"]] = an.get("from", 0.0) + (an.get("to", 1.0) - an.get("from", 0.0)) * ka
         fn(c, te, min(1.0, te / 0.5), _zs=max(0.05, pr.get("s", 1.0) * fz * z), **kw)
+        if pr.get("face"):  # any object can be a character
+            fx, fy = pr.get("face_at", (0, 0))
+            c.save()
+            c.translate(fx, fy)
+            art.face(c, te, pr["face"], pr.get("face_s", 1.0))
+            c.restore()
         c.restore()
     c.restore()
     c.restore()
@@ -546,7 +694,7 @@ def chunk_words(words, gap=0.2):
     return chunks
 
 
-def draw_captions(c, chunks, t, accent):
+def draw_captions(c, chunks, t, accent, lower=False):
     active = chunks[0] if chunks else None  # frame 0 already shows the first caption
     for ch in chunks:
         if ch[0][1] - 0.02 <= t:
@@ -554,7 +702,9 @@ def draw_captions(c, chunks, t, accent):
     if not active or t > active[-1][1] + active[-1][2] + 0.5:
         return
     labels = [art.clean(w[0]).upper().rstrip(",;:") or art.clean(w[0]) for w in active]  # no trailing commas
-    size = CAP_SIZE
+    if lower:
+        labels = [lb.lower() for lb in labels]
+    size = CAP_SIZE if not lower else 70
     while size > CAP_MIN and art.measure(" ".join(labels), size) + size * 0.22 * (len(labels) - 1) > SAFE_W:
         size -= 2
     pop = ease_out_back((t - active[0][1] + 0.02) / 0.16)
@@ -693,26 +843,60 @@ def validate(spec, path):
                     continue
                 if not isinstance(cue, str) or find_word(words, cue) is None:
                     raise RenderError(f"{path}: line {i} shot {k} cue word {cue!r} not found in the line text")
+        for sh in line_shots(ln):
+            if sh.get("world") and sh["world"] not in WORLDS:
+                raise RenderError(f"{path}: line {i} unknown world '{sh['world']}' (use {', '.join(WORLDS)})")
         for p in [p for sh in line_shots(ln) for p in scene_props(sh, "yellow")]:
+            for item in p.get("acts", []) + p.get("anim", []):
+                if item.get("on") and find_word(words, item["on"]) is None:
+                    raise RenderError(f"{path}: line {i} cue word {item['on']!r} not found in the line text")
             if p["prop"] not in art.PROPS:
                 raise RenderError(f"{path}: line {i} unknown prop/visual '{p['prop']}'")
             for b in p.get("bars", []):
                 float(b[1])
 
 
+def set_style(spec):
+    """v3 frames the subject larger, below the title bar."""
+    global FIT_BOX, FIT_CAP
+    v3 = spec.get("style") == "v3"
+    FIT_BOX = (40, 270, 1040, 1290) if v3 else (110, 230, 970, 1230)
+    FIT_CAP = 2.8 if v3 else 1.6
+    return v3
+
+
 def render(spec_path, out_dir, args):
     spec = json.load(open(spec_path))
+    v3 = set_style(spec)
     validate(spec, spec_path)
     top, bot, accent = PALETTES.get(spec.get("palette", "violet"), PALETTES["violet"])
+    if v3:
+        accent = spec.get("accent", "yellow")
     lines = spec["lines"]
+    recording = load_recording(args.voice_file, lines) if args.voice_file else None
     with tempfile.TemporaryDirectory() as tmp:
         scenes, words, voice, cues, t = [], [], [], [], 0.0
         for i, ln in enumerate(lines):
-            samples, ws = synth(ln.get("say", ln["text"]), args, os.path.join(tmp, f"a{i}"), args.cache)
+            if recording:  # the owner's own voice: timing comes from the recording, pauses included
+                samples, ws = recording[i]
+            else:
+                samples, ws = synth(ln.get("say", ln["text"]), args, os.path.join(tmp, f"a{i}"), args.cache,
+                                    rate=spec.get("rate"))  # a script can set its own narration speed
             ws = display_words(ln["text"], ws)
+            if ws and not recording:  # TTS clips end in up to half a second of silence; keep the rhythm in our own pauses
+                keep_n = min(len(samples), int((ws[-1][1] + ws[-1][2] + 0.12) * audio.SR))
+                tail = samples[keep_n:]
+                if len(tail) and np.sqrt(np.mean(tail ** 2)) < 0.01:
+                    samples = samples[:keep_n]
             last = i == len(lines) - 1
             reveal = bool(ln.get("sfx"))
-            pause = ln.get("pause", 0.25 if last else (0.7 if reveal else (0.6 if i == 0 or ln["text"].rstrip().endswith("?") else 0.4)))
+            base = spec.get("pause")  # v3 scripts run denser: a short default pause between lines
+            if base is not None:
+                pause = ln.get("pause", 0.2 if last else (base + 0.25 if reveal else (base + 0.15 if i == 0 else base)))
+            else:
+                pause = ln.get("pause", 0.25 if last else (0.7 if reveal else (0.6 if i == 0 or ln["text"].rstrip().endswith("?") else 0.4)))
+            if recording:
+                pause = 0.0
             dur = len(samples) / audio.SR + pause
             # split the line into shots that cut on spoken words
             shots, widx = line_shots(ln), 0
@@ -726,7 +910,8 @@ def render(spec_path, out_dir, args):
             keep = [0]  # drop cuts that would leave a shot shorter than MIN_SHOT
             for k in range(1, len(shots)):
                 nxt_start = starts[k + 1][0] if k + 1 < len(shots) else t + dur
-                if starts[k][0] - starts[keep[-1]][0] >= MIN_SHOT and nxt_start - starts[k][0] >= MIN_SHOT * 0.6:
+                min_shot = 1.6 if v3 else MIN_SHOT
+                if starts[k][0] - starts[keep[-1]][0] >= min_shot and nxt_start - starts[k][0] >= min_shot * 0.6:
                     keep.append(k)
             shots, starts = [shots[k] for k in keep], [starts[k] for k in keep]
             for k, sh in enumerate(shots):
@@ -740,7 +925,14 @@ def render(spec_path, out_dir, args):
                             pr["delay"] = max(0.0, t + ws[j][1] - st - 0.05)
                     if i == 0 and k == 0:  # the hook frame must be complete from frame 0 to stop the scroll
                         pr["delay"] = 0.0
+                    for item in pr.get("acts", []) + pr.get("anim", []):
+                        if item.get("on"):
+                            j = find_word(ws, item["on"], wi)
+                            if j is not None:
+                                item["at"] = max(0.0, t + ws[j][1] - st - 0.05)
                 scenes.append({"start": st, "dur": end - st, "props": props, "cam": sh.get("cam", {}), "tint": sh.get("tint"),
+                               "world": sh.get("world") or ln.get("world") or (scenes[-1].get("world") if scenes else None)
+                               or spec.get("world", "neon"),
                                "fit": fit_scene(props, sh.get("cam")) if sh.get("autofit", spec.get("autofit", True)) else (1.0, 0, 0)})
                 if scenes[-1]["start"] > 0 and k == 0:  # whoosh on sentence-level cuts only
                     cues.append((max(0, st - 0.12), "whoosh"))
@@ -782,7 +974,8 @@ def render(spec_path, out_dir, args):
                 props = [{**owl, **extra}, {"prop": "label", "label": label, "x": 0.5, "y": 0.2, "size": 110,
                                             "color": "yellow", "accent": accent}]
                 scenes.append({"start": st, "dur": end - st, "props": props, "cam": {"zoom": (1.0, 1.06)},
-                               "tint": None, "fit": fit_scene(props, {"zoom": (1.0, 1.06)}), "outro": True})
+                               "tint": None, "fit": fit_scene(props, {"zoom": (1.0, 1.06)}), "outro": True,
+                               "world": spec.get("outro_world", "grape")})
             cues += [(max(0, t - 0.12), "whoosh"), (t + 0.02, "pop"), (cta_at, "pop")]
             words += [(w, t + s0, d) for w, s0, d in ws]
             voice += [samples, np.zeros(int(0.35 * audio.SR))]
@@ -815,7 +1008,7 @@ def render(spec_path, out_dir, args):
         enc = subprocess.Popen(
             ["ffmpeg", "-nostdin", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgba", "-s", f"{W}x{H}",
              "-r", str(FPS), "-i", "-", "-i", final_audio, "-c:v", "libx264", "-preset", "slow", "-tune", "animation",
-             "-crf", str(args.crf), "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "128k", "-shortest",
+             "-crf", str(args.crf + (5 if v3 else 0)), "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "128k", "-shortest",
              "-movflags", "+faststart", target], stdin=subprocess.PIPE)
         bg = Background((top, bot, accent), spec.get("bg", "space"), spec["id"], total, spec.get("ground"))
         surface = skia.Surface.MakeRaster(skia.ImageInfo.Make(W, H, skia.kRGBA_8888_ColorType, skia.kPremul_AlphaType))
@@ -826,10 +1019,9 @@ def render(spec_path, out_dir, args):
                 idx = max(i for i, s in enumerate(scenes) if s["start"] <= ft + 1e-6)
                 sc = scenes[idx]
                 tl = ft - sc["start"]
-                bg.draw(c, ft)
-                # soft cross-dissolve from the previous shot (the very first scene is fully built on frame 0)
                 tl_draw = tl + (0.6 if idx == 0 else 0)
-                k = ease_io(tl / XFADE) if idx and tl < XFADE else 1.0
+                xf = 0.42 if v3 else XFADE
+                k = ease_io(tl / xf) if idx and tl < xf else 1.0
                 pv = scenes[idx - 1] if k < 1 else None
                 if sc.get("outro"):
                     k_env = int((ft - outro_at) * FPS)
@@ -837,23 +1029,43 @@ def render(spec_path, out_dir, args):
                     for pr in sc["props"]:
                         if pr["prop"] == "mascot":
                             pr["talk"] = talk
-                for scn, alpha in ((pv, 1 - k), (sc, k)):
-                    if scn is not None and scn.get("tint"):
-                        c.drawRect(skia.Rect.MakeWH(W, H), art.paint(scn["tint"], int(120 * alpha)))
-                gy = ground_y(sc["props"], tl_draw, sc["dur"], sc["cam"], sc["fit"], idx > 0)
-                if pv is not None:  # the horizon glides between the two shots
-                    gy_prev = ground_y(pv["props"], ft - pv["start"], pv["dur"], pv["cam"], pv["fit"], True)
-                    gy = gy_prev + (gy - gy_prev) * k
-                bg.draw_ground(c, ft, gy, dock_span(sc if k >= 0.5 else pv, tl_draw, idx > 0))
-                if pv is not None:
-                    c.saveLayerAlpha(None, int(255 * (1 - k)))
-                    draw_scene(c, pv["props"], ft - pv["start"], pv["dur"], pv["cam"], pv["fit"], punch=True)
-                    c.restore()
-                    c.saveLayerAlpha(None, int(255 * k))
-                    draw_scene(c, sc["props"], tl_draw, sc["dur"], sc["cam"], sc["fit"], punch=True)
-                    c.restore()
+                if v3:
+                    # full-colour world per shot; the camera flies through the old scene into the new one
+                    if pv is not None and pv["world"] != sc["world"]:
+                        draw_world(c, pv["world"], ft)
+                        draw_world(c, sc["world"], ft, k)
+                    else:
+                        draw_world(c, sc["world"], ft)
+                    cxm, cym = W / 2, (FIT_BOX[1] + FIT_BOX[3]) / 2
+                    for scn, alpha, zoom, tloc in ((pv, 1 - k, 1 + 1.5 * k, ft - pv["start"] if pv else 0),
+                                                   (sc, k, 0.6 + 0.4 * k, tl_draw)):
+                        if scn is None:
+                            continue
+                        c.saveLayerAlpha(None, int(255 * alpha))
+                        c.translate(cxm, cym)
+                        c.scale(zoom, zoom)
+                        c.translate(-cxm, -cym)
+                        draw_scene(c, scn["props"], tloc, scn["dur"], scn["cam"], scn["fit"], punch=idx > 0 or scn is pv)
+                        c.restore()
                 else:
-                    draw_scene(c, sc["props"], tl_draw, sc["dur"], sc["cam"], sc["fit"], punch=idx > 0)
+                    bg.draw(c, ft)
+                    for scn, alpha in ((pv, 1 - k), (sc, k)):
+                        if scn is not None and scn.get("tint"):
+                            c.drawRect(skia.Rect.MakeWH(W, H), art.paint(scn["tint"], int(120 * alpha)))
+                    gy = ground_y(sc["props"], tl_draw, sc["dur"], sc["cam"], sc["fit"], idx > 0)
+                    if pv is not None:  # the horizon glides between the two shots
+                        gy_prev = ground_y(pv["props"], ft - pv["start"], pv["dur"], pv["cam"], pv["fit"], True)
+                        gy = gy_prev + (gy - gy_prev) * k
+                    bg.draw_ground(c, ft, gy, dock_span(sc if k >= 0.5 else pv, tl_draw, idx > 0))
+                    if pv is not None:
+                        c.saveLayerAlpha(None, int(255 * (1 - k)))
+                        draw_scene(c, pv["props"], ft - pv["start"], pv["dur"], pv["cam"], pv["fit"], punch=True)
+                        c.restore()
+                        c.saveLayerAlpha(None, int(255 * k))
+                        draw_scene(c, sc["props"], tl_draw, sc["dur"], sc["cam"], sc["fit"], punch=True)
+                        c.restore()
+                    else:
+                        draw_scene(c, sc["props"], tl_draw, sc["dur"], sc["cam"], sc["fit"], punch=idx > 0)
                 if teaser and not args.no_mascot and not sc.get("outro"):
                     # Mr. Shorts sits in the right-hand corner (below the captions, left of the Shorts buttons),
                     # busy with this video's one activity; he hops on the reveal
@@ -865,8 +1077,11 @@ def render(spec_path, out_dir, args):
                     art.PROPS["mascot"](c, ft, 1.0, look=-0.7 + 0.3 * math.sin(ft * 0.7), hop=hop / 2,
                                         mood="curious" if hop else "smirk", activity=activity)
                     c.restore()
-                bg.foreground(c, ft)
-                draw_captions(c, chunks, ft, art.rgb(accent))
+                if v3:
+                    draw_title(c, spec, ft, accent)
+                else:
+                    bg.foreground(c, ft)
+                draw_captions(c, chunks, ft, art.rgb(accent), lower=v3)
                 enc.stdin.write(surface.makeImageSnapshot().tobytes())
         except BrokenPipeError:
             pass
@@ -894,6 +1109,8 @@ def main():
     ap.add_argument("--mascot-rate", default="+0%")
     ap.add_argument("--mascot-pitch", default="+0Hz")
     ap.add_argument("--no-mascot", action="store_true", help="skip the mascot and its end question")
+    ap.add_argument("--voice-file", default=None,
+                    help="your own narration (one continuous recording of the script); replaces the AI voice")
     ap.add_argument("--music-file", default=None, help="use this audio file as the music bed instead of the generated one")
     ap.add_argument("--cache", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), ".tts-cache"))
     args = ap.parse_args()

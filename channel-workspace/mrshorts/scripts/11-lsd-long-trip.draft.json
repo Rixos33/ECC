@@ -1,0 +1,109 @@
+{
+ "id": "short11_lsd_long_trip",
+ "title": "Why does an LSD trip last so long?",
+ "title_bar": "LSD: THE LONG TRIP",
+ "lines": [
+  {
+   "text": "Why does an LSD trip last so long, often swallowing most of a waking day?",
+   "event": "A small LSD molecule character with a face sits on a brain character's head while a sun behind them rises, crosses the whole sky and sets; the brain looks more and more worn out and the molecule still has not moved.",
+   "tone": "curious"
+  },
+  {
+   "text": "In 1943, chemist Albert Hofmann cycled home from his Swiss lab, then mistook his neighbour for a witch.",
+   "event": "A wobbling chemist in a lab coat pedals a bicycle along a road that bends like a funhouse mirror; he arrives at a door where a friendly neighbour holding a jug of milk flickers into a witch silhouette and back, and his eyes go wide with fright.",
+   "tone": "dry"
+  },
+  {
+   "text": "LSD looks enough like serotonin, your brain's own messenger, to slot into a receptor called 5-HT2A.",
+   "event": "Zoom into a brain cell: a serotonin character hops into a cup-shaped receptor character and hops straight out again; then the LSD molecule, similar in outline but bulkier, squeezes into the same cup and the receptor's eyebrows shoot up.",
+   "tone": "curious"
+  },
+  {
+   "text": "In 2016, Robin Carhart-Harris's London team scanned volunteers and watched normally separate brain networks start blending. The visual cortex was talking to far more of the brain, even with eyes shut.",
+   "event": "A brain character slides into a scanner with its eyes closed; inside it, coloured neighbourhoods that each kept to their own fence start throwing glowing lines over the fences to each other, and the patch at the back (the visual cortex, with its own little face) lights up and shoots lines to nearly every other region.",
+   "tone": "amazed"
+  },
+  {
+   "text": "In 2017, Daniel Wacker, working in Bryan Roth's lab, X-rayed LSD sitting inside a serotonin receptor.",
+   "event": "Two scientist characters aim an X-ray beam at a tiny crystal; the picture develops like a photo and reveals the LSD molecule character caught sitting inside the receptor cup, looking surprised to be photographed.",
+   "tone": "amazed"
+  },
+  {
+   "text": "Part of the receptor had folded over the molecule like a lid. When they loosened that lid, LSD slipped out several times faster.",
+   "event": "A flap of the receptor swings down over the molecule like a lid snapping shut, and the molecule pushes against it and cannot get out while a clock spins; then a scientist's hand props the flap open and the molecule pops out almost at once.",
+   "tone": "amazed"
+  },
+  {
+   "text": "That's probably only part of the answer, because the drug also lingers in the blood for hours.",
+   "event": "Pull back to a bloodstream river where more LSD molecule characters are still drifting past, slowly thinning out as a clock hand moves; Mr. Shorts the owl holds up half of a jigsaw piece and shrugs, the other half still missing.",
+   "tone": "dry"
+  },
+  {
+   "text": "It rarely poisons the body, but a trip can become hours of panic, and people get hurt in accidents.",
+   "event": "The colour world turns hot orange: the body character's heart and lungs give a shaky thumbs up, but the brain character above them is wide-eyed and trembling as the walls close in, then it stumbles toward the edge of a kerb with traffic passing.",
+   "tone": "serious"
+  },
+  {
+   "text": "A few keep lasting visual disturbances, it may trigger psychosis in vulnerable people, and it's illegal in most countries.",
+   "event": "An eye character keeps seeing trails and static after the clock has long stopped; a second brain character develops a crack that spreads; then a globe turns and nearly every country stamps itself red.",
+   "tone": "serious"
+  },
+  {
+   "text": "It lasts so long partly because your own receptor shuts the lid, and you don't choose when it ends.",
+   "event": "Back to the opening picture: the lid is shut over the molecule on the brain cell, the tired brain character looks up at the sun still crossing the sky and taps a clock that will not speed up; the lid finally lifts only as night falls.",
+   "tone": "warm"
+  }
+ ],
+ "teaser": {
+  "question": "Why would a stimulant help anyone sit still?",
+  "label": "ADHD meds next"
+ },
+ "sources": [
+  {
+   "claim": "Effects last many hours (most of a waking day).",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5591798/",
+   "note": "Dolder et al. 2017, Clin Pharmacokinet: in healthy volunteers subjective effects lasted on average roughly 8 to 12 hours depending on the amount given. The script deliberately gives no figures tied to an amount."
+  },
+  {
+   "claim": "Hofmann's 1943 bicycle ride home from Sandoz in Basel; believed his neighbour was a witch; doctor found nothing physically wrong except dilated pupils.",
+   "url": "https://blog.nationalmuseum.ch/en/2017/04/albert-hofmanns-high-speed-bicycle-trip/",
+   "note": "Swiss National Museum, drawing on Hofmann's own account in 'LSD: My Problem Child' (1980). The witch episode happened after he got home, hence 'then mistook'. Self-experiment date 19 April 1943; cross-checked at https://en.wikipedia.org/wiki/Bicycle_Day_(psychedelic_holiday)."
+  },
+  {
+   "claim": "LSD acts mainly at the serotonin 5-HT2A receptor.",
+   "url": "https://nida.nih.gov/research-topics/psychedelic-dissociative-drugs",
+   "note": "NIDA: psychedelics such as LSD 'primarily affect 5-HT2A receptors in the brain, which ordinarily are activated by the neurotransmitter serotonin'. LSD also binds other serotonin and dopamine receptors; the script says 'a receptor called 5-HT2A', not 'only'."
+  },
+  {
+   "claim": "Brain imaging: normally separate networks became less segregated; visual cortex connectivity expanded, with eyes closed.",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4855588/",
+   "note": "Carhart-Harris et al. 2016, PNAS 113(17):4853-4858, Imperial College London with Cardiff. 20 volunteers took part, 15 usable for fMRI, eyes-closed resting scans. Decreased segregation between 8 network pairs; expanded primary visual cortex connectivity and increased visual cortex blood flow correlated with reported visual imagery. Small study, correlational."
+  },
+  {
+   "claim": "X-ray crystal structure of LSD in a serotonin receptor showing a 'lid' (extracellular loop 2) over the molecule; weakening the lid speeds LSD's exit.",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5289311/",
+   "note": "Wacker et al. 2017, Cell 168:377-389, first author Daniel Wacker, senior author Bryan Roth, UNC Chapel Hill. IMPORTANT: the crystal was of the 5-HT2B receptor, not 5-HT2A; that is why the script says 'a serotonin receptor'. Mutating the lid residue cut residence time about 10-fold at 5-HT2B (44 to 4.3 min) and about 4-fold at 5-HT2A (221 to 50 min), hence 'several times faster'. A later paper (Kim et al. 2020, Cell, doi 10.1016/j.cell.2020.08.024) solved LSD bound to 5-HT2A itself."
+  },
+  {
+   "claim": "The lid is only part of the explanation; the drug also stays in the blood for hours.",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5591798/",
+   "note": "Dolder et al. 2017: plasma half-life about 2.6 h and effects closely tracked blood concentration over time, which by itself explains much of the duration. Wacker et al. only say it is 'conceivable' the lid 'could contribute' to the long duration. Roth's press quote ('We think this lid is likely why the effects of LSD can last so long', https://phys.org/news/2017-01-lsd-brain-cell-serotonin-receptor.html) is stronger than the paper."
+  },
+  {
+   "claim": "Low physical toxicity; frightening trips; dangerous behaviour and accidents; persisting perceptual problems; possible triggering of psychosis in predisposed people.",
+   "url": "https://nida.nih.gov/research-topics/psychedelic-dissociative-drugs",
+   "note": "NIDA: fatal overdoses 'rarely associated with typical use'; 'extreme emotions such as fear, confusion, or panic'; people may 'behave in unusual or dangerous ways'; HPPD episodes 'can reoccur even years after'; 'some evidence that psychedelic drugs might bring about or trigger schizophrenia-like illness in people with predisposing factors'."
+  },
+  {
+   "claim": "Lasting visual disturbances (HPPD) affect a few people, not many.",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9166883/",
+   "note": "Mueller et al. 2022: brief flashbacks in about 9% of 142 trial participants, none met criteria for HPPD; authors call HPPD rare but say true incidence is uncertain."
+  },
+  {
+   "claim": "Illegal in most countries.",
+   "url": "https://www.incb.org/incb/uploads/documents/Psychotropics/training-materials/2021/21-01537_1971_Training_ENG_Module_1_ebook.pdf",
+   "note": "LSD is in Schedule I of the UN 1971 Convention on Psychotropic Substances, which has 184 state parties (INCB, 2021). Also stated in the EUDA lysergide drug profile, https://www.euda.europa.eu/publications/drug-profiles/lsd_en (page blocked automated fetching; open it by hand)."
+  }
+ ],
+ "caveats": "Double-check before recording: (1) The 2017 crystal structure was LSD in the 5-HT2B receptor, a close relative of the 5-HT2A receptor thought to drive the trip; the wording 'a serotonin receptor' is deliberate, do not change it to 5-HT2A in voice or captions. (2) The lid as the reason for the long trip is a hypothesis: the paper says 'could contribute', and blood-level data alone explain much of the duration. Keep 'probably only part of the answer' and 'partly'. (3) 'Most of a waking day' stands for roughly 8 to 12 hours in volunteer studies; duration varies, and no amounts are given on purpose, so do not add a number tied to an amount on screen. (4) 'X-rayed' is shorthand for X-ray crystallography of a frozen crystal, not an X-ray of a person. (5) 'London team': Imperial College London led it, with Cardiff University doing part of the scanning; 20 volunteers, 15 usable for fMRI. (6) 'It rarely poisons the body' means fatal overdose is rare in the literature; it does not mean safe, and the line must stay attached to the risks that follow. (7) The PNAS page and the EUDA drug profile refused automated access; I read the PNAS paper through its PubMed Central copy and did not read the EUDA page at all, so open it once by hand. (8) Hofmann detail comes from his own memoir as retold by the Swiss National Museum; I did not read the memoir text directly. (9) 'five-H-T-two-A' is how to say 5-HT2A aloud; it adds about four spoken words to the count. (10) Expect age restriction or limited ads on this topic."
+}

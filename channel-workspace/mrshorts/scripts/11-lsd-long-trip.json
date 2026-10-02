@@ -1,0 +1,1119 @@
+{
+ "id": "short11_lsd_long_trip",
+ "style": "v3",
+ "handle": "@mrshorts1737",
+ "title": "Why Does an LSD Trip Last So Long?",
+ "title_bar": "LSD: THE LONG TRIP",
+ "accent": "yellow",
+ "world": "neon",
+ "mood": "wonder",
+ "pause": 0.18,
+ "mascot": {
+  "activity": "flask"
+ },
+ "lines": [
+  {
+   "text": "Why does an LSD trip last so long, often swallowing most of a waking day?",
+   "tone": "curious",
+   "shots": [
+    {
+     "world": "sunset",
+     "scene": [
+      {
+       "prop": "brain",
+       "x": 0.5,
+       "y": 0.5,
+       "s": 1.9,
+       "face": "worried",
+       "face_at": [
+        -20,
+        -20
+       ],
+       "face_s": 1.3,
+       "layer": true
+      },
+      {
+       "prop": "molecule",
+       "x": 0.47,
+       "y": 0.345,
+       "s": 0.5,
+       "color": "yellow",
+       "mood": "smug",
+       "layer": true
+      },
+      {
+       "prop": "sun",
+       "x": 0.16,
+       "y": 0.6,
+       "s": 0.7,
+       "on": "trip",
+       "acts": [
+        {
+         "type": "move",
+         "to": [
+          0.86,
+          0.6
+         ],
+         "on": "trip",
+         "dur": 2.0
+        }
+       ],
+       "layer": true
+      }
+     ]
+    },
+    {
+     "on": "swallowing",
+     "world": "ink",
+     "scene": [
+      {
+       "prop": "brain",
+       "x": 0.5,
+       "y": 0.5,
+       "s": 1.9,
+       "face": "dizzy",
+       "face_at": [
+        -20,
+        -20
+       ],
+       "face_s": 1.3,
+       "layer": true
+      },
+      {
+       "prop": "molecule",
+       "x": 0.47,
+       "y": 0.345,
+       "s": 0.5,
+       "color": "yellow",
+       "mood": "smug",
+       "layer": true
+      },
+      {
+       "prop": "moon",
+       "x": 0.82,
+       "y": 0.33,
+       "s": 0.7,
+       "layer": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "In 1943, chemist Albert Hofmann cycled home from his Swiss lab, then mistook his neighbour for a witch.",
+   "tone": "dry",
+   "shots": [
+    {
+     "world": "mint",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.38,
+       "y": 0.5,
+       "s": 1.6,
+       "color": "white",
+       "mood": "happy",
+       "look": 0.0
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.22,
+       "s": 1.0,
+       "label": "1943",
+       "size": 130,
+       "color": "white"
+      },
+      {
+       "prop": "bulb",
+       "x": 0.76,
+       "y": 0.4,
+       "s": 0.8,
+       "on": "chemist"
+      }
+     ]
+    },
+    {
+     "on": "cycled",
+     "world": "sky",
+     "scene": [
+      {
+       "prop": "bike",
+       "x": 0.22,
+       "y": 0.47,
+       "s": 1.35,
+       "acts": [
+        {
+         "type": "move",
+         "to": [
+          0.76,
+          0.47
+         ],
+         "on": "cycled",
+         "dur": 2.2
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "on": "mistook",
+     "world": "grape",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.3,
+       "y": 0.5,
+       "s": 1.5,
+       "color": "white",
+       "mood": "surprised",
+       "look": 0.0,
+       "acts": [
+        {
+         "type": "shake",
+         "on": "witch",
+         "dur": 0.6
+        }
+       ],
+       "layer": true
+      },
+      {
+       "prop": "person",
+       "x": 0.7,
+       "y": 0.5,
+       "s": 1.5,
+       "color": "teal",
+       "mood": "happy",
+       "look": 3.1,
+       "layer": true
+      },
+      {
+       "prop": "hat",
+       "x": 0.7,
+       "y": 0.3,
+       "s": 0.95,
+       "on": "witch",
+       "layer": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "LSD looks enough like serotonin, your brain's own messenger, to slot into a receptor called 5-HT2A.",
+   "tone": "curious",
+   "shots": [
+    {
+     "world": "grape",
+     "scene": [
+      {
+       "prop": "molecule",
+       "x": 0.3,
+       "y": 0.42,
+       "s": 1.7,
+       "color": "yellow",
+       "mood": "smug",
+       "float": true
+      },
+      {
+       "prop": "molecule",
+       "x": 0.72,
+       "y": 0.42,
+       "s": 1.5,
+       "color": "green",
+       "mood": "happy",
+       "atoms": 3,
+       "float": true,
+       "on": "like"
+      }
+     ]
+    },
+    {
+     "on": "serotonin",
+     "world": "neon",
+     "scene": [
+      {
+       "prop": "receptor",
+       "x": 0.5,
+       "y": 0.52,
+       "s": 1.51,
+       "mood": "happy",
+       "layer": true
+      },
+      {
+       "prop": "molecule",
+       "x": 0.2,
+       "y": 0.25,
+       "s": 0.42,
+       "color": "green",
+       "mood": "happy",
+       "atoms": 3,
+       "float": true,
+       "layer": true,
+       "acts": [
+        {
+         "type": "move",
+         "to": [
+          0.5,
+          0.44
+         ],
+         "on": "serotonin",
+         "dur": 0.6
+        },
+        {
+         "type": "fall",
+         "on": "messenger",
+         "dur": 0.9
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "on": "slot",
+     "world": "neon",
+     "scene": [
+      {
+       "prop": "receptor",
+       "x": 0.5,
+       "y": 0.52,
+       "s": 1.51,
+       "mood": "shocked",
+       "layer": true
+      },
+      {
+       "prop": "molecule",
+       "x": 0.8,
+       "y": 0.25,
+       "s": 0.5,
+       "color": "yellow",
+       "mood": "smug",
+       "float": true,
+       "acts": [
+        {
+         "type": "move",
+         "to": [
+          0.5,
+          0.44
+         ],
+         "on": "slot",
+         "dur": 0.8
+        }
+       ],
+       "layer": true
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.2,
+       "s": 1.0,
+       "label": "5-HT2A",
+       "size": 96,
+       "color": "cyan",
+       "on": "receptor",
+       "layer": true
+      }
+     ]
+    }
+   ],
+   "say": "LSD looks enough like serotonin, your brain's own messenger, to slot into a receptor called five H T two A."
+  },
+  {
+   "text": "In 2016, Robin Carhart-Harris's London team scanned volunteers and watched normally separate brain networks start blending. The visual cortex was talking to far more of the brain, even with eyes shut.",
+   "tone": "amazed",
+   "shots": [
+    {
+     "world": "grape",
+     "scene": [
+      {
+       "prop": "scanner",
+       "x": 0.5,
+       "y": 0.47,
+       "s": 1.7,
+       "layer": true
+      },
+      {
+       "prop": "brain",
+       "x": 0.5,
+       "y": 0.47,
+       "s": 0.62,
+       "face": "sleepy",
+       "face_at": [
+        -20,
+        -20
+       ],
+       "face_s": 1.5,
+       "layer": true
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.22,
+       "s": 1.0,
+       "label": "2016",
+       "size": 130,
+       "color": "white",
+       "layer": true
+      }
+     ]
+    },
+    {
+     "on": "watched",
+     "world": "ink",
+     "scene": [
+      {
+       "prop": "network",
+       "x": 0.5,
+       "y": 0.45,
+       "s": 1.75,
+       "anim": [
+        {
+         "param": "links",
+         "from": 0,
+         "to": 0.55,
+         "on": "blending",
+         "dur": 1.0
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "on": "visual",
+     "world": "ink",
+     "scene": [
+      {
+       "prop": "network",
+       "x": 0.5,
+       "y": 0.42,
+       "s": 1.6,
+       "links": 1.0,
+       "layer": true
+      },
+      {
+       "prop": "eye",
+       "x": 0.5,
+       "y": 0.66,
+       "s": 0.8,
+       "color": "cyan",
+       "on": "visual",
+       "layer": true
+      }
+     ]
+    },
+    {
+     "on": "far",
+     "world": "ink",
+     "scene": [
+      {
+       "prop": "network",
+       "x": 0.5,
+       "y": 0.45,
+       "s": 2.0,
+       "links": 1.0
+      }
+     ],
+     "cam": {
+      "zoom": [
+       1.0,
+       1.2
+      ]
+     }
+    },
+    {
+     "on": "eyes",
+     "world": "candy",
+     "scene": [
+      {
+       "prop": "rings",
+       "x": 0.5,
+       "y": 0.45,
+       "s": 0.9,
+       "layer": true
+      },
+      {
+       "prop": "brain",
+       "x": 0.5,
+       "y": 0.47,
+       "s": 1.6,
+       "face": "sleepy",
+       "face_at": [
+        -20,
+        -20
+       ],
+       "face_s": 1.3,
+       "layer": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "In 2017, Daniel Wacker, working in Bryan Roth's lab, X-rayed LSD sitting inside a serotonin receptor.",
+   "tone": "amazed",
+   "shots": [
+    {
+     "world": "mint",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.32,
+       "y": 0.5,
+       "s": 1.5,
+       "color": "white",
+       "mood": "happy",
+       "look": 0.0
+      },
+      {
+       "prop": "person",
+       "x": 0.68,
+       "y": 0.5,
+       "s": 1.5,
+       "color": "cyan",
+       "mood": "happy",
+       "look": 3.1,
+       "on": "Bryan"
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.22,
+       "s": 1.0,
+       "label": "2017",
+       "size": 130,
+       "color": "white"
+      }
+     ]
+    },
+    {
+     "on": "X-rayed",
+     "world": "ink",
+     "scene": [
+      {
+       "prop": "xray",
+       "x": 0.52,
+       "y": 0.36,
+       "s": 1.45
+      },
+      {
+       "prop": "person",
+       "x": 0.3,
+       "y": 0.6,
+       "s": 1.3,
+       "color": "white",
+       "mood": "surprised",
+       "look": 0.0
+      }
+     ]
+    },
+    {
+     "on": "sitting",
+     "world": "lemon",
+     "scene": [
+      {
+       "prop": "rays",
+       "x": 0.5,
+       "y": 0.48,
+       "s": 1.0,
+       "color": "white",
+       "layer": true
+      },
+      {
+       "prop": "receptor",
+       "x": 0.5,
+       "y": 0.52,
+       "s": 1.51,
+       "mood": "shocked",
+       "layer": true
+      },
+      {
+       "prop": "molecule",
+       "x": 0.5,
+       "y": 0.44,
+       "s": 0.5,
+       "color": "yellow",
+       "mood": "shocked",
+       "layer": true,
+       "float": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "Part of the receptor had folded over the molecule like a lid. When they loosened that lid, LSD slipped out several times faster.",
+   "tone": "amazed",
+   "shots": [
+    {
+     "world": "neon",
+     "scene": [
+      {
+       "prop": "receptor",
+       "x": 0.5,
+       "y": 0.52,
+       "s": 1.57,
+       "mood": "smug",
+       "anim": [
+        {
+         "param": "lid",
+         "from": 0,
+         "to": 1,
+         "on": "folded",
+         "dur": 0.5
+        }
+       ],
+       "acts": [
+        {
+         "type": "shake",
+         "on": "lid",
+         "dur": 0.5
+        }
+       ],
+       "layer": true
+      },
+      {
+       "prop": "molecule",
+       "x": 0.5,
+       "y": 0.44,
+       "s": 0.5,
+       "color": "yellow",
+       "mood": "worried",
+       "layer": true,
+       "float": true
+      }
+     ]
+    },
+    {
+     "on": "like",
+     "world": "neon",
+     "scene": [
+      {
+       "prop": "receptor",
+       "x": 0.5,
+       "y": 0.52,
+       "s": 1.57,
+       "mood": "smug",
+       "lid": 1.0,
+       "layer": true,
+       "acts": [
+        {
+         "type": "shake",
+         "on": "lid",
+         "dur": 0.5
+        }
+       ]
+      },
+      {
+       "prop": "molecule",
+       "x": 0.5,
+       "y": 0.44,
+       "s": 0.5,
+       "color": "yellow",
+       "mood": "worried",
+       "layer": true,
+       "float": true
+      },
+      {
+       "prop": "clock",
+       "x": 0.84,
+       "y": 0.25,
+       "s": 0.55,
+       "speed": 8,
+       "layer": true
+      }
+     ],
+     "cam": {
+      "zoom": [
+       1.0,
+       1.18
+      ]
+     }
+    },
+    {
+     "on": "When",
+     "world": "sunset",
+     "scene": [
+      {
+       "prop": "receptor",
+       "x": 0.5,
+       "y": 0.52,
+       "s": 1.57,
+       "mood": "shocked",
+       "lid": 1.0,
+       "anim": [
+        {
+         "param": "lid",
+         "from": 1,
+         "to": 0.25,
+         "on": "loosened",
+         "dur": 0.6
+        }
+       ],
+       "layer": true
+      },
+      {
+       "prop": "molecule",
+       "x": 0.5,
+       "y": 0.44,
+       "s": 0.5,
+       "color": "yellow",
+       "mood": "happy",
+       "layer": true,
+       "float": true,
+       "acts": [
+        {
+         "type": "move",
+         "to": [
+          0.82,
+          0.2
+         ],
+         "on": "slipped",
+         "dur": 0.5
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "on": "LSD",
+     "world": "lemon",
+     "scene": [
+      {
+       "prop": "rays",
+       "x": 0.5,
+       "y": 0.45,
+       "s": 1.0,
+       "color": "white",
+       "layer": true
+      },
+      {
+       "prop": "molecule",
+       "x": 0.5,
+       "y": 0.45,
+       "s": 1.7,
+       "color": "yellow",
+       "mood": "happy",
+       "layer": true,
+       "float": true,
+       "acts": [
+        {
+         "type": "jump",
+         "on": "slipped"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "sfx": "chime",
+   "sfx_at": 0.3
+  },
+  {
+   "text": "That's probably only part of the answer, because the drug also lingers in the blood for hours.",
+   "tone": "dry",
+   "shots": [
+    {
+     "world": "grape",
+     "scene": [
+      {
+       "prop": "receptor",
+       "x": 0.4,
+       "y": 0.5,
+       "s": 1.23,
+       "mood": "smug",
+       "lid": 1.0,
+       "layer": true
+      },
+      {
+       "prop": "molecule",
+       "x": 0.4,
+       "y": 0.435,
+       "s": 0.4,
+       "color": "yellow",
+       "mood": "sleepy",
+       "layer": true,
+       "float": true
+      },
+      {
+       "prop": "question",
+       "x": 0.8,
+       "y": 0.33,
+       "s": 0.55,
+       "big": "?",
+       "layer": true
+      }
+     ]
+    },
+    {
+     "on": "because",
+     "world": "lava",
+     "scene": [
+      {
+       "prop": "stream",
+       "x": 0.5,
+       "y": 0.5,
+       "s": 0.95,
+       "riders": 5,
+       "layer": true
+      },
+      {
+       "prop": "molecule",
+       "x": 0.5,
+       "y": 0.27,
+       "s": 0.8,
+       "color": "yellow",
+       "mood": "sleepy",
+       "float": true,
+       "layer": true
+      }
+     ]
+    },
+    {
+     "on": "blood",
+     "world": "lava",
+     "scene": [
+      {
+       "prop": "stream",
+       "x": 0.5,
+       "y": 0.52,
+       "s": 1.0,
+       "riders": 5,
+       "layer": true
+      },
+      {
+       "prop": "clock",
+       "x": 0.5,
+       "y": 0.25,
+       "s": 0.85,
+       "speed": 5,
+       "layer": true
+      }
+     ],
+     "cam": {
+      "zoom": [
+       1.0,
+       1.15
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "text": "It rarely poisons the body, but a trip can become hours of panic, and people get hurt in accidents.",
+   "tone": "serious",
+   "shots": [
+    {
+     "world": "mint",
+     "scene": [
+      {
+       "prop": "heart",
+       "x": 0.36,
+       "y": 0.46,
+       "s": 1.5,
+       "face": "happy",
+       "face_s": 1.2
+      },
+      {
+       "prop": "check",
+       "x": 0.75,
+       "y": 0.36,
+       "s": 0.8,
+       "on": "body"
+      }
+     ]
+    },
+    {
+     "on": "trip",
+     "world": "lava",
+     "scene": [
+      {
+       "prop": "rings",
+       "x": 0.5,
+       "y": 0.46,
+       "s": 0.9,
+       "layer": true,
+       "colors": [
+        "red",
+        "orange",
+        "yellow",
+        "red",
+        "orange",
+        "pink"
+       ]
+      },
+      {
+       "prop": "brain",
+       "x": 0.5,
+       "y": 0.47,
+       "s": 1.7,
+       "face": "shocked",
+       "face_at": [
+        -20,
+        -20
+       ],
+       "face_s": 1.3,
+       "layer": true,
+       "acts": [
+        {
+         "type": "shake",
+         "on": "panic",
+         "dur": 1.2
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "on": "people",
+     "world": "ink",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.42,
+       "y": 0.52,
+       "s": 1.5,
+       "color": "orange",
+       "mood": "sad",
+       "rot": 90
+      },
+      {
+       "prop": "check",
+       "x": 0.76,
+       "y": 0.33,
+       "s": 0.9,
+       "ok": false,
+       "on": "hurt"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "A few keep lasting visual disturbances, it may trigger psychosis in vulnerable people, and it's illegal in most countries.",
+   "tone": "serious",
+   "shots": [
+    {
+     "world": "grape",
+     "scene": [
+      {
+       "prop": "rings",
+       "x": 0.5,
+       "y": 0.45,
+       "s": 0.7,
+       "layer": true
+      },
+      {
+       "prop": "eye",
+       "x": 0.5,
+       "y": 0.45,
+       "s": 1.9,
+       "color": "pink",
+       "layer": true
+      }
+     ]
+    },
+    {
+     "on": "psychosis",
+     "world": "ink",
+     "scene": [
+      {
+       "prop": "brain",
+       "x": 0.5,
+       "y": 0.47,
+       "s": 1.8,
+       "face": "worried",
+       "face_at": [
+        -20,
+        -20
+       ],
+       "face_s": 1.3,
+       "acts": [
+        {
+         "type": "shake",
+         "on": "vulnerable",
+         "dur": 0.8
+        }
+       ]
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.2,
+       "s": 1.0,
+       "label": "higher risk for some",
+       "size": 64,
+       "color": "pink"
+      }
+     ]
+    },
+    {
+     "on": "illegal",
+     "world": "lava",
+     "scene": [
+      {
+       "prop": "planet",
+       "x": 0.45,
+       "y": 0.46,
+       "s": 2.0,
+       "atmosphere": null,
+       "pins": 34,
+       "layer": true
+      },
+      {
+       "prop": "check",
+       "x": 0.8,
+       "y": 0.3,
+       "s": 0.8,
+       "ok": false,
+       "layer": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "It lasts so long partly because your own receptor shuts the lid, and you don't choose when it ends.",
+   "tone": "warm",
+   "shots": [
+    {
+     "world": "sunset",
+     "scene": [
+      {
+       "prop": "clock",
+       "x": 0.5,
+       "y": 0.45,
+       "s": 1.8,
+       "speed": 6,
+       "face": "sleepy",
+       "face_at": [
+        0,
+        60
+       ],
+       "face_s": 1.0
+      }
+     ]
+    },
+    {
+     "on": "your",
+     "world": "neon",
+     "scene": [
+      {
+       "prop": "receptor",
+       "x": 0.5,
+       "y": 0.52,
+       "s": 1.57,
+       "mood": "smug",
+       "lid": 1.0,
+       "layer": true,
+       "acts": [
+        {
+         "type": "shake",
+         "on": "lid",
+         "dur": 0.5
+        }
+       ]
+      },
+      {
+       "prop": "molecule",
+       "x": 0.5,
+       "y": 0.44,
+       "s": 0.5,
+       "color": "yellow",
+       "mood": "sleepy",
+       "layer": true,
+       "float": true
+      }
+     ]
+    },
+    {
+     "on": "you",
+     "world": "ink",
+     "scene": [
+      {
+       "prop": "brain",
+       "x": 0.5,
+       "y": 0.5,
+       "s": 1.9,
+       "face": "dizzy",
+       "face_at": [
+        -20,
+        -20
+       ],
+       "face_s": 1.3,
+       "layer": true
+      },
+      {
+       "prop": "molecule",
+       "x": 0.47,
+       "y": 0.345,
+       "s": 0.5,
+       "color": "yellow",
+       "mood": "smug",
+       "layer": true
+      },
+      {
+       "prop": "moon",
+       "x": 0.82,
+       "y": 0.33,
+       "s": 0.7,
+       "layer": true
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "teaser": {
+  "question": "Why would a stimulant help anyone sit still?",
+  "label": "ADHD meds next"
+ },
+ "sources": [
+  {
+   "claim": "Effects last many hours (most of a waking day).",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5591798/",
+   "note": "Dolder et al. 2017, Clin Pharmacokinet: in healthy volunteers subjective effects lasted on average roughly 8 to 12 hours depending on the amount given. The script deliberately gives no figures tied to an amount."
+  },
+  {
+   "claim": "Hofmann's 1943 bicycle ride home from Sandoz in Basel; believed his neighbour was a witch; doctor found nothing physically wrong except dilated pupils.",
+   "url": "https://blog.nationalmuseum.ch/en/2017/04/albert-hofmanns-high-speed-bicycle-trip/",
+   "note": "Swiss National Museum, drawing on Hofmann's own account in 'LSD: My Problem Child' (1980). The witch episode happened after he got home, hence 'then mistook'. Self-experiment date 19 April 1943; cross-checked at https://en.wikipedia.org/wiki/Bicycle_Day_(psychedelic_holiday)."
+  },
+  {
+   "claim": "LSD acts mainly at the serotonin 5-HT2A receptor.",
+   "url": "https://nida.nih.gov/research-topics/psychedelic-dissociative-drugs",
+   "note": "NIDA: psychedelics such as LSD 'primarily affect 5-HT2A receptors in the brain, which ordinarily are activated by the neurotransmitter serotonin'. LSD also binds other serotonin and dopamine receptors; the script says 'a receptor called 5-HT2A', not 'only'."
+  },
+  {
+   "claim": "Brain imaging: normally separate networks became less segregated; visual cortex connectivity expanded, with eyes closed.",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4855588/",
+   "note": "Carhart-Harris et al. 2016, PNAS 113(17):4853-4858, Imperial College London with Cardiff. 20 volunteers took part, 15 usable for fMRI, eyes-closed resting scans. Decreased segregation between 8 network pairs; expanded primary visual cortex connectivity and increased visual cortex blood flow correlated with reported visual imagery. Small study, correlational."
+  },
+  {
+   "claim": "X-ray crystal structure of LSD in a serotonin receptor showing a 'lid' (extracellular loop 2) over the molecule; weakening the lid speeds LSD's exit.",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5289311/",
+   "note": "Wacker et al. 2017, Cell 168:377-389, first author Daniel Wacker, senior author Bryan Roth, UNC Chapel Hill. IMPORTANT: the crystal was of the 5-HT2B receptor, not 5-HT2A; that is why the script says 'a serotonin receptor'. Mutating the lid residue cut residence time about 10-fold at 5-HT2B (44 to 4.3 min) and about 4-fold at 5-HT2A (221 to 50 min), hence 'several times faster'. A later paper (Kim et al. 2020, Cell, doi 10.1016/j.cell.2020.08.024) solved LSD bound to 5-HT2A itself."
+  },
+  {
+   "claim": "The lid is only part of the explanation; the drug also stays in the blood for hours.",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5591798/",
+   "note": "Dolder et al. 2017: plasma half-life about 2.6 h and effects closely tracked blood concentration over time, which by itself explains much of the duration. Wacker et al. only say it is 'conceivable' the lid 'could contribute' to the long duration. Roth's press quote ('We think this lid is likely why the effects of LSD can last so long', https://phys.org/news/2017-01-lsd-brain-cell-serotonin-receptor.html) is stronger than the paper."
+  },
+  {
+   "claim": "Low physical toxicity; frightening trips; dangerous behaviour and accidents; persisting perceptual problems; possible triggering of psychosis in predisposed people.",
+   "url": "https://nida.nih.gov/research-topics/psychedelic-dissociative-drugs",
+   "note": "NIDA: fatal overdoses 'rarely associated with typical use'; 'extreme emotions such as fear, confusion, or panic'; people may 'behave in unusual or dangerous ways'; HPPD episodes 'can reoccur even years after'; 'some evidence that psychedelic drugs might bring about or trigger schizophrenia-like illness in people with predisposing factors'."
+  },
+  {
+   "claim": "Lasting visual disturbances (HPPD) affect a few people, not many.",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9166883/",
+   "note": "Mueller et al. 2022: brief flashbacks in about 9% of 142 trial participants, none met criteria for HPPD; authors call HPPD rare but say true incidence is uncertain."
+  },
+  {
+   "claim": "Illegal in most countries.",
+   "url": "https://www.incb.org/incb/uploads/documents/Psychotropics/training-materials/2021/21-01537_1971_Training_ENG_Module_1_ebook.pdf",
+   "note": "LSD is in Schedule I of the UN 1971 Convention on Psychotropic Substances, which has 184 state parties (INCB, 2021). Also stated in the EUDA lysergide drug profile, https://www.euda.europa.eu/publications/drug-profiles/lsd_en (page blocked automated fetching; open it by hand)."
+  }
+ ],
+ "caveats": "Double-check before recording: (1) The 2017 crystal structure was LSD in the 5-HT2B receptor, a close relative of the 5-HT2A receptor thought to drive the trip; the wording 'a serotonin receptor' is deliberate, do not change it to 5-HT2A in voice or captions. (2) The lid as the reason for the long trip is a hypothesis: the paper says 'could contribute', and blood-level data alone explain much of the duration. Keep 'probably only part of the answer' and 'partly'. (3) 'Most of a waking day' stands for roughly 8 to 12 hours in volunteer studies; duration varies, and no amounts are given on purpose, so do not add a number tied to an amount on screen. (4) 'X-rayed' is shorthand for X-ray crystallography of a frozen crystal, not an X-ray of a person. (5) 'London team': Imperial College London led it, with Cardiff University doing part of the scanning; 20 volunteers, 15 usable for fMRI. (6) 'It rarely poisons the body' means fatal overdose is rare in the literature; it does not mean safe, and the line must stay attached to the risks that follow. (7) The PNAS page and the EUDA drug profile refused automated access; I read the PNAS paper through its PubMed Central copy and did not read the EUDA page at all, so open it once by hand. (8) Hofmann detail comes from his own memoir as retold by the Swiss National Museum; I did not read the memoir text directly. (9) 'five-H-T-two-A' is how to say 5-HT2A aloud; it adds about four spoken words to the count. (10) Expect age restriction or limited ads on this topic.",
+ "rate": "+18%"
+}
