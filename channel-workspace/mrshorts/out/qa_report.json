@@ -1,15 +1,16 @@
 [
  {
   "id": "short11_lsd_long_trip",
-  "duration": 94.6,
-  "size_mb": 11.61,
+  "duration": 92.9,
+  "size_mb": 11.73,
   "lufs": -14.1,
-  "wps": 2.23,
-  "narration_match": 0.918,
+  "wps": 2.27,
+  "narration_match": 0.908,
   "caption_sync_ms": 60,
   "first_frame_std": 35.8,
   "diffs": [
    "'does an' -> \"doesn't\"",
+   "'waking' -> 'awake in'",
    "'hofmann' -> 'hoffman'",
    "'neighbour' -> 'neighbor'",
    "'ht2a' -> 'hd2a'",
@@ -21,12 +22,13 @@
    "'' -> 'the'",
    "'it may' -> \"it's my\"",
    "'in vulnerable' -> 'invulnerable'",
-   "'shuts the lid' -> 'shots delete'"
+   "'shuts the lid' -> 'shots delete'",
+   "'the' -> ''"
   ],
   "flags": [
-   "duration 94.6s outside 20-75",
-   "size 11.6 MB",
-   "narration match 0.92"
+   "duration 92.9s outside 20-75",
+   "size 11.7 MB",
+   "narration match 0.91"
   ]
  }
 ]

@@ -103,6 +103,7 @@ def main():
             best += 1
         return best * 0.02 if t_third - best * 0.02 >= 0.5 else t_first
 
+    os.makedirs(args.out_dir, exist_ok=True)
     pieces, report, cursor = [], [], 0
     for i, ln in enumerate(spec["lines"]):
         words = ln.get("say", ln["text"]).split()
@@ -139,8 +140,22 @@ def main():
             pieces += [seg, np.zeros(int((args.max_pause if r < len(runs) - 1 else args.line_gap) * SR))]
         report.append({"line": i + 1, "takes_found": len(takes), "used_seconds": [round(runs[0][0], 1), round(src[b - 1][2], 1)],
                        "match": round(ratio, 2), "heard": said, "differences": diff})
+    teaser = spec.get("teaser")
+    if teaser:  # the owl's closing question, if it was read too
+        t_words = f"{teaser['question']} {teaser.get('cta', 'Think it over. The answer is in the next Short.')}".split()
+        t_takes = [tk for tk in find_takes(t_words, heard, min_ratio=0.6) if tk[0] >= cursor]
+        if t_takes:
+            a, b, ratio = t_takes[-1]
+            seg = rec[int(max(0, heard[a][1] - 0.1) * SR):int((heard[b - 1][2] + 0.2) * SR)]
+            tp = os.path.join(args.out_dir, spec["id"] + ".teaser.f32")
+            seg.astype(np.float32).tofile(tp)
+            subprocess.run(["ffmpeg", "-nostdin", "-y", "-loglevel", "error", "-f", "f32le", "-ar", str(SR), "-ac", "1",
+                            "-i", tp, "-af", "highpass=f=70,afftdn=nr=8,loudnorm=I=-18:TP=-2",
+                            os.path.join(args.out_dir, spec["id"] + ".teaser.wav")], check=True)
+            os.remove(tp)
+            print(f"  owl's closing line: {heard[a][1]:.1f}-{heard[b - 1][2]:.1f}s, match {ratio:.2f}: "
+                  + " ".join(h[0] for h in heard[a:b]))
     clean = np.concatenate(pieces)
-    os.makedirs(args.out_dir, exist_ok=True)
     raw = os.path.join(args.out_dir, spec["id"] + ".raw.f32")
     clean.astype(np.float32).tofile(raw)
     out = os.path.join(args.out_dir, spec["id"] + ".wav")

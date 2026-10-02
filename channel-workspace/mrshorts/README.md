@@ -119,10 +119,14 @@ Colours are palette names (`white yellow orange red pink purple violet blue cyan
 A small owl in glasses and red shorts (`mascot` prop). When a script has a `teaser`, he sits in the bottom-right
 corner for the whole Short doing one "thinking" activity, set per script with `"mascot": {"activity": "telescope"}`
 (telescope, book, globe, puzzle, abacus, magnifier, chess, notebook, flask, cube: use a different one in each
-video). He hops on the reveal chime, then steps forward at the end, asks the teaser question in
+video). While the narration plays his beak moves with the voice, he points a wing at things as they appear or
+happen, and between lines he does one small gag chosen by the line's `"tone"` (dry, amazed, curious, warm;
+never on `serious` lines). He hops on the reveal chime, then steps forward at the end, asks the teaser question in
 his own voice (`--mascot-voice`, default `en-GB-RyanNeural`, a dry adult voice) with a moving beak, and says the answer is in the next
 Short. The teaser must be the hook of the Short published next, so keep `teaser.next` in step with the publishing
-order. `--no-mascot` renders without him (and keeps the seamless loop).
+order. With `--voice-file`, a take of the closing question saved as `<voice-file>.teaser.wav` (written by
+`prepare_narration.py` when you read that line too) is used, so he keeps one voice throughout.
+`--no-mascot` renders without him (and keeps the seamless loop).
 
 ## Retention rules baked into the renderer
 

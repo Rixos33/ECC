@@ -920,43 +920,104 @@ def _activity(c, t, kind):
         c.restore()
 
 
-def p_mascot(c, t, p, talk=0.0, look=0.0, mood="smirk", wave=False, hop=0.0, activity=None, **_):
+GAGS = ("glasses", "eyebrows", "jawdrop", "double_take", "nod", "peek", "shrug", "spin")
+
+
+def p_mascot(c, t, p, talk=0.0, look=0.0, mood="smirk", wave=False, hop=0.0, activity=None, point=0.0,
+             gag=None, gag_t=0.0, **_):
     """Mr. Shorts: a small round owl with big glasses, a raised eyebrow and red shorts.
-    talk 0..1 opens the beak, look -1..1 moves the pupils, hop 0..1 lifts him off the ground."""
+    talk 0..1 opens the beak, look -1..1 moves the pupils, hop 0..1 lifts him off the ground,
+    point 0..1 raises the left wing toward the scene, gag + gag_t (0..1) plays a short bit of business."""
     body_c, wing_c, beak_c = (246, 240, 228), (124, 92, 214), (255, 150, 60)
+    g = max(0.0, min(1.0, gag_t)) if gag else 0.0
+    arc = math.sin(math.pi * g)                      # 0 -> 1 -> 0 over the gag
+    point = max(0.0, min(1.0, point))
+    look_y, eye_s, brow_extra, glasses_dy, tilt, flip = 0.0, 1.0, 0.0, 0.0, 0.0, 1.0
+    shrug = 0.0
+    if gag == "glasses":
+        glasses_dy = -16 * arc
+    elif gag == "eyebrows":
+        brow_extra = 14 * abs(math.sin(3 * math.pi * g))
+    elif gag == "jawdrop":
+        talk, eye_s, brow_extra = max(talk, 1.4 * arc), 1 + 0.18 * arc, 16 * arc
+    elif gag == "double_take":
+        look = 1.0 if g < 0.4 else -1.0
+        eye_s, brow_extra = (1.0, 0.0) if g < 0.4 else (1 + 0.2 * math.sin(math.pi * (g - 0.4) / 0.6), 12)
+    elif gag == "nod":
+        tilt = 7 * math.sin(4 * math.pi * g)
+    elif gag == "peek":
+        glasses_dy, look_y = 20 * arc, -10 * arc
+    elif gag == "shrug":
+        shrug, brow_extra = arc, 12 * arc
+    elif gag == "spin":
+        flip, hop = math.cos(2 * math.pi * g), max(hop, 0.5 * arc)
+    if point:
+        look, look_y = -1.0, min(look_y, -8 * point)
     lift = -70 * math.sin(math.pi * max(0.0, min(1.0, hop)))
-    c.drawOval(skia.Rect.MakeXYWH(-95 + abs(lift) * 0.2, 168, 190 - abs(lift) * 0.4, 28), paint(INK, 70))
+    c.drawOval(skia.Rect.MakeXYWH(-100 + abs(lift) * 0.2, 186, 200 - abs(lift) * 0.4, 28), paint(INK, 70))
     c.save()
     c.translate(0, lift)
+    c.translate(0, 190)
+    c.rotate(tilt - 4 * point)                        # he leans toward what he is pointing at
+    c.translate(0, -190)
     sq = 1 + 0.02 * math.sin(t * 2.6)  # breathing
-    c.scale(1 / sq, sq)
-    for sx in (-1, 1):  # feet
-        c.drawOval(skia.Rect.MakeXYWH(sx * 48 - 30, 150, 60, 26), paint(beak_c))
+    c.scale(flip / sq if abs(flip) > 0.08 else 0.08, sq)
+    for sx in (-1, 1):  # legs and feet, showing below the shorts
+        c.drawLine(sx * 62, 140, sx * 62, 182, paint(beak_c, stroke=14))
+        c.drawOval(skia.Rect.MakeXYWH(sx * 66 - 34, 172, 68, 26), paint(beak_c))
     for sx in (-1, 1):  # ear tufts
         c.drawPath(path([(sx * 40, -150), (sx * 112, -205), (sx * 104, -110)]), paint(wing_c))
     body = skia.Path()
-    body.addOval(skia.Rect.MakeXYWH(-125, -160, 250, 320))
+    body.addOval(skia.Rect.MakeXYWH(-125, -160, 250, 296))
     c.drawPath(body, paint(shade(body_c, -0.2)))
     c.save()
     c.clipPath(body, doAntiAlias=True)
-    c.drawOval(skia.Rect.MakeXYWH(-135, -172, 250, 320), paint(body_c))
-    c.drawRect(skia.Rect.MakeXYWH(-140, 62, 280, 120), paint("red"))          # the shorts
-    c.drawRect(skia.Rect.MakeXYWH(-140, 62, 280, 18), paint(shade(PAL["red"], -0.3)))  # waistband
-    c.drawLine(0, 78, 0, 170, paint(shade(PAL["red"], -0.3), stroke=6))
-    c.drawOval(skia.Rect.MakeXYWH(40, -150, 160, 330), paint(INK, 22))       # soft side shading
+    c.drawOval(skia.Rect.MakeXYWH(-135, -172, 250, 300), paint(body_c))
+    c.drawOval(skia.Rect.MakeXYWH(40, -150, 160, 310), paint(INK, 22))       # soft side shading
     c.restore()
-    for sx in (-1, 1):  # wings; the right one waves when asked
+    # the shorts: a real garment with a waistband, a drawstring, two legs and side stripes
+    red, dark = PAL["red"], shade(PAL["red"], -0.3)
+    shorts = skia.Path()
+    shorts.moveTo(-122, 52)
+    shorts.lineTo(122, 52)
+    shorts.cubicTo(134, 90, 140, 120, 138, 152)
+    shorts.lineTo(14, 152)
+    shorts.lineTo(0, 112)
+    shorts.lineTo(-14, 152)
+    shorts.lineTo(-138, 152)
+    shorts.cubicTo(-140, 120, -134, 90, -122, 52)
+    shorts.close()
+    c.drawPath(shorts, paint(red))
+    c.save()
+    c.clipPath(shorts, doAntiAlias=True)
+    c.drawRect(skia.Rect.MakeXYWH(-150, 136, 300, 20), paint(dark))          # leg cuffs
+    c.drawRect(skia.Rect.MakeXYWH(-150, 48, 300, 22), paint(dark))           # waistband
+    for sx in (-1, 1):
+        c.drawRect(skia.Rect.MakeXYWH(sx * 112 - 9, 70, 18, 66), paint("white"))   # side stripes
+    c.drawRect(skia.Rect.MakeXYWH(40, 40, 120, 120), paint(INK, 26))          # shading on the far side
+    c.restore()
+    c.drawLine(0, 72, 0, 112, paint(dark, stroke=5))                          # centre seam
+    for sx in (-1, 1):                                                        # drawstring bow
+        c.drawOval(skia.Rect.MakeXYWH(sx * 15 - 13, 60, 26, 15), paint("white", stroke=5))
+        c.drawLine(sx * 4, 74, sx * 15, 98, paint("white", stroke=5))
+    for sx in (-1, 1):  # wings: the right one waves, the left one points at the scene
         c.save()
         c.translate(sx * 118, -10)
-        ang = sx * 14 + (sx * 4 * math.sin(t * 2.2))
+        ang = sx * 14 + (sx * 4 * math.sin(t * 2.2)) - sx * 62 * shrug
+        length = 118
         if wave and sx > 0:
             ang = -152 + 18 * math.sin(t * 9)
+        if sx < 0 and point:
+            ang = ang + (128 - ang) * point + 5 * math.sin(t * 10) * point  # up and to the left, with a jab
+            length = 118 + 34 * point
+        if gag == "glasses" and sx > 0:
+            ang = ang + (-150 - ang) * arc                                   # wing comes up to the frames
         c.rotate(ang)
-        c.drawOval(skia.Rect.MakeXYWH(-26, -8, 52, 118), paint(wing_c))
-        c.drawOval(skia.Rect.MakeXYWH(-18, -2, 34, 96), paint(shade(wing_c, 0.18)))
+        c.drawOval(skia.Rect.MakeXYWH(-26, -8, 52, length), paint(wing_c))
+        c.drawOval(skia.Rect.MakeXYWH(-18, -2, 34, length - 22), paint(shade(wing_c, 0.18)))
         c.restore()
     # eyes behind big round glasses
-    blink = abs(((t + 0.4) % 3.4) - 0.1) < 0.07
+    blink = abs(((t + 0.4) % 3.4) - 0.1) < 0.07 and not gag
     for sx in (-1, 1):
         ex = sx * 56
         c.drawCircle(ex, -52, 50, paint("white"))
@@ -964,16 +1025,16 @@ def p_mascot(c, t, p, talk=0.0, look=0.0, mood="smirk", wave=False, hop=0.0, act
             c.drawLine(ex - 26, -50, ex + 26, -50, paint(INK, stroke=8))
         else:
             px = ex + 14 * max(-1.0, min(1.0, look))
-            c.drawCircle(px, -48, 22, paint(INK))
-            c.drawCircle(px - 8, -57, 8, paint("white"))
-        c.drawCircle(ex, -52, 52, paint(INK, stroke=10))
-    c.drawLine(-8, -56, 8, -56, paint(INK, stroke=10))                       # bridge
+            c.drawCircle(px, -48 + look_y, 22 * eye_s, paint(INK))
+            c.drawCircle(px - 8, -57 + look_y, 8, paint("white"))
+        c.drawCircle(ex, -52 + glasses_dy, 52, paint(INK, stroke=10))
+    c.drawLine(-8, -56 + glasses_dy, 8, -56 + glasses_dy, paint(INK, stroke=10))   # bridge
     # eyebrows: the right one is cocked, which is where the wit lives
     lift_b = {"smirk": 16, "curious": 22, "happy": 6}.get(mood, 12)
-    c.drawLine(-88, -120, -30, -116, paint(wing_c, stroke=11))
-    c.drawLine(30, -118 - lift_b * 0.4, 90, -124 - lift_b, paint(wing_c, stroke=11))
+    c.drawLine(-88, -120 - brow_extra, -30, -116 - brow_extra, paint(wing_c, stroke=11))
+    c.drawLine(30, -118 - lift_b * 0.4 - brow_extra, 90, -124 - lift_b - brow_extra, paint(wing_c, stroke=11))
     # beak opens with speech
-    op = 16 * max(0.0, min(1.0, talk))
+    op = 16 * max(0.0, min(1.5, talk))
     c.drawPath(path([(-22, 6 - op * 0.3), (22, 6 - op * 0.3), (0, 26 - op * 0.3)]), paint(beak_c))
     if op > 1:
         c.drawPath(path([(-16, 12 + op * 0.4), (16, 12 + op * 0.4), (0, 22 + op)]), paint(shade(beak_c, -0.25)))

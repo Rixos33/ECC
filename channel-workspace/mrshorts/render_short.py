@@ -161,7 +161,7 @@ def tts_elevenlabs(text, voice, path):
     return words
 
 
-def load_recording(path, lines, model_name="small.en"):
+def load_recording(path, lines, model_name="small.en", min_match=0.8):
     """Owner's own narration (one continuous take). Returns per-line (samples, words) by aligning the
     script to Whisper word timestamps, so captions, cuts and cues follow the real voice."""
     import difflib
@@ -181,7 +181,7 @@ def load_recording(path, lines, model_name="small.en"):
         for k in range(blk.size):
             times[blk.a + k] = (heard[blk.b + k][1], heard[blk.b + k][2])
     matched = sum(x is not None for x in times) / max(1, len(times))
-    if matched < 0.8:
+    if matched < min_match:
         raise RenderError(f"recording matches only {matched:.0%} of the script; re-record or check the wording")
     last_end = 0.0
     for k in range(len(times)):  # fill words Whisper missed by interpolating between neighbours
@@ -376,7 +376,7 @@ EXTENTS = {
     "rain": (350, 250), "wave": (460, 200), "salt": (250, 110), "big": (430, 190), "question": (200, 260),
     "versus": (430, 220), "timeline": (400, 190), "bird": (150, 130), "robot": (150, 250), "heart": (170, 140),
     "speaker": (130, 170), "newspaper": (200, 240), "thumb": (130, 130), "frame": (180, 210), "crane": (200, 270),
-    "tv": (230, 230), "package": (150, 170), "mascot": (135, 205), "molecule": (130, 120), "receptor": (330, 175),
+    "tv": (230, 230), "package": (150, 170), "mascot": (140, 215), "molecule": (130, 120), "receptor": (330, 175),
     "neuron": (250, 250), "network": (250, 240), "rays": (300, 300), "rings": (330, 330), "bike": (220, 290),
     "hat": (150, 180), "scanner": (230, 215), "xray": (330, 90), "stream": (480, 170),
 }
@@ -423,7 +423,7 @@ def fit_scene(props, cam=None):
 
 
 FOOT = {"person": 175, "crowd": 190, "robot": 140, "bird": 125, "ship": 70, "crane": 180, "package": 170,
-        "mountain": 200, "camera": 165, "speaker": 170, "slot": 160, "tv": 200, "wave": -60, "mascot": 172}
+        "mountain": 200, "camera": 165, "speaker": 170, "slot": 160, "tv": 200, "wave": -60, "mascot": 190}
 
 
 def camera(tl, dur, cam, fit, punch):
@@ -876,6 +876,7 @@ def render(spec_path, out_dir, args):
     recording = load_recording(args.voice_file, lines) if args.voice_file else None
     with tempfile.TemporaryDirectory() as tmp:
         scenes, words, voice, cues, t = [], [], [], [], 0.0
+        point_at, line_ends = [], []
         for i, ln in enumerate(lines):
             if recording:  # the owner's own voice: timing comes from the recording, pauses included
                 samples, ws = recording[i]
@@ -939,9 +940,14 @@ def render(spec_path, out_dir, args):
                 for pr in props[:3]:
                     if pr.get("delay", 0) > 0.2:
                         cues.append((st + pr["delay"] + 0.05, "pop"))
+                for pr in props:  # moments worth pointing at: cued entrances and things that happen
+                    if pr.get("delay", 0) > 0.2:
+                        point_at.append(st + pr["delay"])
+                    point_at += [st + it["at"] for it in pr.get("acts", []) + pr.get("anim", []) if it.get("at", 0) > 0.2]
             words += [(w, t + s0, d) for w, s0, d in ws]
             voice.append(samples)
             voice.append(np.zeros(int(pause * audio.SR)))
+            line_ends.append((t + (ws[-1][1] + ws[-1][2] if ws else dur), ln.get("tone"), bool(ln.get("sfx"))))
             if last and not ln.get("sfx"):
                 cues.append((t + 0.05, "pop"))  # soft marker for the payoff / loop line
             if ln.get("sfx"):
@@ -950,6 +956,28 @@ def render(spec_path, out_dir, args):
                     cues.append((max(0.0, t - 1.1), "riser"))  # build-up into the reveal
             t += dur
         outro_at, talk_env, chime_times = None, None, [at for at, kind in cues if kind == "chime"]
+        # Mr. Shorts performs the narration: beak follows the voice, a wing points at what happens, and
+        # between lines he does one small bit of business chosen by the line's tone (never on serious lines)
+        nar = np.concatenate(voice)
+        fr = int(audio.SR / FPS)
+        lip = np.array([np.sqrt(np.mean(nar[i:i + fr] ** 2)) for i in range(0, len(nar), fr)])
+        lip = np.clip(lip / (np.percentile(lip[lip > 0], 85) + 1e-9) if (lip > 0).any() else lip, 0, 1)
+        lip = np.where(lip < 0.18, 0.0, lip)
+        lip = np.convolve(lip, [0.25, 0.5, 0.25], mode="same")
+        points = []
+        for at in sorted(point_at):
+            if not points or at - points[-1] >= 2.6:
+                points.append(at)
+        by_tone = {"dry": ("eyebrows", "shrug", "glasses"), "amazed": ("double_take", "jawdrop"),
+                   "curious": ("peek", "glasses"), "warm": ("nod",), None: ("glasses", "eyebrows", "nod", "peek")}
+        gags, n_gag = [], 0
+        for end, tone, reveal in line_ends[:-1]:
+            if tone == "serious" or (gags and end - gags[-1][0] < 7.0):
+                continue
+            kinds = by_tone.get(tone, by_tone[None])
+            gags.append((end - 0.15, 1.1, "jawdrop" if reveal else kinds[n_gag % len(kinds)]))
+            n_gag += 1
+        points = [at for at in points if not any(g0 - 0.9 < at < g0 + gd for g0, gd, _ in gags)]
         activity = (spec.get("mascot") or {}).get("activity") or art.ACTIVITIES[sum(map(ord, spec["id"])) % len(art.ACTIVITIES)]
         teaser = spec.get("teaser")
         if teaser and not args.no_mascot:
@@ -958,8 +986,12 @@ def render(spec_path, out_dir, args):
             voice.append(np.zeros(int(gap * audio.SR)))
             t += gap
             cta = teaser.get("cta", "Think it over. The answer is in the next Short.")
-            samples, ws = synth(f"{teaser['question']} {cta}", args, os.path.join(tmp, "mascot"), args.cache,
-                                voice=args.mascot_voice, rate=args.mascot_rate, pitch=args.mascot_pitch)
+            own = args.teaser_voice_file or (args.voice_file[:-4] + ".teaser.wav" if args.voice_file else None)
+            if own and os.path.exists(own):  # the owl speaks with the narrator's voice from start to finish
+                samples, ws = load_recording(own, [{"text": f"{teaser['question']} {cta}"}], min_match=0.6)[0]
+            else:
+                samples, ws = synth(f"{teaser['question']} {cta}", args, os.path.join(tmp, "mascot"), args.cache,
+                                    voice=args.mascot_voice, rate=args.mascot_rate, pitch=args.mascot_pitch)
             ws = display_words(f"{teaser['question']} {cta}", ws)
             dur = len(samples) / audio.SR + 0.35
             n_q = len(teaser["question"].split()) + 3  # cut to the wave on "The answer..."
@@ -1067,15 +1099,23 @@ def render(spec_path, out_dir, args):
                     else:
                         draw_scene(c, sc["props"], tl_draw, sc["dur"], sc["cam"], sc["fit"], punch=idx > 0)
                 if teaser and not args.no_mascot and not sc.get("outro"):
-                    # Mr. Shorts sits in the right-hand corner (below the captions, left of the Shorts buttons),
-                    # busy with this video's one activity; he hops on the reveal
+                    # Mr. Shorts in the right-hand corner (below the captions, left of the Shorts buttons)
                     hop = max((1 - abs((ft - tc) / 0.45 - 0.5) * 2 for tc in chime_times if 0 <= ft - tc <= 0.45),
                               default=0.0)
+                    pt = 0.0
+                    for at in points:  # wing up just before the event, held, then down
+                        d = ft - (at - 0.2)
+                        if 0 <= d <= 1.35:
+                            pt = max(pt, min(1.0, d / 0.18) if d < 1.05 else max(0.0, 1 - (d - 1.05) / 0.3))
+                    gag = next(((kind, (ft - g0) / gd) for g0, gd, kind in gags if g0 <= ft < g0 + gd), None)
+                    li = int(ft * FPS)
                     c.save()
                     c.translate(850, 1492)
                     c.scale(0.62, 0.62)
                     art.PROPS["mascot"](c, ft, 1.0, look=-0.7 + 0.3 * math.sin(ft * 0.7), hop=hop / 2,
-                                        mood="curious" if hop else "smirk", activity=activity)
+                                        mood="curious" if hop else "smirk", activity=activity,
+                                        talk=float(lip[li]) if li < len(lip) else 0.0, point=ease_io(pt),
+                                        gag=gag[0] if gag else None, gag_t=gag[1] if gag else 0.0)
                     c.restore()
                 if v3:
                     draw_title(c, spec, ft, accent)
@@ -1111,6 +1151,8 @@ def main():
     ap.add_argument("--no-mascot", action="store_true", help="skip the mascot and its end question")
     ap.add_argument("--voice-file", default=None,
                     help="your own narration (one continuous recording of the script); replaces the AI voice")
+    ap.add_argument("--teaser-voice-file", default=None,
+                    help="your own take of the owl's closing question (default: <voice-file>.teaser.wav if present)")
     ap.add_argument("--music-file", default=None, help="use this audio file as the music bed instead of the generated one")
     ap.add_argument("--cache", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), ".tts-cache"))
     args = ap.parse_args()
