@@ -583,7 +583,7 @@ def _chunk_cost(ws, nxt):
     """Lower is better: prefer 2-3 word phrases, never end on a function word, never split a number."""
     if not _fits(ws):
         return 1e9
-    cost = 1.5 + (1.5 if len(ws) == 1 else 0) + (1.2 if len(ws) == 4 else 0) + (2.5 if len(ws) >= 5 else 0)
+    cost = 2.4 + (1.5 if len(ws) == 1 else 0) + (0.4 if len(ws) == 4 else 0) + (1.4 if len(ws) >= 5 else 0)
     last = _norm(ws[-1][0])
     if (last in {_norm(x) for x in STOP_END} or ws[-1][0].lower().endswith(("'s", "’s"))) \
             and ws[-1][0][-1:] not in ",.?!;:":
@@ -592,7 +592,7 @@ def _chunk_cost(ws, nxt):
         cost += 50  # never run a caption across a sentence break
     if nxt is not None and _numeric(ws[-1][0]) and _numeric(nxt[0]):
         cost += 8
-    if len(" ".join(w[0] for w in ws)) > 18:
+    if len(" ".join(w[0] for w in ws)) > 28:
         cost += 0.8
     return cost
 
@@ -702,7 +702,25 @@ def chunk_words(words, gap=0.2):
     return chunks
 
 
-def draw_captions(c, chunks, t, accent, lower=False):
+KEY_COLOR = (90, 225, 255)
+
+
+def caption_keys(lines, extra=()):
+    """Names and acronyms (ADHD, Charles Bradley, Yale...) found in the script, as normalised words."""
+    keys = {_norm(k) for e in extra for k in e.replace("'s", "").split()}
+    for ln in lines:
+        prev = None
+        for w in ln["text"].split():
+            bare = re.sub(r"[^\w'-]", "", w).replace("'s", "").replace("’s", "")
+            acronym = len(bare) >= 2 and bare.isupper() and bare.isalpha()
+            proper = bare[:1].isupper() and prev is not None and prev[-1:] not in ".?!:" and bare != "I"
+            if acronym or proper:
+                keys.add(_norm(bare))
+            prev = w
+    return keys
+
+
+def draw_captions(c, chunks, t, accent, lower=False, keys=frozenset()):
     active = chunks[0] if chunks else None  # frame 0 already shows the first caption
     for ch in chunks:
         if ch[0][1] - 0.02 <= t:
@@ -710,24 +728,25 @@ def draw_captions(c, chunks, t, accent, lower=False):
     if not active or t > active[-1][1] + active[-1][2] + 0.5:
         return
     labels = [art.clean(w[0]).upper().rstrip(",;:") or art.clean(w[0]) for w in active]  # no trailing commas
-    if lower:
-        labels = [lb.lower() for lb in labels]
+    is_key = [_norm(re.sub(r"['’]s$", "", art.clean(w[0]).rstrip(",;:.?!"))) in keys for w in active]
+    if lower:  # names and acronyms keep their capitals; everything else is lowercase
+        labels = [art.clean(w[0]).rstrip(",;:") if k else lb.lower() for lb, k, w in zip(labels, is_key, active)]
     size = CAP_SIZE if not lower else 70
     safe_w = 720 if lower else SAFE_W
     while size > CAP_MIN and art.measure(" ".join(labels), size) + size * 0.22 * (len(labels) - 1) > safe_w:
         size -= 2
-    pop = ease_out_back((t - active[0][1] + 0.02) / 0.16)
+    pop = ease_out_back((t - active[0][1] + 0.02) / 0.26)
     size *= 0.88 + 0.12 * pop
     space = art.measure(" ", size) + size * 0.22  # room for the stroke and the enlarged current word
     widths = [art.measure(lb, size) for lb in labels]
     x = W / 2 - (sum(widths) + space * (len(labels) - 1)) / 2
     first = active is chunks[0]
-    for n, ((w, s, d), lb, wd) in enumerate(zip(active, labels, widths)):
+    for n, ((w, s, d), lb, wd, key) in enumerate(zip(active, labels, widths, is_key)):
         if s - 0.02 > t and not (first and n == 0):
             x += wd + space  # not spoken yet: keep its slot so the line doesn't jump, but don't show it
             continue
         cur = s - 0.02 <= t < s + max(d, 0.12) + 0.04
-        color = accent if cur else "white"
+        color = KEY_COLOR if key else (accent if cur else "white")
         fs = size * (1.05 if cur else 1)
         f = skia.Font(art.typeface(lb), fs)
         lx = x + wd / 2 - f.measureText(lb) / 2
@@ -923,7 +942,7 @@ def render(spec_path, out_dir, args):
             keep = [0]  # drop cuts that would leave a shot shorter than MIN_SHOT
             for k in range(1, len(shots)):
                 nxt_start = starts[k + 1][0] if k + 1 < len(shots) else t + dur
-                min_shot = 1.6 if v3 else MIN_SHOT
+                min_shot = 1.2 if v3 else MIN_SHOT
                 if starts[k][0] - starts[keep[-1]][0] >= min_shot and nxt_start - starts[k][0] >= min_shot * 0.6:
                     keep.append(k)
             shots, starts = [shots[k] for k in keep], [starts[k] for k in keep]
@@ -975,7 +994,21 @@ def render(spec_path, out_dir, args):
         lip = np.array([np.sqrt(np.mean(nar[i:i + fr] ** 2)) for i in range(0, len(nar), fr)])
         lip = np.clip(lip / (np.percentile(lip[lip > 0], 85) + 1e-9) if (lip > 0).any() else lip, 0, 1)
         lip = np.where(lip < 0.18, 0.0, lip)
-        lip = np.convolve(lip, [0.25, 0.5, 0.25], mode="same")
+        sm, prev_ = np.zeros_like(lip), 0.0
+        for i, x in enumerate(lip):  # quick to open, a little slower to close: no flapping
+            prev_ += (x - prev_) * (0.65 if x > prev_ else 0.35)
+            sm[i] = prev_
+        lip = sm
+        shape = np.zeros_like(lip)
+        freqs = np.fft.rfftfreq(fr, 1 / audio.SR)
+        for i in range(len(lip)):
+            seg_ = nar[i * fr:(i + 1) * fr]
+            if len(seg_) == fr and lip[i] > 0.05:
+                spec_ = np.abs(np.fft.rfft(seg_ * np.hanning(fr)))
+                band = (freqs > 150) & (freqs < 5000)
+                cen = (freqs[band] * spec_[band]).sum() / (spec_[band].sum() + 1e-9)
+                shape[i] = np.clip((cen - 1300) / 900, -1, 1)
+        shape = np.convolve(shape, np.ones(3) / 3, mode="same")
         points = []
         for at in sorted(point_at):
             if not points or at - points[-1] >= 2.6:
@@ -991,6 +1024,8 @@ def render(spec_path, out_dir, args):
             n_gag += 1
         points = [at for at in points if not any(g0 - 0.9 < at < g0 + gd for g0, gd, _ in gags)]
         show = mascot_show.plan(t, (spec.get("mascot") or {}).get("acts")) if v3 else []
+        gags = [g for g in gags if not any(a - 0.3 < g[0] + g[1] and g[0] < a + d for a, d, _ in show)]
+        points = [p_ for p_ in points if not any(a - 1.5 < p_ < a + d for a, d, _ in show)]
         activity = (spec.get("mascot") or {}).get("activity") or art.ACTIVITIES[sum(map(ord, spec["id"])) % len(art.ACTIVITIES)]
         teaser = spec.get("teaser")
         if teaser and not args.no_mascot:
@@ -1026,12 +1061,18 @@ def render(spec_path, out_dir, args):
             words += [(w, t + s0, d) for w, s0, d in ws]
             voice += [samples, np.zeros(int(0.35 * audio.SR))]
             outro_at = t
+            sc0 = scenes[-2]
+            zt_, px_, py_ = camera(0.0, sc0["dur"], sc0["cam"], sc0["fit"], False)
+            cxm_, cym_ = (FIT_BOX[0] + FIT_BOX[2]) / 2, (FIT_BOX[1] + FIT_BOX[3]) / 2
+            outro_target = (cxm_ + px_ + zt_ * (owl["x"] * W - cxm_ + sc0["fit"][1]),
+                            cym_ + py_ + zt_ * (owl["y"] * H - cym_ + sc0["fit"][2]), owl["s"] * zt_)
             t += dur
         total = t
         os.makedirs(os.path.join(out_dir, "timing"), exist_ok=True)  # caption timeline, used by qa.py's sync check
         with open(os.path.join(out_dir, "timing", spec["id"] + ".json"), "w") as fh:
             json.dump([[w, round(a, 3), round(d, 3)] for w, a, d in words], fh)
         chunks = chunk_words(words)
+        cap_keys = caption_keys(lines, (spec.get("keywords") or []))
 
         mix = audio.mixdown(np.concatenate(voice), total, cues, spec.get("mood", "wonder"),
                             seed=sum(map(ord, spec["id"])), music_db=args.music_db, bed=args.bed)
@@ -1112,7 +1153,10 @@ def render(spec_path, out_dir, args):
                         c.restore()
                     else:
                         draw_scene(c, sc["props"], tl_draw, sc["dur"], sc["cam"], sc["fit"], punch=idx > 0)
-                if teaser and not args.no_mascot and not sc.get("outro"):
+                fly = 0.0  # 0 = in his spot, 1 = arrived at the centre for his closing question
+                if outro_at is not None and v3 and outro_at - 0.6 <= ft < outro_at + 0.42:
+                    fly = ease_io((ft - (outro_at - 0.6)) / 0.6)
+                if teaser and not args.no_mascot and (not sc.get("outro") or fly > 0):
                     # Mr. Shorts in the right-hand corner (below the captions, left of the Shorts buttons)
                     hop = max((1 - abs((ft - tc) / 0.45 - 0.5) * 2 for tc in chime_times if 0 <= ft - tc <= 0.45),
                               default=0.0)
@@ -1124,27 +1168,44 @@ def render(spec_path, out_dir, args):
                     gag = next(((kind, (ft - g0) / gd) for g0, gd, kind in gags if g0 <= ft < g0 + gd), None)
                     li = int(ft * FPS)
                     talk_now = float(lip[li]) if li < len(lip) else 0.0
+                    shape_now = float(shape[li]) if li < len(shape) else 0.0
                     act = mascot_show.active(show, ft)
-                    c.save()
-                    if v3:  # the whole show is drawn 15% larger, anchored on the ground at his spot
-                        c.translate(880, 1270)
-                        c.scale(1.15, 1.15)
-                        c.translate(-880, -1270)
-                    if act:
-                        mascot_show.RUN[act[2]](c, act[0], act[1], {"t": ft, "talk": talk_now, "point": ease_io(pt)})
+                    if fly > 0:  # he flies from his spot to where the closing question is asked, then hands over
+                        c.save()
+                        fade = 1 - ease_io((ft - outro_at) / 0.42) if ft >= outro_at else 1.0
+                        c.saveLayerAlpha(None, int(255 * fade))
+                        x0, y0 = 880 + 1.15 * (mascot_show.HOME[0] - 880), 1270 + 1.15 * (mascot_show.HOME[1] - 1270)
+                        tx, ty, ts = outro_target
+                        k_ = fly
+                        c.translate(x0 + (tx - x0) * k_, y0 + (ty - y0) * k_ - 120 * math.sin(math.pi * k_))
+                        c.scale(0.575 + (ts - 0.575) * k_, 0.575 + (ts - 0.575) * k_)
+                        art.PROPS["mascot"](c, ft, 1.0, look=-0.4 * (1 - k_), talk=talk_now, mouth_shape=shape_now,
+                                            mood="curious", legs="dangle" if 0.1 < k_ < 0.9 else "stand",
+                                            wings=(150, -150) if 0.1 < k_ < 0.9 else None, shadow=k_ > 0.9)
+                        c.restore()
+                        c.restore()
                     else:
-                        c.translate(*(mascot_show.HOME if v3 else (850, 1492)))
-                        c.scale(*((mascot_show.S,) * 2 if v3 else (0.62, 0.62)))
-                        art.PROPS["mascot"](c, ft, 1.0, look=-0.7 + 0.3 * math.sin(ft * 0.7), hop=hop / 2,
-                                            mood="curious" if hop else "smirk", activity=None if v3 else activity,
-                                            talk=talk_now, point=ease_io(pt),
-                                            gag=gag[0] if gag else None, gag_t=gag[1] if gag else 0.0)
-                    c.restore()
+                        c.save()
+                        if v3:  # the whole show is drawn 15% larger, anchored on the ground at his spot
+                            c.translate(880, 1270)
+                            c.scale(1.15, 1.15)
+                            c.translate(-880, -1270)
+                        if act:
+                            mascot_show.perform(act[2], c, act[0], act[1], {"t": ft, "talk": talk_now,
+                                                                         "shape": shape_now, "point": ease_io(pt)})
+                        else:
+                            c.translate(*(mascot_show.HOME if v3 else (850, 1492)))
+                            c.scale(*((mascot_show.S,) * 2 if v3 else (0.62, 0.62)))
+                            art.PROPS["mascot"](c, ft, 1.0, look=-0.7 + 0.3 * math.sin(ft * 0.7), hop=hop / 2,
+                                                mood="curious" if hop else "smirk", activity=None if v3 else activity,
+                                                talk=talk_now, mouth_shape=shape_now, point=ease_io(pt),
+                                                gag=gag[0] if gag else None, gag_t=gag[1] if gag else 0.0)
+                        c.restore()
                 if v3 and not sc.get("outro"):  # the owl's closing label takes the title's place
                     draw_title(c, spec, ft, accent)
                 else:
                     bg.foreground(c, ft)
-                draw_captions(c, chunks, ft, art.rgb(accent), lower=v3)
+                draw_captions(c, chunks, ft, art.rgb(accent), lower=v3, keys=cap_keys)
                 enc.stdin.write(surface.makeImageSnapshot().tobytes())
         except BrokenPipeError:
             pass

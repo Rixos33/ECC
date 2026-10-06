@@ -924,7 +924,8 @@ GAGS = ("glasses", "eyebrows", "jawdrop", "double_take", "nod", "peek", "shrug",
 
 
 def p_mascot(c, t, p, talk=0.0, look=0.0, mood="smirk", wave=False, hop=0.0, activity=None, point=0.0,
-             gag=None, gag_t=0.0, point_angle=128.0, pointer=False, wings=None, legs="stand", shadow=True, **_):
+             gag=None, gag_t=0.0, point_angle=128.0, pointer=False, wings=None, legs="stand", shadow=True,
+             mouth_shape=0.0, **_):
     """Mr. Shorts: a small round owl with big glasses, a raised eyebrow and red shorts.
     talk 0..1 opens the beak, look -1..1 moves the pupils, hop 0..1 lifts him off the ground,
     point 0..1 raises the left wing toward the scene, gag + gag_t (0..1) plays a short bit of business."""
@@ -1047,22 +1048,37 @@ def p_mascot(c, t, p, talk=0.0, look=0.0, mood="smirk", wave=False, hop=0.0, act
     lift_b = {"smirk": 16, "curious": 22, "happy": 6}.get(mood, 12)
     c.drawLine(-88, -120 - brow_extra, -30, -116 - brow_extra, paint(wing_c, stroke=11))
     c.drawLine(30, -118 - lift_b * 0.4 - brow_extra, 90, -124 - lift_b - brow_extra, paint(wing_c, stroke=11))
-    # mouth: a clear open mouth with teeth and a tongue when he talks
-    tk = max(0.0, min(1.5, talk))
-    if tk > 0.12:
-        mw, mh = 44 + 10 * tk, 16 + 44 * tk
-        mouth = skia.RRect.MakeRectXY(skia.Rect.MakeXYWH(-mw / 2, 12, mw, mh), 16, 16)
-        c.drawRRect(mouth, paint((120, 30, 50)))
+    # mouth: lips that part with the voice. `talk` sets how far the jaw drops; `mouth_shape` goes from
+    # round ("oo", -1) to wide ("ee", +1). Upper teeth show under the top lip, a tongue sits low.
+    tk = max(0.0, min(1.4, talk))
+    shp = max(-1.0, min(1.0, mouth_shape))
+    if tk > 0.08:
+        y0 = 24
+        hw = 30 + 13 * shp - 4 * tk * (shp < 0)          # half width
+        hh = 5 + 40 * tk * (1 - 0.25 * shp)                # how far the lower lip drops
+        cup = 5 + 3 * shp                                   # the top lip's gentle bow
+        inner = skia.Path()
+        inner.moveTo(-hw, y0)
+        inner.cubicTo(-hw * 0.5, y0 - cup, hw * 0.5, y0 - cup, hw, y0)
+        inner.cubicTo(hw * 0.75, y0 + hh * 1.05, -hw * 0.75, y0 + hh * 1.05, -hw, y0)
+        inner.close()
+        c.drawPath(inner, paint((105, 22, 42)))
         c.save()
-        c.clipRRect(mouth, doAntiAlias=True)
-        c.drawOval(skia.Rect.MakeXYWH(-mw * 0.32, 12 + mh * 0.55, mw * 0.64, mh * 0.6), paint("pink"))   # tongue
-        c.drawRect(skia.Rect.MakeXYWH(-mw / 2, 12, mw, min(13, mh * 0.34)), paint("white"))               # top teeth
+        c.clipPath(inner, doAntiAlias=True)
+        teeth_h = min(11.0, 4 + hh * 0.3)
+        c.drawRect(skia.Rect.MakeXYWH(-hw, y0 - cup - 2, 2 * hw, teeth_h + cup), paint((250, 248, 240)))
         for i in range(1, 4):
-            x = -mw / 2 + i * mw / 4
-            c.drawLine(x, 12, x, 12 + min(13, mh * 0.34), paint((200, 200, 205), stroke=2))
+            x = -hw + i * hw / 2
+            c.drawLine(x, y0 - cup, x, y0 + teeth_h - 2, paint((205, 200, 195), stroke=1.6))
+        if tk > 0.6:
+            c.drawRect(skia.Rect.MakeXYWH(-hw * 0.6, y0 + hh * 0.86, hw * 1.2, 7), paint((240, 236, 228)))
+        c.drawOval(skia.Rect.MakeXYWH(-hw * 0.55, y0 + hh * 0.55, hw * 1.1, hh * 0.65 + 6), paint((235, 110, 130)))
         c.restore()
-        c.drawRRect(mouth, paint(INK, stroke=5))
-        c.drawPath(path([(-24, 4), (24, 4), (0, 22)]), paint(beak_c))                                    # upper beak
+        lips = paint(shade(beak_c, -0.08), stroke=7)
+        c.drawPath(inner, lips)
+        for sx in (-1, 1):                                  # corners of the mouth
+            c.drawCircle(sx * hw, y0, 4.5, paint(shade(beak_c, -0.3)))
+        c.drawPath(path([(-20, 2), (20, 2), (0, y0 - cup + 2)]), paint(beak_c))   # beak tip over the top lip
     else:
         c.drawPath(path([(-22, 6), (22, 6), (0, 26)]), paint(beak_c))
         if mood in ("smirk", "happy"):

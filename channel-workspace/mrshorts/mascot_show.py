@@ -10,7 +10,7 @@ import art
 
 HOME, S = (872, 1150), 0.5          # resting spot and scale
 ACT_LEN, REST = 6.0, 1.2            # seconds per scenario and the pause between two of them
-SCENARIOS = ("computer", "sofa", "jetpack", "skateboard", "detective", "chalkboard", "juggle", "trampoline",
+SCENARIOS = ("computer", "jetpack", "skateboard", "detective", "chalkboard", "juggle", "trampoline",
              "parachute", "popcorn")
 WOOD, DARK = (150, 96, 60), (60, 40, 80)
 
@@ -29,11 +29,19 @@ def presence(u, T, edge=0.8):
     return min(ease(u / edge), ease((T - u) / edge))
 
 
-def owl(c, x, y, s=S, rot=0.0, flip=False, **pose):
+_mouth = [0.0]  # mouth shape for this frame, set by perform()
+
+
+def owl(c, x, y, s=S, rot=0.0, flip=False, turn=None, **pose):
+    """turn: -1..1 horizontal facing (1 = normal, -1 = mirrored); values in between are the owl turning round."""
+    pose.setdefault("mouth_shape", _mouth[0])
     c.save()
     c.translate(x, y)
     c.rotate(rot)
-    c.scale(-s if flip else s, s)
+    face = (-1.0 if flip else 1.0) if turn is None else turn
+    if abs(face) < 0.12:
+        face = 0.12 if face >= 0 else -0.12
+    c.scale(s * face, s)
     art.PROPS["mascot"](c, pose.pop("t", 0.0), 1.0, **pose)
     c.restore()
 
@@ -57,46 +65,45 @@ def active(show, ft):
 # happening in the main animation right now)
 
 def computer(c, u, T, st):
-    """A chair and a desk with a computer glide in; he sits and researches something."""
+    """An office chair and a desk with a computer glide in; he sits down and types, and text fills the screen."""
     k = presence(u, T)
     hx, hy = HOME
-    x, y = lerp(hx, 800, k), lerp(hy, 1146, k)
-    chair_x, desk_x = lerp(1300, x + 22, k), lerp(-320, 610, k)
-    art.rrect(c, chair_x - 44, 1050, 88, 150, 26, (70, 110, 200))                 # chair back
-    c.drawLine(chair_x, 1200, chair_x, 1248, art.paint(DARK, stroke=12))
-    c.drawLine(chair_x - 46, 1250, chair_x + 46, 1250, art.paint(DARK, stroke=12))
+    x, y = lerp(hx, 806, k), lerp(hy, 1140, k)
+    chair_x, desk_x = lerp(1320, x + 18, k), lerp(-320, 606, k)
+    # office chair: backrest, seat, gas lift, five-star base with castors
+    art.shaded_rrect(c, chair_x - 50, 1012, 100, 150, 38, (60, 64, 90))
+    c.drawLine(chair_x, 1160, chair_x, 1244, art.paint((150, 150, 165), stroke=12))
+    for dx in (-60, -30, 0, 30, 60):
+        c.drawLine(chair_x, 1244, chair_x + dx, 1262, art.paint((70, 70, 90), stroke=9))
+        c.drawCircle(chair_x + dx, 1266, 7, art.paint(art.INK))
+    seated = ease((k - 0.55) / 0.3)
     typing = k > 0.9
-    owl(c, x, y, legs="sit" if k > 0.6 else "stand", look=-1.0, talk=st["talk"], t=st["t"], mood="curious",
-        wings=(62 + 16 * math.sin(st["t"] * 22), -12) if typing else None)
-    art.rrect(c, desk_x - 150, 1206, 300, 22, 8, WOOD)                            # desk
-    for dx in (-130, 130):
-        c.drawLine(desk_x + dx, 1228, desk_x + dx, 1276, art.paint(WOOD, stroke=14))
-    art.rrect(c, desk_x - 104, 1062, 190, 128, 14, DARK)                          # monitor
-    glow_a = int(150 + 60 * math.sin(st["t"] * 9))
-    art.rrect(c, desk_x - 92, 1074, 166, 104, 8, "cyan", glow_a)
-    for i in range(4):                                                            # lines scrolling on the screen
-        w = 60 + 70 * abs(math.sin(i * 1.7 + int(st["t"] * 3)))
-        c.drawLine(desk_x - 80, 1090 + i * 22, desk_x - 80 + w, 1090 + i * 22, art.paint("white", 220, stroke=6))
-    c.drawLine(desk_x - 10, 1190, desk_x - 10, 1206, art.paint(DARK, stroke=14))
-    art.rrect(c, desk_x + 40, 1192, 96, 14, 6, (220, 220, 230))                   # keyboard
-
-
-def sofa(c, u, T, st):
-    """A sofa glides in; he stretches out on it and waves a wing at the main animation."""
-    k = presence(u, T)
-    hx, hy = HOME
-    sx = lerp(1340, 770, k)
-    col = (235, 90, 130)
-    art.shaded_rrect(c, sx - 210, 1090, 420, 120, 46, art.shade(col, -0.15))      # back
-    art.shaded_rrect(c, sx - 230, 1170, 460, 84, 34, col)                         # seat
-    for dx in (-200, 200):
-        c.drawLine(sx + dx, 1254, sx + dx, 1274, art.paint(DARK, stroke=16))
-    lie = ease((u - 0.5) / 0.7) * ease((T - u - 0.3) / 0.7)
-    x, y = lerp(hx, sx + 30, k), lerp(hy, 1132, lie)
-    jab = 0.75 + 0.25 * st["point"]
-    owl(c, x, y, rot=62 * lie, look=-1.0, talk=st["talk"], t=st["t"], mood="smirk", shadow=lie < 0.3,
-        point=lie * jab, point_angle=190, legs="stand")
-    art.shaded_rrect(c, sx + 150, 1130, 84, 130, 36, col)                         # near armrest, in front of him
+    owl(c, x, y, legs="sit" if seated > 0.5 else "stand", look=-1.0, talk=st["talk"], t=st["t"], mood="curious",
+        wings=(lerp(14, 58 + 14 * math.sin(st["t"] * 24), seated), lerp(-14, 40 + 10 * math.sin(st["t"] * 21 + 1), seated))
+        if seated > 0.05 else None)
+    art.shaded_rrect(c, chair_x - 64, 1150, 128, 30, 14, (60, 64, 90))              # seat, in front of his legs
+    art.rrect(c, desk_x - 160, 1200, 320, 22, 8, WOOD)                              # desk
+    for dx in (-140, 140):
+        c.drawLine(desk_x + dx, 1222, desk_x + dx, 1276, art.paint(WOOD, stroke=14))
+    art.rrect(c, desk_x - 110, 1050, 200, 136, 14, DARK)                            # monitor
+    art.rrect(c, desk_x - 98, 1062, 176, 112, 8, (20, 30, 60))
+    shown = st["t"] * 9 if typing else 0                                            # characters typed so far
+    rows = [0.9, 0.6, 0.8, 0.45, 0.7]
+    for i, wv in enumerate(rows):
+        frac = max(0.0, min(1.0, (shown - i * 9) / 9))
+        if frac > 0:
+            c.drawLine(desk_x - 86, 1080 + i * 18, desk_x - 86 + 150 * wv * frac, 1080 + i * 18,
+                       art.paint("cyan" if i % 2 else "green", 230, stroke=6))
+    if typing and int(st["t"] * 3) % 2:                                             # blinking cursor
+        i = min(len(rows) - 1, int(shown // 9))
+        c.drawRect(skia.Rect.MakeXYWH(desk_x - 84 + 150 * rows[i] * min(1, (shown - i * 9) / 9), 1073 + i * 18, 6, 14),
+                   art.paint("white"))
+    c.drawLine(desk_x - 10, 1186, desk_x - 10, 1200, art.paint(DARK, stroke=14))
+    art.rrect(c, desk_x + 36, 1186, 104, 14, 6, (220, 220, 230))                    # keyboard
+    if typing:
+        for i in range(5):
+            if int(st["t"] * 14 + i * 3) % 4 == 0:
+                c.drawRect(skia.Rect.MakeXYWH(desk_x + 42 + i * 19, 1188, 14, 9), art.paint("yellow", 200))
 
 
 def jetpack(c, u, T, st):
@@ -137,7 +144,10 @@ def skateboard(c, u, T, st):
     for wx in (-56, 56):
         c.drawCircle(wx, 22, 12, art.paint(art.INK, int(255 * k)))
     c.restore()
-    owl(c, x, y, rot=tilt, flip=not going_left, look=-1.0, talk=st["talk"], t=st["t"], mood="smirk",
+    turn = 1 - 2 * ease((u - (T / 2 - 0.2)) / 0.4)
+    if u > T - 0.4:
+        turn = -1 + 2 * ease((u - (T - 0.4)) / 0.4)
+    owl(c, x, y, rot=tilt, turn=turn, look=-1.0, talk=st["talk"], t=st["t"], mood="smirk",
         wings=(48 + 12 * math.sin(st["t"] * 5), -48 - 12 * math.sin(st["t"] * 5)))
 
 
@@ -148,7 +158,8 @@ def detective(c, u, T, st):
     x = lerp(hx, 250, go)
     moving = 0.02 < go < 0.98
     hop = abs(math.sin(u * 7)) if moving else 0.0
-    owl(c, x, hy, flip=True, rot=8 * go, look=-1.0, talk=st["talk"], t=st["t"], mood="curious", hop=hop * 0.35,
+    turn = 1 - 2 * min(ease(u / 0.35), ease((T - u) / 0.35))
+    owl(c, x, hy, turn=turn, rot=8 * go, look=-1.0, talk=st["talk"], t=st["t"], mood="curious", hop=hop * 0.35,
         activity="magnifier" if go > 0.3 else None)
 
 
@@ -214,7 +225,7 @@ def parachute(c, u, T, st):
     else:
         d = (u - 0.6) / (T - 0.6)
         y = lerp(520, hy, ease(d))
-        x = hx - 40 + 60 * math.sin(u * 1.6) * (1 - d)
+        x = hx + (60 * math.sin(u * 1.6) - 40) * (1 - d)
         canopy = ease((u - 0.6) / 0.5) * ease((T - u) / 0.6)
     if canopy > 0:
         c.save()
@@ -252,5 +263,10 @@ def popcorn(c, u, T, st):
         c.drawCircle(lerp(bx, hx - 6, ph), lerp(by - 10, hy + 8, ph) - 70 * math.sin(math.pi * ph), 9, art.paint((255, 244, 200)))
 
 
-RUN = {"computer": computer, "sofa": sofa, "jetpack": jetpack, "skateboard": skateboard, "detective": detective,
+RUN = {"computer": computer, "jetpack": jetpack, "skateboard": skateboard, "detective": detective,
        "chalkboard": chalkboard, "juggle": juggle, "trampoline": trampoline, "parachute": parachute, "popcorn": popcorn}
+
+
+def perform(name, c, u, T, st):
+    _mouth[0] = st.get("shape", 0.0)
+    RUN[name](c, u, T, st)
