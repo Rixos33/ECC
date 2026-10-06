@@ -161,6 +161,18 @@ def tts_elevenlabs(text, voice, path):
     return words
 
 
+TONE_PROSODY = {  # (rate change in %, pitch change in Hz) relative to the base voice
+    "curious": (-2, 3), "dry": (2, -3), "amazed": (4, 6), "serious": (-6, -3), "warm": (-7, 0)}
+
+
+def prosody(base_rate, base_pitch, tone):
+    """Combine a base rate/pitch ("+6%", "+8Hz") with the line's tone, so the read rises and falls."""
+    r = int(re.sub(r"[^-\d]", "", base_rate or "+0") or 0)
+    p = int(re.sub(r"[^-\d]", "", base_pitch or "+0") or 0)
+    dr, dp = TONE_PROSODY.get(tone, (0, 0))
+    return f"{r + dr:+d}%", f"{p + dp:+d}Hz"
+
+
 def load_recording(path, lines, model_name="small.en", min_match=0.8):
     """Owner's own narration (one continuous take). Returns per-line (samples, words) by aligning the
     script to Whisper word timestamps, so captions, cuts and cues follow the real voice."""
@@ -912,8 +924,9 @@ def render(spec_path, out_dir, args):
             if recording:  # the owner's own voice: timing comes from the recording, pauses included
                 samples, ws = recording[i]
             else:
+                rate_, pitch_ = prosody(spec.get("rate") or args.rate, args.pitch, ln.get("tone"))
                 samples, ws = synth(ln.get("say", ln["text"]), args, os.path.join(tmp, f"a{i}"), args.cache,
-                                    rate=spec.get("rate"))  # a script can set its own narration speed
+                                    rate=rate_, pitch=pitch_)  # the line's tone shapes its delivery
             ws = display_words(ln["text"], ws)
             if ws and not recording:  # TTS clips end in up to half a second of silence; keep the rhythm in our own pauses
                 keep_n = min(len(samples), int((ws[-1][1] + ws[-1][2] + 0.12) * audio.SR))
@@ -1038,9 +1051,9 @@ def render(spec_path, out_dir, args):
             if own and os.path.exists(own):  # the owl speaks with the narrator's voice from start to finish
                 samples, ws = load_recording(own, [{"text": f"{teaser['question']} {cta}"}], min_match=0.6)[0]
             else:
-                samples, ws = synth(f"{teaser['question']} {cta}", args, os.path.join(tmp, "mascot"), args.cache,
-                                    voice=args.mascot_voice, rate=args.mascot_rate or spec.get("rate"),
-                                    pitch=args.mascot_pitch)
+                samples, ws = synth(teaser.get("say") or f"{teaser['question']} {cta}", args, os.path.join(tmp, "mascot"),
+                                    args.cache, voice=args.mascot_voice, rate=args.mascot_rate or spec.get("rate"),
+                                    pitch=args.mascot_pitch or prosody(None, args.pitch, "curious")[1])
             ws = display_words(f"{teaser['question']} {cta}", ws)
             dur = len(samples) / audio.SR + 0.35
             n_q = len(teaser["question"].split()) + 3  # cut to the wave on "The answer..."

@@ -7,8 +7,8 @@
  "accent": "yellow",
  "world": "neon",
  "mood": "mystic",
- "pause": 0.3,
- "rate": "-2%",
+ "pause": 0.16,
+ "rate": "+12%",
  "mascot": {
   "activity": "chess"
  },
@@ -80,7 +80,8 @@
       }
      ]
     }
-   ]
+   ],
+   "say": "Why would a stimulant help anyone sit still... when stimulants are supposed to rev you up?"
   },
   {
    "text": "In 1937, doctor Charles Bradley gave children Benzedrine, an amphetamine, hoping to cure their headaches.",
@@ -172,7 +173,8 @@
       }
      ]
     }
-   ]
+   ],
+   "say": "In 1937, doctor Charles Bradley gave children Benzedrine — an amphetamine — hoping to cure their headaches."
   },
   {
    "text": "The headaches stayed, but among thirty children he then tested, many attacked their schoolwork and half grew calmer.",
@@ -248,7 +250,8 @@
       }
      ]
     }
-   ]
+   ],
+   "say": "The headaches stayed. But among thirty children he then tested, many attacked their schoolwork... and half grew calmer."
   },
   {
    "text": "These medicines jam the pumps that mop up dopamine and noradrenaline, and amphetamine also pushes extra out.",
@@ -344,7 +347,8 @@
       }
      ]
     }
-   ]
+   ],
+   "say": "These medicines jam the pumps that mop up dopamine and noradrenaline — and amphetamine also pushes extra out."
   },
   {
    "text": "That extra signal wakes the prefrontal cortex, the brakes behind your forehead that tell you to wait.",
@@ -422,7 +426,8 @@
       }
      ]
     }
-   ]
+   ],
+   "say": "That extra signal wakes the prefrontal cortex: the brakes behind your forehead, that tell you to wait."
   },
   {
    "text": "The twist: in 1978, Judith Rapoport's team gave amphetamine to fourteen boys without the condition. They fidgeted less and focused better too, so calming down never proved a diagnosis.",
@@ -527,7 +532,8 @@
     }
    ],
    "sfx": "chime",
-   "sfx_at": 0.3
+   "sfx_at": 0.3,
+   "say": "The twist? In 1978, Judith Rapoport's team gave amphetamine to fourteen boys — without the condition. They fidgeted less, and focused better too... so calming down never proved a diagnosis."
   },
   {
    "text": "Amy Arnsten's Yale lab, working mostly with animals, found that too little or too much signal both hurt.",
@@ -598,7 +604,8 @@
       }
      ]
     }
-   ]
+   ],
+   "say": "Amy Arnsten's Yale lab — working mostly with animals — found that too little, or too much signal... both hurt."
   },
   {
    "text": "In 2018, Samuele Cortese's team pooled over a hundred trials: clear symptom relief for twelve weeks, thin evidence beyond.",
@@ -691,7 +698,8 @@
       }
      ]
     }
-   ]
+   ],
+   "say": "In 2018, Samuele Cortese's team pooled over a hundred trials. Clear symptom relief for twelve weeks... thin evidence beyond."
   },
   {
    "text": "They can blunt appetite, disturb sleep, raise heart rate and blood pressure, and be misused. And in a 2023 Melbourne study, healthy adults tried harder on puzzles but scored slightly worse.",
@@ -842,7 +850,8 @@
       }
      ]
     }
-   ]
+   ],
+   "say": "They can blunt appetite, disturb sleep, raise heart rate and blood pressure... and be misused. And in a 2023 Melbourne study, healthy adults tried harder on puzzles — but scored slightly worse."
   },
   {
    "text": "So a stimulant helps you sit still by powering your brakes, and whether it suits anyone is a doctor's call.",
@@ -925,12 +934,14 @@
       }
      ]
     }
-   ]
+   ],
+   "say": "So a stimulant helps you sit still... by powering your brakes. And whether it suits anyone — is a doctor's call."
   }
  ],
  "teaser": {
   "question": "Why can't you remember being a baby, when you were definitely there?",
-  "label": "Baby memories next"
+  "label": "Baby memories next",
+  "say": "Why can't you remember being a baby... when you were definitely there? Think it over. The answer is in the next Short."
  },
  "sources": [
   {
