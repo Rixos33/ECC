@@ -10,63 +10,18 @@
  "pause": 0.16,
  "rate": "+12%",
  "keywords": [
-  "Shazia Akhtar",
   "Carolyn Rovee-Collier",
-  "Tristan Yates",
-  "Nick Turk-Browne",
   "Yale",
-  "hippocampus",
-  "Paul Frankland",
   "Toronto",
-  "Harlene Hayne"
+  "New Zealand",
+  "hippocampus"
  ],
  "lines": [
   {
-   "text": "You were there for every second of being a baby, so why can't you remember any of it?",
+   "text": "Somewhere in your brain there may be a recording of your first birthday. So why can't you press play?",
    "tone": "curious",
    "shots": [
     {
-     "world": "candy",
-     "scene": [
-      {
-       "prop": "baby",
-       "x": 0.36,
-       "y": 0.47,
-       "s": 1.6,
-       "mood": "happy"
-      },
-      {
-       "prop": "question",
-       "x": 0.76,
-       "y": 0.3,
-       "s": 0.6,
-       "big": "?",
-       "layer": true
-      }
-     ]
-    },
-    {
-     "on": "every",
-     "world": "sunset",
-     "scene": [
-      {
-       "prop": "clock",
-       "x": 0.4,
-       "y": 0.43,
-       "s": 1.3,
-       "speed": 6
-      },
-      {
-       "prop": "baby",
-       "x": 0.78,
-       "y": 0.5,
-       "s": 0.8,
-       "mood": "happy"
-      }
-     ]
-    },
-    {
-     "on": "why",
      "world": "grape",
      "scene": [
       {
@@ -74,7 +29,7 @@
        "x": 0.42,
        "y": 0.44,
        "s": 1.6,
-       "face": "worried",
+       "face": "happy",
        "face_at": [
         -20,
         -20
@@ -83,72 +38,134 @@
        "layer": true
       },
       {
-       "prop": "frame",
-       "x": 0.78,
-       "y": 0.32,
-       "s": 0.65,
-       "label": "???",
+       "prop": "cake",
+       "x": 0.76,
+       "y": 0.3,
+       "s": 0.55,
+       "candles": 1,
        "layer": true
+      }
+     ]
+    },
+    {
+     "on": "recording",
+     "world": "sunset",
+     "scene": [
+      {
+       "prop": "cake",
+       "x": 0.42,
+       "y": 0.44,
+       "s": 1.4,
+       "candles": 1
+      },
+      {
+       "prop": "frame",
+       "x": 0.8,
+       "y": 0.3,
+       "s": 0.5,
+       "label": "age 1"
+      }
+     ]
+    },
+    {
+     "on": "So",
+     "world": "ink",
+     "scene": [
+      {
+       "prop": "tv",
+       "x": 0.45,
+       "y": 0.44,
+       "s": 1.3,
+       "people": 0,
+       "label": "press play?"
+      },
+      {
+       "prop": "question",
+       "x": 0.82,
+       "y": 0.28,
+       "s": 0.5,
+       "big": "?"
       }
      ]
     }
    ]
   },
   {
-   "text": "When Shazia Akhtar's team surveyed over six thousand adults, first memories averaged around age three. Four in ten claimed memories from age two or younger, probably stitched together from photos and family stories.",
-   "tone": "dry",
+   "text": "You learned to walk, to talk, to know your mum's face. Yet most people's earliest memory starts around age three.",
+   "tone": "curious",
    "shots": [
     {
-     "world": "sky",
+     "world": "candy",
      "scene": [
       {
-       "prop": "crowd",
-       "x": 0.5,
-       "y": 0.45,
-       "s": 1.0,
-       "n": 6,
-       "mood": "happy"
+       "prop": "baby",
+       "x": 0.42,
+       "y": 0.47,
+       "s": 1.6,
+       "mood": "happy",
+       "kick": 1.0
+      },
+      {
+       "prop": "bubble",
+       "x": 0.78,
+       "y": 0.3,
+       "s": 0.7,
+       "label": "mama!",
+       "on": "talk"
       }
      ]
     },
     {
-     "on": "first",
+     "on": "know",
+     "world": "candy",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.36,
+       "y": 0.48,
+       "s": 1.4,
+       "color": "pink",
+       "mood": "happy",
+       "look": 0.0
+      },
+      {
+       "prop": "baby",
+       "x": 0.74,
+       "y": 0.52,
+       "s": 0.9,
+       "mood": "stars"
+      }
+     ]
+    },
+    {
+     "on": "Yet",
      "world": "sky",
      "scene": [
       {
        "prop": "cake",
-       "x": 0.42,
+       "x": 0.45,
        "y": 0.44,
-       "s": 1.3,
+       "s": 1.4,
        "candles": 3
       },
       {
        "prop": "person",
-       "x": 0.8,
+       "x": 0.82,
        "y": 0.48,
-       "s": 0.9,
+       "s": 0.8,
        "color": "teal",
        "mood": "happy",
        "look": 3.1
       }
      ]
-    },
+    }
+   ]
+  },
+  {
+   "text": "Remember being two? Four in ten people say they do. But those memories are probably rebuilt from photos and family stories.",
+   "tone": "dry",
+   "shots": [
     {
-     "on": "Four",
-     "world": "sunset",
-     "scene": [
-      {
-       "prop": "crowd",
-       "x": 0.5,
-       "y": 0.45,
-       "s": 1.0,
-       "n": 5,
-       "mood": "surprised"
-      }
-     ]
-    },
-    {
-     "on": "age",
      "world": "sunset",
      "scene": [
       {
@@ -161,36 +178,72 @@
       {
        "prop": "question",
        "x": 0.78,
-       "y": 0.32,
+       "y": 0.3,
        "s": 0.7,
        "big": "?"
       }
      ]
     },
     {
-     "on": "probably",
+     "on": "Four",
+     "world": "sky",
+     "scene": [
+      {
+       "prop": "crowd",
+       "x": 0.45,
+       "y": 0.45,
+       "s": 0.9,
+       "n": 5,
+       "mood": "happy"
+      }
+     ]
+    },
+    {
+     "on": "But",
      "world": "candy",
      "scene": [
       {
        "prop": "frame",
-       "x": 0.34,
+       "x": 0.42,
        "y": 0.42,
-       "s": 1.0,
+       "s": 1.4,
        "label": "photos"
       },
       {
+       "prop": "question",
+       "x": 0.8,
+       "y": 0.3,
+       "s": 0.5,
+       "big": "?"
+      }
+     ]
+    },
+    {
+     "on": "family",
+     "world": "candy",
+     "scene": [
+      {
        "prop": "bubble",
-       "x": 0.72,
-       "y": 0.36,
-       "s": 0.9,
+       "x": 0.45,
+       "y": 0.38,
+       "s": 1.6,
        "label": "family stories"
+      },
+      {
+       "prop": "crowd",
+       "x": 0.45,
+       "y": 0.62,
+       "s": 0.55,
+       "n": 3,
+       "mood": "happy",
+       "layer": true
       }
      ]
     }
    ]
   },
   {
-   "text": "Yet babies clearly form memories: Carolyn Rovee-Collier's three-month-olds remembered for a week that kicking jiggled a mobile.",
+   "text": "So can babies even make memories? Psychologist Carolyn Rovee-Collier tied a ribbon from a baby's ankle to a mobile. Three-month-olds learned that kicking made it dance, and remembered it a week later.",
    "tone": "curious",
    "shots": [
     {
@@ -198,24 +251,65 @@
      "scene": [
       {
        "prop": "baby",
-       "x": 0.36,
+       "x": 0.42,
        "y": 0.47,
-       "s": 1.5,
-       "mood": "happy"
+       "s": 1.6,
+       "mood": "worried"
       },
       {
-       "prop": "cabinet",
-       "x": 0.76,
-       "y": 0.47,
-       "s": 0.75,
-       "open_": 1.0,
-       "label": "new!",
-       "on": "memories"
+       "prop": "question",
+       "x": 0.78,
+       "y": 0.28,
+       "s": 0.6,
+       "big": "?"
       }
      ]
     },
     {
-     "on": "Carolyn",
+     "on": "Psychologist",
+     "world": "mint",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.4,
+       "y": 0.48,
+       "s": 1.5,
+       "color": "pink",
+       "mood": "happy",
+       "look": 0.0
+      },
+      {
+       "prop": "mobile",
+       "x": 0.8,
+       "y": 0.32,
+       "s": 0.5,
+       "ribbon": true
+      }
+     ]
+    },
+    {
+     "on": "ribbon",
+     "world": "mint",
+     "scene": [
+      {
+       "prop": "mobile",
+       "x": 0.45,
+       "y": 0.31,
+       "s": 1.45,
+       "ribbon": true
+      },
+      {
+       "prop": "baby",
+       "x": 0.45,
+       "y": 0.6,
+       "s": 1.1,
+       "mood": "happy",
+       "layer": true
+      }
+     ]
+    },
+    {
+     "on": "Three-month-olds",
      "world": "mint",
      "scene": [
       {
@@ -227,17 +321,55 @@
       },
       {
        "prop": "label",
-       "x": 0.5,
+       "x": 0.45,
        "y": 0.235,
        "s": 1.0,
-       "label": "3 months",
-       "size": 110,
+       "label": "3 months old",
+       "size": 90,
        "color": "white"
       }
      ]
     },
     {
-     "on": "week",
+     "on": "kicking",
+     "world": "mint",
+     "scene": [
+      {
+       "prop": "mobile",
+       "x": 0.45,
+       "y": 0.31,
+       "s": 1.45,
+       "anim": [
+        {
+         "param": "spin",
+         "from": 0,
+         "to": 1,
+         "on": "kicking",
+         "dur": 0.5
+        }
+       ]
+      },
+      {
+       "prop": "baby",
+       "x": 0.45,
+       "y": 0.6,
+       "s": 1.1,
+       "mood": "stars",
+       "layer": true,
+       "anim": [
+        {
+         "param": "kick",
+         "from": 0,
+         "to": 1,
+         "on": "kicking",
+         "dur": 0.4
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "on": "remembered",
      "world": "sky",
      "scene": [
       {
@@ -253,101 +385,31 @@
        "x": 0.76,
        "y": 0.5,
        "s": 1.0,
-       "mood": "happy"
-      }
-     ]
-    },
-    {
-     "on": "kicking",
-     "world": "mint",
-     "scene": [
-      {
-       "prop": "mobile",
-       "x": 0.5,
-       "y": 0.31,
-       "s": 1.45,
-       "anim": [
-        {
-         "param": "spin",
-         "from": 0,
-         "to": 1,
-         "on": "kicking",
-         "dur": 0.6
-        }
-       ]
-      },
-      {
-       "prop": "baby",
-       "x": 0.5,
-       "y": 0.6,
-       "s": 1.1,
        "mood": "stars",
-       "anim": [
-        {
-         "param": "kick",
-         "from": 0,
-         "to": 1,
-         "on": "kicking",
-         "dur": 0.4
-        }
-       ],
-       "layer": true
+       "kick": 1.0
       }
      ]
     }
    ]
   },
   {
-   "text": "In 2025, Tristan Yates and Nick Turk-Browne at Yale scanned awake babies looking at pictures. From around age one, their hippocampus, the memory centre, worked harder on pictures they'd later recognise.",
+   "text": "In 2025, a Yale team scanned awake babies. From about their first birthday, the hippocampus, the brain's memory hub, was already filing away what they saw.",
    "tone": "amazed",
    "shots": [
     {
      "world": "ink",
      "scene": [
       {
-       "prop": "person",
-       "x": 0.32,
-       "y": 0.5,
-       "s": 1.4,
-       "color": "cyan",
-       "mood": "happy",
-       "look": 0.0
-      },
-      {
-       "prop": "person",
-       "x": 0.68,
-       "y": 0.5,
-       "s": 1.4,
-       "color": "pink",
-       "mood": "happy",
-       "look": 3.1
-      },
-      {
-       "prop": "label",
-       "x": 0.5,
-       "y": 0.235,
-       "s": 1.0,
-       "label": "2025",
-       "size": 130,
-       "color": "white"
-      }
-     ]
-    },
-    {
-     "on": "scanned",
-     "world": "ink",
-     "scene": [
-      {
        "prop": "scanner",
-       "x": 0.5,
+       "x": 0.45,
        "y": 0.46,
-       "s": 1.6
+       "s": 1.5
       },
       {
        "prop": "baby",
-       "x": 0.5,
+       "x": 0.45,
        "y": 0.47,
-       "s": 0.5,
+       "s": 0.48,
        "mood": "happy",
        "layer": true
       }
@@ -355,29 +417,26 @@
     },
     {
      "on": "From",
-     "world": "neon",
+     "world": "sunset",
      "scene": [
       {
-       "prop": "hippocampus",
+       "prop": "cake",
        "x": 0.4,
-       "y": 0.45,
+       "y": 0.44,
        "s": 1.3,
-       "mood": "happy"
+       "candles": 1
       },
       {
-       "prop": "label",
-       "x": 0.76,
-       "y": 0.3,
-       "s": 1.0,
-       "label": "memory centre",
-       "size": 56,
-       "color": "yellow",
-       "on": "memory"
+       "prop": "baby",
+       "x": 0.78,
+       "y": 0.5,
+       "s": 0.9,
+       "mood": "happy"
       }
      ]
     },
     {
-     "on": "worked",
+     "on": "hippocampus",
      "world": "neon",
      "scene": [
       {
@@ -385,53 +444,74 @@
        "x": 0.38,
        "y": 0.45,
        "s": 1.3,
-       "mood": "stars",
+       "mood": "happy",
        "anim": [
         {
          "param": "glow_on",
          "from": 0,
          "to": 1,
-         "on": "harder",
+         "on": "filing",
          "dur": 0.6
         }
        ]
       },
       {
+       "prop": "cabinet",
+       "x": 0.76,
+       "y": 0.47,
+       "s": 0.75,
+       "open_": 1.0,
+       "label": "age 1",
+       "on": "filing"
+      }
+     ]
+    },
+    {
+     "on": "filing",
+     "world": "neon",
+     "scene": [
+      {
+       "prop": "cabinet",
+       "x": 0.42,
+       "y": 0.47,
+       "s": 1.2,
+       "open_": 1.0,
+       "label": "age 1"
+      },
+      {
        "prop": "frame",
-       "x": 0.78,
-       "y": 0.34,
-       "s": 0.6,
-       "label": "seen it!",
-       "on": "recognise"
+       "x": 0.8,
+       "y": 0.32,
+       "s": 0.5,
+       "label": "seen it"
       }
      ]
     }
-   ],
-   "sfx": "chime",
-   "sfx_at": 0.3
+   ]
   },
   {
-   "text": "So babies record just fine; it's the playback that seems to fail.",
-   "tone": "dry",
+   "text": "So the recorder works. It's the playback that fails.",
+   "tone": "amazed",
    "shots": [
     {
-     "world": "grape",
+     "world": "lemon",
      "scene": [
       {
-       "prop": "hippocampus",
-       "x": 0.32,
-       "y": 0.46,
-       "s": 1.1,
-       "mood": "happy",
-       "glow_on": 1.0
+       "prop": "rays",
+       "x": 0.45,
+       "y": 0.44,
+       "s": 1.0,
+       "color": "white",
+       "layer": true
       },
       {
-       "prop": "cabinet",
-       "x": 0.72,
-       "y": 0.47,
-       "s": 0.95,
-       "open_": 1.0,
-       "label": "baby files"
+       "prop": "hippocampus",
+       "x": 0.45,
+       "y": 0.45,
+       "s": 1.3,
+       "mood": "stars",
+       "glow_on": 1.0,
+       "layer": true
       }
      ]
     },
@@ -441,25 +521,27 @@
      "scene": [
       {
        "prop": "tv",
-       "x": 0.5,
-       "y": 0.42,
+       "x": 0.45,
+       "y": 0.44,
        "s": 1.35,
        "people": 0,
        "label": "no signal",
        "acts": [
         {
          "type": "shake",
-         "on": "fail",
+         "on": "fails",
          "dur": 0.5
         }
        ]
       }
      ]
     }
-   ]
+   ],
+   "sfx": "chime",
+   "sfx_at": 0.2
   },
   {
-   "text": "In baby mice, Paul Frankland's Toronto lab found that slowing the brain's rush of new neurons helped memories stick.",
+   "text": "One suspect comes from baby mice, in a lab in Toronto. Young brains grow new neurons so fast they keep rewiring, like renovating a library while you're still shelving the books. Slow the building work, and memories stuck.",
    "tone": "curious",
    "shots": [
     {
@@ -467,75 +549,162 @@
      "scene": [
       {
        "prop": "mouse",
-       "x": 0.5,
-       "y": 0.47,
-       "s": 1.7
+       "x": 0.42,
+       "y": 0.48,
+       "s": 1.5
+      },
+      {
+       "prop": "question",
+       "x": 0.8,
+       "y": 0.3,
+       "s": 0.55,
+       "big": "?"
+      }
+     ]
+    },
+    {
+     "on": "lab",
+     "world": "lava",
+     "scene": [
+      {
+       "prop": "mouse",
+       "x": 0.45,
+       "y": 0.5,
+       "s": 1.4
       },
       {
        "prop": "label",
-       "x": 0.5,
+       "x": 0.45,
        "y": 0.235,
        "s": 1.0,
        "label": "Toronto",
-       "size": 110,
+       "size": 100,
        "color": "white"
       }
      ]
     },
     {
-     "on": "slowing",
+     "on": "Young",
      "world": "neon",
      "scene": [
       {
        "prop": "neuron",
-       "x": 0.42,
+       "x": 0.45,
        "y": 0.44,
-       "s": 1.1,
+       "s": 1.2,
        "mood": "dizzy",
        "acts": [
         {
-         "type": "shrink",
-         "on": "slowing",
-         "dur": 0.8,
-         "factor": 0.7
+         "type": "shake",
+         "at": 0.0,
+         "dur": 2.5
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "on": "they",
+     "world": "neon",
+     "scene": [
+      {
+       "prop": "neuron",
+       "x": 0.45,
+       "y": 0.44,
+       "s": 1.4,
+       "mood": "dizzy",
+       "fire": 1.0,
+       "acts": [
+        {
+         "type": "shake",
+         "at": 0.0,
+         "dur": 2.0
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "on": "like",
+     "world": "grape",
+     "scene": [
+      {
+       "prop": "cabinet",
+       "x": 0.4,
+       "y": 0.47,
+       "s": 1.0,
+       "open_": 1.0,
+       "label": "memories",
+       "acts": [
+        {
+         "type": "shake",
+         "on": "renovating",
+         "dur": 1.0
         }
        ]
       },
       {
-       "prop": "crowd",
-       "x": 0.5,
-       "y": 0.62,
+       "prop": "crane",
+       "x": 0.74,
+       "y": 0.42,
+       "s": 0.6
+      }
+     ]
+    },
+    {
+     "on": "while",
+     "world": "grape",
+     "scene": [
+      {
+       "prop": "cabinet",
+       "x": 0.45,
+       "y": 0.47,
+       "s": 1.1,
+       "open_": 1.0,
+       "label": "memories",
+       "acts": [
+        {
+         "type": "shake",
+         "at": 0.0,
+         "dur": 1.6
+        }
+       ]
+      },
+      {
+       "prop": "neuron",
+       "x": 0.78,
+       "y": 0.34,
        "s": 0.5,
-       "n": 4,
-       "mood": "neutral",
+       "mood": "dizzy",
        "layer": true
       }
      ]
     },
     {
-     "on": "helped",
+     "on": "Slow",
      "world": "mint",
      "scene": [
       {
        "prop": "cabinet",
-       "x": 0.42,
+       "x": 0.4,
        "y": 0.47,
-       "s": 1.1,
+       "s": 1.0,
        "open_": 1.0,
-       "label": "memory"
+       "label": "memories"
       },
       {
        "prop": "check",
-       "x": 0.78,
+       "x": 0.76,
        "y": 0.3,
-       "s": 0.8
+       "s": 0.8,
+       "on": "stuck"
       }
      ]
     }
    ]
   },
   {
-   "text": "Yet months later, his team shone light on the cells holding a lost memory, and it flickered back.",
+   "text": "Then, months later, the team shone light on the cells that once held a lost memory, and it flickered back. Not deleted. Just lost.",
    "tone": "amazed",
    "shots": [
     {
@@ -543,15 +712,15 @@
      "scene": [
       {
        "prop": "mouse",
-       "x": 0.44,
+       "x": 0.42,
        "y": 0.5,
-       "s": 1.5
+       "s": 1.4
       },
       {
        "prop": "calendar",
-       "x": 0.8,
+       "x": 0.78,
        "y": 0.3,
-       "s": 0.6,
+       "s": 0.55,
        "label": "months"
       }
      ]
@@ -562,9 +731,9 @@
      "scene": [
       {
        "prop": "mouse",
-       "x": 0.5,
+       "x": 0.45,
        "y": 0.52,
-       "s": 1.6,
+       "s": 1.5,
        "anim": [
         {
          "param": "light",
@@ -578,12 +747,12 @@
      ]
     },
     {
-     "on": "holding",
+     "on": "cells",
      "world": "neon",
      "scene": [
       {
        "prop": "neuron",
-       "x": 0.5,
+       "x": 0.45,
        "y": 0.44,
        "s": 1.3,
        "mood": "sleepy",
@@ -611,7 +780,7 @@
      "scene": [
       {
        "prop": "rays",
-       "x": 0.5,
+       "x": 0.45,
        "y": 0.44,
        "s": 1.0,
        "color": "white",
@@ -619,9 +788,9 @@
       },
       {
        "prop": "frame",
-       "x": 0.5,
+       "x": 0.45,
        "y": 0.44,
-       "s": 1.4,
+       "s": 1.35,
        "label": "it's back!",
        "layer": true,
        "acts": [
@@ -633,41 +802,59 @@
        ]
       }
      ]
+    },
+    {
+     "on": "Not",
+     "world": "grape",
+     "scene": [
+      {
+       "prop": "cabinet",
+       "x": 0.42,
+       "y": 0.47,
+       "s": 1.1,
+       "open_": 1.0,
+       "label": "still here"
+      },
+      {
+       "prop": "key",
+       "x": 0.76,
+       "y": 0.32,
+       "s": 0.55,
+       "on": "lost"
+      }
+     ]
     }
    ]
   },
   {
-   "text": "Toddlers in Harlene Hayne's New Zealand lab never described a toy using words they learned afterwards.",
+   "text": "Words may be another lock. In New Zealand, toddlers never described a toy using words they learned afterwards.",
    "tone": "curious",
    "shots": [
     {
      "world": "mint",
      "scene": [
       {
-       "prop": "baby",
-       "x": 0.5,
-       "y": 0.47,
-       "s": 1.6,
-       "mood": "happy"
+       "prop": "key",
+       "x": 0.45,
+       "y": 0.42,
+       "s": 1.3
       },
       {
-       "prop": "label",
-       "x": 0.5,
-       "y": 0.235,
-       "s": 1.0,
-       "label": "New Zealand",
-       "size": 90,
-       "color": "white"
+       "prop": "bubble",
+       "x": 0.76,
+       "y": 0.3,
+       "s": 0.6,
+       "label": "words?"
       }
      ]
     },
     {
-     "on": "never",
-     "world": "mint",
+     "on": "toddlers",
+     "world": "sky",
      "scene": [
       {
        "prop": "baby",
-       "x": 0.3,
+       "x": 0.32,
        "y": 0.48,
        "s": 1.3,
        "mood": "happy"
@@ -676,28 +863,28 @@
        "prop": "package",
        "x": 0.72,
        "y": 0.48,
-       "s": 1.1,
+       "s": 1.0,
        "color": "orange",
        "label": "toy"
       }
      ]
     },
     {
-     "on": "words",
+     "on": "using",
      "world": "sky",
      "scene": [
       {
        "prop": "bubble",
-       "x": 0.5,
-       "y": 0.33,
-       "s": 2.0,
+       "x": 0.45,
+       "y": 0.36,
+       "s": 1.6,
        "label": "new words"
       },
       {
        "prop": "check",
-       "x": 0.5,
-       "y": 0.56,
-       "s": 0.9,
+       "x": 0.45,
+       "y": 0.58,
+       "s": 0.8,
        "ok": false,
        "on": "afterwards"
       }
@@ -706,7 +893,7 @@
    ]
   },
   {
-   "text": "That's mostly mice and small studies, so whether your baby memories survive is still unknown.",
+   "text": "It's mostly mice and small studies, so no one can promise your baby memories survive.",
    "tone": "serious",
    "shots": [
     {
@@ -714,28 +901,29 @@
      "scene": [
       {
        "prop": "mouse",
-       "x": 0.32,
+       "x": 0.42,
        "y": 0.5,
-       "s": 1.3
+       "s": 1.6
       },
       {
        "prop": "crowd",
-       "x": 0.72,
-       "y": 0.5,
-       "s": 0.6,
+       "x": 0.45,
+       "y": 0.66,
+       "s": 0.5,
        "n": 3,
        "mood": "neutral",
+       "layer": true,
        "on": "small"
       }
      ]
     },
     {
-     "on": "whether",
+     "on": "so",
      "world": "grape",
      "scene": [
       {
        "prop": "cabinet",
-       "x": 0.38,
+       "x": 0.4,
        "y": 0.47,
        "s": 1.1,
        "open_": 0.0,
@@ -743,7 +931,7 @@
       },
       {
        "prop": "question",
-       "x": 0.78,
+       "x": 0.76,
        "y": 0.32,
        "s": 0.8,
        "big": "?"
@@ -753,53 +941,88 @@
    ]
   },
   {
-   "text": "You were there for all of it; your brain may just have misplaced the key.",
+   "text": "But they might still be in there, filed away before you had the words to find them. You were there. You just can't find the door.",
    "tone": "warm",
    "shots": [
     {
-     "world": "candy",
+     "world": "grape",
      "scene": [
       {
-       "prop": "baby",
-       "x": 0.36,
+       "prop": "cabinet",
+       "x": 0.4,
        "y": 0.47,
-       "s": 1.6,
-       "mood": "happy"
+       "s": 1.1,
+       "open_": 1.0,
+       "label": "baby files"
       },
       {
-       "prop": "question",
+       "prop": "hippocampus",
+       "x": 0.76,
+       "y": 0.42,
+       "s": 0.6,
+       "mood": "happy"
+      }
+     ]
+    },
+    {
+     "on": "filed",
+     "world": "mint",
+     "scene": [
+      {
+       "prop": "cabinet",
+       "x": 0.4,
+       "y": 0.47,
+       "s": 1.1,
+       "open_": 1.0,
+       "label": "no words yet"
+      },
+      {
+       "prop": "bubble",
        "x": 0.76,
        "y": 0.3,
        "s": 0.6,
-       "big": "?",
+       "label": "...?"
+      }
+     ]
+    },
+    {
+     "on": "words",
+     "world": "mint",
+     "scene": [
+      {
+       "prop": "bubble",
+       "x": 0.45,
+       "y": 0.38,
+       "s": 2.4,
+       "label": "...?"
+      },
+      {
+       "prop": "baby",
+       "x": 0.45,
+       "y": 0.62,
+       "s": 0.7,
+       "mood": "happy",
        "layer": true
       }
      ]
     },
     {
-     "on": "your",
-     "world": "grape",
+     "on": "were",
+     "world": "candy",
      "scene": [
       {
-       "prop": "brain",
+       "prop": "baby",
        "x": 0.4,
-       "y": 0.44,
-       "s": 1.5,
-       "face": "smug",
-       "face_at": [
-        -20,
-        -20
-       ],
-       "face_s": 1.3,
-       "layer": true
+       "y": 0.47,
+       "s": 1.6,
+       "mood": "happy"
       },
       {
        "prop": "key",
-       "x": 0.78,
+       "x": 0.76,
        "y": 0.32,
-       "s": 0.7,
-       "on": "key",
-       "layer": true
+       "s": 0.6,
+       "on": "door"
       }
      ]
     }
@@ -856,5 +1079,5 @@
    "note": "Not used in the script. Commonly credited to Freud's 1905 Three Essays, but 'coined' is hard to verify against earlier usage, and his repression explanation is not supported, so it was dropped to save words."
   }
  ],
- "caveats": "Double-check before recording: (1) 'Four in ten' rounds 38.6%; the survey was online and these early memories are 'likely' fictional by the authors' judgement, not proven, so keep 'probably'. 'Averaged around age three' = mean 3.2 years. (2) Rovee-Collier's one-week figure is for 3-month-olds under her standard training; it shows the memory lasts days, not that babies keep it for life. (3) Yale 2025: only 26 infants, memory tested within the same scan session (exact delay not checked), effect strongest after 12 months; it shows encoding, not that the memories last. 'Playback seems to fail' is the authors' interpretation, hence 'seems'. Spelling 'recognise/centre' is British, as in earlier scripts. (4) Frankland neurogenesis and Guskjolen light-reactivation work are in mice; recovery was partial ('flickered'), and 'months later' rests on the ~90-day figure in secondary coverage; check the Current Biology paper if a reviewer has access. 'His team' = Frankland's lab (Axel Guskjolen lead author). (5) Simcock & Hayne: first author is Gabrielle Simcock; the line credits 'Harlene Hayne's lab', which is accurate but a reviewer may prefer naming both. (6) Freud deliberately omitted. No medical claims."
+ "caveats": "Double-check before recording: (1) 'Four in ten' rounds 38.6%; the survey was online and these early memories are 'likely' fictional by the authors' judgement, not proven, so keep 'probably'. 'Averaged around age three' = mean 3.2 years. (2) Rovee-Collier's one-week figure is for 3-month-olds under her standard training; it shows the memory lasts days, not that babies keep it for life. (3) Yale 2025: only 26 infants, memory tested within the same scan session (exact delay not checked), effect strongest after 12 months; it shows encoding, not that the memories last. 'Playback seems to fail' is the authors' interpretation, hence 'seems'. Spelling 'recognise/centre' is British, as in earlier scripts. (4) Frankland neurogenesis and Guskjolen light-reactivation work are in mice; recovery was partial ('flickered'), and 'months later' rests on the ~90-day figure in secondary coverage; check the Current Biology paper if a reviewer has access. 'His team' = Frankland's lab (Axel Guskjolen lead author). (5) Simcock & Hayne: first author is Gabrielle Simcock; the line credits 'Harlene Hayne's lab', which is accurate but a reviewer may prefer naming both. (6) Freud deliberately omitted. No medical claims. v2 storyline: the library-renovation image is a metaphor for the neurogenesis idea (Akers et al. 2014, mice); 'flickered back' = partial recovery (Guskjolen et al. 2018, mice); the Yale line describes encoding activity that predicted later recognition (Yates et al. 2025, 26 infants)."
 }
