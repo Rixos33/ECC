@@ -17,7 +17,7 @@ import art, audio, mascot_show
 W, H, FPS = 1080, 1920, 30
 VIS_CY = 760        # visual focus (above captions, clear of the Shorts UI)
 CAP_Y = 1330        # caption baseline block
-SCENE_CLIP = (0, 0, 800, 1052)  # v3: the animation is never drawn into the owl's column or strip
+SCENE_FADE = (730, 830, 985, 1075)  # v3: the animation fades out (x from..to, y from..to) before the owl's zone
 SAFE_W = 800        # caption width: clear of the Shorts action buttons on the right
 XFADE = 0.5         # cross-dissolve between shots (s)
 MIN_SHOT = 2.4      # shots shorter than this are merged into the previous one (s)
@@ -907,7 +907,7 @@ def set_style(spec):
     # v3 box measured against the YouTube app: top icons end at y~245, the channel row starts at y~1450,
     # the like/comment/share column covers x>900 below y~1190, and ~5% is cropped from each side
     # the animation lives in the left/centre box; the owl owns the right-hand column and the strip below it
-    FIT_BOX = (70, 380, 790, 1040) if v3 else (110, 230, 970, 1230)
+    FIT_BOX = (70, 380, 760, 1000) if v3 else (110, 230, 970, 1230)
     FIT_CAP = 2.8 if v3 else 1.6
     return v3
 
@@ -1141,9 +1141,10 @@ def render(spec_path, out_dir, args):
                     else:
                         draw_world(c, sc["world"], ft)
                     cxm, cym = (FIT_BOX[0] + FIT_BOX[2]) / 2, (FIT_BOX[1] + FIT_BOX[3]) / 2
+                    feather = not sc.get("outro")
                     c.save()
-                    if not sc.get("outro"):
-                        c.clipRect(skia.Rect.MakeLTRB(*SCENE_CLIP), doAntiAlias=True)
+                    if feather:  # draw the animation on its own layer, then fade it softly towards the owl's zone
+                        c.saveLayer(None, None)
                     for scn, alpha, zoom, tloc in ((pv, 1 - k, 1 + 1.5 * k, ft - pv["start"] if pv else 0),
                                                    (sc, k, 0.6 + 0.4 * k, tl_draw)):
                         if scn is None:
@@ -1153,6 +1154,13 @@ def render(spec_path, out_dir, args):
                         c.scale(zoom, zoom)
                         c.translate(-cxm, -cym)
                         draw_scene(c, scn["props"], tloc, scn["dur"], scn["cam"], scn["fit"], punch=idx > 0 or scn is pv)
+                        c.restore()
+                    if feather:
+                        fx0, fx1, fy0, fy1 = SCENE_FADE
+                        for p0, p1 in ((skia.Point(fx0, 0), skia.Point(fx1, 0)), (skia.Point(0, fy0), skia.Point(0, fy1))):
+                            mask = skia.Paint(Shader=skia.GradientShader.MakeLinear(
+                                [p0, p1], [skia.Color(0, 0, 0, 255), skia.Color(0, 0, 0, 0)]), BlendMode=skia.BlendMode.kDstIn)
+                            c.drawRect(skia.Rect.MakeWH(W, H), mask)
                         c.restore()
                     c.restore()
                 else:

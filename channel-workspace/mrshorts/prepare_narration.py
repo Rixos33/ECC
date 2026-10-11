@@ -62,6 +62,7 @@ def main():
     ap.add_argument("script")
     ap.add_argument("out_dir")
     ap.add_argument("--tempo", type=float, default=1.0, help="speed-up factor without pitch change, e.g. 1.08")
+    ap.add_argument("--pitch", type=float, default=0.0, help="raise (or lower) the voice by this many semitones, same speed")
     ap.add_argument("--max-pause", type=float, default=0.45, help="longest pause kept inside a line (s)")
     ap.add_argument("--line-gap", type=float, default=0.3, help="pause placed between lines (s)")
     ap.add_argument("--model", default="small.en")
@@ -162,7 +163,7 @@ def main():
             tp = os.path.join(args.out_dir, spec["id"] + ".teaser.f32")
             seg.astype(np.float32).tofile(tp)
             subprocess.run(["ffmpeg", "-nostdin", "-y", "-loglevel", "error", "-f", "f32le", "-ar", str(SR), "-ac", "1",
-                            "-i", tp, "-af", "highpass=f=70,afftdn=nr=8,loudnorm=I=-18:TP=-2",
+                            "-i", tp, "-af", "highpass=f=70,afftdn=nr=8" + (f",asetrate={SR * 2 ** (args.pitch / 12):.0f},aresample={SR},atempo={2 ** (-args.pitch / 12):.6f}" if abs(args.pitch) > 1e-3 else "") + ",loudnorm=I=-18:TP=-2",
                             os.path.join(args.out_dir, spec["id"] + ".teaser.wav")], check=True)
             os.remove(tp)
             print(f"  owl's closing line: {heard[a][1]:.1f}-{heard[b - 1][2]:.1f}s, match {ratio:.2f}: "
@@ -171,7 +172,9 @@ def main():
     raw = os.path.join(args.out_dir, spec["id"] + ".raw.f32")
     clean.astype(np.float32).tofile(raw)
     out = os.path.join(args.out_dir, spec["id"] + ".wav")
-    af = "highpass=f=70,afftdn=nr=8,loudnorm=I=-18:TP=-2" + (f",atempo={args.tempo}" if abs(args.tempo - 1) > 1e-3 else "")
+    shift = 2 ** (args.pitch / 12)                 # pitch: resample up, then stretch back to the same speed
+    pitch_f = f",asetrate={SR * shift:.0f},aresample={SR},atempo={1 / shift:.6f}" if abs(args.pitch) > 1e-3 else ""
+    af = "highpass=f=70,afftdn=nr=8" + pitch_f + ",loudnorm=I=-18:TP=-2" + (f",atempo={args.tempo}" if abs(args.tempo - 1) > 1e-3 else "")
     subprocess.run(["ffmpeg", "-nostdin", "-y", "-loglevel", "error", "-f", "f32le", "-ar", str(SR), "-ac", "1", "-i", raw,
                     "-af", af, out], check=True)
     os.remove(raw)
