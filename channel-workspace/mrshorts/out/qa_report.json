@@ -1,34 +1,36 @@
 [
  {
-  "id": "short11_lsd_long_trip",
-  "duration": 92.9,
-  "size_mb": 11.73,
+  "id": "short13_baby_memories",
+  "duration": 117.1,
+  "size_mb": 10.51,
   "lufs": -14.1,
-  "wps": 2.27,
-  "narration_match": 0.908,
+  "wps": 2.26,
+  "narration_match": 0.899,
   "caption_sync_ms": 60,
-  "first_frame_std": 35.8,
+  "first_frame_std": 29.9,
   "diffs": [
-   "'does an' -> \"doesn't\"",
-   "'waking' -> 'awake in'",
-   "'hofmann' -> 'hoffman'",
-   "'neighbour' -> 'neighbor'",
-   "'ht2a' -> 'hd2a'",
-   "\"harris's\" -> 'harris'",
-   "'shut' -> 'shot'",
-   "'wacker' -> 'walker'",
-   "'in bryan' -> 'with brian'",
-   "'receptor' -> ''",
-   "'' -> 'the'",
-   "'it may' -> \"it's my\"",
-   "'in vulnerable' -> 'invulnerable'",
-   "'shuts the lid' -> 'shots delete'",
-   "'the' -> ''"
+   "'brain' -> 'reign'",
+   "'' -> 'if'",
+   "'psychologist carolyn rovee collier tied' -> \"that college's caroline rovin khoriya died\"",
+   "'team scanned' -> \"teens can't\"",
+   "'hippocampus' -> 'hypo campus'",
+   "'filing' -> 'feeling'",
+   "'what' -> 'but'",
+   "'the recorder' -> 'their quarter'",
+   "\"you're\" -> \"they're\"",
+   "'team shone' -> 'teens show'",
+   "'lock' -> 'look'",
+   "'described' -> 'describe'",
+   "'afterwards' -> 'afterward'",
+   "'memories' -> 'memory'",
+   "'filed away' -> 'feel the way'",
+   "'vanish' -> 'vanished'",
+   "\"you've\" -> 'you'"
   ],
   "flags": [
-   "duration 92.9s outside 20-75",
-   "size 11.7 MB",
-   "narration match 0.91"
+   "duration 117.1s outside 20-75",
+   "size 10.5 MB",
+   "narration match 0.90"
   ]
  }
 ]

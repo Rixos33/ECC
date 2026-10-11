@@ -42,7 +42,10 @@ def find_takes(line_words, heard, min_ratio=0.72):
             blocks = [b for b in difflib.SequenceMatcher(a=target, b=[norm(h[0]) for h in heard[best[0]:best[1]]],
                                                          autojunk=False).get_matching_blocks() if b.size]
             end = best[0] + blocks[-1].b + blocks[-1].size
-            ext = 0  # keep going to the end of the spoken sentence (e.g. "5-HT2A." heard as one token)
+            ext = 0  # keep going to the end of the spoken sentence (e.g. "5-HT2A." heard as one token),
+            # but only when the line's last words were not matched yet
+            if blocks[-1].a + blocks[-1].size >= len(target):
+                ext = 99
             while end < len(heard) and ext < 4 and heard[end - 1][0][-1:] not in ".?!" \
                     and heard[end][1] - heard[end - 1][2] < 0.8:
                 end, ext = end + 1, ext + 1
@@ -104,7 +107,7 @@ def main():
         return best * 0.02 if t_third - best * 0.02 >= 0.5 else t_first
 
     os.makedirs(args.out_dir, exist_ok=True)
-    pieces, report, cursor = [], [], 0
+    pieces, report, cursor, prev_end = [], [], 0, None
     for i, ln in enumerate(spec["lines"]):
         words = ln["text"].split()
         takes = [t for t in find_takes(words, heard) if t[0] >= cursor] or find_takes(words, heard)
@@ -125,6 +128,14 @@ def main():
                 if op != "equal"]
         # cut the take into runs of speech, closing any pause longer than --max-pause
         runs, start = [], snap_start(src, a, b)
+        first_missing = diff and diff[0].startswith(repr(words[0]) + " -> ''") or \
+            (norm(src[a][0]) != norm(words[0]) and norm(words[0]) not in [norm(h[0]) for h in src[a:a + 2]])
+        if first_missing and prev_end is not None:  # the opening word was cut off: start at the speech after the last line
+            q = int((prev_end + 0.05) / 0.02)
+            while q < len(quiet) and quiet[q]:
+                q += 1
+            if q * 0.02 < start:
+                start = q * 0.02
         for k in range(a, b - 1):
             if src[k][2] <= start:  # words Whisper pinned to the slate/false start: already skipped
                 continue
@@ -138,6 +149,7 @@ def main():
             seg[:f] *= np.linspace(0, 1, f)
             seg[-f:] *= np.linspace(1, 0, f)
             pieces += [seg, np.zeros(int((args.max_pause if r < len(runs) - 1 else args.line_gap) * SR))]
+        prev_end = src[b - 1][2]
         report.append({"line": i + 1, "takes_found": len(takes), "used_seconds": [round(runs[0][0], 1), round(src[b - 1][2], 1)],
                        "match": round(ratio, 2), "heard": said, "differences": diff})
     teaser = spec.get("teaser")

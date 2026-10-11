@@ -91,7 +91,7 @@
    ]
   },
   {
-   "text": "You learned to walk, to talk, to know your mum's face. Yet most people's earliest memory starts around age three.",
+   "text": "You learned to walk, to talk, to know your mother's face. Yet most people's earliest memory starts around age three.",
    "tone": "curious",
    "shots": [
     {
@@ -243,7 +243,7 @@
    ]
   },
   {
-   "text": "So can babies even make memories? Psychologist Carolyn Rovee-Collier tied a ribbon from a baby's ankle to a mobile. Three-month-olds learned that kicking made it dance, and remembered it a week later.",
+   "text": "So can babies even make memories? Psychologist Carolyn Rovee-Collier tied the ribbon from a baby's ankle to a mobile. Three-month-olds learned that kicking made it dance, and remembered it a week later.",
    "tone": "curious",
    "shots": [
     {
@@ -393,7 +393,7 @@
    ]
   },
   {
-   "text": "In 2025, a Yale team scanned awake babies. From about their first birthday, the hippocampus, the brain's memory hub, was already filing away what they saw.",
+   "text": "In 2025, a Yale team scanned awake babies. From about their first birthday, the hippocampus, the brain's memory, was already filing away what they saw.",
    "tone": "amazed",
    "shots": [
     {
@@ -541,7 +541,7 @@
    "sfx_at": 0.2
   },
   {
-   "text": "One suspect comes from baby mice, in a lab in Toronto. Young brains grow new neurons so fast they keep rewiring, like renovating a library while you're still shelving the books. Slow the building work, and memories stuck.",
+   "text": "One suspect comes from baby mice, in a lab in Toronto. Young brains grow new neurons so fast they keep rewiring, like renovating a library while you're still shelving the books.",
    "tone": "curious",
    "shots": [
     {
@@ -679,27 +679,6 @@
        "layer": true
       }
      ]
-    },
-    {
-     "on": "Slow",
-     "world": "mint",
-     "scene": [
-      {
-       "prop": "cabinet",
-       "x": 0.4,
-       "y": 0.47,
-       "s": 1.0,
-       "open_": 1.0,
-       "label": "memories"
-      },
-      {
-       "prop": "check",
-       "x": 0.76,
-       "y": 0.3,
-       "s": 0.8,
-       "on": "stuck"
-      }
-     ]
     }
    ]
   },
@@ -827,7 +806,7 @@
    ]
   },
   {
-   "text": "Words may be another lock. In New Zealand, toddlers never described a toy using words they learned afterwards.",
+   "text": "Words may be another lock. In New Zealand, toddlers never described the toy using words they learned afterwards.",
    "tone": "curious",
    "shots": [
     {
@@ -1079,5 +1058,5 @@
    "note": "Not used in the script. Commonly credited to Freud's 1905 Three Essays, but 'coined' is hard to verify against earlier usage, and his repression explanation is not supported, so it was dropped to save words."
   }
  ],
- "caveats": "Double-check before recording: (1) 'Four in ten' rounds 38.6%; the survey was online and these early memories are 'likely' fictional by the authors' judgement, not proven, so keep 'probably'. 'Averaged around age three' = mean 3.2 years. (2) Rovee-Collier's one-week figure is for 3-month-olds under her standard training; it shows the memory lasts days, not that babies keep it for life. (3) Yale 2025: only 26 infants, memory tested within the same scan session (exact delay not checked), effect strongest after 12 months; it shows encoding, not that the memories last. 'Playback seems to fail' is the authors' interpretation, hence 'seems'. Spelling 'recognise/centre' is British, as in earlier scripts. (4) Frankland neurogenesis and Guskjolen light-reactivation work are in mice; recovery was partial ('flickered'), and 'months later' rests on the ~90-day figure in secondary coverage; check the Current Biology paper if a reviewer has access. 'His team' = Frankland's lab (Axel Guskjolen lead author). (5) Simcock & Hayne: first author is Gabrielle Simcock; the line credits 'Harlene Hayne's lab', which is accurate but a reviewer may prefer naming both. (6) Freud deliberately omitted. No medical claims. v2 storyline: the library-renovation image is a metaphor for the neurogenesis idea (Akers et al. 2014, mice); 'flickered back' = partial recovery (Guskjolen et al. 2018, mice); the Yale line describes encoding activity that predicted later recognition (Yates et al. 2025, 26 infants)."
+ "caveats": "Double-check before recording: (1) 'Four in ten' rounds 38.6%; the survey was online and these early memories are 'likely' fictional by the authors' judgement, not proven, so keep 'probably'. 'Averaged around age three' = mean 3.2 years. (2) Rovee-Collier's one-week figure is for 3-month-olds under her standard training; it shows the memory lasts days, not that babies keep it for life. (3) Yale 2025: only 26 infants, memory tested within the same scan session (exact delay not checked), effect strongest after 12 months; it shows encoding, not that the memories last. 'Playback seems to fail' is the authors' interpretation, hence 'seems'. Spelling 'recognise/centre' is British, as in earlier scripts. (4) Frankland neurogenesis and Guskjolen light-reactivation work are in mice; recovery was partial ('flickered'), and 'months later' rests on the ~90-day figure in secondary coverage; check the Current Biology paper if a reviewer has access. 'His team' = Frankland's lab (Axel Guskjolen lead author). (5) Simcock & Hayne: first author is Gabrielle Simcock; the line credits 'Harlene Hayne's lab', which is accurate but a reviewer may prefer naming both. (6) Freud deliberately omitted. No medical claims. v2 storyline: the library-renovation image is a metaphor for the neurogenesis idea (Akers et al. 2014, mice); 'flickered back' = partial recovery (Guskjolen et al. 2018, mice); the Yale line describes encoding activity that predicted later recognition (Yates et al. 2025, 26 infants). Recorded take: line 7 ends at 'shelving the books' because the final take lacked the word 'Slow'; the supporting sentence can be restored with a pickup."
 }

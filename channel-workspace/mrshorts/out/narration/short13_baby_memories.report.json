@@ -1,0 +1,137 @@
+[
+ {
+  "line": 1,
+  "takes_found": 1,
+  "used_seconds": [
+   9.2,
+   15.7
+  ],
+  "match": 1.0,
+  "heard": "Somewhere in your brain there may be a recording of your first birthday. So why can't you press play?",
+  "differences": []
+ },
+ {
+  "line": 2,
+  "takes_found": 1,
+  "used_seconds": [
+   16.8,
+   24.6
+  ],
+  "match": 0.95,
+  "heard": "learned to walk, to talk, to know your mother's face, yet most people's earliest memory starts around age 3.",
+  "differences": [
+   "'You' -> ''",
+   "'three.' -> '3.'"
+  ]
+ },
+ {
+  "line": 3,
+  "takes_found": 1,
+  "used_seconds": [
+   25.5,
+   34.6
+  ],
+  "match": 1.0,
+  "heard": "Remember being two? Four in ten people say they do. But those memories are probably rebuilt from photos and family stories.",
+  "differences": []
+ },
+ {
+  "line": 4,
+  "takes_found": 1,
+  "used_seconds": [
+   35.8,
+   52.3
+  ],
+  "match": 0.84,
+  "heard": "So, can babies even make memories? Psychologist Caroline Rov\u00fd Kolje tied the ribbon from a baby's ankle to a mobile. Three -month -olds learned that kicking made it dense and remembered it a week later.",
+  "differences": [
+   "'Carolyn Rovee-Collier' -> 'Caroline Rov\u00fd Kolje'",
+   "'Three-month-olds' -> 'Three -month -olds'",
+   "'dance,' -> 'dense'"
+  ]
+ },
+ {
+  "line": 5,
+  "takes_found": 1,
+  "used_seconds": [
+   65.1,
+   77.5
+  ],
+  "match": 0.92,
+  "heard": "In 2025, a Yale teen scanned awake babies. From about their first birthday, the hippocampus, the brain's memory, was already feeling away what they saw.",
+  "differences": [
+   "'team' -> 'teen'",
+   "'filing' -> 'feeling'"
+  ]
+ },
+ {
+  "line": 6,
+  "takes_found": 1,
+  "used_seconds": [
+   96.1,
+   99.9
+  ],
+  "match": 1.0,
+  "heard": "So the recorder works, it's the playback that fails.",
+  "differences": []
+ },
+ {
+  "line": 7,
+  "takes_found": 2,
+  "used_seconds": [
+   136.0,
+   150.9
+  ],
+  "match": 1.0,
+  "heard": "One suspect comes from baby mice. In a lab in Toronto, young brains grow new neurons so fast they keep rewiring. Like renovating a library, while you're still shelving the books,",
+  "differences": []
+ },
+ {
+  "line": 8,
+  "takes_found": 1,
+  "used_seconds": [
+   156.6,
+   168.7
+  ],
+  "match": 1.0,
+  "heard": "Then, months later, the team shone light on the cells that once held a lost memory, and it flickered back. Not deleted, just lost.",
+  "differences": []
+ },
+ {
+  "line": 9,
+  "takes_found": 1,
+  "used_seconds": [
+   175.9,
+   183.2
+  ],
+  "match": 0.94,
+  "heard": "Words may be another lock. In New Zealand toddlers never describe the toy using words they learned afterwards.",
+  "differences": [
+   "'described' -> 'describe'"
+  ]
+ },
+ {
+  "line": 10,
+  "takes_found": 1,
+  "used_seconds": [
+   184.3,
+   189.7
+  ],
+  "match": 1.0,
+  "heard": "It's mostly mice and small studies, so no one can promise your baby memories survive.",
+  "differences": []
+ },
+ {
+  "line": 11,
+  "takes_found": 1,
+  "used_seconds": [
+   190.1,
+   198.2
+  ],
+  "match": 0.91,
+  "heard": "But they might still be in there. Feel the way before you had the words to find them. You were there. You just can't find the door.",
+  "differences": [
+   "'filed away' -> 'Feel the way'"
+  ]
+ }
+]
