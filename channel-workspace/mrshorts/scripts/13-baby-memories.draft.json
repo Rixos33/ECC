@@ -1,0 +1,121 @@
+{
+  "id": "short13_baby_memories",
+  "title": "Why Can't You Remember Being a Baby?",
+  "title_bar": "BABY MEMORIES: LOST?",
+  "keywords": [
+    "Shazia Akhtar",
+    "Carolyn Rovee-Collier",
+    "Tristan Yates",
+    "Nick Turk-Browne",
+    "Yale",
+    "hippocampus",
+    "Paul Frankland",
+    "Toronto",
+    "Harlene Hayne",
+    "age three",
+    "four in ten"
+  ],
+  "lines": [
+    {
+      "text": "You were there for every second of being a baby, so why can't you remember any of it?",
+      "tone": "curious",
+      "event": "A smiling baby with a face sits in a nursery; the owl peers into a brain-shaped photo album and flips its first pages, which are blank."
+    },
+    {
+      "text": "When Shazia Akhtar's team surveyed over six thousand adults, first memories averaged around age three. Four in ten claimed memories from age two or younger, probably stitched together from photos and family stories.",
+      "tone": "dry",
+      "event": "A crowd of little adult characters each hold up a memory card stamped '3'; one in every few holds a card stamped '1' or '2' that is visibly sewn together from photo scraps and speech bubbles, with a 'four in ten' pill at the top."
+    },
+    {
+      "text": "Yet babies clearly form memories: Carolyn Rovee-Collier's three-month-olds remembered for a week that kicking jiggled a mobile.",
+      "tone": "curious",
+      "event": "A baby in a cot has a ribbon tied from its ankle to a mobile of smiling stars; it kicks, the mobile dances, a calendar flips seven days, and the baby kicks again with a knowing grin."
+    },
+    {
+      "text": "In 2025, Tristan Yates and Nick Turk-Browne at Yale scanned awake babies looking at pictures. From around age one, their hippocampus, the memory centre, worked harder on pictures they'd later recognise.",
+      "tone": "amazed",
+      "event": "A wide-eyed baby lies in a scanner tube watching a screen of faces and objects; zoom into its brain, where a seahorse-shaped hippocampus with a face glows brighter and stamps each picture into a filing drawer."
+    },
+    {
+      "text": "So babies record just fine; it's the playback that seems to fail.",
+      "tone": "dry",
+      "event": "The hippocampus character proudly holds a full tape cassette; an older child presses play on a tape player, and it only whirs and shows static while the hippocampus shrugs."
+    },
+    {
+      "text": "In baby mice, Paul Frankland's Toronto lab found that slowing the brain's rush of new neurons helped memories stick.",
+      "tone": "curious",
+      "event": "Inside a baby mouse's brain, a crowd of tiny new neurons with faces pours in and jostles a fragile memory bubble until it cracks; a hand turns a tap to slow the crowd, and the bubble stays whole."
+    },
+    {
+      "text": "Yet months later, his team shone light on the cells holding a lost memory, and it flickered back.",
+      "tone": "amazed",
+      "event": "A grown mouse stares at a dark room with a blank expression; a beam of light hits a small cluster of tagged cells in its brain, and a faint picture of the room flickers on like an old bulb as the mouse's eyes widen."
+    },
+    {
+      "text": "Toddlers in Harlene Hayne's New Zealand lab never described a toy using words they learned afterwards.",
+      "tone": "curious",
+      "event": "A toddler stands beside a toy machine with levers and lights; a year later the grown-up toddler holds a huge stack of word cards, but only a few small old cards fit into the toy's memory slot."
+    },
+    {
+      "text": "That's mostly mice and small studies, so whether your baby memories survive is still unknown.",
+      "tone": "serious",
+      "event": "The owl stands at a locked vault labelled 'baby memories' with a question mark on the door, a mouse and a small group of babies on either side, and taps the door to hear an uncertain echo."
+    },
+    {
+      "text": "You were there for all of it; your brain may just have misplaced the key.",
+      "tone": "warm",
+      "event": "The blank first pages of the brain-shaped photo album from the opening show faint baby pictures behind frosted glass; the owl pats its pockets looking for a key."
+    }
+  ],
+  "pronounce": {
+    "Shazia Akhtar": "SHAH-zee-uh AHK-tar",
+    "Rovee-Collier": "ROH-vee KOL-ee-er",
+    "Tristan Yates": "TRISS-tun YAYTS",
+    "Turk-Browne": "TURK BROWN (like the colour)",
+    "Frankland": "FRANK-lund",
+    "Harlene Hayne": "har-LEEN HAIN (rhymes with rain)",
+    "hippocampus": "hip-oh-KAM-pus"
+  },
+  "teaser": {
+    "question": "Why does a dream that felt so real vanish before you've even brushed your teeth?",
+    "label": "Dreams next"
+  },
+  "sources": [
+    {
+      "claim": "In a survey of over six thousand adults, earliest memories averaged around age three; about four in ten claimed memories from age two or younger, likely fictional and built from fragments plus facts from photos and family talk.",
+      "url": "https://www.psychologicalscience.org/news/releases/many-peoples-earliest-memories-may-be-fictional.html",
+      "note": "Akhtar, Justice, Morrison & Conway 2018, 'Fictional First Memories', Psychological Science 29(10):1612-1619. 6,641 participants; mean age of earliest memory 3.2 years; 38.6% reported memories from age 2 or younger, 893 from age 1 or younger. The authors call these likely fictional, not proven fictional; hence 'probably'. Shazia Akhtar (lead author, then at University of Bradford) with Martin Conway (City, University of London)."
+    },
+    {
+      "claim": "Three-month-olds remembered for a week that kicking moved a mobile tied to their ankle with a ribbon.",
+      "url": "https://www.lancaster.ac.uk/fas/psych/glossary/mobile_conjugate_reinforcement/",
+      "note": "Carolyn Rovee-Collier's mobile conjugate reinforcement paradigm (infants 2 to 6 months): 3-month-olds retain for about 1 week, 6-month-olds about 2 weeks. See also Rovee-Collier 1999, Current Directions in Psychological Science. Retention depends on training details and reminders."
+    },
+    {
+      "claim": "Yale team scanned awake infants with fMRI; greater hippocampal (posterior) activity when first seeing a picture predicted later memory-based looking, from around 1 year of age.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40112047/",
+      "note": "Yates et al. (senior author Turk-Browne) 2025, 'Hippocampal encoding of memories in human infants', Science 387(6740):1316-1320. 26 infants aged 4.2 to 24.9 months; pictures of faces, scenes and objects; memory measured by looking time at seen vs new images later in the same scan (exact delay not checked; likely seconds to minutes). Effect strongest in infants older than 12 months. Coverage: https://news.yale.edu/2025/03/20/why-dont-we-remember-being-baby-new-study-provides-clues and https://www.the-scientist.com/babies-form-memories-why-do-adults-forget-them-72826 (Turk-Browne: suggests a retrieval problem; memories 'may endure in some form' - speculative)."
+    },
+    {
+      "claim": "In infant mice, reducing hippocampal neurogenesis after learning reduced forgetting; raising it in species with little postnatal neurogenesis caused forgetting.",
+      "url": "https://www.gwern.net/doc/psychology/neuroscience/2014-akers.pdf",
+      "note": "Akers, ..., Josselyn & Frankland 2014, 'Hippocampal neurogenesis regulates forgetting during adulthood and infancy', Science 344(6184):598-602. Hospital for Sick Children, Toronto. Also worked in guinea pigs and degus. Animal work; in humans it is a leading hypothesis, not established. DOI believed to be 10.1126/science.1248903 (not checked)."
+    },
+    {
+      "claim": "A memory formed by infant mice, forgotten within about a week, was partially brought back by optogenetically reactivating the tagged hippocampal neurons, up to about 90 days after training.",
+      "url": "https://hospitalnews.com/our-earliest-memories-may-be-forgotten-but-not-lost",
+      "note": "Guskjolen, ..., Frankland 2018, Current Biology (published July 2018; exact title and pages not checked). Frankland: 'the recovery was incomplete, indicating there may be problems with storing these early memories as well' - hence 'flickered back', not 'came back'. Mice only. 90-day figure from secondary coverage (The Varsity / SickKids)."
+    },
+    {
+      "claim": "Toddlers tested 6 months or 1 year after playing with a novel toy never verbally reported details using words they did not have at the time of the event, though they could re-enact it nonverbally.",
+      "url": "https://www.psychologicalscience.org/journals/psychological-science/1467-9280.00442/",
+      "note": "Simcock & Hayne 2002, 'Breaking the barrier? Children fail to translate their preverbal memories into language', Psychological Science 13(3):225-231. University of Otago, New Zealand. Gabrielle Simcock is first author; Harlene Hayne ran the lab. Toy: custom-built machine with levers, lights and sounds (Discover coverage: https://discovermagazine.com/mind/infant-recall)."
+    },
+    {
+      "claim": "Freud named 'infantile amnesia' (Three Essays, 1905).",
+      "url": "https://www.encyclopedia.com/psychology/dictionaries-thesauruses-pictures-and-press-releases/three-essays-theory-sexuality",
+      "note": "Not used in the script. Commonly credited to Freud's 1905 Three Essays, but 'coined' is hard to verify against earlier usage, and his repression explanation is not supported, so it was dropped to save words."
+    }
+  ],
+  "caveats": "Double-check before recording: (1) 'Four in ten' rounds 38.6%; the survey was online and these early memories are 'likely' fictional by the authors' judgement, not proven, so keep 'probably'. 'Averaged around age three' = mean 3.2 years. (2) Rovee-Collier's one-week figure is for 3-month-olds under her standard training; it shows the memory lasts days, not that babies keep it for life. (3) Yale 2025: only 26 infants, memory tested within the same scan session (exact delay not checked), effect strongest after 12 months; it shows encoding, not that the memories last. 'Playback seems to fail' is the authors' interpretation, hence 'seems'. Spelling 'recognise/centre' is British, as in earlier scripts. (4) Frankland neurogenesis and Guskjolen light-reactivation work are in mice; recovery was partial ('flickered'), and 'months later' rests on the ~90-day figure in secondary coverage; check the Current Biology paper if a reviewer has access. 'His team' = Frankland's lab (Axel Guskjolen lead author). (5) Simcock & Hayne: first author is Gabrielle Simcock; the line credits 'Harlene Hayne's lab', which is accurate but a reviewer may prefer naming both. (6) Freud deliberately omitted. No medical claims."
+}

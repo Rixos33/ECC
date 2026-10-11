@@ -1568,6 +1568,167 @@ def p_doctor(c, t, p, color="white", mood="happy", look=0.0, **_):
     c.restore()
     c.restore()
 
+
+# ---------------- props for Short 13 (baby memories) ----------------
+
+def p_baby(c, t, p, color="skin", mood="happy", kick=0.0, pacifier=False, **_):
+    """A round baby: big head, tiny body, a curl of hair; `kick` 0..1 wiggles a leg (to pull a ribbon)."""
+    bob = 4 * math.sin(t * 3)
+    c.save()
+    c.translate(0, bob)
+    for sx in (-1, 1):  # legs
+        c.save()
+        c.translate(sx * 44, 120)
+        k = kick * (1 if sx > 0 else 0.3)
+        c.rotate(-sx * 10 - 50 * k * (0.5 + 0.5 * math.sin(t * 14)))
+        rrect(c, -20, 0, 40, 74, 20, shade(color, -0.1))
+        c.drawCircle(0, 76, 24, paint(shade(color, -0.1)))
+        c.restore()
+    shaded_rrect(c, -82, 20, 164, 130, 64, "cyan")                     # onesie
+    c.drawCircle(-30, 70, 9, paint("white", 200))
+    c.drawCircle(30, 70, 9, paint("white", 200))
+    ball(c, 0, -70, 112, color)                                         # head
+    pa = skia.Path()                                                    # curl of hair
+    pa.moveTo(-6, -178)
+    pa.cubicTo(30, -210, 40, -150, 6, -158)
+    c.drawPath(pa, paint("brown", stroke=10))
+    c.save()
+    c.translate(0, -60)
+    face(c, t, mood, 1.25)
+    c.restore()
+    c.drawCircle(-66, -30, 16, paint("pink", 110))
+    c.drawCircle(66, -30, 16, paint("pink", 110))
+    if pacifier:
+        ball(c, 0, -14, 26, "pink")
+        c.drawCircle(0, -14, 12, paint("white", 220, stroke=5))
+    c.restore()
+
+
+def p_mobile(c, t, p, spin=0.0, ribbon=True, **_):
+    """A crib mobile; `spin` 0..1 sets it turning, `ribbon` hangs a ribbon down (as in the kicking studies)."""
+    rate = 0.3 + 2.4 * max(0.0, min(1.0, float(spin)))
+    c.drawLine(0, -260, 0, -170, paint("grey", stroke=8))
+    c.drawOval(skia.Rect.MakeXYWH(-180, -184, 360, 34), paint("white", 220, stroke=8))
+    for i, (colr, shp) in enumerate((("yellow", 0), ("pink", 1), ("cyan", 0), ("green", 1), ("orange", 0))):
+        a = t * rate + i * 2 * math.pi / 5
+        x, depth = 170 * math.cos(a), math.sin(a)
+        y = -60 + 30 * depth
+        c.drawLine(x, -168 + 16 * depth, x, y - 34, paint("white", 160, stroke=3))
+        s_ = 1 + 0.15 * depth
+        if shp:
+            c.drawPath(path([(x, y - 40 * s_), (x + 14 * s_, y - 12 * s_), (x + 42 * s_, y - 10 * s_), (x + 20 * s_, y + 8 * s_),
+                             (x + 28 * s_, y + 36 * s_), (x, y + 20 * s_), (x - 28 * s_, y + 36 * s_), (x - 20 * s_, y + 8 * s_),
+                             (x - 42 * s_, y - 10 * s_), (x - 14 * s_, y - 12 * s_)]), paint(colr))
+        else:
+            ball(c, x, y, 30 * s_, colr)
+    if ribbon:
+        pa = skia.Path()
+        pa.moveTo(0, -150)
+        for k in range(1, 12):
+            pa.lineTo(14 * math.sin(k * 0.9 + t * 3 * rate), -150 + k * 34)
+        c.drawPath(pa, paint("pink", stroke=8))
+
+
+def p_hippocampus(c, t, p, color="orange", glow_on=0.0, mood=None, **_):
+    """The hippocampus, drawn as the little seahorse it is named after."""
+    g = max(0.0, min(1.0, float(glow_on)))
+    if g:
+        glow(c, 0, 0, 230, "yellow", int(160 * g))
+    body = skia.Path()
+    body.moveTo(-40, -200)
+    body.cubicTo(60, -230, 120, -150, 80, -90)
+    body.cubicTo(140, -30, 120, 80, 40, 120)
+    body.cubicTo(10, 140, 20, 190, 70, 200)
+    body.cubicTo(110, 210, 110, 250, 60, 250)
+    body.cubicTo(-20, 250, -30, 170, -10, 130)
+    body.cubicTo(-60, 90, -70, 0, -30, -60)
+    body.cubicTo(-90, -70, -120, -110, -110, -150)
+    body.cubicTo(-90, -170, -70, -150, -40, -200)
+    body.close()
+    c.save()
+    c.translate(8, 10)
+    c.drawPath(body, paint(shade(color, -0.3)))
+    c.restore()
+    c.drawPath(body, paint(color))
+    for k in range(6):  # belly ridges
+        y = -40 + k * 28
+        c.drawLine(-20 + k * 4, y, 50 - k * 3, y + 6, paint(shade(color, -0.25), stroke=7))
+    c.drawPath(path([(60, -160), (110, -190), (96, -140)]), paint(shade(color, -0.2)))   # fin
+    c.drawCircle(-30, -140, 20, paint("white"))
+    c.drawCircle(-26, -138, 10, paint(INK))
+    if mood:
+        c.save()
+        c.translate(10, 20)
+        face(c, t, mood, 0.7)
+        c.restore()
+
+
+def p_mouse(c, t, p, color="white", light=0.0, **_):
+    """A lab mouse; `light` 0..1 shows a thin optic fibre glowing blue at its head."""
+    c.drawOval(skia.Rect.MakeXYWH(-150, 70, 300, 30), paint(INK, 60))
+    tail = skia.Path()
+    tail.moveTo(130, 40)
+    tail.cubicTo(220, 30, 210, -60, 260 + 10 * math.sin(t * 3), -40)
+    c.drawPath(tail, paint("pink", stroke=9))
+    c.drawOval(skia.Rect.MakeXYWH(-120, -60, 260, 150), paint(shade(color, -0.15)))
+    c.drawOval(skia.Rect.MakeXYWH(-126, -66, 250, 140), paint(color))
+    c.drawCircle(-150, -10, 54, paint(color))                              # head
+    c.drawCircle(-120, -66, 34, paint(shade(color, -0.1)))                  # ear
+    c.drawCircle(-120, -66, 20, paint("pink"))
+    c.drawCircle(-196, -4, 10, paint("pink"))                               # nose
+    for dy in (-6, 6):
+        c.drawLine(-196, -4 + dy, -240, -12 + dy * 3, paint("grey", stroke=3))
+    c.drawCircle(-160, -20, 9, paint(INK))
+    k = max(0.0, min(1.0, float(light)))
+    if k:
+        c.drawLine(-140, -60, -140, -260, paint("grey", stroke=8))
+        glow(c, -140, -60, 70, "cyan", int(200 * k))
+        c.drawLine(-140, -64, -140, -150, paint("cyan", int(255 * k), stroke=12))
+
+
+def p_cabinet(c, t, p, open_=0.0, label="", _zs=1.0, **_):
+    """A memory filing cabinet; `open_` 0..1 pulls the middle drawer out, `label` tags the drawer."""
+    k = max(0.0, min(1.0, float(open_)))
+    shaded_rrect(c, -150, -230, 300, 460, 18, (110, 120, 150))
+    for i in range(3):
+        y = -210 + i * 146
+        dx = 50 * k if i == 1 else 0
+        shaded_rrect(c, -130 + dx, y, 260, 126, 10, (150, 160, 190))
+        rrect(c, -40 + dx, y + 40, 80, 20, 10, (80, 90, 120))
+        if i == 1 and label:
+            rrect(c, -70 + dx, y + 80, 140, 36, 6, "white")
+            text(c, label, dx, y + 98, min_size(fit_size(label, 28, 126), _zs), INK)
+        if i == 1 and k > 0.2:
+            for j in range(4):
+                c.drawRect(skia.Rect.MakeXYWH(-110 + dx + j * 30, y - 30 * k, 22, 40), paint(("yellow", "pink", "cyan", "green")[j]))
+
+
+def p_cake(c, t, p, candles=3, _zs=1.0, **_):
+    """A birthday cake with `candles` flickering candles."""
+    shaded_rrect(c, -170, -20, 340, 140, 30, "pink")
+    for i in range(7):
+        c.drawCircle(-150 + i * 50, -14, 24, paint("white"))
+    rrect(c, -190, 110, 380, 30, 14, "white")
+    n = int(candles)
+    for i in range(n):
+        x = (i - (n - 1) / 2) * 70
+        rrect(c, x - 12, -120, 24, 100, 8, ("cyan", "yellow", "green", "orange")[i % 4])
+        f = 1 + 0.15 * math.sin(t * 13 + i)
+        glow(c, x, -140, 40, "orange", 160)
+        c.drawOval(skia.Rect.MakeXYWH(x - 12 * f, -170, 24 * f, 40 * f), paint("yellow"))
+
+
+def p_key(c, t, p, color="yellow", **_):
+    """A big old key (for 'retrieval')."""
+    c.save()
+    c.rotate(-20 + 6 * math.sin(t * 2))
+    ball(c, -120, 0, 80, color)
+    c.drawCircle(-120, 0, 36, paint(INK, 140))
+    shaded_rrect(c, -60, -20, 260, 40, 16, color)
+    for x in (130, 170):
+        rrect(c, x, 10, 26, 54, 8, color)
+    c.restore()
+
 # ---------------- infographic props (text-led beats) ----------------
 
 def p_big(c, t, p, big="?", sub="", color=None, accent="yellow", _zs=1.0, **_):

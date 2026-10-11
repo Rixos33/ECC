@@ -373,6 +373,8 @@ def scene_props(line, accent):
         props.append({"prop": typ, **v})
     for p in props:
         p.setdefault("accent", accent)
+        if p["prop"] == "cabinet" and "open" in p:
+            p["open_"] = p.pop("open")
         if p["prop"] == "calendar" and "flip" in p:
             p["pages"] = p.pop("flip")
     return props
@@ -393,7 +395,8 @@ EXTENTS = {
     "hat": (150, 180), "scanner": (230, 215), "xray": (330, 90), "stream": (480, 170),
     "pill": (190, 130), "ache": (130, 170), "notes": (170, 200), "synapse": (280, 330), "pedal": (160, 190),
     "car": (300, 140), "toggle": (240, 170), "curve": (410, 260), "papers": (180, 230), "plate": (220, 90),
-    "dial": (210, 180), "doctor": (115, 180),
+    "dial": (210, 180), "doctor": (115, 180), "baby": (120, 190), "mobile": (210, 260), "hippocampus": (130, 230),
+    "mouse": (260, 150), "cabinet": (155, 235), "cake": (195, 170), "key": (210, 110),
 }
 FIT_BOX = (110, 230, 970, 1230)
 FIT_CAP = 1.6  # x0, y0, x1, y1: visual safe area above the captions
@@ -439,7 +442,7 @@ def fit_scene(props, cam=None):
 
 FOOT = {"person": 175, "crowd": 190, "robot": 140, "bird": 125, "ship": 70, "crane": 180, "package": 170,
         "mountain": 200, "camera": 165, "speaker": 170, "slot": 160, "tv": 200, "wave": -60, "mascot": 190,
-        "doctor": 175}
+        "doctor": 175, "baby": 200, "cabinet": 230}
 
 
 def camera(tl, dur, cam, fit, punch):

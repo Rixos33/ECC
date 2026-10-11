@@ -1,0 +1,860 @@
+{
+ "id": "short13_baby_memories",
+ "style": "v3",
+ "handle": "@mrshorts1737",
+ "title": "Why Can't You Remember Being a Baby?",
+ "title_bar": "BABY MEMORIES: LOST?",
+ "accent": "yellow",
+ "world": "neon",
+ "mood": "mystic",
+ "pause": 0.16,
+ "rate": "+12%",
+ "keywords": [
+  "Shazia Akhtar",
+  "Carolyn Rovee-Collier",
+  "Tristan Yates",
+  "Nick Turk-Browne",
+  "Yale",
+  "hippocampus",
+  "Paul Frankland",
+  "Toronto",
+  "Harlene Hayne"
+ ],
+ "lines": [
+  {
+   "text": "You were there for every second of being a baby, so why can't you remember any of it?",
+   "tone": "curious",
+   "shots": [
+    {
+     "world": "candy",
+     "scene": [
+      {
+       "prop": "baby",
+       "x": 0.36,
+       "y": 0.47,
+       "s": 1.6,
+       "mood": "happy"
+      },
+      {
+       "prop": "question",
+       "x": 0.76,
+       "y": 0.3,
+       "s": 0.6,
+       "big": "?",
+       "layer": true
+      }
+     ]
+    },
+    {
+     "on": "every",
+     "world": "sunset",
+     "scene": [
+      {
+       "prop": "clock",
+       "x": 0.4,
+       "y": 0.43,
+       "s": 1.3,
+       "speed": 6
+      },
+      {
+       "prop": "baby",
+       "x": 0.78,
+       "y": 0.5,
+       "s": 0.8,
+       "mood": "happy"
+      }
+     ]
+    },
+    {
+     "on": "why",
+     "world": "grape",
+     "scene": [
+      {
+       "prop": "brain",
+       "x": 0.42,
+       "y": 0.44,
+       "s": 1.6,
+       "face": "worried",
+       "face_at": [
+        -20,
+        -20
+       ],
+       "face_s": 1.3,
+       "layer": true
+      },
+      {
+       "prop": "frame",
+       "x": 0.78,
+       "y": 0.32,
+       "s": 0.65,
+       "label": "???",
+       "layer": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "When Shazia Akhtar's team surveyed over six thousand adults, first memories averaged around age three. Four in ten claimed memories from age two or younger, probably stitched together from photos and family stories.",
+   "tone": "dry",
+   "shots": [
+    {
+     "world": "sky",
+     "scene": [
+      {
+       "prop": "crowd",
+       "x": 0.5,
+       "y": 0.45,
+       "s": 1.0,
+       "n": 6,
+       "mood": "happy"
+      }
+     ]
+    },
+    {
+     "on": "first",
+     "world": "sky",
+     "scene": [
+      {
+       "prop": "cake",
+       "x": 0.42,
+       "y": 0.44,
+       "s": 1.3,
+       "candles": 3
+      },
+      {
+       "prop": "person",
+       "x": 0.8,
+       "y": 0.48,
+       "s": 0.9,
+       "color": "teal",
+       "mood": "happy",
+       "look": 3.1
+      }
+     ]
+    },
+    {
+     "on": "Four",
+     "world": "sunset",
+     "scene": [
+      {
+       "prop": "crowd",
+       "x": 0.5,
+       "y": 0.45,
+       "s": 1.0,
+       "n": 5,
+       "mood": "surprised"
+      }
+     ]
+    },
+    {
+     "on": "age",
+     "world": "sunset",
+     "scene": [
+      {
+       "prop": "cake",
+       "x": 0.4,
+       "y": 0.44,
+       "s": 1.3,
+       "candles": 2
+      },
+      {
+       "prop": "question",
+       "x": 0.78,
+       "y": 0.32,
+       "s": 0.7,
+       "big": "?"
+      }
+     ]
+    },
+    {
+     "on": "probably",
+     "world": "candy",
+     "scene": [
+      {
+       "prop": "frame",
+       "x": 0.34,
+       "y": 0.42,
+       "s": 1.0,
+       "label": "photos"
+      },
+      {
+       "prop": "bubble",
+       "x": 0.72,
+       "y": 0.36,
+       "s": 0.9,
+       "label": "family stories"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "Yet babies clearly form memories: Carolyn Rovee-Collier's three-month-olds remembered for a week that kicking jiggled a mobile.",
+   "tone": "curious",
+   "shots": [
+    {
+     "world": "mint",
+     "scene": [
+      {
+       "prop": "baby",
+       "x": 0.36,
+       "y": 0.47,
+       "s": 1.5,
+       "mood": "happy"
+      },
+      {
+       "prop": "cabinet",
+       "x": 0.76,
+       "y": 0.47,
+       "s": 0.75,
+       "open_": 1.0,
+       "label": "new!",
+       "on": "memories"
+      }
+     ]
+    },
+    {
+     "on": "Carolyn",
+     "world": "mint",
+     "scene": [
+      {
+       "prop": "baby",
+       "x": 0.4,
+       "y": 0.48,
+       "s": 1.5,
+       "mood": "happy"
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.235,
+       "s": 1.0,
+       "label": "3 months",
+       "size": 110,
+       "color": "white"
+      }
+     ]
+    },
+    {
+     "on": "week",
+     "world": "sky",
+     "scene": [
+      {
+       "prop": "calendar",
+       "x": 0.36,
+       "y": 0.44,
+       "s": 1.3,
+       "label": "+7 days",
+       "pages": true
+      },
+      {
+       "prop": "baby",
+       "x": 0.76,
+       "y": 0.5,
+       "s": 1.0,
+       "mood": "happy"
+      }
+     ]
+    },
+    {
+     "on": "kicking",
+     "world": "mint",
+     "scene": [
+      {
+       "prop": "mobile",
+       "x": 0.5,
+       "y": 0.31,
+       "s": 1.45,
+       "anim": [
+        {
+         "param": "spin",
+         "from": 0,
+         "to": 1,
+         "on": "kicking",
+         "dur": 0.6
+        }
+       ]
+      },
+      {
+       "prop": "baby",
+       "x": 0.5,
+       "y": 0.6,
+       "s": 1.1,
+       "mood": "stars",
+       "anim": [
+        {
+         "param": "kick",
+         "from": 0,
+         "to": 1,
+         "on": "kicking",
+         "dur": 0.4
+        }
+       ],
+       "layer": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "In 2025, Tristan Yates and Nick Turk-Browne at Yale scanned awake babies looking at pictures. From around age one, their hippocampus, the memory centre, worked harder on pictures they'd later recognise.",
+   "tone": "amazed",
+   "shots": [
+    {
+     "world": "ink",
+     "scene": [
+      {
+       "prop": "person",
+       "x": 0.32,
+       "y": 0.5,
+       "s": 1.4,
+       "color": "cyan",
+       "mood": "happy",
+       "look": 0.0
+      },
+      {
+       "prop": "person",
+       "x": 0.68,
+       "y": 0.5,
+       "s": 1.4,
+       "color": "pink",
+       "mood": "happy",
+       "look": 3.1
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.235,
+       "s": 1.0,
+       "label": "2025",
+       "size": 130,
+       "color": "white"
+      }
+     ]
+    },
+    {
+     "on": "scanned",
+     "world": "ink",
+     "scene": [
+      {
+       "prop": "scanner",
+       "x": 0.5,
+       "y": 0.46,
+       "s": 1.6
+      },
+      {
+       "prop": "baby",
+       "x": 0.5,
+       "y": 0.47,
+       "s": 0.5,
+       "mood": "happy",
+       "layer": true
+      }
+     ]
+    },
+    {
+     "on": "From",
+     "world": "neon",
+     "scene": [
+      {
+       "prop": "hippocampus",
+       "x": 0.4,
+       "y": 0.45,
+       "s": 1.3,
+       "mood": "happy"
+      },
+      {
+       "prop": "label",
+       "x": 0.76,
+       "y": 0.3,
+       "s": 1.0,
+       "label": "memory centre",
+       "size": 56,
+       "color": "yellow",
+       "on": "memory"
+      }
+     ]
+    },
+    {
+     "on": "worked",
+     "world": "neon",
+     "scene": [
+      {
+       "prop": "hippocampus",
+       "x": 0.38,
+       "y": 0.45,
+       "s": 1.3,
+       "mood": "stars",
+       "anim": [
+        {
+         "param": "glow_on",
+         "from": 0,
+         "to": 1,
+         "on": "harder",
+         "dur": 0.6
+        }
+       ]
+      },
+      {
+       "prop": "frame",
+       "x": 0.78,
+       "y": 0.34,
+       "s": 0.6,
+       "label": "seen it!",
+       "on": "recognise"
+      }
+     ]
+    }
+   ],
+   "sfx": "chime",
+   "sfx_at": 0.3
+  },
+  {
+   "text": "So babies record just fine; it's the playback that seems to fail.",
+   "tone": "dry",
+   "shots": [
+    {
+     "world": "grape",
+     "scene": [
+      {
+       "prop": "hippocampus",
+       "x": 0.32,
+       "y": 0.46,
+       "s": 1.1,
+       "mood": "happy",
+       "glow_on": 1.0
+      },
+      {
+       "prop": "cabinet",
+       "x": 0.72,
+       "y": 0.47,
+       "s": 0.95,
+       "open_": 1.0,
+       "label": "baby files"
+      }
+     ]
+    },
+    {
+     "on": "playback",
+     "world": "ink",
+     "scene": [
+      {
+       "prop": "tv",
+       "x": 0.5,
+       "y": 0.42,
+       "s": 1.35,
+       "people": 0,
+       "label": "no signal",
+       "acts": [
+        {
+         "type": "shake",
+         "on": "fail",
+         "dur": 0.5
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "In baby mice, Paul Frankland's Toronto lab found that slowing the brain's rush of new neurons helped memories stick.",
+   "tone": "curious",
+   "shots": [
+    {
+     "world": "lava",
+     "scene": [
+      {
+       "prop": "mouse",
+       "x": 0.5,
+       "y": 0.47,
+       "s": 1.7
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.235,
+       "s": 1.0,
+       "label": "Toronto",
+       "size": 110,
+       "color": "white"
+      }
+     ]
+    },
+    {
+     "on": "slowing",
+     "world": "neon",
+     "scene": [
+      {
+       "prop": "neuron",
+       "x": 0.42,
+       "y": 0.44,
+       "s": 1.1,
+       "mood": "dizzy",
+       "acts": [
+        {
+         "type": "shrink",
+         "on": "slowing",
+         "dur": 0.8,
+         "factor": 0.7
+        }
+       ]
+      },
+      {
+       "prop": "crowd",
+       "x": 0.5,
+       "y": 0.62,
+       "s": 0.5,
+       "n": 4,
+       "mood": "neutral",
+       "layer": true
+      }
+     ]
+    },
+    {
+     "on": "helped",
+     "world": "mint",
+     "scene": [
+      {
+       "prop": "cabinet",
+       "x": 0.42,
+       "y": 0.47,
+       "s": 1.1,
+       "open_": 1.0,
+       "label": "memory"
+      },
+      {
+       "prop": "check",
+       "x": 0.78,
+       "y": 0.3,
+       "s": 0.8
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "Yet months later, his team shone light on the cells holding a lost memory, and it flickered back.",
+   "tone": "amazed",
+   "shots": [
+    {
+     "world": "ink",
+     "scene": [
+      {
+       "prop": "mouse",
+       "x": 0.44,
+       "y": 0.5,
+       "s": 1.5
+      },
+      {
+       "prop": "calendar",
+       "x": 0.8,
+       "y": 0.3,
+       "s": 0.6,
+       "label": "months"
+      }
+     ]
+    },
+    {
+     "on": "shone",
+     "world": "ink",
+     "scene": [
+      {
+       "prop": "mouse",
+       "x": 0.5,
+       "y": 0.52,
+       "s": 1.6,
+       "anim": [
+        {
+         "param": "light",
+         "from": 0,
+         "to": 1,
+         "on": "light",
+         "dur": 0.5
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "on": "holding",
+     "world": "neon",
+     "scene": [
+      {
+       "prop": "neuron",
+       "x": 0.5,
+       "y": 0.44,
+       "s": 1.3,
+       "mood": "sleepy",
+       "anim": [
+        {
+         "param": "fire",
+         "from": 0,
+         "to": 1,
+         "on": "lost",
+         "dur": 0.6
+        }
+       ]
+      }
+     ],
+     "cam": {
+      "zoom": [
+       1.0,
+       1.15
+      ]
+     }
+    },
+    {
+     "on": "flickered",
+     "world": "lemon",
+     "scene": [
+      {
+       "prop": "rays",
+       "x": 0.5,
+       "y": 0.44,
+       "s": 1.0,
+       "color": "white",
+       "layer": true
+      },
+      {
+       "prop": "frame",
+       "x": 0.5,
+       "y": 0.44,
+       "s": 1.4,
+       "label": "it's back!",
+       "layer": true,
+       "acts": [
+        {
+         "type": "pulse",
+         "at": 0.0,
+         "dur": 9
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "Toddlers in Harlene Hayne's New Zealand lab never described a toy using words they learned afterwards.",
+   "tone": "curious",
+   "shots": [
+    {
+     "world": "mint",
+     "scene": [
+      {
+       "prop": "baby",
+       "x": 0.5,
+       "y": 0.47,
+       "s": 1.6,
+       "mood": "happy"
+      },
+      {
+       "prop": "label",
+       "x": 0.5,
+       "y": 0.235,
+       "s": 1.0,
+       "label": "New Zealand",
+       "size": 90,
+       "color": "white"
+      }
+     ]
+    },
+    {
+     "on": "never",
+     "world": "mint",
+     "scene": [
+      {
+       "prop": "baby",
+       "x": 0.3,
+       "y": 0.48,
+       "s": 1.3,
+       "mood": "happy"
+      },
+      {
+       "prop": "package",
+       "x": 0.72,
+       "y": 0.48,
+       "s": 1.1,
+       "color": "orange",
+       "label": "toy"
+      }
+     ]
+    },
+    {
+     "on": "words",
+     "world": "sky",
+     "scene": [
+      {
+       "prop": "bubble",
+       "x": 0.5,
+       "y": 0.33,
+       "s": 2.0,
+       "label": "new words"
+      },
+      {
+       "prop": "check",
+       "x": 0.5,
+       "y": 0.56,
+       "s": 0.9,
+       "ok": false,
+       "on": "afterwards"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "That's mostly mice and small studies, so whether your baby memories survive is still unknown.",
+   "tone": "serious",
+   "shots": [
+    {
+     "world": "ink",
+     "scene": [
+      {
+       "prop": "mouse",
+       "x": 0.32,
+       "y": 0.5,
+       "s": 1.3
+      },
+      {
+       "prop": "crowd",
+       "x": 0.72,
+       "y": 0.5,
+       "s": 0.6,
+       "n": 3,
+       "mood": "neutral",
+       "on": "small"
+      }
+     ]
+    },
+    {
+     "on": "whether",
+     "world": "grape",
+     "scene": [
+      {
+       "prop": "cabinet",
+       "x": 0.38,
+       "y": 0.47,
+       "s": 1.1,
+       "open_": 0.0,
+       "label": "baby files"
+      },
+      {
+       "prop": "question",
+       "x": 0.78,
+       "y": 0.32,
+       "s": 0.8,
+       "big": "?"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "text": "You were there for all of it; your brain may just have misplaced the key.",
+   "tone": "warm",
+   "shots": [
+    {
+     "world": "candy",
+     "scene": [
+      {
+       "prop": "baby",
+       "x": 0.36,
+       "y": 0.47,
+       "s": 1.6,
+       "mood": "happy"
+      },
+      {
+       "prop": "question",
+       "x": 0.76,
+       "y": 0.3,
+       "s": 0.6,
+       "big": "?",
+       "layer": true
+      }
+     ]
+    },
+    {
+     "on": "your",
+     "world": "grape",
+     "scene": [
+      {
+       "prop": "brain",
+       "x": 0.4,
+       "y": 0.44,
+       "s": 1.5,
+       "face": "smug",
+       "face_at": [
+        -20,
+        -20
+       ],
+       "face_s": 1.3,
+       "layer": true
+      },
+      {
+       "prop": "key",
+       "x": 0.78,
+       "y": 0.32,
+       "s": 0.7,
+       "on": "key",
+       "layer": true
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "pronounce": {
+  "Shazia Akhtar": "SHAH-zee-uh AHK-tar",
+  "Rovee-Collier": "ROH-vee KOL-ee-er",
+  "Tristan Yates": "TRISS-tun YAYTS",
+  "Turk-Browne": "TURK BROWN (like the colour)",
+  "Frankland": "FRANK-lund",
+  "Harlene Hayne": "har-LEEN HAIN (rhymes with rain)",
+  "hippocampus": "hip-oh-KAM-pus"
+ },
+ "teaser": {
+  "question": "Why does a dream that felt so real vanish before you've even brushed your teeth?",
+  "label": "Dreams next"
+ },
+ "sources": [
+  {
+   "claim": "In a survey of over six thousand adults, earliest memories averaged around age three; about four in ten claimed memories from age two or younger, likely fictional and built from fragments plus facts from photos and family talk.",
+   "url": "https://www.psychologicalscience.org/news/releases/many-peoples-earliest-memories-may-be-fictional.html",
+   "note": "Akhtar, Justice, Morrison & Conway 2018, 'Fictional First Memories', Psychological Science 29(10):1612-1619. 6,641 participants; mean age of earliest memory 3.2 years; 38.6% reported memories from age 2 or younger, 893 from age 1 or younger. The authors call these likely fictional, not proven fictional; hence 'probably'. Shazia Akhtar (lead author, then at University of Bradford) with Martin Conway (City, University of London)."
+  },
+  {
+   "claim": "Three-month-olds remembered for a week that kicking moved a mobile tied to their ankle with a ribbon.",
+   "url": "https://www.lancaster.ac.uk/fas/psych/glossary/mobile_conjugate_reinforcement/",
+   "note": "Carolyn Rovee-Collier's mobile conjugate reinforcement paradigm (infants 2 to 6 months): 3-month-olds retain for about 1 week, 6-month-olds about 2 weeks. See also Rovee-Collier 1999, Current Directions in Psychological Science. Retention depends on training details and reminders."
+  },
+  {
+   "claim": "Yale team scanned awake infants with fMRI; greater hippocampal (posterior) activity when first seeing a picture predicted later memory-based looking, from around 1 year of age.",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/40112047/",
+   "note": "Yates et al. (senior author Turk-Browne) 2025, 'Hippocampal encoding of memories in human infants', Science 387(6740):1316-1320. 26 infants aged 4.2 to 24.9 months; pictures of faces, scenes and objects; memory measured by looking time at seen vs new images later in the same scan (exact delay not checked; likely seconds to minutes). Effect strongest in infants older than 12 months. Coverage: https://news.yale.edu/2025/03/20/why-dont-we-remember-being-baby-new-study-provides-clues and https://www.the-scientist.com/babies-form-memories-why-do-adults-forget-them-72826 (Turk-Browne: suggests a retrieval problem; memories 'may endure in some form' - speculative)."
+  },
+  {
+   "claim": "In infant mice, reducing hippocampal neurogenesis after learning reduced forgetting; raising it in species with little postnatal neurogenesis caused forgetting.",
+   "url": "https://www.gwern.net/doc/psychology/neuroscience/2014-akers.pdf",
+   "note": "Akers, ..., Josselyn & Frankland 2014, 'Hippocampal neurogenesis regulates forgetting during adulthood and infancy', Science 344(6184):598-602. Hospital for Sick Children, Toronto. Also worked in guinea pigs and degus. Animal work; in humans it is a leading hypothesis, not established. DOI believed to be 10.1126/science.1248903 (not checked)."
+  },
+  {
+   "claim": "A memory formed by infant mice, forgotten within about a week, was partially brought back by optogenetically reactivating the tagged hippocampal neurons, up to about 90 days after training.",
+   "url": "https://hospitalnews.com/our-earliest-memories-may-be-forgotten-but-not-lost",
+   "note": "Guskjolen, ..., Frankland 2018, Current Biology (published July 2018; exact title and pages not checked). Frankland: 'the recovery was incomplete, indicating there may be problems with storing these early memories as well' - hence 'flickered back', not 'came back'. Mice only. 90-day figure from secondary coverage (The Varsity / SickKids)."
+  },
+  {
+   "claim": "Toddlers tested 6 months or 1 year after playing with a novel toy never verbally reported details using words they did not have at the time of the event, though they could re-enact it nonverbally.",
+   "url": "https://www.psychologicalscience.org/journals/psychological-science/1467-9280.00442/",
+   "note": "Simcock & Hayne 2002, 'Breaking the barrier? Children fail to translate their preverbal memories into language', Psychological Science 13(3):225-231. University of Otago, New Zealand. Gabrielle Simcock is first author; Harlene Hayne ran the lab. Toy: custom-built machine with levers, lights and sounds (Discover coverage: https://discovermagazine.com/mind/infant-recall)."
+  },
+  {
+   "claim": "Freud named 'infantile amnesia' (Three Essays, 1905).",
+   "url": "https://www.encyclopedia.com/psychology/dictionaries-thesauruses-pictures-and-press-releases/three-essays-theory-sexuality",
+   "note": "Not used in the script. Commonly credited to Freud's 1905 Three Essays, but 'coined' is hard to verify against earlier usage, and his repression explanation is not supported, so it was dropped to save words."
+  }
+ ],
+ "caveats": "Double-check before recording: (1) 'Four in ten' rounds 38.6%; the survey was online and these early memories are 'likely' fictional by the authors' judgement, not proven, so keep 'probably'. 'Averaged around age three' = mean 3.2 years. (2) Rovee-Collier's one-week figure is for 3-month-olds under her standard training; it shows the memory lasts days, not that babies keep it for life. (3) Yale 2025: only 26 infants, memory tested within the same scan session (exact delay not checked), effect strongest after 12 months; it shows encoding, not that the memories last. 'Playback seems to fail' is the authors' interpretation, hence 'seems'. Spelling 'recognise/centre' is British, as in earlier scripts. (4) Frankland neurogenesis and Guskjolen light-reactivation work are in mice; recovery was partial ('flickered'), and 'months later' rests on the ~90-day figure in secondary coverage; check the Current Biology paper if a reviewer has access. 'His team' = Frankland's lab (Axel Guskjolen lead author). (5) Simcock & Hayne: first author is Gabrielle Simcock; the line credits 'Harlene Hayne's lab', which is accurate but a reviewer may prefer naming both. (6) Freud deliberately omitted. No medical claims."
+}
