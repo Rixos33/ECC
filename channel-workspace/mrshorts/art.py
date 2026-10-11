@@ -925,7 +925,7 @@ GAGS = ("glasses", "eyebrows", "jawdrop", "double_take", "nod", "peek", "shrug",
 
 def p_mascot(c, t, p, talk=0.0, look=0.0, mood="smirk", wave=False, hop=0.0, activity=None, point=0.0,
              gag=None, gag_t=0.0, point_angle=128.0, pointer=False, wings=None, legs="stand", shadow=True,
-             mouth_shape=0.0, **_):
+             mouth_shape=0.0, pointer_len=190, **_):
     """Mr. Shorts: a small round owl with big glasses, a raised eyebrow and red shorts.
     talk 0..1 opens the beak, look -1..1 moves the pupils, hop 0..1 lifts him off the ground,
     point 0..1 raises the left wing toward the scene, gag + gag_t (0..1) plays a short bit of business."""
@@ -1026,8 +1026,8 @@ def p_mascot(c, t, p, talk=0.0, look=0.0, mood="smirk", wave=False, hop=0.0, act
             ang = ang + (-150 - ang) * arc                                   # wing comes up to the frames
         c.rotate(ang)
         if pointer and sx < 0 and (point > 0.3 or wings is not None):  # a pointer stick held in the wing
-            c.drawLine(0, length - 20, 0, length + 190, paint((120, 80, 50), stroke=10))
-            c.drawCircle(0, length + 196, 12, paint("red"))
+            c.drawLine(0, length - 20, 0, length + pointer_len, paint((120, 80, 50), stroke=10))
+            c.drawCircle(0, length + pointer_len + 6, 12, paint("red"))
         c.drawOval(skia.Rect.MakeXYWH(-26, -8, 52, length), paint(wing_c))
         c.drawOval(skia.Rect.MakeXYWH(-18, -2, 34, length - 22), paint(shade(wing_c, 0.18)))
         c.restore()

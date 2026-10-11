@@ -66,3 +66,10 @@ In our 1080x1920 frame, on an iPhone: status bar and top icons down to y ~245; t
 buttons from y ~1450 down; the like/comment/share column at x > 900 below y ~1190; and about 5% cropped from
 each side (visible x ~52-1028). So everything that matters lives in x 70-1010, y 265-1420: title bar at
 y 262-354, scene content y 380-1200, captions at y ~1330 and at most 720 px wide, the owl at (872, 1118).
+
+## The owl's zone (v3, 2026-10-11)
+
+The animation keeps the left/centre box (x 70-790, y 380-1040) and is masked out of everything else. The owl
+owns the column to its right (x 800-1010, y 380-1060) and the strip below it (y 1060-1265). Every scenario is
+checked frame by frame so no part of him or his props enters the animation box (a few pixels of a pointer tip
+at the edge at most). His flight to the centre for the closing question starts only after the narration ends.

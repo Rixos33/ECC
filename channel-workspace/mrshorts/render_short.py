@@ -17,6 +17,7 @@ import art, audio, mascot_show
 W, H, FPS = 1080, 1920, 30
 VIS_CY = 760        # visual focus (above captions, clear of the Shorts UI)
 CAP_Y = 1330        # caption baseline block
+SCENE_CLIP = (0, 0, 800, 1052)  # v3: the animation is never drawn into the owl's column or strip
 SAFE_W = 800        # caption width: clear of the Shorts action buttons on the right
 XFADE = 0.5         # cross-dissolve between shots (s)
 MIN_SHOT = 2.4      # shots shorter than this are merged into the previous one (s)
@@ -905,8 +906,8 @@ def set_style(spec):
     v3 = spec.get("style") == "v3"
     # v3 box measured against the YouTube app: top icons end at y~245, the channel row starts at y~1450,
     # the like/comment/share column covers x>900 below y~1190, and ~5% is cropped from each side
-    # the strip from y~1050 down to the captions is the owl's stage
-    FIT_BOX = (70, 380, 1010, 1050) if v3 else (110, 230, 970, 1230)
+    # the animation lives in the left/centre box; the owl owns the right-hand column and the strip below it
+    FIT_BOX = (70, 380, 790, 1040) if v3 else (110, 230, 970, 1230)
     FIT_CAP = 2.8 if v3 else 1.6
     return v3
 
@@ -1139,7 +1140,10 @@ def render(spec_path, out_dir, args):
                         draw_world(c, sc["world"], ft, k)
                     else:
                         draw_world(c, sc["world"], ft)
-                    cxm, cym = W / 2, (FIT_BOX[1] + FIT_BOX[3]) / 2
+                    cxm, cym = (FIT_BOX[0] + FIT_BOX[2]) / 2, (FIT_BOX[1] + FIT_BOX[3]) / 2
+                    c.save()
+                    if not sc.get("outro"):
+                        c.clipRect(skia.Rect.MakeLTRB(*SCENE_CLIP), doAntiAlias=True)
                     for scn, alpha, zoom, tloc in ((pv, 1 - k, 1 + 1.5 * k, ft - pv["start"] if pv else 0),
                                                    (sc, k, 0.6 + 0.4 * k, tl_draw)):
                         if scn is None:
@@ -1150,6 +1154,7 @@ def render(spec_path, out_dir, args):
                         c.translate(-cxm, -cym)
                         draw_scene(c, scn["props"], tloc, scn["dur"], scn["cam"], scn["fit"], punch=idx > 0 or scn is pv)
                         c.restore()
+                    c.restore()
                 else:
                     bg.draw(c, ft)
                     for scn, alpha in ((pv, 1 - k), (sc, k)):
@@ -1170,8 +1175,8 @@ def render(spec_path, out_dir, args):
                     else:
                         draw_scene(c, sc["props"], tl_draw, sc["dur"], sc["cam"], sc["fit"], punch=idx > 0)
                 fly = 0.0  # 0 = in his spot, 1 = arrived at the centre for his closing question
-                if outro_at is not None and v3 and outro_at - 0.6 <= ft < outro_at + 0.42:
-                    fly = ease_io((ft - (outro_at - 0.6)) / 0.6)
+                if outro_at is not None and v3 and outro_at <= ft < outro_at + 0.65:
+                    fly = max(0.01, ease_io((ft - outro_at) / 0.6))  # only once the last picture is fading out
                 if teaser and not args.no_mascot and (not sc.get("outro") or fly > 0):
                     # Mr. Shorts in the right-hand corner (below the captions, left of the Shorts buttons)
                     hop = max((1 - abs((ft - tc) / 0.45 - 0.5) * 2 for tc in chime_times if 0 <= ft - tc <= 0.45),
@@ -1188,13 +1193,14 @@ def render(spec_path, out_dir, args):
                     act = mascot_show.active(show, ft)
                     if fly > 0:  # he flies from his spot to where the closing question is asked, then hands over
                         c.save()
-                        fade = 1 - ease_io((ft - outro_at) / 0.42) if ft >= outro_at else 1.0
+                        fade = 1 - ease_io((ft - (outro_at + 0.38)) / 0.27)
                         c.saveLayerAlpha(None, int(255 * fade))
-                        x0, y0 = 880 + 1.15 * (mascot_show.HOME[0] - 880), 1270 + 1.15 * (mascot_show.HOME[1] - 1270)
+                        x0, y0 = mascot_show.HOME
                         tx, ty, ts = outro_target
                         k_ = fly
                         c.translate(x0 + (tx - x0) * k_, y0 + (ty - y0) * k_ - 120 * math.sin(math.pi * k_))
-                        c.scale(0.575 + (ts - 0.575) * k_, 0.575 + (ts - 0.575) * k_)
+                        s0_ = mascot_show.S
+                        c.scale(s0_ + (ts - s0_) * k_, s0_ + (ts - s0_) * k_)
                         art.PROPS["mascot"](c, ft, 1.0, look=-0.4 * (1 - k_), talk=talk_now, mouth_shape=shape_now,
                                             mood="curious", legs="dangle" if 0.1 < k_ < 0.9 else "stand",
                                             wings=(150, -150) if 0.1 < k_ < 0.9 else None, shadow=k_ > 0.9)
@@ -1202,10 +1208,6 @@ def render(spec_path, out_dir, args):
                         c.restore()
                     else:
                         c.save()
-                        if v3:  # the whole show is drawn 15% larger, anchored on the ground at his spot
-                            c.translate(880, 1270)
-                            c.scale(1.15, 1.15)
-                            c.translate(-880, -1270)
                         if act:
                             mascot_show.perform(act[2], c, act[0], act[1], {"t": ft, "talk": talk_now,
                                                                          "shape": shape_now, "point": ease_io(pt)})

@@ -8,7 +8,9 @@ import math
 import skia
 import art
 
-HOME, S = (872, 1150), 0.5          # resting spot and scale
+HOME, S = (830, 1167), 0.5          # resting spot (feet on y~1262) and scale
+# His zone: the column right of the animation (x 800-1010, y 380-1060) and the strip under it (y 1060-1265).
+# Every scenario stays inside it, so he never covers the animation. Below y~1190, x>900 is under YouTube's buttons.
 ACT_LEN, REST = 6.0, 1.2            # seconds per scenario and the pause between two of them
 SCENARIOS = ("computer", "jetpack", "skateboard", "detective", "chalkboard", "juggle", "trampoline",
              "parachute", "popcorn")
@@ -68,11 +70,11 @@ def computer(c, u, T, st):
     """An office chair and a desk with a computer glide in; he sits down and types, and text fills the screen."""
     k = presence(u, T)
     hx, hy = HOME
-    x, y = lerp(hx, 806, k), lerp(hy, 1140, k)
-    chair_x, desk_x = lerp(1320, x + 18, k), lerp(-320, 606, k)
+    x, y = lerp(hx, 770, k), lerp(hy, 1160, k)
+    chair_x, desk_x = lerp(1320, x + 18, k), lerp(-320, 560, k)
     # office chair: backrest, seat, gas lift, five-star base with castors
-    art.shaded_rrect(c, chair_x - 50, 1012, 100, 150, 38, (60, 64, 90))
-    c.drawLine(chair_x, 1160, chair_x, 1244, art.paint((150, 150, 165), stroke=12))
+    art.shaded_rrect(c, chair_x - 46, 1066, 92, 110, 34, (60, 64, 90))
+    c.drawLine(chair_x, 1176, chair_x, 1244, art.paint((150, 150, 165), stroke=12))
     for dx in (-60, -30, 0, 30, 60):
         c.drawLine(chair_x, 1244, chair_x + dx, 1262, art.paint((70, 70, 90), stroke=9))
         c.drawCircle(chair_x + dx, 1266, 7, art.paint(art.INK))
@@ -81,37 +83,40 @@ def computer(c, u, T, st):
     owl(c, x, y, legs="sit" if seated > 0.5 else "stand", look=-1.0, talk=st["talk"], t=st["t"], mood="curious",
         wings=(lerp(14, 58 + 14 * math.sin(st["t"] * 24), seated), lerp(-14, 40 + 10 * math.sin(st["t"] * 21 + 1), seated))
         if seated > 0.05 else None)
-    art.shaded_rrect(c, chair_x - 64, 1150, 128, 30, 14, (60, 64, 90))              # seat, in front of his legs
-    art.rrect(c, desk_x - 160, 1200, 320, 22, 8, WOOD)                              # desk
+    art.shaded_rrect(c, chair_x - 60, 1170, 120, 26, 12, (60, 64, 90))              # seat, in front of his legs
+    art.rrect(c, desk_x - 160, 1196, 320, 20, 8, WOOD)                              # desk
     for dx in (-140, 140):
-        c.drawLine(desk_x + dx, 1222, desk_x + dx, 1276, art.paint(WOOD, stroke=14))
-    art.rrect(c, desk_x - 110, 1050, 200, 136, 14, DARK)                            # monitor
-    art.rrect(c, desk_x - 98, 1062, 176, 112, 8, (20, 30, 60))
+        c.drawLine(desk_x + dx, 1216, desk_x + dx, 1262, art.paint(WOOD, stroke=14))
+    art.rrect(c, desk_x - 110, 1068, 200, 116, 14, DARK)                            # monitor
+    art.rrect(c, desk_x - 98, 1078, 176, 96, 8, (20, 30, 60))
     shown = st["t"] * 9 if typing else 0                                            # characters typed so far
     rows = [0.9, 0.6, 0.8, 0.45, 0.7]
     for i, wv in enumerate(rows):
         frac = max(0.0, min(1.0, (shown - i * 9) / 9))
         if frac > 0:
-            c.drawLine(desk_x - 86, 1080 + i * 18, desk_x - 86 + 150 * wv * frac, 1080 + i * 18,
+            c.drawLine(desk_x - 86, 1092 + i * 16, desk_x - 86 + 150 * wv * frac, 1092 + i * 16,
                        art.paint("cyan" if i % 2 else "green", 230, stroke=6))
     if typing and int(st["t"] * 3) % 2:                                             # blinking cursor
         i = min(len(rows) - 1, int(shown // 9))
-        c.drawRect(skia.Rect.MakeXYWH(desk_x - 84 + 150 * rows[i] * min(1, (shown - i * 9) / 9), 1073 + i * 18, 6, 14),
+        c.drawRect(skia.Rect.MakeXYWH(desk_x - 84 + 150 * rows[i] * min(1, (shown - i * 9) / 9), 1085 + i * 16, 6, 14),
                    art.paint("white"))
-    c.drawLine(desk_x - 10, 1186, desk_x - 10, 1200, art.paint(DARK, stroke=14))
-    art.rrect(c, desk_x + 36, 1186, 104, 14, 6, (220, 220, 230))                    # keyboard
+    c.drawLine(desk_x - 10, 1184, desk_x - 10, 1196, art.paint(DARK, stroke=14))
+    art.rrect(c, desk_x + 36, 1182, 104, 14, 6, (220, 220, 230))                    # keyboard
     if typing:
         for i in range(5):
             if int(st["t"] * 14 + i * 3) % 4 == 0:
-                c.drawRect(skia.Rect.MakeXYWH(desk_x + 42 + i * 19, 1188, 14, 9), art.paint("yellow", 200))
+                c.drawRect(skia.Rect.MakeXYWH(desk_x + 42 + i * 19, 1184, 14, 9), art.paint("yellow", 200))
 
 
 def jetpack(c, u, T, st):
     """He straps on a jetpack, flies up beside the title and points a stick at it, then at the animation."""
     hx, hy = HOME
     up = ease(u / 1.3) * ease((T - u) / 1.3)
-    x = lerp(hx, 905, up) + 14 * math.sin(st["t"] * 2.1) * up
-    y = lerp(hy, 560, up) + 12 * math.sin(st["t"] * 3.3) * up
+    side = ease(u / 0.5) * ease((T - u) / 0.5)                                        # into his column first
+    rise = ease((u - 0.4) / 1.1) * ease((T - u - 0.4) / 1.1)                          # then up it
+    x = lerp(hx, 944, side) + 3 * math.sin(st["t"] * 2.1) * rise
+    y = lerp(hy, 520, rise) + 12 * math.sin(st["t"] * 3.3) * rise
+    up = rise
     on = ease(u / 0.4) * ease((T - u) / 0.3)
     c.save()
     c.translate(x, y)
@@ -125,7 +130,7 @@ def jetpack(c, u, T, st):
     c.restore()
     at_title = u < T / 2                                                          # first the title, then the scene
     owl(c, x, y, rot=-6 * up, look=-1.0, talk=st["talk"], t=st["t"], mood="curious", legs="dangle" if up > 0.2 else "stand",
-        shadow=up < 0.2, point=up, pointer=True, point_angle=104 if at_title else 58)
+        shadow=up < 0.2, point=up, pointer=True, pointer_len=16, point_angle=104 if at_title else 70)
 
 
 def skateboard(c, u, T, st):
@@ -135,7 +140,7 @@ def skateboard(c, u, T, st):
     out = ease(u / (T * 0.46)) if u < T / 2 else 1 - ease((u - T * 0.54) / (T * 0.46))
     x = lerp(hx, 250, out)
     going_left = u < T / 2
-    y = hy - 26 * k
+    y = hy - 4 * k
     tilt = (-7 if going_left else 7) * k * (0.5 + 0.5 * math.sin(st["t"] * 3))
     c.save()
     c.translate(x, y + 110)
@@ -159,7 +164,7 @@ def detective(c, u, T, st):
     moving = 0.02 < go < 0.98
     hop = abs(math.sin(u * 7)) if moving else 0.0
     turn = 1 - 2 * min(ease(u / 0.35), ease((T - u) / 0.35))
-    owl(c, x, hy, turn=turn, rot=8 * go, look=-1.0, talk=st["talk"], t=st["t"], mood="curious", hop=hop * 0.35,
+    owl(c, x, hy, turn=turn, rot=4 * go, look=-1.0, talk=st["talk"], t=st["t"], mood="curious", hop=hop * 0.1,
         activity="magnifier" if go > 0.3 else None)
 
 
@@ -167,20 +172,20 @@ def chalkboard(c, u, T, st):
     """A chalkboard on an easel glides in; he taps it with a pointer like a teacher."""
     k = presence(u, T)
     hx, hy = HOME
-    bx = lerp(-320, 640, k)
+    bx = lerp(-320, 600, k)
     for dx, lean in ((-90, -14), (90, 14)):
-        c.drawLine(bx + dx * 0.4, 1090, bx + dx + lean, 1276, art.paint(WOOD, stroke=12))
-    art.shaded_rrect(c, bx - 150, 1020, 300, 190, 12, WOOD)
-    art.rrect(c, bx - 136, 1032, 272, 166, 6, (30, 70, 60))
+        c.drawLine(bx + dx * 0.4, 1120, bx + dx + lean, 1262, art.paint(WOOD, stroke=12))
+    art.shaded_rrect(c, bx - 150, 1066, 300, 150, 12, WOOD)
+    art.rrect(c, bx - 136, 1076, 272, 130, 6, (30, 70, 60))
     d = ease((u - 0.9) / 2.5)                                                      # the chalk drawing appears
     pa = skia.Path()
     for i in range(int(40 * d) + 1):
         px = bx - 116 + i * 4.6
-        py = 1168 - 110 * math.exp(-(((i - 20) / 9.0) ** 2))
+        py = 1196 - 100 * math.exp(-(((i - 20) / 9.0) ** 2))
         pa.moveTo(px, py) if i == 0 else pa.lineTo(px, py)
     c.drawPath(pa, art.paint("white", 230, stroke=6))
     if d > 0.8:
-        art.text(c, "!", bx + 100, 1080, 60, "yellow")
+        art.text(c, "!", bx + 100, 1110, 56, "yellow")
     tap = 0.75 + 0.25 * abs(math.sin(st["t"] * 6))
     owl(c, hx, hy, look=-1.0, talk=st["talk"], t=st["t"], mood="smirk", point=k * tap, pointer=True, point_angle=96)
 
@@ -193,8 +198,8 @@ def juggle(c, u, T, st):
         wings=(lerp(14, 150 + 18 * math.sin(st["t"] * 9), k), lerp(-14, -150 + 18 * math.sin(st["t"] * 9), k)))
     for i, colr in enumerate(("cyan", "pink", "yellow")):
         ph = (st["t"] * 0.9 + i / 3) % 1
-        bx = hx + 88 * math.cos(2 * math.pi * ph)
-        by = hy - 150 - 110 * abs(math.sin(math.pi * ph)) * 1.0 - 10
+        bx = hx + 62 + 50 * math.cos(2 * math.pi * ph)
+        by = hy - 130 - 90 * abs(math.sin(math.pi * ph))
         art.glow(c, bx, by, 24, colr, int(160 * k))
         art.ball(c, bx, by, 17, colr, int(255 * k))
 
@@ -203,35 +208,35 @@ def trampoline(c, u, T, st):
     """A trampoline slides under him and he bounces, higher each time."""
     k = presence(u, T)
     hx, hy = HOME
-    tx = lerp(1320, hx, k)
+    tx = lerp(1320, hx + 56, k)
     b = abs(math.sin(u * 3.4))
     height = 190 * b * ease((u - 0.8) / 1.5) * ease((T - u - 0.6) / 0.8)
     dip = 10 * (1 - b) * k
-    c.drawOval(skia.Rect.MakeXYWH(tx - 120, 1236 + dip, 240, 26), art.paint("cyan", int(255 * k)))
-    c.drawOval(skia.Rect.MakeXYWH(tx - 120, 1236 + dip, 240, 26), art.paint(DARK, int(255 * k), stroke=8))
-    for dx in (-104, 104):
-        c.drawLine(tx + dx, 1250, tx + dx * 1.1, 1280, art.paint(DARK, int(255 * k), stroke=10))
+    c.drawOval(skia.Rect.MakeXYWH(tx - 100, 1238 + dip, 200, 22), art.paint("cyan", int(255 * k)))
+    c.drawOval(skia.Rect.MakeXYWH(tx - 100, 1238 + dip, 200, 22), art.paint(DARK, int(255 * k), stroke=8))
+    for dx in (-86, 86):
+        c.drawLine(tx + dx, 1250, tx + dx * 1.1, 1264, art.paint(DARK, int(255 * k), stroke=10))
     air = height > 30
-    owl(c, hx, hy - 12 * k - height, look=-0.6, talk=st["talk"], t=st["t"], mood="happy", shadow=not air,
-        legs="dangle" if air else "stand", wings=(120, -120) if air else None)
+    owl(c, hx + 56 * k, hy - 12 * k - height, look=-0.6, talk=st["talk"], t=st["t"], mood="happy", shadow=not air,
+        legs="dangle" if air else "stand", wings=(150, -150) if air else None)
 
 
 def parachute(c, u, T, st):
     """He shoots up out of sight, then drifts back down under a parachute, pointing as he falls."""
     hx, hy = HOME
-    if u < 0.6:                                                                    # launch
+    if u < 0.6:                                                                    # launch up his column
         y = lerp(hy, 520, ease(u / 0.6))
-        x, canopy = hx, 0.0
+        x, canopy = lerp(hx, 938, ease(u / 0.6)), 0.0
     else:
         d = (u - 0.6) / (T - 0.6)
         y = lerp(520, hy, ease(d))
-        x = hx + (60 * math.sin(u * 1.6) - 40) * (1 - d)
-        canopy = ease((u - 0.6) / 0.5) * ease((T - u) / 0.6)
+        x = lerp(938 + 8 * math.sin(u * 1.6), hx, ease((u - (T - 0.45)) / 0.45))
+        canopy = ease((u - 0.6) / 0.5) * ease((T - u - 0.5) / 0.45)
     if canopy > 0:
         c.save()
         c.translate(x, y - 150)
         c.rotate(6 * math.sin(u * 1.6))
-        c.scale(canopy, canopy)
+        c.scale(0.7 * canopy, 0.7 * canopy)
         for sx_ in (-90, -30, 30, 90):
             c.drawLine(sx_, 0, sx_ * 0.3, 120, art.paint("white", 200, stroke=3))
         c.drawArc(skia.Rect.MakeXYWH(-110, -70, 220, 140), 180, 180, True, art.paint("orange"))
@@ -239,7 +244,7 @@ def parachute(c, u, T, st):
             c.drawArc(skia.Rect.MakeXYWH(-110, -70, 220, 140), 180 + i * 60 + 8, 44, True, art.paint(colr, 200))
         c.restore()
     owl(c, x, y, look=-1.0, talk=st["talk"], t=st["t"], mood="curious", legs="dangle" if canopy > 0.2 else "stand",
-        shadow=canopy < 0.2 and u > 0.6, point=canopy, point_angle=70)
+        shadow=canopy < 0.2 and u > 0.6, point=canopy, point_angle=150)
 
 
 def popcorn(c, u, T, st):
@@ -247,7 +252,7 @@ def popcorn(c, u, T, st):
     k = presence(u, T)
     hx, hy = HOME
     sx = lerp(1320, hx + 4, k)
-    art.shaded_rrect(c, sx - 80, 1040, 160, 190, 40, (190, 40, 60))                # seat back
+    art.shaded_rrect(c, sx - 76, 1066, 152, 150, 40, (190, 40, 60))                # seat back
     owl(c, hx - 6 * k, hy, look=-1.0, talk=st["talk"], t=st["t"], mood="curious", legs="sit" if k > 0.6 else "stand",
         wings=(30 + 26 * abs(math.sin(st["t"] * 3.2)), -14) if k > 0.9 else None)
     art.shaded_rrect(c, sx - 96, 1196, 192, 48, 20, (150, 30, 50))                 # seat cushion
